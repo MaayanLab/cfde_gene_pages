@@ -1,0 +1,25 @@
+/* Demo Margin */
+.container{
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+/* This may not be needed depending on if you want to restrict the card size*/
+.card{
+  max-width: 380px;
+}
+
+.card-image-wrapper {
+  display: flex;
+  width: 100%;
+  height: 250px;
+  /* Just to show the size of the image wrapper */
+  background-color: darkgrey;
+}
+
+.card-img-top {
+  display: block;
+  width: auto;
+  max-height: 100%;
+  margin: auto;
+}
