@@ -82,6 +82,15 @@
         max-height: 100%;
         margin: auto;
       }
+
+      .icon-CF {
+        background-image: url("https://images.app.goo.gl/72UNgUecie53WvPs8.png");
+        background-position: center center;
+        height: 24px;
+        line-height: 24px;
+        width: 24px;
+        /* Other styles here */
+      }
     </style>
 
     
@@ -111,7 +120,7 @@
         <i class="fas fa-dna"></i>
         <strong>Links to CFDE and Non-CFDE Gene Pages</strong>
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
     </div>
@@ -132,6 +141,8 @@
               <input type="button" onclick="myFunction()" value="Search" style="height: 33px;">
             </div>
           </form>
+
+          <p id="demo"></p>
 
           <script>
 function autocomplete(inp, arr) {
@@ -241,7 +252,8 @@ var genes = GENES;
 autocomplete(document.getElementById("myInput"), genes);
 
 function myFunction() {
-  document.getElementById("frm1").submit();
+  var gene_search = document.getElementById("Gene").value;
+  document.getElementById("demo").innerHTML = gene_search;
 }
 </script>
           <!-- <div class="input-group">
@@ -276,6 +288,8 @@ function myFunction() {
                   function onClick() {
                     clicks += 1;
                     document.getElementById("clicks").innerHTML = clicks;
+                    var a = document.getElementById(`${gene_search}`); //or grab it by tagname etc
+                    a.href = `https://www.gtexportal.org/home/gene/${gene_search}`
                   };
                 </script>
                 <div class="btn-group">
@@ -302,7 +316,7 @@ function myFunction() {
                 <div class="btn-group">
                   <a href="https://pharos.nih.gov/targets" class="btn btn-sm btn-outline-primary" target="_blank"role="button">View on Site</a>
                 </div>
-                <small class="text-muted"> CF program</small>
+                <img src="https://images.app.goo.gl/72UNgUecie53WvPs8" alt="CF program"></img>
               </div>
             </div>
           </div>
@@ -342,7 +356,7 @@ function myFunction() {
                 <div class="btn-group">
                   <a href="https://ldp3.cloud/" class="btn btn-sm btn-outline-primary" target="_blank"role="button">View on Site</a>
                 </div>
-                <small class="text-muted"> CF program</small>
+                <i class="icon-CF"></i>
               </div>
             </div>
           </div>
