@@ -83,14 +83,6 @@
         margin: auto;
       }
 
-      .icon-CF {
-        background-image: url("https://images.app.goo.gl/72UNgUecie53WvPs8.png");
-        background-position: center center;
-        height: 24px;
-        line-height: 24px;
-        width: 24px;
-        /* Other styles here */
-      }
     </style>
 
     
@@ -141,8 +133,6 @@
               <input type="button" onclick="myFunction()" value="Search" style="height: 33px;">
             </div>
           </form>
-
-          <p id="demo"></p>
 
           <script>
 function autocomplete(inp, arr) {
@@ -253,7 +243,8 @@ autocomplete(document.getElementById("myInput"), genes);
 
 function myFunction() {
   var gene_search = document.getElementById("Gene").value;
-  document.getElementById("demo").innerHTML = gene_search;
+  var a = document.getElementById('GTEx'); //or grab it by tagname etc
+  a.href = `https://www.gtexportal.org/home/gene/${gene_search}`
 }
 </script>
           <!-- <div class="input-group">
@@ -288,16 +279,14 @@ function myFunction() {
                   function onClick() {
                     clicks += 1;
                     document.getElementById("clicks").innerHTML = clicks;
-                    var a = document.getElementById(`${gene_search}`); //or grab it by tagname etc
-                    a.href = `https://www.gtexportal.org/home/gene/${gene_search}`
                   };
                 </script>
                 <div class="btn-group">
-                  <a href="https://www.gtexportal.org/home/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="onClick()" >View on Site</a>
+                  <a id="GTEx" href="https://www.gtexportal.org/home/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="onClick()" >View on Site</a>
                 </div>
-                <p>Clicks: <a id="clicks">0</a></p>
                 <small class="text-muted"> CF program</small>
               </div>
+              <p>Clicks: <a id="clicks">0</a></p>
             </div>
           </div>
         </div>
@@ -316,7 +305,9 @@ function myFunction() {
                 <div class="btn-group">
                   <a href="https://pharos.nih.gov/targets" class="btn btn-sm btn-outline-primary" target="_blank"role="button">View on Site</a>
                 </div>
-                <img src="https://images.app.goo.gl/72UNgUecie53WvPs8" alt="CF program"></img>
+                <div class="image-wrap">
+                  <small class="text-muted"> CF program</small>
+                </div>
               </div>
             </div>
           </div>
@@ -356,7 +347,7 @@ function myFunction() {
                 <div class="btn-group">
                   <a href="https://ldp3.cloud/" class="btn btn-sm btn-outline-primary" target="_blank"role="button">View on Site</a>
                 </div>
-                <i class="icon-CF"></i>
+                <small class="text-muted"> CF program</small>
               </div>
             </div>
           </div>
@@ -584,8 +575,8 @@ function myFunction() {
     <p class="float-end mb-1">
       <a href="#">Back to top</a>
     </p>
-    <p class="mb-1">Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
-    <p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a href="#">getting started guide</a>.</p>
+    <p class="mb-1">View this repository on Github <a href="https://github.com/MaayanLab/cfde_gene_pages">here</a>.</p>
+    <p class="mb-0">Contact the CFDE <a href="https://www.nih-cfde.org/contact/">here</a>.</p>
   </div>
 </footer>
 
