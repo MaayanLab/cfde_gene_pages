@@ -124,7 +124,7 @@
     <div class="row py-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto">
         <h1 class="fw-light">CFDE Gene Landing Pages</h1>
-        <p class="lead text-muted">This page provides links to repositories that provide direct links to human gene landing pages. You can search by gene name and then choose the sites that contain knowledge about your gene of interest.</p>
+        <p class="lead text-muted">This page provides links to repositories that provide direct links to human gene landing pages. You can search by gene name and then choose the sites that contain knowledge about your gene.</p>
         <p>
           <form id="frm1" autocomplete="off" action="/action_page.php"> 
             <div class="autocomplete mx-auto d-block" style="width:400px; height: 50px;">
@@ -270,9 +270,18 @@ function myFunction() {
               <h4 class="card-title">GTEx Portal</h4>
               <p class="card-text">The Genotype-Tissue Expression (GTEx) Portal provides open access to data including gene expression, QTLs, and histology images.</p>
               <div class="d-flex justify-content-between align-items-center">
+                <script type="text/javascript">
+                  var clicks = 0;
+
+                  function onClick() {
+                    clicks += 1;
+                    document.getElementById("clicks").innerHTML = clicks;
+                  };
+                </script>
                 <div class="btn-group">
-                  <a href="https://www.gtexportal.org/home/" class="btn btn-sm btn-outline-primary" target="_blank"role="button">View on Site</a>
+                  <a href="https://www.gtexportal.org/home/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="onClick()" >View on Site</a>
                 </div>
+                <p>Clicks: <a id="clicks">0</a></p>
                 <small class="text-muted"> CF program</small>
               </div>
             </div>
