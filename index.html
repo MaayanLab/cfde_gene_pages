@@ -293,6 +293,10 @@ function myFunction() {
   var uniprot_h4 = document.getElementById('UniProt_title'); //or grab it by tagname etc
   uniprot_h4.textContent = `UniProt: ${gene_search}`;
 
+  var hgnc_a = document.getElementById('HGNC'); //or grab it by tagname etc
+  hgnc_a.href = `https://www.genenames.org/data/gene-symbol-report/#!/symbol/${gene_search}`;
+  var hgnc_h4 = document.getElementById('HGNC_title'); //or grab it by tagname etc
+  hgnc_h4.textContent = `HGNC: ${gene_search}`;
 
 };
 </script>
@@ -608,6 +612,25 @@ function myFunction() {
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <a id="BioGPS" href="http://biogps.org" class="btn btn-sm btn-outline-primary" target="_blank"role="button">View on Site</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm">
+            <div class="card-image-wrapper-1">
+              <img class="card-img-top img-fluid" src="CFDE_gene_page/hgnc_logo.jpeg" alt="HGNC image" width="100%" height="100%">
+            </div>
+            <div class="card-image-wrapper-2">
+              <img class="card-img-top img-fluid" src="CFDE_gene_page/hgnc_site.png" alt="HGNC site image" width="100%" height="100%">
+            </div>
+            <div class="card-body">
+              <h4 id="HGNC_title">HGNC</h4>
+              <p class="card-text">The HGNC database is a curated online repository of HGNC-approved gene nomenclature, gene groups and associated resources including links to genomic, proteomic and phenotypic information.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a id="HGNC" href="https://www.genenames.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button">View on Site</a>
                 </div>
               </div>
             </div>
