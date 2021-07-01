@@ -47,6 +47,10 @@
         width: 100%;
         height: 250px;
       }
+      .card-footer{
+        width: 100%;
+        height: 37px;
+      }
 
       .card-image-wrapper {
         display: flex;
@@ -337,19 +341,21 @@ function myFunction() {
               <p class="card-text">The Genotype-Tissue Expression (GTEx) Portal provides open access to data including gene expression, QTLs, and histology images.</p>
               <div class="d-flex justify-content-between align-items-center">
                 <script type="text/javascript">
-                  var clicks = 0;
+                  var Gte_clicks = 0;
 
-                  function onClick() {
-                    clicks += 1;
-                    document.getElementById("clicks").innerHTML = clicks;
+                  function GteonClick() {
+                    Gte_clicks += 1;
+                    document.getElementById("Gte_clicks").innerHTML = Gte_clicks;
                   };
                 </script>
                 <div class="btn-group">
-                  <a id="GTEx" href="https://www.gtexportal.org/home/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="onClick()" >View on Site</a>
+                  <a id="GTEx" href="https://www.gtexportal.org/home/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="GteonClick()" >View on Site</a>
                 </div>
                 <img class="cf-logo" src="CFDE_gene_page/CFDE_logo.png">
               </div>
-              <p>Clicks: <a id="clicks">0</a></p>
+            </div>
+            <div class="card-footer">
+              <p>Clicks: <a id="Gte_clicks">0</a></p>
             </div>
           </div>
         </div>
@@ -365,11 +371,22 @@ function myFunction() {
               <h4 id="Pharos_title">Pharos</h4>
               <p class="card-text">The Pharos interface provides facile access to most data types collected by the Knowledge Management Center for the IDG program.</p>
               <div class="d-flex justify-content-between align-items-center">
+                <script type="text/javascript">
+                  var Phar_clicks = 0;
+
+                  function PharonClick() {
+                    Phar_clicks += 1;
+                    document.getElementById("Phar_clicks").innerHTML = Phar_clicks;
+                  };
+                </script>
                 <div class="btn-group">
-                  <a id="Pharos" href="https://pharos.nih.gov/targets" class="btn btn-sm btn-outline-primary" target="_blank"role="button">View on Site</a>
+                  <a id="Pharos" href="https://pharos.nih.gov/targets" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="PharonClick()">View on Site</a>
                 </div>
                 <img class="cf-logo" src="CFDE_gene_page/CFDE_logo.png">
               </div>
+            </div>
+            <div class="card-footer">
+              <p>Clicks: <a id="Phar_clicks">0</a></p>
             </div>
           </div>
         </div>
@@ -385,11 +402,22 @@ function myFunction() {
               <h4 id="Harmonizome_title">Harmonizome</h4>
               <p class="card-text"> The Harmonizome is a collection of information about genes and proteins from 114 datasets provided by 66 online resources to facilitate access to and learning from biomedical Big Data.</p>
               <div class="d-flex justify-content-between align-items-center">
+                <script type="text/javascript">
+                  var Harm_clicks = 0;
+
+                  function HarmonClick() {
+                    Harm_clicks += 1;
+                    document.getElementById("Harm_clicks").innerHTML = Harm_clicks;
+                  };
+                </script>
                 <div class="btn-group">
-                  <a id="Harmonizome" href="https://maayanlab.cloud/Harmonizome/" class="btn btn-sm btn-outline-primary" target="_blank"role="button">View on Site</a>
+                  <a id="Harmonizome" href="https://maayanlab.cloud/Harmonizome/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="HarmonClick()">View on Site</a>
                 </div>
                 <img class="cf-logo" src="CFDE_gene_page/CFDE_logo.png">
               </div>
+            </div>
+            <div class="card-footer">
+              <p>Clicks: <a id="Harm_clicks">0</a></p>
             </div>
           </div>
         </div>
@@ -405,11 +433,22 @@ function myFunction() {
               <h4>LINCS Portal</h4>
               <p class="card-text">The LINCS Data Portal 3.0 is a portal for serving and querying LINCS datasets and signatures. It provides a signature similarity search to query for mimicker or reverser signatures.</p>
               <div class="d-flex justify-content-between align-items-center">
+                <script type="text/javascript">
+                  var LINCS_clicks = 0;
+
+                  function LINCSonClick() {
+                    LINCS_clicks += 1;
+                    document.getElementById("LINCS_clicks").innerHTML = LINCS_clicks;
+                  };
+                </script>
                 <div class="btn-group">
-                  <a href="https://ldp3.cloud/" class="btn btn-sm btn-outline-primary" target="_blank"role="button">View on Site</a>
+                  <a href="https://ldp3.cloud/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="LINCSonClick()">View on Site</a>
                 </div>
                 <img class="cf-logo" src="CFDE_gene_page/CFDE_logo.png">
               </div>
+            </div>
+            <div class="card-footer">
+              <p>Clicks: <a id="LINCS_clicks">0</a></p>
             </div>
           </div>
         </div>
@@ -426,11 +465,22 @@ function myFunction() {
               <h4>Metabolomics Workbench</h4>
               <p class="card-text">The Metabolomics Workbench serves as a repository for metabolomics data and metadata and provides analysis tools.</p>
               <div class="d-flex justify-content-between align-items-center">
+                <script type="text/javascript">
+                  var Metab_clicks = 0;
+
+                  function MetabonClick() {
+                    Metab_clicks += 1;
+                    document.getElementById("Metab_clicks").innerHTML = Metab_clicks;
+                  };
+                </script>
                 <div class="btn-group">
-                  <a href="https://www.metabolomicsworkbench.org/databases/proteome/MGP.php" class="btn btn-sm btn-outline-primary" target="_blank"role="button">View on Site</a>
+                  <a href="https://www.metabolomicsworkbench.org/databases/proteome/MGP.php" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="MetabonClick()">View on Site</a>
                 </div>
                 <img class="cf-logo" src="CFDE_gene_page/CFDE_logo.png">
               </div>
+            </div>
+            <div class="card-footer">
+              <p>Clicks: <a id="Metab_clicks">0</a></p>
             </div>
           </div>
         </div>
@@ -446,10 +496,21 @@ function myFunction() {
               <h4>GlyGen Portal</h4>
               <p class="card-text">GlyGen provides computational and informatics resources and tools for glycosciences research using information from many data sources.</p>
               <div class="d-flex justify-content-between align-items-center">
+                <script type="text/javascript">
+                  var GlyG_clicks = 0;
+
+                  function GlyGonClick() {
+                    GlyG_clicks += 1;
+                    document.getElementById("GlyG_clicks").innerHTML = GlyG_clicks;
+                  };
+                </script>
                 <div class="btn-group">
-                  <a href="https://www.glygen.org/protein-search/" class="btn btn-sm btn-outline-primary" target="_blank"role="button">View on Site</a>
+                  <a href="https://www.glygen.org/protein-search/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="GlyGonClick()">View on Site</a>
                 </div>
               </div>
+            </div>
+            <div class="card-footer">
+              <p>Clicks: <a id="GlyG_clicks">0</a></p>
             </div>
           </div>
         </div>
@@ -465,10 +526,21 @@ function myFunction() {
               <h4 id="KOMP_title">KOMP- IMPC Portal</h4>
               <p class="card-text">The International Mouse Phenotyping Consortium (IMPC) has information about the functions of protein-coding genes in the mouse genome.</p>
               <div class="d-flex justify-content-between align-items-center">
+                <script type="text/javascript">
+                  var KOMP_clicks = 0;
+
+                  function KOMPonClick() {
+                    KOMP_clicks += 1;
+                    document.getElementById("KOMP_clicks").innerHTML = KOMP_clicks;
+                  };
+                </script>
                 <div class="btn-group">
-                  <a id="komp" href="https://www.mousephenotype.org" class="btn btn-sm btn-outline-primary" target="_blank"role="button">View on Site</a>
+                  <a id="komp" href="https://www.mousephenotype.org" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="KOMPonClick()">View on Site</a>
                 </div>
               </div>
+            </div>
+            <div class="card-footer">
+              <p>Clicks: <a id="KOMP_clicks">0</a></p>
             </div>
           </div>
         </div>
@@ -485,10 +557,21 @@ function myFunction() {
               <h4 id= "UDN_title">UDN Portal</h4>
               <p class="card-text">This page contains information about genetic changes that were identified in a UDN participant.</p>
               <div class="d-flex justify-content-between align-items-center">
+                <script type="text/javascript">
+                  var UDN_clicks = 0;
+
+                  function UDNonClick() {
+                    UDN_clicks += 1;
+                    document.getElementById("UDN_clicks").innerHTML = UDN_clicks;
+                  };
+                </script>
                 <div class="btn-group">
-                  <a id="UDN" href="https://undiagnosed.hms.harvard.edu/genes/" class="btn btn-sm btn-outline-primary" target="_blank"role="button">View on Site</a>
+                  <a id="UDN" href="https://undiagnosed.hms.harvard.edu/genes/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="UDNonClick()">View on Site</a>
                 </div>
               </div>
+            </div>
+            <div class="card-footer">
+              <p>Clicks: <a id="UDN_clicks">0</a></p>
             </div>
           </div>
         </div>
@@ -504,10 +587,21 @@ function myFunction() {
               <h4 id="NCBI_title">NCBI Gene Database</h4>
               <p class="card-text">The NCBI Gene page provides information about nomenclature, RefSeqs, maps, pathways, variations, phenotypes, and links to genome-, phenotype-, and locus-specific resources.</p>
               <div class="d-flex justify-content-between align-items-center">
+                <script type="text/javascript">
+                  var NCBI_clicks = 0;
+
+                  function NCBIonClick() {
+                    NCBI_clicks += 1;
+                    document.getElementById("NCBI_clicks").innerHTML = NCBI_clicks;
+                  };
+                </script>
                 <div class="btn-group">
-                  <a id="NCBI" href="https://www.ncbi.nlm.nih.gov/gene/" class="btn btn-sm btn-outline-primary" target="_blank"role="button">View on Site</a>
+                  <a id="NCBI" href="https://www.ncbi.nlm.nih.gov/gene/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="NCBIonClick()">View on Site</a>
                 </div>
               </div>
+            </div>
+            <div class="card-footer">
+              <p>Clicks: <a id="NCBI_clicks">0</a></p>
             </div>
           </div>
         </div>
@@ -523,10 +617,21 @@ function myFunction() {
               <h4 id="GeneCards_title">GeneCards</h4>
               <p class="card-text">GeneCards is a searchable, integrative database that provides comprehensive, user-friendly information on all annotated and predicted human genes.</p>
               <div class="d-flex justify-content-between align-items-center">
+                <script type="text/javascript">
+                  var GeneCard_clicks = 0;
+
+                  function GeneCardonClick() {
+                    GeneCard_clicks += 1;
+                    document.getElementById("GeneCard_clicks").innerHTML = GeneCard_clicks;
+                  };
+                </script>
                 <div class="btn-group">
-                  <a id="GeneCards"href="https://www.genecards.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button">View on Site</a>
+                  <a id="GeneCards"href="https://www.genecards.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="GeneCardonClick()">View on Site</a>
                 </div>
               </div>
+            </div>
+            <div class="card-footer">
+              <p>Clicks: <a id="GeneCard_clicks">0</a></p>
             </div>
           </div>
         </div>
@@ -542,10 +647,21 @@ function myFunction() {
               <h4 id="Enrichr_title">Enrichr</h4>
               <p class="card-text">Enrichr is an enrichment analysis tool that provides various types of visualization summaries of collective functions of gene lists.</p>
               <div class="d-flex justify-content-between align-items-center">
+                <script type="text/javascript">
+                  var Enrichr_clicks = 0;
+
+                  function EnrichronClick() {
+                    Enrichr_clicks += 1;
+                    document.getElementById("Enrichr_clicks").innerHTML = Enrichr_clicks;
+                  };
+                </script>
                 <div class="btn-group">
-                  <a id="Enrichr" href="https://maayanlab.cloud/Enrichr/#find" class="btn btn-sm btn-outline-primary" target="_blank"role="button">View on Site</a>
+                  <a id="Enrichr" href="https://maayanlab.cloud/Enrichr/#find" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="EnrichronClick()">View on Site</a>
                 </div>
               </div>
+            </div>
+            <div class="card-footer">
+              <p>Clicks: <a id="Enrichr_clicks">0</a></p>
             </div>
           </div>
         </div>
@@ -561,10 +677,21 @@ function myFunction() {
               <h4 id="ENCODE_title">ENCODE Portal</h4>
               <p class="card-text">The ENCODE Consortium not only produces high-quality data, but also analyzes the data in an integrative fashion.</p>
               <div class="d-flex justify-content-between align-items-center">
+                <script type="text/javascript">
+                  var ENCODE_clicks = 0;
+
+                  function ENCODEonClick() {
+                    ENCODE_clicks += 1;
+                    document.getElementById("ENCODE_clicks").innerHTML = ENCODE_clicks;
+                  };
+                </script>
                 <div class="btn-group">
-                  <a id="ENCODE" href="https://www.encodeproject.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button">View on Site</a>
+                  <a id="ENCODE" href="https://www.encodeproject.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="ENCODEonClick()">View on Site</a>
                 </div>
               </div>
+            </div>
+            <div class="card-footer">
+              <p>Clicks: <a id="ENCODE_clicks">0</a></p>
             </div>
           </div>
         </div>
@@ -580,10 +707,21 @@ function myFunction() {
               <h4 id="MARRVEL_title">MARRVEL</h4>
               <p class="card-text">MARRVEL allows users to search multiple public variant databases simultaneously and provides a unified interface to facilitate the search process.</p>
               <div class="d-flex justify-content-between align-items-center">
+                <script type="text/javascript">
+                  var MARRVEL_clicks = 0;
+
+                  function MARRVELonClick() {
+                    MARRVEL_clicks += 1;
+                    document.getElementById("MARRVEL_clicks").innerHTML = MARRVEL_clicks;
+                  };
+                </script>
                 <div class="btn-group">
-                  <a id="MARRVEL" href="http://marrvel.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button">View on Site</a>
+                  <a id="MARRVEL" href="http://marrvel.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="MARRVELonClick()">View on Site</a>
                 </div>
               </div>
+            </div>
+            <div class="card-footer">
+              <p>Clicks: <a id="MARRVEL_clicks">0</a></p>
             </div>
           </div>
         </div>
@@ -599,10 +737,21 @@ function myFunction() {
               <h4 id="UniProt_title">UniProt</h4>
               <p class="card-text">The mission of UniProt is to provide the scientific community with a comprehensive, high-quality and freely accessible resource of protein sequence and functional information.</p>
               <div class="d-flex justify-content-between align-items-center">
+                <script type="text/javascript">
+                  var UniProt_clicks = 0;
+
+                  function UniProtonClick() {
+                    UniProt_clicks += 1;
+                    document.getElementById("UniProt_clicks").innerHTML = UniProt_clicks;
+                  };
+                </script>
                 <div class="btn-group">
-                  <a id="UniProt" href="https://www.uniprot.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button">View on Site</a>
+                  <a id="UniProt" href="https://www.uniprot.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="UniProtonClick()">View on Site</a>
                 </div>
               </div>
+            </div>
+            <div class="card-footer">
+              <p>Clicks: <a id="UniProt_clicks">0</a></p>
             </div>
           </div>
         </div>
@@ -618,10 +767,21 @@ function myFunction() {
               <h4 id="BioGPS_title">BioGPS</h4>
               <p class="card-text">BioGPS is a free extensible and customizable gene annotation portal, a complete resource for learning about gene and protein function.</p>
               <div class="d-flex justify-content-between align-items-center">
+                <script type="text/javascript">
+                  var BioGPS_clicks = 0;
+
+                  function BioGPSonClick() {
+                    BioGPS_clicks += 1;
+                    document.getElementById("BioGPS_clicks").innerHTML = BioGPS_clicks;
+                  };
+                </script>
                 <div class="btn-group">
-                  <a id="BioGPS" href="http://biogps.org" class="btn btn-sm btn-outline-primary" target="_blank"role="button">View on Site</a>
+                  <a id="BioGPS" href="http://biogps.org" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="BioGPSonClick()">View on Site</a>
                 </div>
               </div>
+            </div>
+            <div class="card-footer">
+              <p>Clicks: <a id="BioGPS_clicks">0</a></p>
             </div>
           </div>
         </div>
@@ -637,10 +797,21 @@ function myFunction() {
               <h4 id="HGNC_title">HGNC</h4>
               <p class="card-text">The HGNC database is a curated online repository of HGNC-approved gene nomenclature, gene groups and associated resources including links to genomic, proteomic and phenotypic information.</p>
               <div class="d-flex justify-content-between align-items-center">
+                <script type="text/javascript">
+                  var HGNC_clicks = 0;
+
+                  function HGNConClick() {
+                    HGNC_clicks += 1;
+                    document.getElementById("HGNC_clicks").innerHTML = HGNC_clicks;
+                  };
+                </script>
                 <div class="btn-group">
-                  <a id="HGNC" href="https://www.genenames.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button">View on Site</a>
+                  <a id="HGNC" href="https://www.genenames.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="HGNConClick()">View on Site</a>
                 </div>
               </div>
+            </div>
+            <div class="card-footer">
+              <p>Clicks: <a id="HGNC_clicks">0</a></p>
             </div>
           </div>
         </div>
