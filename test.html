@@ -257,7 +257,7 @@ autocomplete(document.getElementById("myInput"), genes);
 
 function myFunction() {
   var gene_search = document.getElementById("myInput").value;
-  /*window.location.href= '/gene/' + gene_search;*/
+  window.location.href= '/gene/' + gene_search;
 
   var gtex_a = document.getElementById('GTEx'); //or grab it by tagname etc
   gtex_a.href = `https://www.gtexportal.org/home/gene/${gene_search}`;
