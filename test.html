@@ -15,6 +15,7 @@
     <meta name="theme-color" content="#ffffff">
     <script src="https://kit.fontawesome.com/7d2099e717.js" crossorigin="anonymous"></script>
     <script src="CFDE_gene_page/autocomplete_genes.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">  </script>
     <title>CFDE gene page</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/album/">
@@ -125,10 +126,10 @@
         <img height="30px" width="50px" style="color:white;" src="CFDE_gene_page/CFDE_logo.png">
         <strong>&nbsp; Links to CFDE and Non-CFDE Gene Pages</strong>
       </a>
-      <a class="nav-link" style="color:gray;" href="#">Genes</a>
-      <a class="nav-link" style="color:gray;" href="#">Drugs</a>
-      <a class="nav-link" style="color:gray;" href="#">Metabolites</a>
-      <a class="nav-link" style="color:gray;" href="#">Cell types</a>
+      <a class="nav-link" style="color:gray;" href="gene.html">Genes</a>
+      <a class="nav-link" style="color:gray;" href="drug.html">Drugs</a>
+      <!--<a class="nav-link" style="color:gray;" href="#">Metabolites</a>
+      <a class="nav-link" style="color:gray;" href="#">Cell types</a>-->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -144,10 +145,11 @@
         <h1 class="fw-light"><img height="40px" width="70px" src="CFDE_gene_page/CFDE_logo.png">CFDE Gene Landing Pages</h1>
         <p class="lead text-muted">This page provides links to repositories that provide direct links to human gene landing pages. You can search by gene name and then choose the sites that contain knowledge about your gene.</p>
         <p>
-          <form id="frm1" autocomplete="off" action="/action_page.php"> 
+          <form id="frm1" autocomplete="off" action="/action_page.php" method="GET"> 
             <div class="autocomplete mx-auto d-block" style="width:400px; height: 50px;">
               <input id="myInput" type="text" name="Gene" placeholder="Gene" style="height: 33px; width: 200px">
-              <input type="button" onclick="myFunction()" value="Search" style="height: 33px;">
+              <input id="search" type="button" onclick="myFunction()" value="Search" style="height: 33px;">
+              <p>Examples:<a id="ACE2" class="link" onclick="myFunction('ACE2')">ACE2</a>, <a id="ULK4" class="link" onclick="myFunction('ULK4')">ULK4</a>, <a id="DPH7" class="link" onclick="myFunction('DPH7')">DPH7</a> </p>
             </div>
           </form>
 
@@ -255,66 +257,82 @@ var genes = GENES;
 /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
 autocomplete(document.getElementById("myInput"), genes);
 
-function myFunction() {
-  var gene_search = document.getElementById("myInput").value;
-  /*window.location.href= '/gene/' + gene_search;*/
+$(document).ready(function(){
+        var gene;
+        $("#search").click(function(){
+          gene=$("#myInput").val();
+          $.post("http://localhost:3000/gene",{gene_name: gene_name}, function(data){
+            
+          });
+        });
+      });
 
-  var gtex_a = document.getElementById('GTEx'); //or grab it by tagname etc
-  gtex_a.href = `https://www.gtexportal.org/home/gene/${gene_search}`;
-  var gtex_h4 = document.getElementById('Gtex_title'); //or grab it by tagname etc
-  gtex_h4.textContent = `GTEx Portal: ${gene_search}`;
-
-  var pharos_a = document.getElementById('Pharos'); //or grab it by tagname etc
-  pharos_a.href = `https://pharos.nih.gov/targets?q=${gene_search}`;
-  var pharos_h4 = document.getElementById('Pharos_title'); //or grab it by tagname etc
-  pharos_h4.textContent = `Pharos: ${gene_search}`;
-
-  var harmonizome_a = document.getElementById('Harmonizome'); //or grab it by tagname etc
-  harmonizome_a.href = `https://maayanlab.cloud/Harmonizome/gene/${gene_search}`;
-  var harmonizome_h4 = document.getElementById('Harmonizome_title'); //or grab it by tagname etc
-  harmonizome_h4.textContent = `Harmonizome: ${gene_search}`;
-
-  var komp_a = document.getElementById('komp'); //or grab it by tagname etc
-  komp_a.href = `https://www.mousephenotype.org/data/search?term=${gene_search}&type=gene`;
-  var komp_h4 = document.getElementById('KOMP_title'); //or grab it by tagname etc
-  komp_h4.textContent = `KOMP- IMPC Portal: ${gene_search}`;
-
-  var udn_a = document.getElementById('UDN'); //or grab it by tagname etc
-  udn_a.href = `https://undiagnosed.hms.harvard.edu/genes/${gene_search}/`;
-  var udn_h4 = document.getElementById('UDN_title'); //or grab it by tagname etc
-  udn_h4.textContent = `UDN Portal: ${gene_search}`;
-
-  var ncbi_a = document.getElementById('NCBI'); //or grab it by tagname etc
-  ncbi_a.href = `https://www.ncbi.nlm.nih.gov/gene/?term=${gene_search}`;
-  var ncbi_h4 = document.getElementById('NCBI_title'); //or grab it by tagname etc
-  ncbi_h4.textContent = `NCBI Gene Database: ${gene_search}`;
-
-  var genecards_a = document.getElementById('GeneCards'); //or grab it by tagname etc
-  genecards_a.href = `https://www.genecards.org/cgi-bin/carddisp.pl?gene=${gene_search}`;
-  var genecards_h4 = document.getElementById('GeneCards_title'); //or grab it by tagname etc
-  genecards_h4.textContent = `GeneCards: ${gene_search}`;
-
-  var enrichr_a = document.getElementById('Enrichr'); //or grab it by tagname etc
-  enrichr_a.href = `https://maayanlab.cloud/Enrichr/#!gene=${gene_search}`;
-  var enrichr_h4 = document.getElementById('Enrichr_title'); //or grab it by tagname etc
-  enrichr_h4.textContent = `Enrichr: ${gene_search}`;
-
-  var encode_a = document.getElementById('ENCODE'); //or grab it by tagname etc
-  encode_a.href = `https://www.encodeproject.org/search/?searchTerm=${gene_search}&type=Gene`;
-  var encode_h4 = document.getElementById('ENCODE_title'); //or grab it by tagname etc
-  encode_h4.textContent = `ENCODE Portal: ${gene_search}`;
-
-  var uniprot_a = document.getElementById('UniProt'); //or grab it by tagname etc
-  uniprot_a.href = `https://www.uniprot.org/uniprot/?query=${gene_search}&sort=score`;
-  var uniprot_h4 = document.getElementById('UniProt_title'); //or grab it by tagname etc
-  uniprot_h4.textContent = `UniProt: ${gene_search}`;
-
-  var hgnc_a = document.getElementById('HGNC'); //or grab it by tagname etc
-  hgnc_a.href = `https://www.genenames.org/data/gene-symbol-report/#!/symbol/${gene_search}`;
-  var hgnc_h4 = document.getElementById('HGNC_title'); //or grab it by tagname etc
-  hgnc_h4.textContent = `HGNC: ${gene_search}`;
-
+function myFunction(gene_name) {
+  if (gene_name === undefined){
+    var gene_search = document.getElementById("myInput").value;
+  }else{
+    var gene_search = gene_name;
+  }
+  window.location.href= '/gene/' + gene_search;
 };
+
+
+
+var gtex_a = document.getElementById('GTEx'); //or grab it by tagname etc
+gtex_a.href = `https://www.gtexportal.org/home/gene/${gene_search}`;
+var gtex_h4 = document.getElementById('Gtex_title'); //or grab it by tagname etc
+gtex_h4.textContent = `GTEx Portal: ${gene_search}`;
+
+var pharos_a = document.getElementById('Pharos'); //or grab it by tagname etc
+pharos_a.href = `https://pharos.nih.gov/targets?q=${gene_search}`;
+var pharos_h4 = document.getElementById('Pharos_title'); //or grab it by tagname etc
+pharos_h4.textContent = `Pharos: ${gene_search}`;
+
+var harmonizome_a = document.getElementById('Harmonizome'); //or grab it by tagname etc
+harmonizome_a.href = `https://maayanlab.cloud/Harmonizome/gene/${gene_search}`;
+var harmonizome_h4 = document.getElementById('Harmonizome_title'); //or grab it by tagname etc
+harmonizome_h4.textContent = `Harmonizome: ${gene_search}`;
+
+var komp_a = document.getElementById('komp'); //or grab it by tagname etc
+komp_a.href = `https://www.mousephenotype.org/data/search?term=${gene_search}&type=gene`;
+var komp_h4 = document.getElementById('KOMP_title'); //or grab it by tagname etc
+komp_h4.textContent = `KOMP- IMPC Portal: ${gene_search}`;
+
+var udn_a = document.getElementById('UDN'); //or grab it by tagname etc
+udn_a.href = `https://undiagnosed.hms.harvard.edu/genes/${gene_search}/`;
+var udn_h4 = document.getElementById('UDN_title'); //or grab it by tagname etc
+udn_h4.textContent = `UDN Portal: ${gene_search}`;
+
+var ncbi_a = document.getElementById('NCBI'); //or grab it by tagname etc
+ncbi_a.href = `https://www.ncbi.nlm.nih.gov/gene/?term=${gene_search}`;
+var ncbi_h4 = document.getElementById('NCBI_title'); //or grab it by tagname etc
+ncbi_h4.textContent = `NCBI Gene Database: ${gene_search}`;
+
+var genecards_a = document.getElementById('GeneCards'); //or grab it by tagname etc
+genecards_a.href = `https://www.genecards.org/cgi-bin/carddisp.pl?gene=${gene_search}`;
+var genecards_h4 = document.getElementById('GeneCards_title'); //or grab it by tagname etc
+genecards_h4.textContent = `GeneCards: ${gene_search}`;
+
+var enrichr_a = document.getElementById('Enrichr'); //or grab it by tagname etc
+enrichr_a.href = `https://maayanlab.cloud/Enrichr/#!gene=${gene_search}`;
+var enrichr_h4 = document.getElementById('Enrichr_title'); //or grab it by tagname etc
+enrichr_h4.textContent = `Enrichr: ${gene_search}`;
+
+var encode_a = document.getElementById('ENCODE'); //or grab it by tagname etc
+encode_a.href = `https://www.encodeproject.org/search/?searchTerm=${gene_search}&type=Gene`;
+var encode_h4 = document.getElementById('ENCODE_title'); //or grab it by tagname etc
+encode_h4.textContent = `ENCODE Portal: ${gene_search}`;
+
+var uniprot_a = document.getElementById('UniProt'); //or grab it by tagname etc
+uniprot_a.href = `https://www.uniprot.org/uniprot/?query=${gene_search}&sort=score`;
+var uniprot_h4 = document.getElementById('UniProt_title'); //or grab it by tagname etc
+uniprot_h4.textContent = `UniProt: ${gene_search}`;
+
+var hgnc_a = document.getElementById('HGNC'); //or grab it by tagname etc
+hgnc_a.href = `https://www.genenames.org/data/gene-symbol-report/#!/symbol/${gene_search}`;
+var hgnc_h4 = document.getElementById('HGNC_title'); //or grab it by tagname etc
+hgnc_h4.textContent = `HGNC: ${gene_search}`;
+
 </script>
           <!-- <div class="input-group">
             <input type="search" class="form-control rounded"  aria-label="Search"

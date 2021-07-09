@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Marilyn Meyers">
+    <meta name="generator" content="Hugo 0.84.0">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">  </script>
+    <title>CFDE gene page</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/album/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      /* This may not be needed depending on if you want to restrict the card size*/
+      .card{
+        max-width: 380px;
+      }
+      .card-body{
+        width: 100%;
+        height: 250px;
+        margin:  3px;
+      }
+      .card-footer{
+        width: 100%;
+        height: 37px;
+      }
+
+      .card-image-wrapper {
+        display: flex;
+        width: 100%;
+        height: 200px;
+        /* Just to show the size of the image wrapper */
+        background-color: white;
+      }
+
+      .card-image-wrapper-1 {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        display: flex;
+        width: 65px;
+        height: 65px;
+        /* Just to show the size of the image wrapper */
+        background-color: white;
+      }
+
+      .card-image-wrapper-2 {
+        display: flex;
+        width: 75%;
+        height: 175px;
+        margin: 5px 10px;
+        /* Just to show the size of the image wrapper */
+        background-color: white;
+      }
+
+      .card-img-top {
+        display: block;
+        width: auto;
+        max-height: 100%;
+        margin: auto;
+      }
+
+      .cf-logo {
+        height: 40px;
+        width: 60px;
+        /*border-radius: 70%;*/
+      }
+
+    </style>
+
+    
+  </head>
+  <body>
+    
+<header>
+  <div class="collapse bg-dark" id="navbarHeader">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 col-md-7 py-4">
+          <h4 class="text-white">About</h4>
+          <p class="text-muted">The CFDE Gene WG was created based on a consensus that we need the CF DCCs to interoperate at the gene level. The aim is to potentially provide a resource and a service that will enable researchers to search for CF DCC data, and external data, centered around a gene, including variants, metabolites, isoforms, protein product, or other molecular entities. By specifying a gene as the search term, users should be able to fetch data from the DCCs to obtain a report in the form of a gene landing page with all the information presented in a user-friendly manner. To achieve this goal several technical issues need to be resolved.</p>
+        </div>
+        <div class="col-sm-4 offset-md-1 py-4">
+          <h4 class="text-white">More</h4>
+          <ul class="list-unstyled">
+            <li><a href="https://commonfund.nih.gov/dataecosystem" target="_blank" class="text-white">NIH CFDE Program</a></li>
+            <li><a href="https://commonfund.nih.gov/about" target="_blank" class="text-white">NIH Common Fund</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="navbar navbar-dark bg-dark shadow-sm">
+    <div class="container">
+      <a href="test.html" class="navbar-brand d-flex align-items-center">
+        <!--<i class="fas fa-dna"></i>-->
+        <img height="30px" width="50px" style="color:white;" src="CFDE_gene_page/CFDE_logo.png">
+        <strong>&nbsp; Links to CFDE and Non-CFDE Gene Pages</strong>
+      </a>
+      <a class="nav-link" style="color:gray;" href="gene.html">Genes</a>
+      <a class="nav-link" style="color:gray;" href="drug.html">Drugs</a>
+      <!--<a class="nav-link" style="color:gray;" href="#">Metabolites</a>
+      <a class="nav-link" style="color:gray;" href="#">Cell types</a>-->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+    <script>app.get('/gene/:gene_name', (req, res)=>{
+        const {gene_name} = req.params;
+        res.render(path.join(__dirname, '/gene.html'), {gene_name: gene_name})
+    });
+    </script>
+</main>
+
+<footer class="text-muted py-5">
+  <div class="container">
+    <p class="float-end mb-1">
+      <a href="#">Back to top</a>
+    </p>
+    <p class="mb-3">Links:</p>
+    <p class="mb-0"><a href="https://github.com/MaayanLab/cfde_gene_pages">Project's GitHub Repo</a></p>
+    <p class="mb-0"><a href="https://commonfund.nih.gov/dataecosystem">NIH CFDE Program</a></p>
+    <p class="mb-0"><a href="https://commonfund.nih.gov/dataecosystem/coordinatingcenter">CFDE-CC</a></p>
+    <p class="mb-0"><a href="https://www.nih-cfde.org/">CFDE Portal</a></p>
+    <p class="mb-0"><a href="https://www.nih-cfde.org/product/fair-cookbook/">The FAIR Cookbook</a></p>
+    <!--<p class="mb-0"><a href="">About the CFDE Gene Working Group</a></p>-->
+  </div>
+</footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    <!--<script src="assets/dist/js/bootstrap.bundle.min.js"></script>-->
+
+      
+  </body>
+</html>
+
+
