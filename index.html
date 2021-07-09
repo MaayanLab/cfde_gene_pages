@@ -322,6 +322,21 @@ function myFunction(gene_name) {
   var hgnc_h4 = document.getElementById('HGNC_title'); //or grab it by tagname etc
   hgnc_h4.textContent = `HGNC: ${gene_search}`;
 
+  var Ensembl_a = document.getElementById('Ensembl'); //or grab it by tagname etc
+  Ensembl_a.href = `http://www.ensembl.org/Multi/Search/Results?q=${gene_search};site=ensembl`;
+  var Ensembl_h4 = document.getElementById('Ensembl_title'); //or grab it by tagname etc
+  Ensembl_h4.textContent = `Ensembl: ${gene_search}`;
+
+  var Bgee_a = document.getElementById('Bgee'); //or grab it by tagname etc
+  Bgee_a.href = `https://bgee.org/?page=gene&query=${gene_search}`;
+  var Bgee_h4 = document.getElementById('Bgee_title'); //or grab it by tagname etc
+  Bgee_h4.textContent = `Bgee: ${gene_search}`;
+
+  var COSMIC_a = document.getElementById('COSMIC'); //or grab it by tagname etc
+  COSMIC_a.href = `https://cancer.sanger.ac.uk/cosmic/gene/analysis?ln=${gene_search}`;
+  var COSMIC_h4 = document.getElementById('COSMIC_title'); //or grab it by tagname etc
+  COSMIC_h4.textContent = `COSMIC: ${gene_search}`;
+
 };
 </script>
           <!-- <div class="input-group">
@@ -836,6 +851,99 @@ function myFunction(gene_name) {
                   <a id="HGNC" href="https://www.genenames.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="HGNConClick()">View on Site</a>
                 </div>
                 <p>Clicks: <a id="HGNC_clicks">0</a></p>
+              </div>
+            </div>
+            <!--<div class="card-footer">
+              <p>Clicks: <a id="HGNC_clicks">0</a></p>
+            </div>-->
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm">
+            <div class="card-image-wrapper-1">
+              <img class="card-img-top img-fluid" src="CFDE_gene_page/Ensembl_logo.png" alt="Ensembl image" width="100%" height="100%">
+            </div>
+            <div class="card-image-wrapper-2">
+              <img class="card-img-top img-fluid" src="CFDE_gene_page/Ensembl_site.png" alt="Ensembl site image" width="100%" height="100%">
+            </div>
+            <div class="card-body">
+              <h4 id="Ensembl_title">Ensembl</h4>
+              <p class="card-text">Ensembl is a genome browser for vertebrate genomes that supports research in comparative genomics, evolution, sequence variation and transcriptional regulation.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <script type="text/javascript">
+                  var Ensembl_clicks = 0;
+
+                  function EnsemblonClick() {
+                    Ensembl_clicks += 1;
+                    document.getElementById("Ensembl_clicks").innerHTML = Ensembl_clicks;
+                  };
+                </script>
+                <div class="btn-group">
+                  <a id="Ensembl" href="https://useast.ensembl.org/index.html" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="EnsemblonClick()">View on Site</a>
+                </div>
+                <p>Clicks: <a id="Ensembl_clicks">0</a></p>
+              </div>
+            </div>
+            <!--<div class="card-footer">
+              <p>Clicks: <a id="HGNC_clicks">0</a></p>
+            </div>-->
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm">
+            <div class="card-image-wrapper-1">
+              <img class="card-img-top img-fluid" src="CFDE_gene_page/Bgee_logo.png" alt="Bgee image" width="100%" height="100%">
+            </div>
+            <div class="card-image-wrapper-2">
+              <img class="card-img-top img-fluid" src="CFDE_gene_page/Bgee_site.png" alt="Bgee site image" width="100%" height="100%">
+            </div>
+            <div class="card-body">
+              <h4 id="Bgee_title">Bgee</h4>
+              <p class="card-text">Bgee is a database for retrieval and comparison of gene expression patterns across multiple animal species.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <script type="text/javascript">
+                  var Bgee_clicks = 0;
+
+                  function BgeeonClick() {
+                    Bgee_clicks += 1;
+                    document.getElementById("Bgee_clicks").innerHTML = Bgee_clicks;
+                  };
+                </script>
+                <div class="btn-group">
+                  <a id="Bgee" href="https://bgee.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="BgeeonClick()">View on Site</a>
+                </div>
+                <p>Clicks: <a id="Bgee_clicks">0</a></p>
+              </div>
+            </div>
+            <!--<div class="card-footer">
+              <p>Clicks: <a id="HGNC_clicks">0</a></p>
+            </div>-->
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm">
+            <div class="card-image-wrapper-1">
+              <img class="card-img-top img-fluid" src="CFDE_gene_page/COSMIC_logo.png" alt="COSMIC image" width="100%" height="100%">
+            </div>
+            <div class="card-image-wrapper-2">
+              <img class="card-img-top img-fluid" src="CFDE_gene_page/COSMIC_site.png" alt="COSMIC site image" width="100%" height="100%">
+            </div>
+            <div class="card-body">
+              <h4 id="COSMIC_title">COSMIC</h4>
+              <p class="card-text">COSMIC, the Catalogue Of Somatic Mutations In Cancer, is the world's largest and most comprehensive resource for exploring the impact of somatic mutations in human cancer.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <script type="text/javascript">
+                  var COSMIC_clicks = 0;
+
+                  function COSMIConClick() {
+                    COSMIC_clicks += 1;
+                    document.getElementById("COSMIC_clicks").innerHTML = COSMIC_clicks;
+                  };
+                </script>
+                <div class="btn-group">
+                  <a id="COSMIC" href="https://cancer.sanger.ac.uk/cosmic" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="COSMIConClick()">View on Site</a>
+                </div>
+                <p>Clicks: <a id="COSMIC_clicks">0</a></p>
               </div>
             </div>
             <!--<div class="card-footer">
