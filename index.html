@@ -322,6 +322,11 @@ function myFunction(gene_name) {
   var hgnc_h4 = document.getElementById('HGNC_title'); //or grab it by tagname etc
   hgnc_h4.textContent = `HGNC: ${gene_search}`;
 
+  var GWAS_a = document.getElementById('GWAS'); //or grab it by tagname etc
+  GWAS_a.href = `https://www.ebi.ac.uk/gwas/genes/${gene_search}`;
+  var GWAS_h4 = document.getElementById('GWAS_title'); //or grab it by tagname etc
+  GWAS_h4.textContent = `GWAS Catalog: ${gene_search}`;
+
   var Ensembl_a = document.getElementById('Ensembl'); //or grab it by tagname etc
   Ensembl_a.href = `http://www.ensembl.org/Multi/Search/Results?q=${gene_search};site=ensembl`;
   var Ensembl_h4 = document.getElementById('Ensembl_title'); //or grab it by tagname etc
@@ -944,6 +949,68 @@ function myFunction(gene_name) {
                   <a id="COSMIC" href="https://cancer.sanger.ac.uk/cosmic" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="COSMIConClick()">View on Site</a>
                 </div>
                 <p>Clicks: <a id="COSMIC_clicks">0</a></p>
+              </div>
+            </div>
+            <!--<div class="card-footer">
+              <p>Clicks: <a id="HGNC_clicks">0</a></p>
+            </div>-->
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm">
+            <div class="card-image-wrapper-1">
+              <img class="card-img-top img-fluid" src="CFDE_gene_page/ClinGen_logo.png" alt="ClinGen image" width="100%" height="100%">
+            </div>
+            <div class="card-image-wrapper-2">
+              <img class="card-img-top img-fluid" src="CFDE_gene_page/ClinGen_site.png" alt="ClinGen site image" width="100%" height="100%">
+            </div>
+            <div class="card-body">
+              <h4 id="ClinGen_title">ClinGen</h4>
+              <p class="card-text">ClinGen is a NIH funded resource dedicated to building a central resource that defines the clinical relevance of genes and variants for use in precision medicine and research.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <script type="text/javascript">
+                  var ClinGen_clicks = 0;
+
+                  function ClinGenonClick() {
+                    ClinGen_clicks += 1;
+                    document.getElementById("ClinGen_clicks").innerHTML = ClinGen_clicks;
+                  };
+                </script>
+                <div class="btn-group">
+                  <a id="ClinGen" href="https://www.clinicalgenome.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="ClinGenonClick()">View on Site</a>
+                </div>
+                <p>Clicks: <a id="ClinGen_clicks">0</a></p>
+              </div>
+            </div>
+            <!--<div class="card-footer">
+              <p>Clicks: <a id="HGNC_clicks">0</a></p>
+            </div>-->
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm">
+            <div class="card-image-wrapper-1">
+              <img class="card-img-top img-fluid" src="CFDE_gene_page/GWAS_logo.jpeg" alt="GWAS image" width="100%" height="100%">
+            </div>
+            <div class="card-image-wrapper-2">
+              <img class="card-img-top img-fluid" src="CFDE_gene_page/GWAS_site.png" alt="GWAS site image" width="100%" height="100%">
+            </div>
+            <div class="card-body">
+              <h4 id="GWAS_title">GWAS Catalog</h4>
+              <p class="card-text">The GWAS Catalog provides a consistent, searchable, visualisable and freely available database of SNP-trait associations, which can be easily integrated with other resources.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <script type="text/javascript">
+                  var GWAS_clicks = 0;
+
+                  function GWASonClick() {
+                    GWAS_clicks += 1;
+                    document.getElementById("GWAS_clicks").innerHTML = GWAS_clicks;
+                  };
+                </script>
+                <div class="btn-group">
+                  <a id="GWAS" href="https://www.ebi.ac.uk/gwas/home" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="GWASonClick()">View on Site</a>
+                </div>
+                <p>Clicks: <a id="GWAS_clicks">0</a></p>
               </div>
             </div>
             <!--<div class="card-footer">

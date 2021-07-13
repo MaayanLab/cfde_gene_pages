@@ -15,7 +15,7 @@
     <meta name="theme-color" content="#ffffff">
     <script src="https://kit.fontawesome.com/7d2099e717.js" crossorigin="anonymous"></script>
     <script src="CFDE_gene_page/autocomplete_genes.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">  </script>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <title>CFDE gene page</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/album/">
@@ -257,7 +257,7 @@ var genes = GENES;
 /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
 autocomplete(document.getElementById("myInput"), genes);
 
-$(document).ready(function(){
+/*$(document).ready(function(){
         var gene;
         $("#search").click(function(){
           gene=$("#myInput").val();
@@ -265,7 +265,16 @@ $(document).ready(function(){
             
           });
         });
-      });
+      });*/
+
+/*function myFunction(gene_name) {
+  if (gene_name === undefined){
+    var gene_search = document.getElementById("myInput").value;
+  }else{
+    var gene_search = gene_name;
+  }
+  window.location.href= '/gene/' + gene_search;
+};*/
 
 function myFunction(gene_name) {
   if (gene_name === undefined){
@@ -273,9 +282,29 @@ function myFunction(gene_name) {
   }else{
     var gene_search = gene_name;
   }
-  window.location.href= '/gene/' + gene_search;
+  var gene_query_url = 'http://mygene.info/v3/';
+  var url = gene_query_url + "query?q=symbol:"+gene_search;
+  
+  fetch(url).then(function(response) {
+    return response.json();
+  }).then(function(data) {
+    if ($.isArray(data.hits)){
+        if (data.total > 0){
+            $.each(data.hits, function(i, gene){
+                var gene_id = gene._id;
+                var new_url = gene_query_url + "gene/"+gene_id;
+                fetch(new_url).then(function(response) {
+                  return response.json();
+                }).then(function(data) {
+                  var ensembl_id = data.ensembl.gene;
+                  console.log(ensembl_id)
+                });
+                return false;
+            });
+        }
+    }
+})
 };
-
 
 
 var gtex_a = document.getElementById('GTEx'); //or grab it by tagname etc
