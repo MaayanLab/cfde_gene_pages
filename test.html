@@ -284,6 +284,8 @@ function myFunction(gene_name) {
   }
   var gene_query_url = 'http://mygene.info/v3/';
   var url = gene_query_url + "query?q=symbol:"+gene_search;
+  var gene_id;
+  var ensembl_id;
   
   fetch(url).then(function(response) {
     return response.json();
@@ -291,12 +293,12 @@ function myFunction(gene_name) {
     if ($.isArray(data.hits)){
         if (data.total > 0){
             $.each(data.hits, function(i, gene){
-                var gene_id = gene._id;
+                gene_id = gene._id;
                 var new_url = gene_query_url + "gene/"+gene_id;
                 fetch(new_url).then(function(response) {
                   return response.json();
                 }).then(function(data) {
-                  var ensembl_id = data.ensembl.gene;
+                  ensembl_id = data.ensembl.gene;
                   console.log(ensembl_id)
                 });
                 return false;
