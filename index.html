@@ -128,7 +128,7 @@
         <!--<strong>&nbsp; Links to CFDE and Non-CFDE Gene Pages</strong>-->
         <strong>&nbsp; Gene Landing Page Aggregator</strong>
       </a>
-      <a class="nav-link" style="color:gray;" href="#">Genes</a>
+      <a class="nav-link" style="color:gray;" href="gene.html">Genes</a>
       <a class="nav-link" style="color:gray;" href="#">Drugs</a>
       <!--<a class="nav-link" style="color:gray;" href="#">Metabolites</a>
       <a class="nav-link" style="color:gray;" href="#">Cell types</a>-->
@@ -296,7 +296,7 @@ function myFunction(gene_name) {
       ensembl_id = data.ensembl.gene;
       HGNC = data.HGNC;
       uniprot_qb = data.pantherdb.uniprot_kb;
-      console.log(uniprot_qb);
+      MGI = data.pantherdb.ortholog[0].MGI;
 
       var gtex_a = document.getElementById('GTEx'); //or grab it by tagname etc
       gtex_a.href = `https://www.gtexportal.org/home/gene/${ensembl_id}`;
@@ -319,7 +319,7 @@ function myFunction(gene_name) {
       harmonizome_h4.textContent = `Harmonizome: ${gene_search}`;
 
       var komp_a = document.getElementById('komp'); //or grab it by tagname etc
-      komp_a.href = `https://www.mousephenotype.org/data/search?term=${gene_search}&type=gene`;
+      komp_a.href = `https://www.mousephenotype.org/data/genes/MGI:${MGI}`;
       var komp_h4 = document.getElementById('KOMP_title'); //or grab it by tagname etc
       komp_h4.textContent = `KOMP- IMPC Portal: ${gene_search}`;
 
