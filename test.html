@@ -14,6 +14,7 @@
     <script src="https://kit.fontawesome.com/7d2099e717.js" crossorigin="anonymous"></script>
     <script src="CFDE_gene_page/autocomplete_genes.js"></script>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script> 
     <title>CFDE gene page</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/album/">
@@ -151,7 +152,7 @@
             </div>
           </form>
 
-          <script>
+          <script type="text/javascript">
 function autocomplete(inp, arr) {
   /*the autocomplete function takes two arguments,
   the text field element and an array of possible autocompleted values:*/
@@ -312,6 +313,18 @@ function myFunction(gene_name) {
       MGI = data.pantherdb.ortholog[0].MGI;
 
       var gtex_a = document.getElementById('GTEx'); //or grab it by tagname etc
+      $.ajax({
+          url: `https://www.gtexportal.org/home/gene/${ensembl_id}`,
+          method: "HEAD",
+          statusCode: {
+              404: function () {
+                  alert('not found');
+              },
+              200: function() {
+              alert("foundfile exists");
+          }
+          }
+      });
       gtex_a.href = `https://www.gtexportal.org/home/gene/${ensembl_id}`;
       var gtex_h4 = document.getElementById('Gtex_title'); //or grab it by tagname etc
       gtex_h4.textContent = `GTEx Portal: ${gene_search}`;
