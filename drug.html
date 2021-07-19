@@ -138,33 +138,29 @@
         <div class="col align-items-center">
           <div class="card shadow-sm">
             <div class="card-image-wrapper-1">
-             <img class="card-img-top img-fluid" src="CFDE_gene_page/test_img.png" alt="Gtex image" width="100%" height="100%">
+             <img class="card-img-top img-fluid" src="CFDE_gene_page/DrugBank_logo.png" alt="DrugBank image" width="100%" height="100%">
             </div>
             <div class="card-image-wrapper-2">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/Gtex_site.png" alt="GTEx site image" width="100%" height="100%">
+              <img class="card-img-top img-fluid" src="CFDE_gene_page/DrugBank_site.png" alt="DrugBank site image" width="100%" height="100%">
             </div>
             <div class="card-body">
-              <h4 id="Gtex_title" class="card-title">GTEx Portal</h4>
-              <p class="card-text">The Genotype-Tissue Expression (GTEx) Portal provides open access to data including gene expression, QTLs, and histology images.</p>
+              <h4 id="DrugBank_title" class="card-title">DrugBank</h4>
+              <p class="card-text">DrugBank Online is a comprehensive, free-to-access, online database containing information on drugs and drug targets.</p>
               <div class="d-flex justify-content-between align-items-center">
                 <script type="text/javascript">
-                  var Gte_clicks = 0;
+                  var DrugBank_clicks = 0;
 
-                  function GteonClick() {
-                    Gte_clicks += 1;
-                    document.getElementById("Gte_clicks").innerHTML = Gte_clicks;
+                  function DrugBankonClick() {
+                    DrugBank_clicks += 1;
+                    document.getElementById("DrugBank_clicks").innerHTML = DrugBank_clicks;
                   };
                 </script>
                 <div class="btn-group">
-                  <a id="GTEx" href="https://www.gtexportal.org/home/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="GteonClick()" >View on Site</a>
+                  <a id="DrugBank" href="https://go.drugbank.com/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="DrugBankonClick()" >View on Site</a>
                 </div>
-                <p>Clicks: <a id="Gte_clicks">0</a></p>
-                <!--<img class="cf-logo" src="CFDE_gene_page/CF_logo.png">-->
+                <p>Clicks: <a id="DrugBank_clicks">0</a></p>
               </div>
             </div>
-            <!--<div class="card-footer">
-              <p>Clicks: <a id="Gte_clicks">0</a></p>
-            </div>-->
           </div>
         </div>
         
