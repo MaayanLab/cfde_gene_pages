@@ -6,6 +6,11 @@
     <meta name="description" content="">
     <meta name="author" content="Marilyn Meyers">
     <meta name="generator" content="Hugo 0.84.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="favicon_io/site.webmanifest">
+    <meta name="theme-color" content="#ffffff">
     <script src="https://kit.fontawesome.com/7d2099e717.js" crossorigin="anonymous"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">  </script>
     <title>Gene and Drug Landing Page Cards</title>
@@ -115,7 +120,7 @@
         <strong>&nbsp; Gene and Drug Landing Page Aggregator</strong>
       </a>
       <a class="nav-link" style="color:gray;" href="gene.html">Genes</a>
-      <a class="nav-link" style="color:gray;" href="#">Drugs</a>
+      <a class="nav-link" style="color:gray;" href="drug.html">Drugs</a>
       <!--<a class="nav-link" style="color:gray;" href="#">Metabolites</a>
       <a class="nav-link" style="color:gray;" href="#">Cell types</a>-->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
@@ -790,6 +795,223 @@
             </div>-->
           </div>
         </div>
+        <div class="col">
+            <div class="card shadow-sm">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/PDBe_logo.png" alt="PDBe image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/PDBe_site.png" alt="PDBe site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="PDBe_title">PDBe Knowledge Base</h4>
+                <p class="card-text">PDBe-KB is a community-driven resource managed by the PDBe team, collating functional annotations and predictions for structure data in the PDB archive.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var PDBe_clicks = 0;
+
+                    function PDBeonClick() {
+                      PDBe_clicks += 1;
+                      document.getElementById("PDBe_clicks").innerHTML = PDBe_clicks;
+                    };
+                  </script>
+                  <div class="btn-group">
+                    <a id="PDBe" href="https://www.ebi.ac.uk/pdbe/pdbe-kb" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="PDBeonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="PDBe_clicks">0</a></p>
+                </div>
+              </div>
+              <!--<div class="card-footer">
+                <p>Clicks: <a id="HGNC_clicks">0</a></p>
+              </div>-->
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow-sm">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/pdb_logo.png" alt="PDB image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/PDB_site.png" alt="PDB site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="PDB_title">PDB</h4>
+                <p class="card-text">PDB has information about the 3D shapes of proteins, nucleic acids, and complex assemblies that contribute to understanding everything from protein synthesis to health and disease.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var PDB_clicks = 0;
+
+                    function PDBonClick() {
+                      PDB_clicks += 1;
+                      document.getElementById("PDB_clicks").innerHTML = PDB_clicks;
+                    };
+                  </script>
+                  <div class="btn-group">
+                    <a id="PDB" href="https://www.rcsb.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="PDBonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="PDB_clicks">0</a></p>
+                </div>
+              </div>
+              <!--<div class="card-footer">
+                <p>Clicks: <a id="HGNC_clicks">0</a></p>
+              </div>-->
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow-sm">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/GENEVA_logo.png" alt="GENEVA image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/GENEVA_site.png" alt="GENEVA site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="GENEVA_title">GENEVA</h4>
+                <p class="card-text">GENEVA allows you to identify RNA-sequencing datasets from the Gene Expression Omnibus (GEO) that contains conditions modulating a gene or a gene signature.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var GENEVA_clicks = 0;
+
+                    function GENEVAonClick() {
+                      GENEVA_clicks += 1;
+                      document.getElementById("GENEVA_clicks").innerHTML = GENEVA_clicks;
+                    };
+                  </script>
+                  <div class="btn-group">
+                    <a id="GENEVA" href="https://genevatool.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="GENEVAonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="GENEVA_clicks">0</a></p>
+                </div>
+              </div>
+              <!--<div class="card-footer">
+                <p>Clicks: <a id="HGNC_clicks">0</a></p>
+              </div>-->
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow-sm">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/MGI_logo.jpeg" alt="MGI image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/MGI_site.png" alt="MGI site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="MGI_title">MGI</h4>
+                <p class="card-text">MGI is the international database resource for the laboratory mouse, providing integrated genetic, genomic, and biological data to facilitate the study of human health and disease.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var MGI_clicks = 0;
+
+                    function MGIonClick() {
+                      MGI_clicks += 1;
+                      document.getElementById("MGI_clicks").innerHTML = MGI_clicks;
+                    };
+                  </script>
+                  <div class="btn-group">
+                    <a id="MGI" href="http://www.informatics.jax.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="MGIonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="MGI_clicks">0</a></p>
+                </div>
+              </div>
+              <!--<div class="card-footer">
+                <p>Clicks: <a id="HGNC_clicks">0</a></p>
+              </div>-->
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow-sm">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/OMIM_logo.png" alt="OMIM image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/OMIM_site.png" alt="OMIM site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="OMIM_title">OMIM</h4>
+                <p class="card-text">OMIM is a comprehensive, authoritative compendium of human genes and genetic phenotypes that is freely available and updated daily.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var OMIM_clicks = 0;
+
+                    function OMIMonClick() {
+                      OMIM_clicks += 1;
+                      document.getElementById("OMIM_clicks").innerHTML = OMIM_clicks;
+                    };
+                  </script>
+                  <div class="btn-group">
+                    <a id="OMIM" href="https://omim.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="OMIMonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="OMIM_clicks">0</a></p>
+                </div>
+              </div>
+              <!--<div class="card-footer">
+                <p>Clicks: <a id="HGNC_clicks">0</a></p>
+              </div>-->
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow-sm">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/GO_logo.jpeg" alt="Gene Ontology image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/GO_site.png" alt="Gene Ontology site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="GO_title">Gene Ontology</h4>
+                <p class="card-text">The Gene Ontology (GO) knowledgebase is the world’s largest source of information on the functions of genes.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var GO_clicks = 0;
+
+                    function GOonClick() {
+                      GO_clicks += 1;
+                      document.getElementById("GO_clicks").innerHTML = GO_clicks;
+                    };
+                  </script>
+                  <div class="btn-group">
+                    <a id="GO" href="http://geneontology.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="GOonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="GO_clicks">0</a></p>
+                </div>
+              </div>
+              <!--<div class="card-footer">
+                <p>Clicks: <a id="HGNC_clicks">0</a></p>
+              </div>-->
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow-sm">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/Reactome_logo.png" alt="Reactome image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/Reactome_site.png" alt="Reactome site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="Reactome_title">Reactome</h4>
+                <p class="card-text">Reactome is a free, open-source, curated and peer-reviewed pathway database that provides intuitive bioinformatics tools for the visualization, interpretation and analysis of pathway knowledge.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var Reactome_clicks = 0;
+
+                    function ReactomeonClick() {
+                      Reactome_clicks += 1;
+                      document.getElementById("Reactome_clicks").innerHTML = Reactome_clicks;
+                    };
+                  </script>
+                  <div class="btn-group">
+                    <a id="Reactome" href="https://reactome.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="ReactomeonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="Reactome_clicks">0</a></p>
+                </div>
+              </div>
+              <!--<div class="card-footer">
+                <p>Clicks: <a id="HGNC_clicks">0</a></p>
+              </div>-->
+            </div>
+          </div>
       </div>
     </div>
   </div>

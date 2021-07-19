@@ -6,8 +6,14 @@
     <meta name="description" content="">
     <meta name="author" content="Marilyn Meyers">
     <meta name="generator" content="Hugo 0.84.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="favicon_io/site.webmanifest">
+    <meta name="theme-color" content="#ffffff">
+    <script src="https://kit.fontawesome.com/7d2099e717.js" crossorigin="anonymous"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">  </script>
-    <title>CFDE gene page</title>
+    <title>Gene and Drug Landing Page Cards</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/album/">
 
@@ -38,15 +44,11 @@
         height: 250px;
         margin:  3px;
       }
-      .card-footer{
-        width: 100%;
-        height: 37px;
-      }
 
       .card-image-wrapper {
         display: flex;
         width: 100%;
-        height: 200px;
+        height: 180px;
         /* Just to show the size of the image wrapper */
         background-color: white;
       }
@@ -58,6 +60,7 @@
         display: flex;
         width: 65px;
         height: 65px;
+        margin: 5px 7px;
         /* Just to show the size of the image wrapper */
         background-color: white;
       }
@@ -66,7 +69,7 @@
         display: flex;
         width: 75%;
         height: 175px;
-        margin: 5px 10px;
+        margin: 5px 7px;
         /* Just to show the size of the image wrapper */
         background-color: white;
       }
@@ -96,27 +99,28 @@
       <div class="row">
         <div class="col-sm-8 col-md-7 py-4">
           <h4 class="text-white">About</h4>
-          <p class="text-muted">The CFDE Gene WG was created based on a consensus that we need the CF DCCs to interoperate at the gene level. The aim is to potentially provide a resource and a service that will enable researchers to search for CF DCC data, and external data, centered around a gene, including variants, metabolites, isoforms, protein product, or other molecular entities. By specifying a gene as the search term, users should be able to fetch data from the DCCs to obtain a report in the form of a gene landing page with all the information presented in a user-friendly manner. To achieve this goal several technical issues need to be resolved.</p>
+          <!--<p class="text-muted">The CFDE Gene WG was created based on a consensus that we need the CF DCCs to interoperate at the gene level. The aim is to potentially provide a resource and a service that will enable researchers to search for CF DCC data, and external data, centered around a gene, including variants, metabolites, isoforms, protein product, or other molecular entities. By specifying a gene as the search term, users should be able to fetch data from the DCCs to obtain a report in the form of a gene landing page with all the information presented in a user-friendly manner. To achieve this goal several technical issues need to be resolved.</p>-->
         </div>
         <div class="col-sm-4 offset-md-1 py-4">
           <h4 class="text-white">More</h4>
-          <ul class="list-unstyled">
+          <!--<ul class="list-unstyled">
             <li><a href="https://commonfund.nih.gov/dataecosystem" target="_blank" class="text-white">NIH CFDE Program</a></li>
             <li><a href="https://commonfund.nih.gov/about" target="_blank" class="text-white">NIH Common Fund</a></li>
-          </ul>
+          </ul>-->
         </div>
       </div>
     </div>
   </div>
   <div class="navbar navbar-dark bg-dark shadow-sm">
     <div class="container">
-      <a href="test.html" class="navbar-brand d-flex align-items-center">
-        <!--<i class="fas fa-dna"></i>-->
-        <img height="30px" width="50px" style="color:white;" src="CFDE_gene_page/CFDE_logo.png">
-        <strong>&nbsp; Links to CFDE and Non-CFDE Gene Pages</strong>
+      <a href="index.html" class="navbar-brand d-flex align-items-center">
+        <i class="fas fa-dna"></i>
+        <!--<img height="30px" width="50px" style="color:white;" src="CFDE_gene_page/CFDE_logo.png">-->
+        <!--<strong>&nbsp; Links to CFDE and Non-CFDE Gene Pages</strong>-->
+        <strong>&nbsp; Gene and Drug Landing Page Aggregator</strong>
       </a>
       <a class="nav-link" style="color:gray;" href="gene.html">Genes</a>
-      <a class="nav-link" style="color:gray;" href="drug.html">Drugs</a>
+      <a class="nav-link" style="color:gray;" href="#">Drugs</a>
       <!--<a class="nav-link" style="color:gray;" href="#">Metabolites</a>
       <a class="nav-link" style="color:gray;" href="#">Cell types</a>-->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
@@ -127,7 +131,46 @@
 </header>
 
 <main>
+    <div class="album py-5 bg-light">
+    <div class="container">
 
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="col align-items-center">
+          <div class="card shadow-sm">
+            <div class="card-image-wrapper-1">
+             <img class="card-img-top img-fluid" src="CFDE_gene_page/test_img.png" alt="Gtex image" width="100%" height="100%">
+            </div>
+            <div class="card-image-wrapper-2">
+              <img class="card-img-top img-fluid" src="CFDE_gene_page/Gtex_site.png" alt="GTEx site image" width="100%" height="100%">
+            </div>
+            <div class="card-body">
+              <h4 id="Gtex_title" class="card-title">GTEx Portal</h4>
+              <p class="card-text">The Genotype-Tissue Expression (GTEx) Portal provides open access to data including gene expression, QTLs, and histology images.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <script type="text/javascript">
+                  var Gte_clicks = 0;
+
+                  function GteonClick() {
+                    Gte_clicks += 1;
+                    document.getElementById("Gte_clicks").innerHTML = Gte_clicks;
+                  };
+                </script>
+                <div class="btn-group">
+                  <a id="GTEx" href="https://www.gtexportal.org/home/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="GteonClick()" >View on Site</a>
+                </div>
+                <p>Clicks: <a id="Gte_clicks">0</a></p>
+                <!--<img class="cf-logo" src="CFDE_gene_page/CF_logo.png">-->
+              </div>
+            </div>
+            <!--<div class="card-footer">
+              <p>Clicks: <a id="Gte_clicks">0</a></p>
+            </div>-->
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
 </main>
 
 <footer class="text-muted py-5">
@@ -154,13 +197,5 @@
       
   </body>
 </html>
-
-
-
-
-
-
-
-
 
 
