@@ -299,10 +299,6 @@ function myFunction(gene_name) {
       MIM = data.MIM;
       uniprot_qb = data.pantherdb.uniprot_kb;
       MGI = data.pantherdb.ortholog[0].MGI;
-      console.log(HGNC);
-      console.log(uniprot_qb);
-      console.log(MGI);
-      console.log(data);
 
       var gtex_a = document.getElementById('GTEx'); //or grab it by tagname etc
       gtex_a.href = `https://www.gtexportal.org/home/gene/${ensembl_id}`;
@@ -1149,7 +1145,7 @@ function myFunction(gene_name) {
           <div class="col">
             <div class="card shadow-sm">
               <div class="card-image-wrapper-1">
-                <img class="card-img-top img-fluid" src="CFDE_gene_page/pdb_logo.png" alt="PDB image" width="100%" height="100%">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/PDB_logo.png" alt="PDB image" width="100%" height="100%">
               </div>
               <div class="card-image-wrapper-2">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/PDB_site.png" alt="PDB site image" width="100%" height="100%">
