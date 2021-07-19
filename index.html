@@ -297,18 +297,6 @@ function myFunction(gene_name) {
       MGI = data.pantherdb.ortholog[0].MGI;
 
       var gtex_a = document.getElementById('GTEx'); //or grab it by tagname etc
-      $.ajax({
-          url: `https://www.gtexportal.org/home/gene/${ensembl_id}`,
-          method: "HEAD",
-          statusCode: {
-              404: function () {
-                  alert('not found');
-              },
-              200: function() {
-              alert("foundfile exists");
-          }
-          }
-      });
       gtex_a.href = `https://www.gtexportal.org/home/gene/${ensembl_id}`;
       var gtex_h4 = document.getElementById('Gtex_title'); //or grab it by tagname etc
       gtex_h4.textContent = `GTEx Portal: ${gene_search}`;
