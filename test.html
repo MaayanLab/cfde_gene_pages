@@ -15,6 +15,8 @@
     <script src="CFDE_gene_page/autocomplete_genes.js"></script>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
+  
     <title>CFDE gene page</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/album/">
@@ -43,22 +45,10 @@
       .card{
         max-width: 380px;
       }
-      .card-body{
-        width: 100%;
-        height: 250px;
-        margin:  3px;
-      }
+
       .card-footer{
         width: 100%;
         height: 37px;
-      }
-
-      .card-image-wrapper {
-        display: flex;
-        width: 100%;
-        height: 200px;
-        /* Just to show the size of the image wrapper */
-        background-color: white;
       }
 
       .card-image-wrapper-1 {
@@ -66,8 +56,9 @@
         top: 0px;
         right: 0px;
         display: flex;
-        width: 65px;
-        height: 65px;
+        width: 60px;
+        height: 60px;
+        margin: 5px 7px;
         /* Just to show the size of the image wrapper */
         background-color: white;
       }
@@ -125,8 +116,8 @@
         <img height="30px" width="50px" style="color:white;" src="CFDE_gene_page/CFDE_logo.png">
         <strong>&nbsp; Links to CFDE and Non-CFDE Gene Pages</strong>
       </a>
-      <a class="nav-link" style="color:gray;" href="gene.html">Genes</a>
-      <a class="nav-link" style="color:gray;" href="drug.html">Drugs</a>
+      <a class="nav-link" style="color:gray;" href="gene.html">Gene cards</a>
+      <a class="nav-link" style="color:gray;" href="drug.html">Drug cards</a>
       <!--<a class="nav-link" style="color:gray;" href="#">Metabolites</a>
       <a class="nav-link" style="color:gray;" href="#">Cell types</a>-->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
@@ -429,6 +420,12 @@ function myFunction(gene_name) {
   })
 };
 
+var msnry = new Masonry( '.grid', {
+  columnWidth: '.grid-sizer',
+  itemSelector: '.grid-item',
+  percentPosition: true
+});
+
 </script>
           <!-- <div class="input-group">
             <input type="search" class="form-control rounded"  aria-label="Search"
@@ -444,8 +441,9 @@ function myFunction(gene_name) {
     <div class="container">
 
       <div class="collapse" id="collapseExample">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-          <div class="col align-items-center">
+        <div class="grid">
+        <div class="grid-sizer row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+          <div class="grid-item col align-items-center">
             <div class="card shadow-sm">
               <div class="card-image-wrapper-1">
                <img class="card-img-top img-fluid" src="CFDE_gene_page/test_img.png" alt="Gtex image" width="100%" height="100%">
@@ -477,7 +475,7 @@ function myFunction(gene_name) {
               </div>-->
             </div>
           </div>
-          <div class="col">
+          <div class="grid-item col">
             <div class="card shadow-sm">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/IDG_LOGO.png" alt="IDG image" width="100%" height="100%">
@@ -511,7 +509,7 @@ function myFunction(gene_name) {
               </div>-->
             </div>
           </div>
-          <div class="col">
+          <div class="grid-item col">
             <div class="card shadow-sm">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/IDG_LOGO.png" alt="IDG image" width="100%" height="100%">
@@ -543,7 +541,7 @@ function myFunction(gene_name) {
               </div>-->
             </div>
           </div>
-          <div class="col align-items-center">
+          <div class="grid-item col align-items-center">
             <div class="card shadow-sm">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/LINCS_logo.gif" alt="LINCS image" width="100%" height="100%">

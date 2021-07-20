@@ -13,6 +13,8 @@
     <meta name="theme-color" content="#ffffff">
     <script src="https://kit.fontawesome.com/7d2099e717.js" crossorigin="anonymous"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">  </script>
+    <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
+  
     <title>Gene and Drug Landing Page Cards</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/album/">
@@ -38,11 +40,6 @@
       /* This may not be needed depending on if you want to restrict the card size*/
       .card{
         max-width: 380px;
-      }
-      .card-body{
-        width: 100%;
-        height: 250px;
-        margin:  3px;
       }
 
       .card-image-wrapper {
@@ -131,10 +128,10 @@
 </header>
 
 <main>
-    <div class="album py-5 bg-light">
+  <div class="album py-5 bg-light">
     <div class="container">
 
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" data-masonry='{"percentPosition": true }'>
         <div class="col align-items-center">
           <div class="card shadow-sm">
             <div class="card-image-wrapper-1">
