@@ -412,7 +412,7 @@ function myFunction(gene_name) {
       MGI_h4.textContent = `MGI: ${gene_search}`;
 
       var OMIM_a = document.getElementById('OMIM'); //or grab it by tagname etc
-      OMIM_a.href = `https://omim.org/entry/${MIM}`;
+      OMIM_a.href = `https://www.omim.org/search?index=entry&start=1&limit=10&sort=score+desc%2C+prefix_sort+desc&search=approved_gene_symbol%3A${gene_search}`;
       var OMIM_h4 = document.getElementById('OMIM_title'); //or grab it by tagname etc
       OMIM_h4.textContent = `OMIM: ${gene_search}`;
 
