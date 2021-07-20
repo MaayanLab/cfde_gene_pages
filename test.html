@@ -275,6 +275,7 @@ autocomplete(document.getElementById("myInput"), genes);
   window.location.href= '/gene/' + gene_search;
 };*/
 
+
 function myFunction(gene_name) {
   if (gene_name === undefined){
     var gene_search = document.getElementById("myInput").value;
@@ -313,7 +314,7 @@ function myFunction(gene_name) {
       MGI = data.pantherdb.ortholog[0].MGI;
 
       var gtex_a = document.getElementById('GTEx'); //or grab it by tagname etc
-      $.ajax({
+      /*$.ajax({
           url: `https://www.gtexportal.org/home/gene/${ensembl_id}`,
           method: "HEAD",
           statusCode: {
@@ -324,7 +325,7 @@ function myFunction(gene_name) {
               alert("foundfile exists");
           }
           }
-      });
+      });*/
       gtex_a.href = `https://www.gtexportal.org/home/gene/${ensembl_id}`;
       var gtex_h4 = document.getElementById('Gtex_title'); //or grab it by tagname etc
       gtex_h4.textContent = `GTEx Portal: ${gene_search}`;
@@ -332,7 +333,13 @@ function myFunction(gene_name) {
       var pharos_a = document.getElementById('Pharos'); //or grab it by tagname etc
       pharos_a.href = `https://pharos.nih.gov/targets/${uniprot_qb}`;
       var pharos_h4 = document.getElementById('Pharos_title'); //or grab it by tagname etc
-      pharos_h4.textContent = `Pharos: ${gene_search}`;
+      var link = document.createElement('a')
+
+      link.href = `https://pharos.nih.gov/targets/${uniprot_qb}`;
+      link.textContent = `${gene_search}`;
+      document.pharos_h4.appendChlid(link);
+      /*
+      pharos_h4.textContent = `Pharos: <a href='https://pharos.nih.gov/targets/${uniprot_qb}'>${gene_search}</a>`;*/
 
       var GlyGen_a = document.getElementById('GlyGen'); //or grab it by tagname etc
       GlyGen_a.href = `https://www.glygen.org/protein/${uniprot_qb}`;
