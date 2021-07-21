@@ -472,17 +472,17 @@ function myFunction(gene_name) {
       Reactome_h4.textContent = `Reactome: ${gene_search}`;
 
       var KEGG_a = document.getElementById('KEGG'); //or grab it by tagname etc
-      KEGG_a.href = `http://amigo.geneontology.org/amigo/gene_product/UniProtKB:${uniprot_qb}`;
+      KEGG_a.href = `https://www.genome.jp/entry/hsa:${entrezgene}`;
       var KEGG_h4 = document.getElementById('KEGG_title'); //or grab it by tagname etc
       KEGG_h4.textContent = `KEGG: ${gene_search}`;
 
       var Monarch_a = document.getElementById('Monarch'); //or grab it by tagname etc
-      Monarch_a.href = `http://amigo.geneontology.org/amigo/gene_product/UniProtKB:${uniprot_qb}`;
+      Monarch_a.href = `https://monarchinitiative.org/gene/HGNC:${HGNC}`;
       var Monarch_h4 = document.getElementById('Monarch_title'); //or grab it by tagname etc
       Monarch_h4.textContent = `Monarch Initiative: ${gene_search}`;
 
       var HGB_a = document.getElementById('HGB'); //or grab it by tagname etc
-      HGB_a.href = `http://amigo.geneontology.org/amigo/gene_product/UniProtKB:${uniprot_qb}`;
+      HGB_a.href = `https://genome.ucsc.edu/cgi-bin/hgGene?hgg_gene=${transcript}&hgg_type=knownGene`;
       var HGB_h4 = document.getElementById('HGB_title'); //or grab it by tagname etc
       HGB_h4.textContent = `Human Genome Browser: ${gene_search}`;
     })
