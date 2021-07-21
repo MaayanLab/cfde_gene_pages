@@ -333,6 +333,8 @@ function myFunction(gene_name) {
       MIM = data.MIM;
       uniprot_qb = data.pantherdb.uniprot_kb;
       MGI = data.pantherdb.ortholog[0].MGI;
+      transcript= data.exac.transcript;
+      entrezgene=data.entrezgene;
 
       var gtex_a = document.getElementById('GTEx'); //or grab it by tagname etc
       gtex_a.href = `https://www.gtexportal.org/home/gene/${ensembl_id}`;
@@ -468,6 +470,21 @@ function myFunction(gene_name) {
       Reactome_a.href = `https://reactome.org/content/query?q=${gene_search}&species=Homo+sapiens&species=Entries+without+species&cluster=true`;
       var Reactome_h4 = document.getElementById('Reactome_title'); //or grab it by tagname etc
       Reactome_h4.textContent = `Reactome: ${gene_search}`;
+
+      var KEGG_a = document.getElementById('KEGG'); //or grab it by tagname etc
+      KEGG_a.href = `http://amigo.geneontology.org/amigo/gene_product/UniProtKB:${uniprot_qb}`;
+      var KEGG_h4 = document.getElementById('KEGG_title'); //or grab it by tagname etc
+      KEGG_h4.textContent = `KEGG: ${gene_search}`;
+
+      var Monarch_a = document.getElementById('Monarch'); //or grab it by tagname etc
+      Monarch_a.href = `http://amigo.geneontology.org/amigo/gene_product/UniProtKB:${uniprot_qb}`;
+      var Monarch_h4 = document.getElementById('Monarch_title'); //or grab it by tagname etc
+      Monarch_h4.textContent = `Monarch Initiative: ${gene_search}`;
+
+      var HGB_a = document.getElementById('HGB'); //or grab it by tagname etc
+      HGB_a.href = `http://amigo.geneontology.org/amigo/gene_product/UniProtKB:${uniprot_qb}`;
+      var HGB_h4 = document.getElementById('HGB_title'); //or grab it by tagname etc
+      HGB_h4.textContent = `Human Genome Browser: ${gene_search}`;
     })
   })
 };
@@ -475,11 +492,6 @@ function myFunction(gene_name) {
 
   
 </script>
-          <!-- <div class="input-group">
-            <input type="search" class="form-control rounded"  aria-label="Search"
-              aria-describedby="search-addon" />
-            <button type="button" class="btn btn-outline-primary">search</button>
-          </div> -->
         </p>
       </div>
     </div>
@@ -518,9 +530,6 @@ function myFunction(gene_name) {
                 </div>
                 <!--<p>Clicks: <a id="Gte_clicks">0</a></p>-->
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="Gte_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
           <div class="col">
@@ -553,9 +562,6 @@ function myFunction(gene_name) {
                 </div>
                 <!--<p>Clicks: <a id="Phar_clicks">0</a></p>-->
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="Phar_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
           <div class="col">
@@ -586,9 +592,6 @@ function myFunction(gene_name) {
                 </div>
                 <!--<p>Clicks: <a id="Harm_clicks">0</a></p>-->
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="Harm_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
           <div class="col align-items-center">
@@ -619,9 +622,6 @@ function myFunction(gene_name) {
                 </div>
                 <!--<p>Clicks: <a id="LINCS_clicks">0</a></p>-->
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="LINCS_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
 
@@ -649,13 +649,8 @@ function myFunction(gene_name) {
                     <a href="https://www.metabolomicsworkbench.org/databases/proteome/MGP.php" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="MetabonClick()">View on Site</a>
                   </div>
                   <p>Clicks: <a id="Metab_clicks">0</a></p>
-                  <!--<img class="cf-logo" src="CFDE_gene_page/CF_logo.png">-->
                 </div>
-                <!--<p>Clicks: <a id="Metab_clicks">0</a></p>-->
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="Metab_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
           <div class="col">
@@ -684,9 +679,6 @@ function myFunction(gene_name) {
                   <p>Clicks: <a id="GlyG_clicks">0</a></p>
                 </div>
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="GlyG_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
           <div class="col">
@@ -715,9 +707,6 @@ function myFunction(gene_name) {
                   <p>Clicks: <a id="KOMP_clicks">0</a></p>
                 </div>
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="KOMP_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
 
@@ -747,9 +736,6 @@ function myFunction(gene_name) {
                   <p>Clicks: <a id="UDN_clicks">0</a></p>
                 </div>
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="UDN_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
           <div class="col">
@@ -778,9 +764,6 @@ function myFunction(gene_name) {
                   <p>Clicks: <a id="NCBI_clicks">0</a></p>
                 </div>
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="NCBI_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
           <div class="col">
@@ -809,9 +792,6 @@ function myFunction(gene_name) {
                   <p>Clicks: <a id="GeneCard_clicks">0</a></p>
                 </div>
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="GeneCard_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
           <div class="col">
@@ -840,9 +820,6 @@ function myFunction(gene_name) {
                   <p>Clicks: <a id="Enrichr_clicks">0</a></p>
                 </div>
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="Enrichr_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
           <div class="col">
@@ -871,9 +848,6 @@ function myFunction(gene_name) {
                   <p>Clicks: <a id="ENCODE_clicks">0</a></p>
                 </div>
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="ENCODE_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
           <div class="col">
@@ -902,9 +876,6 @@ function myFunction(gene_name) {
                   <p>Clicks: <a id="UniProt_clicks">0</a></p>
                 </div>
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="UniProt_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
           <div class="col">
@@ -933,9 +904,6 @@ function myFunction(gene_name) {
                   <p>Clicks: <a id="MARRVEL_clicks">0</a></p>
                 </div>
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="MARRVEL_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
           
@@ -965,9 +933,6 @@ function myFunction(gene_name) {
                   <p>Clicks: <a id="BioGPS_clicks">0</a></p>
                 </div>
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="BioGPS_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
           <div class="col">
@@ -996,9 +961,6 @@ function myFunction(gene_name) {
                   <p>Clicks: <a id="HGNC_clicks">0</a></p>
                 </div>
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="HGNC_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
           <div class="col">
@@ -1027,9 +989,6 @@ function myFunction(gene_name) {
                   <p>Clicks: <a id="Ensembl_clicks">0</a></p>
                 </div>
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="HGNC_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
           <div class="col">
@@ -1058,9 +1017,6 @@ function myFunction(gene_name) {
                   <p>Clicks: <a id="Bgee_clicks">0</a></p>
                 </div>
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="HGNC_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
           <div class="col">
@@ -1089,9 +1045,6 @@ function myFunction(gene_name) {
                   <p>Clicks: <a id="COSMIC_clicks">0</a></p>
                 </div>
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="HGNC_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
           <div class="col">
@@ -1120,9 +1073,6 @@ function myFunction(gene_name) {
                   <p>Clicks: <a id="ClinGen_clicks">0</a></p>
                 </div>
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="HGNC_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
           <div class="col">
@@ -1151,9 +1101,6 @@ function myFunction(gene_name) {
                   <p>Clicks: <a id="GWAS_clicks">0</a></p>
                 </div>
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="HGNC_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
           <div class="col">
@@ -1182,9 +1129,6 @@ function myFunction(gene_name) {
                   <p>Clicks: <a id="PDBe_clicks">0</a></p>
                 </div>
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="HGNC_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
           <div class="col">
@@ -1213,9 +1157,6 @@ function myFunction(gene_name) {
                   <p>Clicks: <a id="PDB_clicks">0</a></p>
                 </div>
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="HGNC_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
           <div class="col">
@@ -1244,9 +1185,6 @@ function myFunction(gene_name) {
                   <p>Clicks: <a id="GENEVA_clicks">0</a></p>
                 </div>
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="HGNC_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
           <div class="col">
@@ -1275,9 +1213,6 @@ function myFunction(gene_name) {
                   <p>Clicks: <a id="MGI_clicks">0</a></p>
                 </div>
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="HGNC_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
           <div class="col">
@@ -1306,9 +1241,6 @@ function myFunction(gene_name) {
                   <p>Clicks: <a id="OMIM_clicks">0</a></p>
                 </div>
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="HGNC_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
           <div class="col">
@@ -1337,9 +1269,6 @@ function myFunction(gene_name) {
                   <p>Clicks: <a id="GO_clicks">0</a></p>
                 </div>
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="HGNC_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
           <div class="col">
@@ -1368,9 +1297,90 @@ function myFunction(gene_name) {
                   <p>Clicks: <a id="Reactome_clicks">0</a></p>
                 </div>
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="HGNC_clicks">0</a></p>
-              </div>-->
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow-sm">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/KEGG_logo.png" alt="KEGG image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/KEGG_site.png" alt="KEGG site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="KEGG_title">KEGG</h4>
+                <p class="card-text">INSERT KEGG INFO HERE</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var KEGG_clicks = 0;
+
+                    function KEGGonClick() {
+                      KEGG_clicks += 1;
+                      document.getElementById("KEGG_clicks").innerHTML = KEGG_clicks;
+                    };
+                  </script>
+                  <div class="btn-group">
+                    <a id="KEGG" href="https://www.genome.jp/kegg/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="KEGGonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="KEGG_clicks">0</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow-sm">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/Monarch_logo.png" alt="Monarch Initiative image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/Monarch_site.png" alt="Monarch Initiative site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="Monarch_title">Monarch Initiative</h4>
+                <p class="card-text">INSERT MONARCH INITIATIVE INFO HERE</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var Monarch_clicks = 0;
+
+                    function MonarchonClick() {
+                      Monarch_clicks += 1;
+                      document.getElementById("Monarch_clicks").innerHTML = Monarch_clicks;
+                    };
+                  </script>
+                  <div class="btn-group">
+                    <a id="Monarch" href="https://monarchinitiative.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="MonarchonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="Monarch_clicks">0</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow-sm">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/HGB_logo.png" alt="Human Genome Browser image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/HGB_site.png" alt="Human Genome Browser site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="HGB_title">Human Genome Browser</h4>
+                <p class="card-text">INSERT HGB INFO HERE</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var HGB_clicks = 0;
+
+                    function HGBonClick() {
+                      HGB_clicks += 1;
+                      document.getElementById("HGB_clicks").innerHTML = HGB_clicks;
+                    };
+                  </script>
+                  <div class="btn-group">
+                    <a id="HGB" href="https://genome.ucsc.edu/cgi-bin/hgGateway" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="HGBonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="HGB_clicks">0</a></p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

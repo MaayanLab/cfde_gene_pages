@@ -308,8 +308,6 @@ function myFunction(gene_name) {
   var url = gene_query_url + "query?q=symbol:"+gene_search;
   var ensembl_id;
   var gene_id;
-  var HGNC;
-  var uniprot_qb;
 
   fetch(url)
   .then(function(response) {
@@ -334,6 +332,9 @@ function myFunction(gene_name) {
       HGNC = data.HGNC;
       uniprot_qb = data.pantherdb.uniprot_kb;
       MGI = data.pantherdb.ortholog[0].MGI;
+      transcript= data.exac.transcript;
+      entrezgene=data.entrezgene;
+      console.log(data);
 
       var gtex_a = document.getElementById('GTEx'); //or grab it by tagname etc
       /*$.ajax({
