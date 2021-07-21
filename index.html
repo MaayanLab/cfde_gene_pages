@@ -98,6 +98,38 @@
         /*border-radius: 70%;*/
       }
 
+      .autocomplete {
+        /*the container must be positioned relative:*/
+        position: relative;
+        display: inline-block;
+      }
+
+      .autocomplete-items {
+        overflow-x: hidden;
+        overflow-y: scroll;
+        position: absolute;
+        border: 1px solid #d4d4d4;
+        border-bottom: none;
+        border-top: none;
+        left: 65px;
+        z-index: 99;
+        width: 50%;
+        height:270px;
+        /*position the autocomplete items to be the same width as the container:*/
+        top: 100%;
+      }
+
+      .autocomplete-items div {
+        padding: 10px;
+        cursor: pointer;
+        background-color: #fff;
+        border-bottom: 1px solid #d4d4d4;
+      }
+      .autocomplete-items div:hover {
+        /*when hovering an item:*/
+        background-color: #e9e9e9;
+      }
+
     </style>
 
     
@@ -143,7 +175,7 @@
 
 <main>
 
-  <section class="py-5 text-center container">
+  <section class="py-1 text-center container">
     <div class="row py-lg-5">
       <div class="col-lg-7 col-md-8 mx-auto">
         <!--<h1 class="fw-light"><img height="40px" width="70px" src="CFDE_gene_page/CFDE_logo.png">CFDE Gene Landing Pages</h1>-->
@@ -322,6 +354,11 @@ function myFunction(gene_name) {
       var harmonizome_h4 = document.getElementById('Harmonizome_title'); //or grab it by tagname etc
       harmonizome_h4.textContent = `Harmonizome: ${gene_search}`;
 
+      var LINCS_a = document.getElementById('LINCS'); //or grab it by tagname etc
+      LINCS_a.href = `https://ldp3.cloud/#/MetadataSearch/Signatures?query={%22skip%22:0,%22limit%22:10,%22search%22:[%22${gene_search}%22]`;
+      var LINCS_h4 = document.getElementById('LINCS_title'); //or grab it by tagname etc
+      LINCS_h4.textContent = `LINCS Portal: ${gene_search}`;
+
       var komp_a = document.getElementById('komp'); //or grab it by tagname etc
       komp_a.href = `https://www.mousephenotype.org/data/genes/MGI:${MGI}`;
       var komp_h4 = document.getElementById('KOMP_title'); //or grab it by tagname etc
@@ -402,6 +439,11 @@ function myFunction(gene_name) {
       var PDBe_h4 = document.getElementById('PDBe_title'); //or grab it by tagname etc
       PDBe_h4.textContent = `PDBe Knowledge Base: ${gene_search}`;
 
+      /*var PDB_a = document.getElementById('PDB'); //or grab it by tagname etc
+      PDB_a.href = `https://www.rcsb.org/search?request=%7B%22query%22%3A%7B%22parameters%22%3A%7B%22value%22%3A%22${gene_search}%22%7D%2C%22type%22%3A%22terminal%22%2C%22service%22%3A%22text%22%2C%22node_id%22%3A0%7D%2C%22return_type%22%3A%22entry%22%2C%22request_options%22%3A%7B%22pager%22%3A%7B%22start%22%3A0%2C%22rows%22%3A25%7D%2C%22scoring_strategy%22%3A%22combined%22%2C%22sort%22%3A%5B%7B%22sort_by%22%3A%22score%22%2C%22direction%22%3A%22desc%22%7D%5D%7D%2C%22request_info%22%3A%7B%22src%22%3A%22ui%22%2C%22query_id%22%3A%225c6fe089d49d2a371762c8cef72037be%22%7D%7D`;
+      var PDB_h4 = document.getElementById('PDB_title'); //or grab it by tagname etc
+      PDB_h4.textContent = `PDB: ${gene_search}`;*/
+
       var GENEVA_a = document.getElementById('GENEVA'); //or grab it by tagname etc
       GENEVA_a.href = `https://genevatool.org/gene_table?gene_name=${gene_search}`;
       var GENEVA_h4 = document.getElementById('GENEVA_title'); //or grab it by tagname etc
@@ -418,7 +460,7 @@ function myFunction(gene_name) {
       OMIM_h4.textContent = `OMIM: ${gene_search}`;
 
       var GO_a = document.getElementById('GO'); //or grab it by tagname etc
-      GO_a.href = `http://amigo.geneontology.org/amigo/search/bioentity?q=${gene_search}&searchtype=geneproduct`;
+      GO_a.href = `http://amigo.geneontology.org/amigo/gene_product/UniProtKB:${uniprot_qb}`;
       var GO_h4 = document.getElementById('GO_title'); //or grab it by tagname etc
       GO_h4.textContent = `Gene Ontology: ${gene_search}`;
 
@@ -504,7 +546,7 @@ function myFunction(gene_name) {
                     };
                   </script>
                   <div class="btn-group">
-                    <a id="Pharos" href="https://pharos.nih.gov/targets" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="PharonClick()">View on Site</a>
+                    <a id="Pharos" href="https://pharos.nih.gov/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="PharonClick()">View on Site</a>
                   </div>
                   <p>Clicks: <a id="Phar_clicks">0</a></p>
                   <!--<img class="cf-logo" src="CFDE_gene_page/CF_logo.png">-->
@@ -558,7 +600,7 @@ function myFunction(gene_name) {
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/Lincs_site.png" alt="LINCS site image" width="100%" height="100%">
               </div>
               <div class="card-body">
-                <h4>LINCS Portal</h4>
+                <h4 id="LINCS_title">LINCS Portal</h4>
                 <p class="card-text">The LINCS Data Portal 3.0 is a portal for serving and querying LINCS datasets and signatures. It provides a signature similarity search to query for mimicker or reverser signatures.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
@@ -570,7 +612,7 @@ function myFunction(gene_name) {
                     };
                   </script>
                   <div class="btn-group">
-                    <a href="https://ldp3.cloud/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="LINCSonClick()">View on Site</a>
+                    <a id="LINCS" href="https://ldp3.cloud/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="LINCSonClick()">View on Site</a>
                   </div>
                   <p>Clicks: <a id="LINCS_clicks">0</a></p>
                   <!--<img class="cf-logo" src="CFDE_gene_page/CF_logo.png">-->

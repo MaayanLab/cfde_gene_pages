@@ -85,6 +85,37 @@
         /*border-radius: 70%;*/
       }
 
+      .autocomplete {
+        /*the container must be positioned relative:*/
+        position: relative;
+        display: inline-block;
+      }
+
+      .autocomplete-items {
+        overflow-x: hidden;
+        overflow-y: scroll;
+        position: absolute;
+        border: 1px solid #d4d4d4;
+        border-bottom: none;
+        border-top: none;
+        left: 65px;
+        z-index: 99;
+        width: 50%;
+        height:270px;
+        /*position the autocomplete items to be the same width as the container:*/
+        top: 100%;
+      }
+
+      .autocomplete-items div {
+        padding: 10px;
+        cursor: pointer;
+        background-color: #fff;
+        border-bottom: 1px solid #d4d4d4;
+      }
+      .autocomplete-items div:hover {
+        /*when hovering an item:*/
+        background-color: #e9e9e9;
+      }
     </style>
 
     
@@ -129,7 +160,7 @@
 
 <main>
 
-  <section class="py-5 text-center container">
+  <section class="py-1 text-center container">
     <div class="row py-lg-5">
       <div class="col-lg-7 col-md-8 mx-auto">
         <h1 class="fw-light"><img height="40px" width="70px" src="CFDE_gene_page/CFDE_logo.png">CFDE Gene Landing Pages</h1>
