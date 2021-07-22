@@ -439,10 +439,10 @@ function myFunction(gene_name) {
       var PDBe_h4 = document.getElementById('PDBe_title'); //or grab it by tagname etc
       PDBe_h4.textContent = `PDBe Knowledge Base: ${gene_search}`;
 
-      /*var PDB_a = document.getElementById('PDB'); //or grab it by tagname etc
-      PDB_a.href = `https://www.rcsb.org/search?request=%7B%22query%22%3A%7B%22parameters%22%3A%7B%22value%22%3A%22${gene_search}%22%7D%2C%22type%22%3A%22terminal%22%2C%22service%22%3A%22text%22%2C%22node_id%22%3A0%7D%2C%22return_type%22%3A%22entry%22%2C%22request_options%22%3A%7B%22pager%22%3A%7B%22start%22%3A0%2C%22rows%22%3A25%7D%2C%22scoring_strategy%22%3A%22combined%22%2C%22sort%22%3A%5B%7B%22sort_by%22%3A%22score%22%2C%22direction%22%3A%22desc%22%7D%5D%7D%2C%22request_info%22%3A%7B%22src%22%3A%22ui%22%2C%22query_id%22%3A%225c6fe089d49d2a371762c8cef72037be%22%7D%7D`;
+      var PDB_a = document.getElementById('PDB'); //or grab it by tagname etc
+      PDB_a.href = `https://www.rcsb.org/search?request=%7B%22query%22%3A%7B%22parameters%22%3A%7B%22attribute%22%3A%22rcsb_entity_source_organism.rcsb_gene_name.value%22%2C%22operator%22%3A%22in%22%2C%22value%22%3A%5B%22${gene_search}%22%5D%7D%2C%22service%22%3A%22text%22%2C%22type%22%3A%22terminal%22%2C%22node_id%22%3A0%7D%2C%22return_type%22%3A%22entry%22%2C%22request_options%22%3A%7B%22pager%22%3A%7B%22start%22%3A0%2C%22rows%22%3A25%7D%2C%22scoring_strategy%22%3A%22combined%22%2C%22sort%22%3A%5B%7B%22sort_by%22%3A%22score%22%2C%22direction%22%3A%22desc%22%7D%5D%7D%2C%22request_info%22%3A%7B%22src%22%3A%22ui%22%2C%22query_id%22%3A%220b67dad6ca2a8ccaca6d67d2399f1ac3%22%7D%7D`;
       var PDB_h4 = document.getElementById('PDB_title'); //or grab it by tagname etc
-      PDB_h4.textContent = `PDB: ${gene_search}`;*/
+      PDB_h4.textContent = `PDB: ${gene_search}`;
 
       var GENEVA_a = document.getElementById('GENEVA'); //or grab it by tagname etc
       GENEVA_a.href = `https://genevatool.org/gene_table?gene_name=${gene_search}`;
