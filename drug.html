@@ -13,6 +13,7 @@
     <meta name="theme-color" content="#ffffff">
     <script src="https://kit.fontawesome.com/7d2099e717.js" crossorigin="anonymous"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">  </script>
+    <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
     <title>Gene and Drug Landing Page Cards</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/album/">
@@ -158,7 +159,92 @@
             </div>
           </div>
         </div>
-        
+        <div class="col">
+            <div class="card shadow-sm">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/chEMBL_logo.png" alt="ChEMBL image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/ChEMBL_site.png" alt="ChEMBL site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="ChEMBL_title">ChEMBL</h4>
+                <p class="card-text">ChEMBL is a manually curated database of bioactive molecules with drug-like properties. It brings together chemical, bioactivity and genomic data to aid the translation of genomic information into effective new drugs.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var ChEMBL_clicks = 0;
+
+                    function ChEMBLonClick() {
+                      ChEMBL_clicks += 1;
+                      document.getElementById("ChEMBL_clicks").innerHTML = ChEMBL_clicks;
+                    };
+                  </script>
+                  <div class="btn-group">
+                    <a id="ChEMBL" href="https://www.ebi.ac.uk/chembl/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="ChEMBLonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="ChEMBL_clicks">0</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card shadow-sm">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/DrugEnrichr_logo.png" alt="DrugEnrichr image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/DrugEnrichr_site.png" alt="DrugEnrichr site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="DrugEnrichr_title">DrugEnrichr</h4>
+                <p class="card-text">DrugEnrichr...</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var DrugEnrichr_clicks = 0;
+
+                    function DrugEnrichronClick() {
+                      DrugEnrichr_clicks += 1;
+                      document.getElementById("DrugEnrichr_clicks").innerHTML = DrugEnrichr_clicks;
+                    };
+                  </script>
+                  <div class="btn-group">
+                    <a id="DrugEnrichr" href="https://maayanlab.cloud/DrugEnrichr/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="DrugEnrichronClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="DrugEnrichr_clicks">0</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card shadow-sm">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/chEMBL_logo.png" alt="ChEMBL image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/ChEMBL_site.png" alt="ChEMBL site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="ChEMBL_title">ChEMBL</h4>
+                <p class="card-text">ChEMBL is a manually curated database of bioactive molecules with drug-like properties. It brings together chemical, bioactivity and genomic data to aid the translation of genomic information into effective new drugs.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var ChEMBL_clicks = 0;
+
+                    function ChEMBLonClick() {
+                      ChEMBL_clicks += 1;
+                      document.getElementById("ChEMBL_clicks").innerHTML = ChEMBL_clicks;
+                    };
+                  </script>
+                  <div class="btn-group">
+                    <a id="ChEMBL" href="https://www.ebi.ac.uk/chembl/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="ChEMBLonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="ChEMBL_clicks">0</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
       </div>
     </div>
   </div>
@@ -171,10 +257,10 @@
     </p>
     <p class="mb-3">Links:</p>
     <p class="mb-0"><a href="https://github.com/MaayanLab/cfde_gene_pages">Project's GitHub Repo</a></p>
-    <p class="mb-0"><a href="https://commonfund.nih.gov/dataecosystem">NIH CFDE Program</a></p>
+    <!--<p class="mb-0"><a href="https://commonfund.nih.gov/dataecosystem">NIH CFDE Program</a></p>
     <p class="mb-0"><a href="https://commonfund.nih.gov/dataecosystem/coordinatingcenter">CFDE-CC</a></p>
     <p class="mb-0"><a href="https://www.nih-cfde.org/">CFDE Portal</a></p>
-    <p class="mb-0"><a href="https://www.nih-cfde.org/product/fair-cookbook/">The FAIR Cookbook</a></p>
+    <p class="mb-0"><a href="https://www.nih-cfde.org/product/fair-cookbook/">The FAIR Cookbook</a></p>-->
     <!--<p class="mb-0"><a href="">About the CFDE Gene Working Group</a></p>-->
   </div>
 </footer>
@@ -188,5 +274,3 @@
       
   </body>
 </html>
-
-
