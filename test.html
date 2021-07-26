@@ -11,6 +11,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
     <link rel="manifest" href="favicon_io/site.webmanifest">
     <meta name="theme-color" content="#ffffff">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="https://kit.fontawesome.com/7d2099e717.js" crossorigin="anonymous"></script>
     <script src="CFDE_gene_page/autocomplete_genes.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
@@ -350,25 +351,20 @@ function myFunction(gene_name) {
 
       var gtex_a = document.getElementById('GTEx'); //or grab it by tagname etc
 
-      function urlExists(url, callback) {
-        fetch(url, { method: 'head' })
-        .then(function(status) {
-          callback(status.ok)
-        });
-      }
-
       var url = `https://www.gtexportal.org/home/gene/${ensembl_id}`;
-
-      urlExists(url, function(exists) {
-        if (exists) {
-          console.log("success");
-            gtex_a.href = `https://www.gtexportal.org/home/gene/${ensembl_id}`;
-            var gtex_h4 = document.getElementById('Gtex_title'); //or grab it by tagname etc
-            gtex_h4.textContent = `GTEx Portal: ${gene_search}`;
-        } else {
+      async function fetchAndDecode(url) {
+        let response = await fetch(url, {mode:'cors'});
+        if (!response.ok) {
           console.log("failed");
+        } else {
+          console.log("success");
+          gtex_a.href = `https://www.gtexportal.org/home/gene/${ensembl_id}`;
+          var gtex_h4 = document.getElementById('Gtex_title'); //or grab it by tagname etc
+          gtex_h4.textContent = `GTEx Portal: ${gene_search}`;
         }
-      });
+      }
+      fetchAndDecode(url);
+         
       /*gtex_a.href = `https://www.gtexportal.org/home/gene/${ensembl_id}`;
       var gtex_h4 = document.getElementById('Gtex_title'); //or grab it by tagname etc
       gtex_h4.textContent = `GTEx Portal: ${gene_search}`;*/
@@ -534,7 +530,7 @@ function myFunction(gene_name) {
     </div>
   </section>
 
-  <div class="album py-5 bg-light">
+  <div class="album py-5">
     <div class="container">
 
       <div class="collapse" id="collapseExample">
@@ -560,9 +556,20 @@ function myFunction(gene_name) {
                     };
                   </script>
                   <div class="btn-group">
-                    <a id="GTEx" href="https://www.gtexportal.org/home/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="GteonClick()" >View on Site</a>
+                    <!--onClick="GteonClick()"-->
+                    <a id="GTEx" href="https://www.gtexportal.org/home/" class="btn btn-sm btn-outline-primary click-trigger" target="_blank"role="button" data-click-id="click-001" >View on Site</a>
                   </div>
-                  <p>Clicks: <a id="Gte_clicks">0</a></p>
+                  <?php 
+
+                  $clickcount = explode("\n", file_get_contents('counter.txt'));
+                  foreach($clickcount as $line){
+                    $tmp = explode('||', $line);
+                    $count[trim($tmp[0])] = trim($tmp[1]);
+                    }
+
+                  ?>
+                  <span id="click-001">Clicks:<?php echo $count['click-001'];?></span>
+                  <!--<p>Clicks: <a id="Gte_clicks">0</a></p>-->
                   <!--<img class="cf-logo" src="CFDE_gene_page/CF_logo.png">-->
                 </div>
                 <!--<p>Clicks: <a id="Gte_clicks">0</a></p>-->
@@ -1456,13 +1463,65 @@ function myFunction(gene_name) {
 
 </main>
 
-<footer class="text-muted py-5">
+<footer class="text-muted py-5" style="background-color: rgba(0, 0, 0, 0.1);">
   <div class="container">
     <p class="float-end mb-1">
-      <a href="#">Back to top</a>
+      <a
+           class="btn btn-primary btn-floating"
+           style="background-color: #3b5998;"
+           href="#!"
+           role="button"
+           ><i class="fab fa-facebook-f"></i
+          ></a>
+
+        <!-- Twitter -->
+        <a
+           class="btn btn-primary btn-floating"
+           style="background-color: #55acee;"
+           href="#!"
+           role="button"
+           ><i class="fab fa-twitter"></i
+          ></a>
+
+        <!-- Google -->
+        <a
+           class="btn btn-primary btn-floating"
+           style="background-color: #dd4b39;"
+           href="#!"
+           role="button"
+           ><i class="fab fa-google"></i
+          ></a>
+
+        <!-- Instagram -->
+        <a
+           class="btn btn-primary btn-floating"
+           style="background-color: #ac2bac;"
+           href="#!"
+           role="button"
+           ><i class="fab fa-instagram"></i
+          ></a>
+
+        <!-- Linkedin -->
+        <a
+           class="btn btn-primary btn-floating"
+           style="background-color: #0082ca;"
+           href="#!"
+           role="button"
+           ><i class="fab fa-linkedin-in"></i
+          ></a>
+        <!-- Github -->
+        <a
+           class="btn btn-primary btn-floating"
+           style="background-color: #333333;"
+           href="#!"
+           role="button"
+           ><i class="fab fa-github"></i
+          ></a>
     </p>
     <p class="mb-3">Links:</p>
+    <p class="mb-0"><a href="https://labs.icahn.mssm.edu/maayanlab/">Ma'ayan Laboratory of Computational Systems Biology</a></p>
     <p class="mb-0"><a href="https://github.com/MaayanLab/cfde_gene_pages">Project's GitHub Repo</a></p>
+    <p><a href="#">Back to top</a></p>
     <!--<p class="mb-0"><a href="https://commonfund.nih.gov/dataecosystem">NIH CFDE Program</a></p>
     <p class="mb-0"><a href="https://commonfund.nih.gov/dataecosystem/coordinatingcenter">CFDE-CC</a></p>
     <p class="mb-0"><a href="https://www.nih-cfde.org/">CFDE Portal</a></p>
@@ -1477,6 +1536,22 @@ function myFunction(gene_name) {
     integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
     <!--<script src="assets/dist/js/bootstrap.bundle.min.js"></script>-->
 
-      
+    <script>
+    var clicks = document.querySelectorAll('.click-trigger'); // IE8
+    for(var i = 0; i < clicks.length; i++){
+      clicks[i].onclick = function(){
+        var id = this.getAttribute('data-click-id');
+        var post = 'id='+id; // post string
+        var req = new XMLHttpRequest();
+        req.open('POST', 'counter.php', true);
+        req.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        req.onreadystatechange = function(){
+          if (req.readyState != 4 || req.status != 200) return; 
+          document.getElementById(id).innerHTML = req.responseText;
+          };
+        req.send(post);
+        }
+      }
+    </script>
   </body>
 </html>
