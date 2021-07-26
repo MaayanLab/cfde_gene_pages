@@ -13,10 +13,8 @@
     <meta name="theme-color" content="#ffffff">
     <script src="https://kit.fontawesome.com/7d2099e717.js" crossorigin="anonymous"></script>
     <script src="CFDE_gene_page/autocomplete_genes.js"></script>
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script> 
     <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
-  
+    <!--<title>CFDE gene page</title>-->
     <title>Gene and Drug Landing Page Aggregator</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/album/">
@@ -27,6 +25,9 @@
   <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
+      .default {cursor: default;}
+      .pointer {cursor: pointer;}
+
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -45,10 +46,22 @@
       .card{
         max-width: 380px;
       }
-
+      /*.card-body{
+        width: 100%;
+        height: 250px;
+        margin:  3px;
+      }*/
       .card-footer{
         width: 100%;
         height: 37px;
+      }
+
+      .card-image-wrapper {
+        display: flex;
+        width: 100%;
+        height: 200px;
+        /* Just to show the size of the image wrapper */
+        background-color: white;
       }
 
       .card-image-wrapper-1 {
@@ -56,8 +69,8 @@
         top: 0px;
         right: 0px;
         display: flex;
-        width: 60px;
-        height: 60px;
+        width: 55px;
+        height: 55px;
         margin: 5px 7px;
         /* Just to show the size of the image wrapper */
         background-color: white;
@@ -67,7 +80,7 @@
         display: flex;
         width: 75%;
         height: 175px;
-        margin: 5px 10px;
+        margin: 5px 7px;
         /* Just to show the size of the image wrapper */
         background-color: white;
       }
@@ -95,19 +108,17 @@
         overflow-x: hidden;
         overflow-y: scroll;
         position: absolute;
-        border: 1px solid #d4d4d4;
-        border-bottom: none;
-        border-top: none;
         left: 65px;
         z-index: 99;
         width: 50%;
-        height:270px;
+        height:230px;
         /*position the autocomplete items to be the same width as the container:*/
         top: 100%;
       }
 
       .autocomplete-items div {
         padding: 10px;
+        border: 1px solid #d4d4d4;
         cursor: pointer;
         background-color: #fff;
         border-bottom: 1px solid #d4d4d4;
@@ -116,6 +127,7 @@
         /*when hovering an item:*/
         background-color: #e9e9e9;
       }
+
     </style>
 
     
@@ -128,14 +140,14 @@
       <div class="row">
         <div class="col-sm-8 col-md-7 py-4">
           <h4 class="text-white">About</h4>
-          <p class="text-muted">The CFDE Gene WG was created based on a consensus that we need the CF DCCs to interoperate at the gene level. The aim is to potentially provide a resource and a service that will enable researchers to search for CF DCC data, and external data, centered around a gene, including variants, metabolites, isoforms, protein product, or other molecular entities. By specifying a gene as the search term, users should be able to fetch data from the DCCs to obtain a report in the form of a gene landing page with all the information presented in a user-friendly manner. To achieve this goal several technical issues need to be resolved.</p>
+          <!--<p class="text-muted">The CFDE Gene WG was created based on a consensus that we need the CF DCCs to interoperate at the gene level. The aim is to potentially provide a resource and a service that will enable researchers to search for CF DCC data, and external data, centered around a gene, including variants, metabolites, isoforms, protein product, or other molecular entities. By specifying a gene as the search term, users should be able to fetch data from the DCCs to obtain a report in the form of a gene landing page with all the information presented in a user-friendly manner. To achieve this goal several technical issues need to be resolved.</p>-->
         </div>
         <div class="col-sm-4 offset-md-1 py-4">
           <h4 class="text-white">More</h4>
-          <ul class="list-unstyled">
+          <!--<ul class="list-unstyled">
             <li><a href="https://commonfund.nih.gov/dataecosystem" target="_blank" class="text-white">NIH CFDE Program</a></li>
             <li><a href="https://commonfund.nih.gov/about" target="_blank" class="text-white">NIH Common Fund</a></li>
-          </ul>
+          </ul>-->
         </div>
       </div>
     </div>
@@ -143,15 +155,16 @@
   <div class="navbar navbar-dark bg-dark shadow-sm">
     <div class="container">
       <a href="#" class="navbar-brand d-flex align-items-center">
-        <!--<i class="fas fa-dna"></i>-->
-        <img height="30px" width="50px" style="color:white;" src="CFDE_gene_page/CFDE_logo.png">
-        <strong>&nbsp; Links to CFDE and Non-CFDE Gene Pages</strong>
+        <i class="fas fa-dna"></i>
+        <!--<img height="30px" width="50px" style="color:white;" src="CFDE_gene_page/CFDE_logo.png">-->
+        <!--<strong>&nbsp; Links to CFDE and Non-CFDE Gene Pages</strong>-->
+        <strong>&nbsp; Gene and Drug Landing Page Aggregator</strong>
       </a>
       <a class="nav-link" style="color:gray;" href="gene.html">Gene cards</a>
       <a class="nav-link" style="color:gray;" href="drug.html">Drug cards</a>
       <!--<a class="nav-link" style="color:gray;" href="#">Metabolites</a>
       <a class="nav-link" style="color:gray;" href="#">Cell types</a>-->
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarToggle" aria-expanded="true" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
     </div>
@@ -163,18 +176,33 @@
   <section class="py-1 text-center container">
     <div class="row py-lg-5">
       <div class="col-lg-7 col-md-8 mx-auto">
-        <h1 class="fw-light"><img height="40px" width="70px" src="CFDE_gene_page/CFDE_logo.png">CFDE Gene Landing Pages</h1>
-        <p class="lead text-muted">This page provides links to repositories that provide direct links to human gene landing pages. You can search by gene name and then choose the sites that contain knowledge about your gene.</p>
+        <!--<h1 class="fw-light"><img height="40px" width="70px" src="CFDE_gene_page/CFDE_logo.png">CFDE Gene Landing Pages</h1>-->
+        <h1 class="fw-light">Gene and Drug Landing Page Aggregator</h1>
+        <p class="lead text-muted">This page provides links to 32 gene and 13 drug repositories that provide direct links to gene and drug landing pages. You can search by gene name and then choose the sites that contain knowledge about your gene.</p>
         <p>
           <form id="frm1" autocomplete="off" action="/action_page.php" method="GET"> 
-            <div class="autocomplete mx-auto d-block" style="width:400px; height: 50px;">
+            <div class="autocomplete mx-auto d-block" style="width:400px; height: 33px;">
               <input id="myInput" type="text" name="Gene" placeholder="Gene" style="height: 33px; width: 200px">
               <input id="search" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" onclick="myFunction()" value="Search" style="height: 33px;">
-              <p>Examples:<a id="ACE2" class="link" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" onclick="myFunction('ACE2')">ACE2</a>, <a id="ULK4" class="link" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" onclick="myFunction('ULK4')">ULK4</a>, <a id="DPH7" class="link" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" onclick="myFunction('DPH7')">DPH7</a> </p>
+              <p class='pointer'>Examples: <a id="ACE2" class="link" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" onclick="myFunction('ACE2')">ACE2</a>, <a id="ULK4" class="link" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" onclick="myFunction('ULK4')">ULK4</a>, <a id="DPH7" class="link" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" onclick="myFunction('DPH7')">DPH7</a>, <a id="KL" class="link" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" onclick="myFunction('KL')">KL</a></p>
+              <script type="text/javascript">
+                /*$('a[data-toggle=collapse]').each(function () {
+                  var $this = $(this);
+
+                  $this.on('myFunction', function () {
+                    $container.imagesLoaded( function () {
+                      $container.masonry({
+                        columnWidth: '.card',
+                        itemSelector: '.card'
+                      });   
+                    });  
+                  });
+                });*/
+              </script>
             </div>
           </form>
 
-          <script type="text/javascript">
+          <script>
 function autocomplete(inp, arr) {
   /*the autocomplete function takes two arguments,
   the text field element and an array of possible autocompleted values:*/
@@ -272,30 +300,11 @@ function autocomplete(inp, arr) {
   });
 }
 
-/*An array containing all the genes:*/
+/*An array containing all the country names in the world:*/
 var genes = GENES;
 
 /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
 autocomplete(document.getElementById("myInput"), genes);
-
-/*$(document).ready(function(){
-        var gene;
-        $("#search").click(function(){
-          gene=$("#myInput").val();
-          $.post("http://localhost:3000/gene",{gene_name: gene_name}, function(data){
-            
-          });
-        });
-      });*/
-
-/*function myFunction(gene_name) {
-  if (gene_name === undefined){
-    var gene_search = document.getElementById("myInput").value;
-  }else{
-    var gene_search = gene_name;
-  }
-  window.location.href= '/gene/' + gene_search;
-};*/
 
 
 function myFunction(gene_name) {
@@ -303,11 +312,14 @@ function myFunction(gene_name) {
     var gene_search = document.getElementById("myInput").value;
   }else{
     var gene_search = gene_name;
+    document.getElementById("myInput").value = gene_name;
   }
   var gene_query_url = 'https://mygene.info/v3/';
   var url = gene_query_url + "query?q=symbol:"+gene_search;
   var ensembl_id;
   var gene_id;
+  var HGNC;
+  var uniprot_qb;
 
   fetch(url)
   .then(function(response) {
@@ -330,38 +342,41 @@ function myFunction(gene_name) {
     .then(function(data){
       ensembl_id = data.ensembl.gene;
       HGNC = data.HGNC;
+      MIM = data.MIM;
       uniprot_qb = data.pantherdb.uniprot_kb;
       MGI = data.pantherdb.ortholog[0].MGI;
       transcript= data.exac.transcript;
       entrezgene=data.entrezgene;
 
       var gtex_a = document.getElementById('GTEx'); //or grab it by tagname etc
-      /*$.ajax({
-          url: `https://www.gtexportal.org/home/gene/${ensembl_id}`,
-          method: "HEAD",
-          statusCode: {
-              404: function () {
-                  alert('not found');
-              },
-              200: function() {
-              alert("foundfile exists");
-          }
-          }
-      });*/
-      gtex_a.href = `https://www.gtexportal.org/home/gene/${ensembl_id}`;
+
+      function urlExists(url, callback) {
+        fetch(url, { method: 'head' })
+        .then(function(status) {
+          callback(status.ok)
+        });
+      }
+
+      var url = `https://www.gtexportal.org/home/gene/${ensembl_id}`;
+
+      urlExists(url, function(exists) {
+        if (exists) {
+          console.log("success");
+            gtex_a.href = `https://www.gtexportal.org/home/gene/${ensembl_id}`;
+            var gtex_h4 = document.getElementById('Gtex_title'); //or grab it by tagname etc
+            gtex_h4.textContent = `GTEx Portal: ${gene_search}`;
+        } else {
+          console.log("failed");
+        }
+      });
+      /*gtex_a.href = `https://www.gtexportal.org/home/gene/${ensembl_id}`;
       var gtex_h4 = document.getElementById('Gtex_title'); //or grab it by tagname etc
-      gtex_h4.textContent = `GTEx Portal: ${gene_search}`;
+      gtex_h4.textContent = `GTEx Portal: ${gene_search}`;*/
 
       var pharos_a = document.getElementById('Pharos'); //or grab it by tagname etc
       pharos_a.href = `https://pharos.nih.gov/targets/${uniprot_qb}`;
       var pharos_h4 = document.getElementById('Pharos_title'); //or grab it by tagname etc
-      var link = document.createElement('a')
-
-      link.href = `https://pharos.nih.gov/targets/${uniprot_qb}`;
-      link.textContent = `${gene_search}`;
-      document.pharos_h4.appendChlid(link);
-      /*
-      pharos_h4.textContent = `Pharos: <a href='https://pharos.nih.gov/targets/${uniprot_qb}'>${gene_search}</a>`;*/
+      pharos_h4.textContent = `Pharos: ${gene_search}`;
 
       var GlyGen_a = document.getElementById('GlyGen'); //or grab it by tagname etc
       GlyGen_a.href = `https://www.glygen.org/protein/${uniprot_qb}`;
@@ -373,6 +388,11 @@ function myFunction(gene_name) {
       var harmonizome_h4 = document.getElementById('Harmonizome_title'); //or grab it by tagname etc
       harmonizome_h4.textContent = `Harmonizome: ${gene_search}`;
 
+      var LINCS_a = document.getElementById('LINCS'); //or grab it by tagname etc
+      LINCS_a.href = `https://ldp3.cloud/#/MetadataSearch/Signatures?query={%22skip%22:0,%22limit%22:10,%22search%22:[%22${gene_search}%22]`;
+      var LINCS_h4 = document.getElementById('LINCS_title'); //or grab it by tagname etc
+      LINCS_h4.textContent = `LINCS Portal: ${gene_search}`;
+
       var komp_a = document.getElementById('komp'); //or grab it by tagname etc
       komp_a.href = `https://www.mousephenotype.org/data/genes/MGI:${MGI}`;
       var komp_h4 = document.getElementById('KOMP_title'); //or grab it by tagname etc
@@ -382,6 +402,11 @@ function myFunction(gene_name) {
       udn_a.href = `https://undiagnosed.hms.harvard.edu/genes/${gene_search}/`;
       var udn_h4 = document.getElementById('UDN_title'); //or grab it by tagname etc
       udn_h4.textContent = `UDN Portal: ${gene_search}`;
+
+      var ARCHS4_a = document.getElementById('ARCHS4'); //or grab it by tagname etc
+      ARCHS4_a.href = `https://maayanlab.cloud/archs4/gene/${gene_search}`;
+      var ARCHS4_h4 = document.getElementById('ARCHS4_title'); //or grab it by tagname etc
+      ARCHS4_h4.textContent = `ARCHS4 Portal: ${gene_search}`;
 
       var ncbi_a = document.getElementById('NCBI'); //or grab it by tagname etc
       ncbi_a.href = `https://www.ncbi.nlm.nih.gov/gene/${gene_id}`;
@@ -399,7 +424,7 @@ function myFunction(gene_name) {
       genecards_h4.textContent = `GeneCards: ${gene_search}`;
 
       var enrichr_a = document.getElementById('Enrichr'); //or grab it by tagname etc
-      enrichr_a.href = `https://maayanlab.cloud/Enrichr/#!gene=${gene_search}`;
+      enrichr_a.href = `https://maayanlab.cloud/Enrichr/#find!gene=${gene_search}`;
       var enrichr_h4 = document.getElementById('Enrichr_title'); //or grab it by tagname etc
       enrichr_h4.textContent = `Enrichr: ${gene_search}`;
 
@@ -447,22 +472,63 @@ function myFunction(gene_name) {
       COSMIC_a.href = `https://cancer.sanger.ac.uk/cosmic/gene/analysis?ln=${gene_search}`;
       var COSMIC_h4 = document.getElementById('COSMIC_title'); //or grab it by tagname etc
       COSMIC_h4.textContent = `COSMIC: ${gene_search}`;
+
+      var PDBe_a = document.getElementById('PDBe'); //or grab it by tagname etc
+      PDBe_a.href = `https://www.ebi.ac.uk/pdbe/pdbe-kb/proteins/${uniprot_qb}`;
+      var PDBe_h4 = document.getElementById('PDBe_title'); //or grab it by tagname etc
+      PDBe_h4.textContent = `PDBe Knowledge Base: ${gene_search}`;
+
+      var PDB_a = document.getElementById('PDB'); //or grab it by tagname etc
+      PDB_a.href = `https://www.rcsb.org/search?request=%7B%22query%22%3A%7B%22parameters%22%3A%7B%22attribute%22%3A%22rcsb_entity_source_organism.rcsb_gene_name.value%22%2C%22operator%22%3A%22in%22%2C%22value%22%3A%5B%22${gene_search}%22%5D%7D%2C%22service%22%3A%22text%22%2C%22type%22%3A%22terminal%22%2C%22node_id%22%3A0%7D%2C%22return_type%22%3A%22entry%22%2C%22request_options%22%3A%7B%22pager%22%3A%7B%22start%22%3A0%2C%22rows%22%3A25%7D%2C%22scoring_strategy%22%3A%22combined%22%2C%22sort%22%3A%5B%7B%22sort_by%22%3A%22score%22%2C%22direction%22%3A%22desc%22%7D%5D%7D%2C%22request_info%22%3A%7B%22src%22%3A%22ui%22%2C%22query_id%22%3A%220b67dad6ca2a8ccaca6d67d2399f1ac3%22%7D%7D`;
+      var PDB_h4 = document.getElementById('PDB_title'); //or grab it by tagname etc
+      PDB_h4.textContent = `PDB: ${gene_search}`;
+
+      var GENEVA_a = document.getElementById('GENEVA'); //or grab it by tagname etc
+      GENEVA_a.href = `https://genevatool.org/gene_table?gene_name=${gene_search}`;
+      var GENEVA_h4 = document.getElementById('GENEVA_title'); //or grab it by tagname etc
+      GENEVA_h4.textContent = `GENEVA: ${gene_search}`;
+
+      var MGI_a = document.getElementById('MGI'); //or grab it by tagname etc
+      MGI_a.href = `http://www.informatics.jax.org/marker/MGI:${MGI}`;
+      var MGI_h4 = document.getElementById('MGI_title'); //or grab it by tagname etc
+      MGI_h4.textContent = `MGI: ${gene_search}`;
+
+      var OMIM_a = document.getElementById('OMIM'); //or grab it by tagname etc
+      OMIM_a.href = `https://www.omim.org/search?index=entry&start=1&limit=10&sort=score+desc%2C+prefix_sort+desc&search=approved_gene_symbol%3A${gene_search}`;
+      var OMIM_h4 = document.getElementById('OMIM_title'); //or grab it by tagname etc
+      OMIM_h4.textContent = `OMIM: ${gene_search}`;
+
+      var GO_a = document.getElementById('GO'); //or grab it by tagname etc
+      GO_a.href = `http://amigo.geneontology.org/amigo/gene_product/UniProtKB:${uniprot_qb}`;
+      var GO_h4 = document.getElementById('GO_title'); //or grab it by tagname etc
+      GO_h4.textContent = `Gene Ontology: ${gene_search}`;
+
+      var Reactome_a = document.getElementById('Reactome'); //or grab it by tagname etc
+      Reactome_a.href = `https://reactome.org/content/query?q=${gene_search}&species=Homo+sapiens&species=Entries+without+species&cluster=true`;
+      var Reactome_h4 = document.getElementById('Reactome_title'); //or grab it by tagname etc
+      Reactome_h4.textContent = `Reactome: ${gene_search}`;
+
+      var KEGG_a = document.getElementById('KEGG'); //or grab it by tagname etc
+      KEGG_a.href = `https://www.genome.jp/entry/hsa:${entrezgene}`;
+      var KEGG_h4 = document.getElementById('KEGG_title'); //or grab it by tagname etc
+      KEGG_h4.textContent = `KEGG: ${gene_search}`;
+
+      var Monarch_a = document.getElementById('Monarch'); //or grab it by tagname etc
+      Monarch_a.href = `https://monarchinitiative.org/gene/HGNC:${HGNC}`;
+      var Monarch_h4 = document.getElementById('Monarch_title'); //or grab it by tagname etc
+      Monarch_h4.textContent = `Monarch Initiative: ${gene_search}`;
+
+      var HGB_a = document.getElementById('HGB'); //or grab it by tagname etc
+      HGB_a.href = `https://genome.ucsc.edu/cgi-bin/hgGene?hgg_gene=${transcript}&hgg_type=knownGene`;
+      var HGB_h4 = document.getElementById('HGB_title'); //or grab it by tagname etc
+      HGB_h4.textContent = `Human Genome Browser: ${gene_search}`;
     })
   })
 };
+  /*window.location.href= '/gene/' + gene_search;*/
 
-var msnry = new Masonry( '.grid', {
-  columnWidth: '.grid-sizer',
-  itemSelector: '.grid-item',
-  percentPosition: true
-});
-
+  
 </script>
-          <!-- <div class="input-group">
-            <input type="search" class="form-control rounded"  aria-label="Search"
-              aria-describedby="search-addon" />
-            <button type="button" class="btn btn-outline-primary">search</button>
-          </div> -->
         </p>
       </div>
     </div>
@@ -471,10 +537,9 @@ var msnry = new Masonry( '.grid', {
   <div class="album py-5 bg-light">
     <div class="container">
 
-      <!--<div class="collapse" id="collapseExample">-->
-      <div class="grid">
-        <div class="grid-sizer row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" data-masonry='{"percentPosition": true }'>
-          <div class="grid-item col align-items-center">
+      <div class="collapse" id="collapseExample">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+          <div class="col align-items-center">
             <div class="card shadow-sm">
               <div class="card-image-wrapper-1">
                <img class="card-img-top img-fluid" src="CFDE_gene_page/test_img.png" alt="Gtex image" width="100%" height="100%">
@@ -497,16 +562,14 @@ var msnry = new Masonry( '.grid', {
                   <div class="btn-group">
                     <a id="GTEx" href="https://www.gtexportal.org/home/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="GteonClick()" >View on Site</a>
                   </div>
-                  <img class="cf-logo" src="CFDE_gene_page/CF_logo.png">
+                  <p>Clicks: <a id="Gte_clicks">0</a></p>
+                  <!--<img class="cf-logo" src="CFDE_gene_page/CF_logo.png">-->
                 </div>
-                <p>Clicks: <a id="Gte_clicks">0</a></p>
+                <!--<p>Clicks: <a id="Gte_clicks">0</a></p>-->
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="Gte_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
-          <div class="grid-item col">
+          <div class="col">
             <div class="card shadow-sm">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/IDG_LOGO.png" alt="IDG image" width="100%" height="100%">
@@ -529,18 +592,16 @@ var msnry = new Masonry( '.grid', {
                     };
                   </script>
                   <div class="btn-group">
-                    <a id="Pharos" href="https://pharos.nih.gov/targets" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="PharonClick()">View on Site</a>
+                    <a id="Pharos" href="https://pharos.nih.gov/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="PharonClick()">View on Site</a>
                   </div>
-                  <img class="cf-logo" src="CFDE_gene_page/CF_logo.png">
+                  <p>Clicks: <a id="Phar_clicks">0</a></p>
+                  <!--<img class="cf-logo" src="CFDE_gene_page/CF_logo.png">-->
                 </div>
-                <p>Clicks: <a id="Phar_clicks">0</a></p>
+                <!--<p>Clicks: <a id="Phar_clicks">0</a></p>-->
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="Phar_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
-          <div class="grid-item col">
+          <div class="col">
             <div class="card shadow-sm">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/IDG_LOGO.png" alt="IDG image" width="100%" height="100%">
@@ -563,16 +624,14 @@ var msnry = new Masonry( '.grid', {
                   <div class="btn-group">
                     <a id="Harmonizome" href="https://maayanlab.cloud/Harmonizome/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="HarmonClick()">View on Site</a>
                   </div>
-                  <img class="cf-logo" src="CFDE_gene_page/CF_logo.png">
+                  <p>Clicks: <a id="Harm_clicks">0</a></p>
+                  <!--<img class="cf-logo" src="CFDE_gene_page/CF_logo.png">-->
                 </div>
-                <p>Clicks: <a id="Harm_clicks">0</a></p>
+                <!--<p>Clicks: <a id="Harm_clicks">0</a></p>-->
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="Harm_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
-          <div class="grid-item col align-items-center">
+          <div class="col align-items-center">
             <div class="card shadow-sm">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/LINCS_logo.gif" alt="LINCS image" width="100%" height="100%">
@@ -581,7 +640,7 @@ var msnry = new Masonry( '.grid', {
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/Lincs_site.png" alt="LINCS site image" width="100%" height="100%">
               </div>
               <div class="card-body">
-                <h4>LINCS Portal</h4>
+                <h4 id="LINCS_title">LINCS Portal</h4>
                 <p class="card-text">The LINCS Data Portal 3.0 is a portal for serving and querying LINCS datasets and signatures. It provides a signature similarity search to query for mimicker or reverser signatures.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
@@ -593,15 +652,13 @@ var msnry = new Masonry( '.grid', {
                     };
                   </script>
                   <div class="btn-group">
-                    <a href="https://ldp3.cloud/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="LINCSonClick()">View on Site</a>
+                    <a id="LINCS" href="https://ldp3.cloud/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="LINCSonClick()">View on Site</a>
                   </div>
-                  <img class="cf-logo" src="CFDE_gene_page/CF_logo.png">
+                  <p>Clicks: <a id="LINCS_clicks">0</a></p>
+                  <!--<img class="cf-logo" src="CFDE_gene_page/CF_logo.png">-->
                 </div>
-                <p>Clicks: <a id="LINCS_clicks">0</a></p>
+                <!--<p>Clicks: <a id="LINCS_clicks">0</a></p>-->
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="LINCS_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
 
@@ -628,13 +685,9 @@ var msnry = new Masonry( '.grid', {
                   <div class="btn-group">
                     <a href="https://www.metabolomicsworkbench.org/databases/proteome/MGP.php" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="MetabonClick()">View on Site</a>
                   </div>
-                  <img class="cf-logo" src="CFDE_gene_page/CF_logo.png">
+                  <p>Clicks: <a id="Metab_clicks">0</a></p>
                 </div>
-                <p>Clicks: <a id="Metab_clicks">0</a></p>
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="Metab_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
           <div class="col">
@@ -646,7 +699,7 @@ var msnry = new Masonry( '.grid', {
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/Glygen_site.png" alt="GlyGen site image" width="100%" height="100%">
               </div>
               <div class="card-body">
-                <h4>GlyGen Portal</h4>
+                <h4 id="GlyGen_title">GlyGen Portal</h4>
                 <p class="card-text">GlyGen provides computational and informatics resources and tools for glycosciences research using information from many data sources.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
@@ -658,14 +711,11 @@ var msnry = new Masonry( '.grid', {
                     };
                   </script>
                   <div class="btn-group">
-                    <a href="https://www.glygen.org/protein-search/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="GlyGonClick()">View on Site</a>
+                    <a id="GlyGen" href="https://www.glygen.org/protein-search/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="GlyGonClick()">View on Site</a>
                   </div>
                   <p>Clicks: <a id="GlyG_clicks">0</a></p>
                 </div>
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="GlyG_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
           <div class="col">
@@ -694,9 +744,6 @@ var msnry = new Masonry( '.grid', {
                   <p>Clicks: <a id="KOMP_clicks">0</a></p>
                 </div>
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="KOMP_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
 
@@ -726,9 +773,35 @@ var msnry = new Masonry( '.grid', {
                   <p>Clicks: <a id="UDN_clicks">0</a></p>
                 </div>
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="UDN_clicks">0</a></p>
-              </div>-->
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card shadow-sm">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/ARCHS4_logo.png" alt="ARCHS4 image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/ARCHS4_site.png" alt="ARCHS4 site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id= "ARCHS4_title">ARCHS4</h4>
+                <p class="card-text">ARCHS4 provides access to gene counts from HiSeq 2000, HiSeq 2500 and NextSeq 500 platforms for human and mouse experiments from GEO and SRA.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var ARCHS4_clicks = 0;
+
+                    function ARCHS4onClick() {
+                      ARCHS4_clicks += 1;
+                      document.getElementById("ARCHS4_clicks").innerHTML = ARCHS4_clicks;
+                    };
+                  </script>
+                  <div class="btn-group">
+                    <a id="ARCHS4" href="https://maayanlab.cloud/archs4/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="ARCHS4onClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="ARCHS4_clicks">0</a></p>
+                </div>
+              </div>
             </div>
           </div>
           <div class="col">
@@ -757,9 +830,6 @@ var msnry = new Masonry( '.grid', {
                   <p>Clicks: <a id="NCBI_clicks">0</a></p>
                 </div>
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="NCBI_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
           <div class="col">
@@ -788,9 +858,6 @@ var msnry = new Masonry( '.grid', {
                   <p>Clicks: <a id="GeneCard_clicks">0</a></p>
                 </div>
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="GeneCard_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
           <div class="col">
@@ -819,9 +886,6 @@ var msnry = new Masonry( '.grid', {
                   <p>Clicks: <a id="Enrichr_clicks">0</a></p>
                 </div>
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="Enrichr_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
           <div class="col">
@@ -850,40 +914,6 @@ var msnry = new Masonry( '.grid', {
                   <p>Clicks: <a id="ENCODE_clicks">0</a></p>
                 </div>
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="ENCODE_clicks">0</a></p>
-              </div>-->
-            </div>
-          </div>
-          <div class="col">
-            <div class="card shadow-sm">
-              <div class="card-image-wrapper-1">
-                <img class="card-img-top img-fluid" src="CFDE_gene_page/marrvel_logo.webp" alt="MARRVEL image" width="100%" height="100%">
-              </div>
-              <div class="card-image-wrapper-2">
-                <img class="card-img-top img-fluid" src="CFDE_gene_page/Marrvel_site.png" alt="MARRVEL site image" width="100%" height="100%">
-              </div>
-              <div class="card-body">
-                <h4 id="MARRVEL_title">MARRVEL</h4>
-                <p class="card-text">MARRVEL allows users to search multiple public variant databases simultaneously and provides a unified interface to facilitate the search process.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <script type="text/javascript">
-                    var MARRVEL_clicks = 0;
-
-                    function MARRVELonClick() {
-                      MARRVEL_clicks += 1;
-                      document.getElementById("MARRVEL_clicks").innerHTML = MARRVEL_clicks;
-                    };
-                  </script>
-                  <div class="btn-group">
-                    <a id="MARRVEL" href="http://marrvel.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="MARRVELonClick()">View on Site</a>
-                  </div>
-                  <p>Clicks: <a id="MARRVEL_clicks">0</a></p>
-                </div>
-              </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="MARRVEL_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
           <div class="col">
@@ -912,11 +942,37 @@ var msnry = new Masonry( '.grid', {
                   <p>Clicks: <a id="UniProt_clicks">0</a></p>
                 </div>
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="UniProt_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
+          <div class="col">
+            <div class="card shadow-sm">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/marrvel_logo.webp" alt="MARRVEL image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/Marrvel_site.png" alt="MARRVEL site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="MARRVEL_title">MARRVEL</h4>
+                <p class="card-text">MARRVEL allows users to search multiple public variant databases simultaneously and provides a unified interface to facilitate the search process.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var MARRVEL_clicks = 0;
+
+                    function MARRVELonClick() {
+                      MARRVEL_clicks += 1;
+                      document.getElementById("MARRVEL_clicks").innerHTML = MARRVEL_clicks;
+                    };
+                  </script>
+                  <div class="btn-group">
+                    <a id="MARRVEL" href="http://marrvel.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="MARRVELonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="MARRVEL_clicks">0</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
           <div class="col">
             <div class="card shadow-sm">
               <div class="card-image-wrapper-1">
@@ -943,9 +999,6 @@ var msnry = new Masonry( '.grid', {
                   <p>Clicks: <a id="BioGPS_clicks">0</a></p>
                 </div>
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="BioGPS_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
           <div class="col">
@@ -974,170 +1027,432 @@ var msnry = new Masonry( '.grid', {
                   <p>Clicks: <a id="HGNC_clicks">0</a></p>
                 </div>
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="HGNC_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <div class="card-image-wrapper-1">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/Ensembl_logo.png" alt="Ensembl image" width="100%" height="100%">
-            </div>
-            <div class="card-image-wrapper-2">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/Ensembl_site.png" alt="Ensembl site image" width="100%" height="100%">
-            </div>
-            <div class="card-body">
-              <h4 id="Ensembl_title">Ensembl</h4>
-              <p class="card-text">Ensembl is a genome browser for vertebrate genomes that supports research in comparative genomics, evolution, sequence variation and transcriptional regulation.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <script type="text/javascript">
-                  var Ensembl_clicks = 0;
+          <div class="col">
+            <div class="card shadow-sm">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/Ensembl_logo.png" alt="Ensembl image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/Ensembl_site.png" alt="Ensembl site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="Ensembl_title">Ensembl</h4>
+                <p class="card-text">Ensembl is a genome browser for vertebrate genomes that supports research in comparative genomics, evolution, sequence variation and transcriptional regulation.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var Ensembl_clicks = 0;
 
-                  function EnsemblonClick() {
-                    Ensembl_clicks += 1;
-                    document.getElementById("Ensembl_clicks").innerHTML = Ensembl_clicks;
-                  };
-                </script>
-                <div class="btn-group">
-                  <a id="Ensembl" href="https://useast.ensembl.org/index.html" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="EnsemblonClick()">View on Site</a>
+                    function EnsemblonClick() {
+                      Ensembl_clicks += 1;
+                      document.getElementById("Ensembl_clicks").innerHTML = Ensembl_clicks;
+                    };
+                  </script>
+                  <div class="btn-group">
+                    <a id="Ensembl" href="https://useast.ensembl.org/index.html" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="EnsemblonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="Ensembl_clicks">0</a></p>
                 </div>
-                <p>Clicks: <a id="Ensembl_clicks">0</a></p>
               </div>
             </div>
-            <!--<div class="card-footer">
-              <p>Clicks: <a id="HGNC_clicks">0</a></p>
-            </div>-->
           </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <div class="card-image-wrapper-1">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/Bgee_logo.png" alt="Bgee image" width="100%" height="100%">
-            </div>
-            <div class="card-image-wrapper-2">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/Bgee_site.png" alt="Bgee site image" width="100%" height="100%">
-            </div>
-            <div class="card-body">
-              <h4 id="Bgee_title">Bgee</h4>
-              <p class="card-text">Bgee is a database for retrieval and comparison of gene expression patterns across multiple animal species.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <script type="text/javascript">
-                  var Bgee_clicks = 0;
+          <div class="col">
+            <div class="card shadow-sm">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/Bgee_logo.png" alt="Bgee image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/Bgee_site.png" alt="Bgee site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="Bgee_title">Bgee</h4>
+                <p class="card-text">Bgee is a database for retrieval and comparison of gene expression patterns across multiple animal species.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var Bgee_clicks = 0;
 
-                  function BgeeonClick() {
-                    Bgee_clicks += 1;
-                    document.getElementById("Bgee_clicks").innerHTML = Bgee_clicks;
-                  };
-                </script>
-                <div class="btn-group">
-                  <a id="Bgee" href="https://bgee.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="BgeeonClick()">View on Site</a>
+                    function BgeeonClick() {
+                      Bgee_clicks += 1;
+                      document.getElementById("Bgee_clicks").innerHTML = Bgee_clicks;
+                    };
+                  </script>
+                  <div class="btn-group">
+                    <a id="Bgee" href="https://bgee.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="BgeeonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="Bgee_clicks">0</a></p>
                 </div>
-                <p>Clicks: <a id="Bgee_clicks">0</a></p>
               </div>
             </div>
-            <!--<div class="card-footer">
-              <p>Clicks: <a id="HGNC_clicks">0</a></p>
-            </div>-->
           </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <div class="card-image-wrapper-1">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/COSMIC_logo.png" alt="COSMIC image" width="100%" height="100%">
-            </div>
-            <div class="card-image-wrapper-2">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/COSMIC_site.png" alt="COSMIC site image" width="100%" height="100%">
-            </div>
-            <div class="card-body">
-              <h4 id="COSMIC_title">COSMIC</h4>
-              <p class="card-text">COSMIC, the Catalogue Of Somatic Mutations In Cancer, is the world's largest and most comprehensive resource for exploring the impact of somatic mutations in human cancer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <script type="text/javascript">
-                  var COSMIC_clicks = 0;
+          <div class="col">
+            <div class="card shadow-sm">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/COSMIC_logo.png" alt="COSMIC image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/COSMIC_site.png" alt="COSMIC site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="COSMIC_title">COSMIC</h4>
+                <p class="card-text">COSMIC, the Catalogue Of Somatic Mutations In Cancer, is the world's largest and most comprehensive resource for exploring the impact of somatic mutations in human cancer.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var COSMIC_clicks = 0;
 
-                  function COSMIConClick() {
-                    COSMIC_clicks += 1;
-                    document.getElementById("COSMIC_clicks").innerHTML = COSMIC_clicks;
-                  };
-                </script>
-                <div class="btn-group">
-                  <a id="COSMIC" href="https://cancer.sanger.ac.uk/cosmic" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="COSMIConClick()">View on Site</a>
+                    function COSMIConClick() {
+                      COSMIC_clicks += 1;
+                      document.getElementById("COSMIC_clicks").innerHTML = COSMIC_clicks;
+                    };
+                  </script>
+                  <div class="btn-group">
+                    <a id="COSMIC" href="https://cancer.sanger.ac.uk/cosmic" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="COSMIConClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="COSMIC_clicks">0</a></p>
                 </div>
-                <p>Clicks: <a id="COSMIC_clicks">0</a></p>
               </div>
             </div>
-            <!--<div class="card-footer">
-              <p>Clicks: <a id="HGNC_clicks">0</a></p>
-            </div>-->
           </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <div class="card-image-wrapper-1">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/ClinGen_logo.png" alt="ClinGen image" width="100%" height="100%">
-            </div>
-            <div class="card-image-wrapper-2">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/ClinGen_site.png" alt="ClinGen site image" width="100%" height="100%">
-            </div>
-            <div class="card-body">
-              <h4 id="ClinGen_title">ClinGen</h4>
-              <p class="card-text">ClinGen is a NIH funded resource dedicated to building a central resource that defines the clinical relevance of genes and variants for use in precision medicine and research.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <script type="text/javascript">
-                  var ClinGen_clicks = 0;
+          <div class="col">
+            <div class="card shadow-sm">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/ClinGen_logo.png" alt="ClinGen image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/ClinGen_site.png" alt="ClinGen site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="ClinGen_title">ClinGen</h4>
+                <p class="card-text">ClinGen is a NIH funded resource dedicated to building a central resource that defines the clinical relevance of genes and variants for use in precision medicine and research.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var ClinGen_clicks = 0;
 
-                  function ClinGenonClick() {
-                    ClinGen_clicks += 1;
-                    document.getElementById("ClinGen_clicks").innerHTML = ClinGen_clicks;
-                  };
-                </script>
-                <div class="btn-group">
-                  <a id="ClinGen" href="https://www.clinicalgenome.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="ClinGenonClick()">View on Site</a>
+                    function ClinGenonClick() {
+                      ClinGen_clicks += 1;
+                      document.getElementById("ClinGen_clicks").innerHTML = ClinGen_clicks;
+                    };
+                  </script>
+                  <div class="btn-group">
+                    <a id="ClinGen" href="https://www.clinicalgenome.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="ClinGenonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="ClinGen_clicks">0</a></p>
                 </div>
-                <p>Clicks: <a id="ClinGen_clicks">0</a></p>
               </div>
             </div>
-            <!--<div class="card-footer">
-              <p>Clicks: <a id="HGNC_clicks">0</a></p>
-            </div>-->
           </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <div class="card-image-wrapper-1">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/GWAS_logo.jpeg" alt="GWAS image" width="100%" height="100%">
-            </div>
-            <div class="card-image-wrapper-2">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/GWAS_site.png" alt="GWAS site image" width="100%" height="100%">
-            </div>
-            <div class="card-body">
-              <h4 id="GWAS_title">GWAS Catalog</h4>
-              <p class="card-text">The GWAS Catalog provides a consistent, searchable, visualisable and freely available database of SNP-trait associations, which can be easily integrated with other resources.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <script type="text/javascript">
-                  var GWAS_clicks = 0;
+          <div class="col">
+            <div class="card shadow-sm">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/GWAS_logo.jpeg" alt="GWAS image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/GWAS_site.png" alt="GWAS site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="GWAS_title">GWAS Catalog</h4>
+                <p class="card-text">The GWAS Catalog provides a consistent, searchable, visualisable and freely available database of SNP-trait associations, which can be easily integrated with other resources.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var GWAS_clicks = 0;
 
-                  function GWASonClick() {
-                    GWAS_clicks += 1;
-                    document.getElementById("GWAS_clicks").innerHTML = GWAS_clicks;
-                  };
-                </script>
-                <div class="btn-group">
-                  <a id="GWAS" href="https://www.ebi.ac.uk/gwas/home" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="GWASonClick()">View on Site</a>
+                    function GWASonClick() {
+                      GWAS_clicks += 1;
+                      document.getElementById("GWAS_clicks").innerHTML = GWAS_clicks;
+                    };
+                  </script>
+                  <div class="btn-group">
+                    <a id="GWAS" href="https://www.ebi.ac.uk/gwas/home" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="GWASonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="GWAS_clicks">0</a></p>
                 </div>
-                <p>Clicks: <a id="GWAS_clicks">0</a></p>
               </div>
             </div>
-            <!--<div class="card-footer">
-              <p>Clicks: <a id="HGNC_clicks">0</a></p>
-            </div>-->
+          </div>
+          <div class="col">
+            <div class="card shadow-sm">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/PDBe_logo.png" alt="PDBe image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/PDBe_site.png" alt="PDBe site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="PDBe_title">PDBe Knowledge Base</h4>
+                <p class="card-text">PDBe-KB is a community-driven resource managed by the PDBe team, collating functional annotations and predictions for structure data in the PDB archive.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var PDBe_clicks = 0;
+
+                    function PDBeonClick() {
+                      PDBe_clicks += 1;
+                      document.getElementById("PDBe_clicks").innerHTML = PDBe_clicks;
+                    };
+                  </script>
+                  <div class="btn-group">
+                    <a id="PDBe" href="https://www.ebi.ac.uk/pdbe/pdbe-kb" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="PDBeonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="PDBe_clicks">0</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow-sm">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/PDB_logo.png" alt="PDB image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/PDB_site.png" alt="PDB site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="PDB_title">PDB</h4>
+                <p class="card-text">PDB has information about the 3D shapes of proteins, nucleic acids, and complex assemblies that contribute to understanding everything from protein synthesis to health and disease.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var PDB_clicks = 0;
+
+                    function PDBonClick() {
+                      PDB_clicks += 1;
+                      document.getElementById("PDB_clicks").innerHTML = PDB_clicks;
+                    };
+                  </script>
+                  <div class="btn-group">
+                    <a id="PDB" href="https://www.rcsb.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="PDBonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="PDB_clicks">0</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow-sm">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/GENEVA_logo.png" alt="GENEVA image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/GENEVA_site.png" alt="GENEVA site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="GENEVA_title">GENEVA</h4>
+                <p class="card-text">GENEVA allows you to identify RNA-sequencing datasets from the Gene Expression Omnibus (GEO) that contains conditions modulating a gene or a gene signature.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var GENEVA_clicks = 0;
+
+                    function GENEVAonClick() {
+                      GENEVA_clicks += 1;
+                      document.getElementById("GENEVA_clicks").innerHTML = GENEVA_clicks;
+                    };
+                  </script>
+                  <div class="btn-group">
+                    <a id="GENEVA" href="https://genevatool.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="GENEVAonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="GENEVA_clicks">0</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow-sm">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/MGI_logo.jpeg" alt="MGI image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/MGI_site.png" alt="MGI site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="MGI_title">MGI</h4>
+                <p class="card-text">MGI is the international database resource for the laboratory mouse, providing integrated genetic, genomic, and biological data to facilitate the study of human health and disease.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var MGI_clicks = 0;
+
+                    function MGIonClick() {
+                      MGI_clicks += 1;
+                      document.getElementById("MGI_clicks").innerHTML = MGI_clicks;
+                    };
+                  </script>
+                  <div class="btn-group">
+                    <a id="MGI" href="http://www.informatics.jax.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="MGIonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="MGI_clicks">0</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow-sm">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/OMIM_logo.png" alt="OMIM image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/OMIM_site.png" alt="OMIM site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="OMIM_title">OMIM</h4>
+                <p class="card-text">OMIM is a comprehensive, authoritative compendium of human genes and genetic phenotypes that is freely available and updated daily.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var OMIM_clicks = 0;
+
+                    function OMIMonClick() {
+                      OMIM_clicks += 1;
+                      document.getElementById("OMIM_clicks").innerHTML = OMIM_clicks;
+                    };
+                  </script>
+                  <div class="btn-group">
+                    <a id="OMIM" href="https://omim.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="OMIMonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="OMIM_clicks">0</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow-sm">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/GO_logo.jpeg" alt="Gene Ontology image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/GO_site.png" alt="Gene Ontology site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="GO_title">Gene Ontology</h4>
+                <p class="card-text">The Gene Ontology (GO) knowledgebase is the world’s largest source of information on the functions of genes.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var GO_clicks = 0;
+
+                    function GOonClick() {
+                      GO_clicks += 1;
+                      document.getElementById("GO_clicks").innerHTML = GO_clicks;
+                    };
+                  </script>
+                  <div class="btn-group">
+                    <a id="GO" href="http://geneontology.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="GOonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="GO_clicks">0</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow-sm">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/Reactome_logo.png" alt="Reactome image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/Reactome_site.png" alt="Reactome site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="Reactome_title">Reactome</h4>
+                <p class="card-text">Reactome is a free, open-source, curated and peer-reviewed pathway database that provides intuitive bioinformatics tools for the visualization, interpretation and analysis of pathway knowledge.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var Reactome_clicks = 0;
+
+                    function ReactomeonClick() {
+                      Reactome_clicks += 1;
+                      document.getElementById("Reactome_clicks").innerHTML = Reactome_clicks;
+                    };
+                  </script>
+                  <div class="btn-group">
+                    <a id="Reactome" href="https://reactome.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="ReactomeonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="Reactome_clicks">0</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow-sm">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/KEGG_logo.jpeg" alt="KEGG image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/KEGG_site.png" alt="KEGG site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="KEGG_title">KEGG</h4>
+                <p class="card-text">KEGG is a database resource for understanding high-level functions and utilities of the biological system from molecular-level information.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var KEGG_clicks = 0;
+
+                    function KEGGonClick() {
+                      KEGG_clicks += 1;
+                      document.getElementById("KEGG_clicks").innerHTML = KEGG_clicks;
+                    };
+                  </script>
+                  <div class="btn-group">
+                    <a id="KEGG" href="https://www.genome.jp/kegg/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="KEGGonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="KEGG_clicks">0</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow-sm">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/Monarch_logo.png" alt="Monarch Initiative image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/Monarch_site.png" alt="Monarch Initiative site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="Monarch_title">Monarch Initiative</h4>
+                <p class="card-text">The Monarch Initiative is an integrative data and analytic platform connecting phenotypes to genotypes across species, bridging basic and applied research with semantics-based analysis.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var Monarch_clicks = 0;
+
+                    function MonarchonClick() {
+                      Monarch_clicks += 1;
+                      document.getElementById("Monarch_clicks").innerHTML = Monarch_clicks;
+                    };
+                  </script>
+                  <div class="btn-group">
+                    <a id="Monarch" href="https://monarchinitiative.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="MonarchonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="Monarch_clicks">0</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow-sm">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/HGB_logo.png" alt="Human Genome Browser image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/HGB_site.png" alt="Human Genome Browser site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="HGB_title">Human Genome Browser</h4>
+                <p class="card-text">The Human Genome Browser includes a broad collection of vertebrate and model organism assemblies and annotations, along with a large suite of tools for viewing, analyzing and downloading data.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var HGB_clicks = 0;
+
+                    function HGBonClick() {
+                      HGB_clicks += 1;
+                      document.getElementById("HGB_clicks").innerHTML = HGB_clicks;
+                    };
+                  </script>
+                  <div class="btn-group">
+                    <a id="HGB" href="https://genome.ucsc.edu/cgi-bin/hgGateway" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="HGBonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="HGB_clicks">0</a></p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-
 
 </main>
 
@@ -1148,10 +1463,10 @@ var msnry = new Masonry( '.grid', {
     </p>
     <p class="mb-3">Links:</p>
     <p class="mb-0"><a href="https://github.com/MaayanLab/cfde_gene_pages">Project's GitHub Repo</a></p>
-    <p class="mb-0"><a href="https://commonfund.nih.gov/dataecosystem">NIH CFDE Program</a></p>
+    <!--<p class="mb-0"><a href="https://commonfund.nih.gov/dataecosystem">NIH CFDE Program</a></p>
     <p class="mb-0"><a href="https://commonfund.nih.gov/dataecosystem/coordinatingcenter">CFDE-CC</a></p>
     <p class="mb-0"><a href="https://www.nih-cfde.org/">CFDE Portal</a></p>
-    <p class="mb-0"><a href="https://www.nih-cfde.org/product/fair-cookbook/">The FAIR Cookbook</a></p>
+    <p class="mb-0"><a href="https://www.nih-cfde.org/product/fair-cookbook/">The FAIR Cookbook</a></p>-->
     <!--<p class="mb-0"><a href="">About the CFDE Gene Working Group</a></p>-->
   </div>
 </footer>
