@@ -344,10 +344,16 @@ function myFunction(gene_name) {
     });
     DrugBankNum = find_DBN[0];
     console.log(DrugBankNum);
+
+    
     GenName = info.Synonym[1];
     GenName2 = info.Synonym[0];
-    console.log(GenName);
-    GTPL = info.Synonym[270];
+    console.log(GenName2);
+
+    find_GTPL = $.grep(info.Synonym, function (item, index) {
+        return item.trim().match(/^GTPL/);
+    });
+    GTPL = find_GTPL[0];
     console.log(GTPL);
   })
 
