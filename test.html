@@ -392,7 +392,8 @@ function myFunction(gene_name) {
       var GlyGen_a = document.getElementById('GlyGen'); //or grab it by tagname etc
       GlyGen_a.href = `https://www.glygen.org/protein/${uniprot_qb}`;
       var GlyGen_h4 = document.getElementById('GlyGen_title'); //or grab it by tagname etc
-      GlyGen_h4.textContent = `GlyGen Portal: ${gene_search}`;
+      var result = gene_search.link(`https://www.glygen.org/protein/${uniprot_qb}`);
+      GlyGen_h4.innerHTML = `GlyGen Portal: ` + result;
 
       var harmonizome_a = document.getElementById('Harmonizome'); //or grab it by tagname etc
       harmonizome_a.href = `https://maayanlab.cloud/Harmonizome/gene/${gene_search}`;

@@ -351,157 +351,188 @@ function myFunction(gene_name) {
       var gtex_a = document.getElementById('GTEx'); //or grab it by tagname etc
       gtex_a.href = `https://www.gtexportal.org/home/gene/${ensembl_id}`;
       var gtex_h4 = document.getElementById('Gtex_title'); //or grab it by tagname etc
-      gtex_h4.textContent = `GTEx Portal: ${gene_search}`;
+      var Gtex_hyperlink = gene_search.link(`https://www.gtexportal.org/home/gene/${ensembl_id}`);
+      gtex_h4.innerHTML = `GTEx Portal: ` + Gtex_hyperlink;
 
       var pharos_a = document.getElementById('Pharos'); //or grab it by tagname etc
       pharos_a.href = `https://pharos.nih.gov/targets/${uniprot_qb}`;
       var pharos_h4 = document.getElementById('Pharos_title'); //or grab it by tagname etc
-      pharos_h4.textContent = `Pharos: ${gene_search}`;
+      var pharos_hyperlink = gene_search.link(`https://pharos.nih.gov/targets/${uniprot_qb}`);
+      pharos_h4.innerHTML = `Pharos: ` + pharos_hyperlink;
 
       var GlyGen_a = document.getElementById('GlyGen'); //or grab it by tagname etc
       GlyGen_a.href = `https://www.glygen.org/protein/${uniprot_qb}`;
       var GlyGen_h4 = document.getElementById('GlyGen_title'); //or grab it by tagname etc
-      GlyGen_h4.textContent = `GlyGen Portal: ${gene_search}`;
+      var GlyGen_hyperlink = gene_search.link(`https://www.glygen.org/protein/${uniprot_qb}`);
+      GlyGen_h4.innerHTML = `GlyGen Portal: ` + GlyGen_hyperlink;
 
       var harmonizome_a = document.getElementById('Harmonizome'); //or grab it by tagname etc
       harmonizome_a.href = `https://maayanlab.cloud/Harmonizome/gene/${gene_search}`;
       var harmonizome_h4 = document.getElementById('Harmonizome_title'); //or grab it by tagname etc
-      harmonizome_h4.textContent = `Harmonizome: ${gene_search}`;
+      var harmonizome_hyperlink = gene_search.link(`https://maayanlab.cloud/Harmonizome/gene/${gene_search}`);
+      harmonizome_h4.innerHTML = `Harmonizome: ` + harmonizome_hyperlink;
 
       var LINCS_a = document.getElementById('LINCS'); //or grab it by tagname etc
       LINCS_a.href = `https://ldp3.cloud/#/MetadataSearch/Signatures?query={%22skip%22:0,%22limit%22:10,%22search%22:[%22${gene_search}%22]`;
       var LINCS_h4 = document.getElementById('LINCS_title'); //or grab it by tagname etc
-      LINCS_h4.textContent = `LINCS Portal: ${gene_search}`;
+      var LINCS_hyperlink = gene_search.link(`https://ldp3.cloud/#/MetadataSearch/Signatures?query={%22skip%22:0,%22limit%22:10,%22search%22:[%22${gene_search}%22]`);
+      LINCS_h4.innerHTML = `LINCS Portal: ` + LINCS_hyperlink;
 
       var komp_a = document.getElementById('komp'); //or grab it by tagname etc
       komp_a.href = `https://www.mousephenotype.org/data/genes/MGI:${MGI}`;
       var komp_h4 = document.getElementById('KOMP_title'); //or grab it by tagname etc
-      komp_h4.textContent = `KOMP- IMPC Portal: ${gene_search}`;
+      var komp_hyperlink = gene_search.link(`https://www.mousephenotype.org/data/genes/MGI:${MGI}`);
+      komp_h4.innerHTML = `KOMP- IMPC Portal: ` + komp_hyperlink;
 
       var udn_a = document.getElementById('UDN'); //or grab it by tagname etc
       udn_a.href = `https://undiagnosed.hms.harvard.edu/genes/${gene_search}/`;
       var udn_h4 = document.getElementById('UDN_title'); //or grab it by tagname etc
-      udn_h4.textContent = `UDN Portal: ${gene_search}`;
+      var udn_hyperlink = gene_search.link(`https://undiagnosed.hms.harvard.edu/genes/${gene_search}/`);
+      udn_h4.innerHTML = `UDN Portal: ` + udn_hyperlink;
 
       var ARCHS4_a = document.getElementById('ARCHS4'); //or grab it by tagname etc
       ARCHS4_a.href = `https://maayanlab.cloud/archs4/gene/${gene_search}`;
       var ARCHS4_h4 = document.getElementById('ARCHS4_title'); //or grab it by tagname etc
-      ARCHS4_h4.textContent = `ARCHS4 Portal: ${gene_search}`;
+      var ARCHS4_hyperlink = gene_search.link(`https://maayanlab.cloud/archs4/gene/${gene_search}`);
+      ARCHS4_h4.innerHTML = `ARCHS4 Portal: ` + ARCHS4_hyperlink;
 
       var ncbi_a = document.getElementById('NCBI'); //or grab it by tagname etc
       ncbi_a.href = `https://www.ncbi.nlm.nih.gov/gene/${gene_id}`;
       var ncbi_h4 = document.getElementById('NCBI_title'); //or grab it by tagname etc
-      ncbi_h4.textContent = `NCBI Gene Database: ${gene_search}`;
+      var ncbi_hyperlink = gene_search.link(`https://www.ncbi.nlm.nih.gov/gene/${gene_id}`);
+      ncbi_h4.innerHTML = `NCBI Gene Database: ` + ncbi_hyperlink;
 
       var ClinGen_a = document.getElementById('ClinGen'); //or grab it by tagname etc
       ClinGen_a.href = `https://search.clinicalgenome.org/kb/genes/HGNC:${HGNC}`;
       var ClinGen_h4 = document.getElementById('ClinGen_title'); //or grab it by tagname etc
-      ClinGen_h4.textContent = `ClinGen: ${gene_search}`;
+      var ClinGen_hyperlink = gene_search.link(`https://search.clinicalgenome.org/kb/genes/HGNC:${HGNC}`);
+      ClinGen_h4.innerHTML = `ClinGen: ` + ClinGen_hyperlink;
 
       var genecards_a = document.getElementById('GeneCards'); //or grab it by tagname etc
       genecards_a.href = `https://www.genecards.org/cgi-bin/carddisp.pl?gene=${gene_search}`;
       var genecards_h4 = document.getElementById('GeneCards_title'); //or grab it by tagname etc
-      genecards_h4.textContent = `GeneCards: ${gene_search}`;
+      var genecards_hyperlink = gene_search.link(`https://www.genecards.org/cgi-bin/carddisp.pl?gene=${gene_search}`);
+      genecards_h4.innerHTML = `GeneCards: ` + genecards_hyperlink;
 
       var enrichr_a = document.getElementById('Enrichr'); //or grab it by tagname etc
       enrichr_a.href = `https://maayanlab.cloud/Enrichr/#find!gene=${gene_search}`;
       var enrichr_h4 = document.getElementById('Enrichr_title'); //or grab it by tagname etc
-      enrichr_h4.textContent = `Enrichr: ${gene_search}`;
+      var enrichr_hyperlink = gene_search.link(`https://maayanlab.cloud/Enrichr/#find!gene=${gene_search}`);
+      enrichr_h4.innerHTML = `Enrichr: ` + enrichr_hyperlink;
 
       var encode_a = document.getElementById('ENCODE'); //or grab it by tagname etc
       encode_a.href = `https://www.encodeproject.org/genes/${gene_id}`;
       var encode_h4 = document.getElementById('ENCODE_title'); //or grab it by tagname etc
-      encode_h4.textContent = `ENCODE Portal: ${gene_search}`;
+      var encode_hyperlink = gene_search.link(`https://www.encodeproject.org/genes/${gene_id}`);
+      encode_h4.innerHTML = `ENCODE Portal: ` + encode_hyperlink;
 
       var marrvel_a = document.getElementById('MARRVEL'); //or grab it by tagname etc
       marrvel_a.href = `http://marrvel.org/human/gene/${gene_id}`;
       var marrvel_h4 = document.getElementById('MARRVEL_title'); //or grab it by tagname etc
-      marrvel_h4.textContent = `MARRVEL: ${gene_search}`;
+      var marrvel_hyperlink = gene_search.link(`http://marrvel.org/human/gene/${gene_id}`);
+      marrvel_h4.innerHTML = `MARRVEL: ` + marrvel_hyperlink;
 
       var uniprot_a = document.getElementById('UniProt'); //or grab it by tagname etc
       uniprot_a.href = `https://www.uniprot.org/uniprot/${uniprot_qb}`;
       var uniprot_h4 = document.getElementById('UniProt_title'); //or grab it by tagname etc
-      uniprot_h4.textContent = `UniProt: ${gene_search}`;
+      var uniprot_hyperlink = gene_search.link(`https://www.uniprot.org/uniprot/${uniprot_qb}`);
+      uniprot_h4.innerHTML = `UniProt: ` + uniprot_hyperlink;
 
       var hgnc_a = document.getElementById('HGNC'); //or grab it by tagname etc
       hgnc_a.href = `https://www.genenames.org/data/gene-symbol-report/#!/symbol/${gene_search}`;
       var hgnc_h4 = document.getElementById('HGNC_title'); //or grab it by tagname etc
-      hgnc_h4.textContent = `HGNC: ${gene_search}`;
+      var hgnc_hyperlink = gene_search.link(`https://www.genenames.org/data/gene-symbol-report/#!/symbol/${gene_search}`);
+      hgnc_h4.innerHTML = `HGNC: ` + hgnc_hyperlink;
 
       var GWAS_a = document.getElementById('GWAS'); //or grab it by tagname etc
       GWAS_a.href = `https://www.ebi.ac.uk/gwas/genes/${gene_search}`;
       var GWAS_h4 = document.getElementById('GWAS_title'); //or grab it by tagname etc
-      GWAS_h4.textContent = `GWAS Catalog: ${gene_search}`;
+      var GWAS_hyperlink = gene_search.link(`https://www.ebi.ac.uk/gwas/genes/${gene_search}`);
+      GWAS_h4.innerHTML = `GWAS Catalog: ` + GWAS_hyperlink;
 
       var Ensembl_a = document.getElementById('Ensembl'); //or grab it by tagname etc
       Ensembl_a.href = `https://useast.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g=${ensembl_id}`;
       var Ensembl_h4 = document.getElementById('Ensembl_title'); //or grab it by tagname etc
-      Ensembl_h4.textContent = `Ensembl: ${gene_search}`;
+      var Ensembl_hyperlink = gene_search.link(`https://useast.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g=${ensembl_id}`);
+      Ensembl_h4.innerHTML = `Ensembl: ` + Ensembl_hyperlink;
 
       var Bgee_a = document.getElementById('Bgee'); //or grab it by tagname etc
       Bgee_a.href = `https://bgee.org/?page=gene&gene_id=${ensembl_id}`;
       var Bgee_h4 = document.getElementById('Bgee_title'); //or grab it by tagname etc
-      Bgee_h4.textContent = `Bgee: ${gene_search}`;
+      var Bgee_hyperlink = gene_search.link(`https://bgee.org/?page=gene&gene_id=${ensembl_id}`);
+      Bgee_h4.innerHTML = `Bgee: ` + Bgee_hyperlink;
 
       var BioGPS_a = document.getElementById('BioGPS'); //or grab it by tagname etc
       BioGPS_a.href = `http://biogps.org/#goto=genereport&id=${gene_id}`;
       var BioGPS_h4 = document.getElementById('BioGPS_title'); //or grab it by tagname etc
-      BioGPS_h4.textContent = `BioGPS: ${gene_search}`;
+      var BioGPS_hyperlink = gene_search.link(`http://biogps.org/#goto=genereport&id=${gene_id}`);
+      BioGPS_h4.innerHTML = `BioGPS: ` + BioGPS_hyperlink;
 
       var COSMIC_a = document.getElementById('COSMIC'); //or grab it by tagname etc
       COSMIC_a.href = `https://cancer.sanger.ac.uk/cosmic/gene/analysis?ln=${gene_search}`;
       var COSMIC_h4 = document.getElementById('COSMIC_title'); //or grab it by tagname etc
-      COSMIC_h4.textContent = `COSMIC: ${gene_search}`;
+      var COSMIC_hyperlink = gene_search.link(`https://cancer.sanger.ac.uk/cosmic/gene/analysis?ln=${gene_search}`);
+      COSMIC_h4.innerHTML = `COSMIC: ` + COSMIC_hyperlink;
 
       var PDBe_a = document.getElementById('PDBe'); //or grab it by tagname etc
       PDBe_a.href = `https://www.ebi.ac.uk/pdbe/pdbe-kb/proteins/${uniprot_qb}`;
       var PDBe_h4 = document.getElementById('PDBe_title'); //or grab it by tagname etc
-      PDBe_h4.textContent = `PDBe Knowledge Base: ${gene_search}`;
+      var PDBe_hyperlink = gene_search.link(`https://www.ebi.ac.uk/pdbe/pdbe-kb/proteins/${uniprot_qb}`);
+      PDBe_h4.innerHTML = `PDBe Knowledge Base: ` + PDBe_hyperlink;
 
       var PDB_a = document.getElementById('PDB'); //or grab it by tagname etc
       PDB_a.href = `https://www.rcsb.org/search?request=%7B%22query%22%3A%7B%22parameters%22%3A%7B%22attribute%22%3A%22rcsb_entity_source_organism.rcsb_gene_name.value%22%2C%22operator%22%3A%22in%22%2C%22value%22%3A%5B%22${gene_search}%22%5D%7D%2C%22service%22%3A%22text%22%2C%22type%22%3A%22terminal%22%2C%22node_id%22%3A0%7D%2C%22return_type%22%3A%22entry%22%2C%22request_options%22%3A%7B%22pager%22%3A%7B%22start%22%3A0%2C%22rows%22%3A25%7D%2C%22scoring_strategy%22%3A%22combined%22%2C%22sort%22%3A%5B%7B%22sort_by%22%3A%22score%22%2C%22direction%22%3A%22desc%22%7D%5D%7D%2C%22request_info%22%3A%7B%22src%22%3A%22ui%22%2C%22query_id%22%3A%220b67dad6ca2a8ccaca6d67d2399f1ac3%22%7D%7D`;
       var PDB_h4 = document.getElementById('PDB_title'); //or grab it by tagname etc
-      PDB_h4.textContent = `PDB: ${gene_search}`;
+      var PDB_hyperlink = gene_search.link(`https://www.rcsb.org/search?request=%7B%22query%22%3A%7B%22parameters%22%3A%7B%22attribute%22%3A%22rcsb_entity_source_organism.rcsb_gene_name.value%22%2C%22operator%22%3A%22in%22%2C%22value%22%3A%5B%22${gene_search}%22%5D%7D%2C%22service%22%3A%22text%22%2C%22type%22%3A%22terminal%22%2C%22node_id%22%3A0%7D%2C%22return_type%22%3A%22entry%22%2C%22request_options%22%3A%7B%22pager%22%3A%7B%22start%22%3A0%2C%22rows%22%3A25%7D%2C%22scoring_strategy%22%3A%22combined%22%2C%22sort%22%3A%5B%7B%22sort_by%22%3A%22score%22%2C%22direction%22%3A%22desc%22%7D%5D%7D%2C%22request_info%22%3A%7B%22src%22%3A%22ui%22%2C%22query_id%22%3A%220b67dad6ca2a8ccaca6d67d2399f1ac3%22%7D%7D`);
+      PDB_h4.innerHTML = `PDB: ` + PDB_hyperlink;
 
       var GENEVA_a = document.getElementById('GENEVA'); //or grab it by tagname etc
       GENEVA_a.href = `https://genevatool.org/gene_table?gene_name=${gene_search}`;
       var GENEVA_h4 = document.getElementById('GENEVA_title'); //or grab it by tagname etc
-      GENEVA_h4.textContent = `GENEVA: ${gene_search}`;
+      var GENEVA_hyperlink = gene_search.link(`https://genevatool.org/gene_table?gene_name=${gene_search}`);
+      GENEVA_h4.innerHTML = `GENEVA: ` + GENEVA_hyperlink;
 
       var MGI_a = document.getElementById('MGI'); //or grab it by tagname etc
       MGI_a.href = `http://www.informatics.jax.org/marker/MGI:${MGI}`;
       var MGI_h4 = document.getElementById('MGI_title'); //or grab it by tagname etc
-      MGI_h4.textContent = `MGI: ${gene_search}`;
+      var MGI_hyperlink = gene_search.link(`http://www.informatics.jax.org/marker/MGI:${MGI}`);
+      MGI_h4.innerHTML = `MGI: ` + MGI_hyperlink;
 
       var OMIM_a = document.getElementById('OMIM'); //or grab it by tagname etc
       OMIM_a.href = `https://www.omim.org/search?index=entry&start=1&limit=10&sort=score+desc%2C+prefix_sort+desc&search=approved_gene_symbol%3A${gene_search}`;
       var OMIM_h4 = document.getElementById('OMIM_title'); //or grab it by tagname etc
-      OMIM_h4.textContent = `OMIM: ${gene_search}`;
+      var OMIM_hyperlink = gene_search.link(`https://www.omim.org/search?index=entry&start=1&limit=10&sort=score+desc%2C+prefix_sort+desc&search=approved_gene_symbol%3A${gene_search}`);
+      OMIM_h4.innerHTML = `OMIM: ` + OMIM_hyperlink;
 
       var GO_a = document.getElementById('GO'); //or grab it by tagname etc
       GO_a.href = `http://amigo.geneontology.org/amigo/gene_product/UniProtKB:${uniprot_qb}`;
       var GO_h4 = document.getElementById('GO_title'); //or grab it by tagname etc
-      GO_h4.textContent = `Gene Ontology: ${gene_search}`;
+      var GO_hyperlink = gene_search.link(`http://amigo.geneontology.org/amigo/gene_product/UniProtKB:${uniprot_qb}`);
+      GO_h4.innerHTML = `Gene Ontology: ` + GO_hyperlink;
 
       var Reactome_a = document.getElementById('Reactome'); //or grab it by tagname etc
       Reactome_a.href = `https://reactome.org/content/query?q=${gene_search}&species=Homo+sapiens&species=Entries+without+species&cluster=true`;
       var Reactome_h4 = document.getElementById('Reactome_title'); //or grab it by tagname etc
-      Reactome_h4.textContent = `Reactome: ${gene_search}`;
+      var Reactome_hyperlink = gene_search.link(`https://reactome.org/content/query?q=${gene_search}&species=Homo+sapiens&species=Entries+without+species&cluster=true`);
+      Reactome_h4.innerHTML = `Reactome: ` + Reactome_hyperlink;
 
       var KEGG_a = document.getElementById('KEGG'); //or grab it by tagname etc
       KEGG_a.href = `https://www.genome.jp/entry/hsa:${entrezgene}`;
       var KEGG_h4 = document.getElementById('KEGG_title'); //or grab it by tagname etc
-      KEGG_h4.textContent = `KEGG: ${gene_search}`;
+      var KEGG_hyperlink = gene_search.link(`https://www.genome.jp/entry/hsa:${entrezgene}`);
+      KEGG_h4.innerHTML = `KEGG: ` + KEGG_hyperlink;
 
       var Monarch_a = document.getElementById('Monarch'); //or grab it by tagname etc
       Monarch_a.href = `https://monarchinitiative.org/gene/HGNC:${HGNC}`;
       var Monarch_h4 = document.getElementById('Monarch_title'); //or grab it by tagname etc
-      Monarch_h4.textContent = `Monarch Initiative: ${gene_search}`;
+      var Monarch_hyperlink = gene_search.link(`https://monarchinitiative.org/gene/HGNC:${HGNC}`);
+      Monarch_h4.innerHTML = `Monarch Initiative: ` + Monarch_hyperlink;
 
       var HGB_a = document.getElementById('HGB'); //or grab it by tagname etc
       HGB_a.href = `https://genome.ucsc.edu/cgi-bin/hgGene?hgg_gene=${transcript}&hgg_type=knownGene`;
       var HGB_h4 = document.getElementById('HGB_title'); //or grab it by tagname etc
-      HGB_h4.textContent = `Human Genome Browser: ${gene_search}`;
+      var HGB_hyperlink = gene_search.link(`https://genome.ucsc.edu/cgi-bin/hgGene?hgg_gene=${transcript}&hgg_type=knownGene`);
+      HGB_h4.innerHTML = `Human Genome Browser: ` + HGB_hyperlink;
     })
   })
 };
