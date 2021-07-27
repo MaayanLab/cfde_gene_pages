@@ -173,7 +173,6 @@
 </header>
 
 <main>
-
   <section class="py-1 text-center container">
     <div class="row py-lg-5">
       <div class="col-lg-7 col-md-8 mx-auto">
@@ -184,26 +183,13 @@
           <form id="frm1" autocomplete="off" action="/action_page.php" method="GET"> 
             <div class="autocomplete mx-auto d-block" style="width:400px; height: 33px;">
               <input id="myInput" type="text" name="Gene" placeholder="Gene" style="height: 33px; width: 200px">
-              <input id="search" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" onclick="myFunction()" value="Search" style="height: 33px;">
-              <p class='pointer'>Examples: <a id="ACE2" class="link" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" onclick="myFunction('ACE2')">ACE2</a>, <a id="ULK4" class="link" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" onclick="myFunction('ULK4')">ULK4</a>, <a id="DPH7" class="link" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" onclick="myFunction('DPH7')">DPH7</a>, <a id="KL" class="link" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" onclick="myFunction('KL')">KL</a></p>
-              <script type="text/javascript">
-                /*$('a[data-toggle=collapse]').each(function () {
-                  var $this = $(this);
-
-                  $this.on('myFunction', function () {
-                    $container.imagesLoaded( function () {
-                      $container.masonry({
-                        columnWidth: '.card',
-                        itemSelector: '.card'
-                      });   
-                    });  
-                  });
-                });*/
-              </script>
+              <input id="search" type="button" onclick="myFunction()" value="Search" style="height: 33px;">
+              <p class='pointer'>Examples: <a id="ACE2" class="link" onclick="myFunction('ACE2')">ACE2</a>, <a id="ULK4" class="link" onclick="myFunction('ULK4')">ULK4</a>, <a id="DPH7" class="link" onclick="myFunction('DPH7')">DPH7</a>, <a id="KL" class="link" onclick="myFunction('KL')">KL</a></p>
             </div>
           </form>
 
           <script>
+
 function autocomplete(inp, arr) {
   /*the autocomplete function takes two arguments,
   the text field element and an array of possible autocompleted values:*/
@@ -321,6 +307,35 @@ function myFunction(gene_name) {
   var gene_id;
   var HGNC;
   var uniprot_qb;
+  $(".card").each(function() {
+    $(this).show();
+  })
+  var drug_url = `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/${gene_search}/synonyms/JSON`;
+  fetch(drug_url)
+  .then(function(drug_response){
+    return drug_response.json();
+  })
+  .then(function(data){
+    var info = data.InformationList.Information[0];
+    console.log(info);
+    CID = info.CID;
+    console.log(CID);
+    find_CHEMBL = $.grep(info.Synonym, function (item, index) {
+        return item.trim().match(/^CHEMBL/);
+    });
+    CHEMBL = find_CHEMBL[0];
+    console.log(CHEMBL);
+    find_DBN = $.grep(info.Synonym, function (item, index) {
+        return item.trim().match(/^DB/);
+    });
+    DrugBankNum = find_DBN[0];
+    console.log(DrugBankNum);
+    GenName = info.Synonym[1];
+    GenName2 = info.Synonym[0];
+    console.log(GenName);
+    GTPL = info.Synonym[270];
+    console.log(GTPL);
+  })
 
   fetch(url)
   .then(function(response) {
@@ -533,8 +548,7 @@ function myFunction(gene_name) {
   <div class="album py-5">
     <div class="container">
 
-      <div class="collapse" id="collapseExample">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" data-masonry='{"percentPosition": true }'>
           <div class="col align-items-center">
             <div class="card shadow-sm">
               <div class="card-image-wrapper-1">
