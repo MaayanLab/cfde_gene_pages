@@ -422,8 +422,11 @@ function myFunction(gene_name) {
     });
     DrugBankNum = find_DBN[0];
 
-    /*GenName = info.Synonym[1];
-    GenName2 = info.Synonym[0];*/
+    if(gene_search == info.Synonym[0]){
+      GenName = info.Synonym[1];
+    }else {
+      GenName = info.Synonym[0];
+    }
 
     find_GTPL = $.grep(info.Synonym, function (item, index) {
         return item.trim().match(/^GTPL/);
@@ -434,34 +437,121 @@ function myFunction(gene_name) {
     }
     
     var PubChem_a = document.getElementById('PubChem'); //or grab it by tagname etc
-    PubChem_a.href = `https://pubchem.ncbi.nlm.nih.gov/compound/${CID}`;
-    var PubChem_h4 = document.getElementById('PubChem_title'); //or grab it by tagname etc
-    var PubChem_hyperlink = gene_search.link(`https://pubchem.ncbi.nlm.nih.gov/compound/${CID}`);
-    PubChem_h4.innerHTML = `PubChem: ` + PubChem_hyperlink;
+    var PubChem_url = `https://maayanlab.cloud/isitup/api?url=https://pubchem.ncbi.nlm.nih.gov/compound/${CID}`;
+    fetch(PubChem_url)
+    .then(function(response){
+      return response.json();
+    })
+    .then(function(data){
+      if (data.status === "yes"){
+        PubChem_a.href = `https://pubchem.ncbi.nlm.nih.gov/compound/${CID}`;
+        var PubChem_h4 = document.getElementById('PubChem_title'); //or grab it by tagname etc
+        var PubChem_hyperlink = gene_search.link(`https://pubchem.ncbi.nlm.nih.gov/compound/${CID}`);
+        PubChem_h4.innerHTML = `PubChem: ` + PubChem_hyperlink;
+      } else {
+        $('.pubchem_card').hide();
+      }
+    })
 
     var DrugBank_a = document.getElementById('DrugBank'); //or grab it by tagname etc
-    DrugBank_a.href = `https://go.drugbank.com/drugs/DB00945${DrugBankNum}`;
-    var DrugBank_h4 = document.getElementById('DrugBank_title'); //or grab it by tagname etc
-    var DrugBank_hyperlink = gene_search.link(`https://go.drugbank.com/drugs/DB00945${DrugBankNum}`);
-    DrugBank_h4.innerHTML = `DrugBank: ` + DrugBank_hyperlink;
+    var DrugBank_url = `https://maayanlab.cloud/isitup/api?url=https://go.drugbank.com/drugs/${DrugBankNum}`;
+    fetch(DrugBank_url)
+    .then(function(response){
+      return response.json();
+    })
+    .then(function(data){
+      if (data.status === "yes"){
+        DrugBank_a.href = `https://go.drugbank.com/drugs/${DrugBankNum}`;
+        var DrugBank_h4 = document.getElementById('DrugBank_title'); //or grab it by tagname etc
+        var DrugBank_hyperlink = gene_search.link(`https://go.drugbank.com/drugs/${DrugBankNum}`);
+        DrugBank_h4.innerHTML = `DrugBank: ` + DrugBank_hyperlink;
+      } else {
+        $('.drugbank_card').hide();
+      }
+    })
 
     var ChEMBL_a = document.getElementById('ChEMBL'); //or grab it by tagname etc
-    ChEMBL_a.href = `https://www.ebi.ac.uk/chembl/compound_report_card/${CHEMBL}/`;
-    var ChEMBL_h4 = document.getElementById('ChEMBL_title'); //or grab it by tagname etc
-    var ChEMBL_hyperlink = gene_search.link(`https://www.ebi.ac.uk/chembl/compound_report_card/${CHEMBL}/`);
-    ChEMBL_h4.innerHTML = `ChEMBL: ` + ChEMBL_hyperlink;
+    var chembl_url = `https://maayanlab.cloud/isitup/api?url=https://www.ebi.ac.uk/chembl/compound_report_card/${CHEMBL}/`;
+    fetch(chembl_url)
+    .then(function(response){
+      return response.json();
+    })
+    .then(function(data){
+      if (data.status === "yes"){
+        ChEMBL_a.href = `https://www.ebi.ac.uk/chembl/compound_report_card/${CHEMBL}/`;
+        var ChEMBL_h4 = document.getElementById('ChEMBL_title'); //or grab it by tagname etc
+        var ChEMBL_hyperlink = gene_search.link(`https://www.ebi.ac.uk/chembl/compound_report_card/${CHEMBL}/`);
+        ChEMBL_h4.innerHTML = `ChEMBL: ` + ChEMBL_hyperlink;
+      } else {
+        $('.chembl_card').hide();
+      }
+    })
 
     var Guide_a = document.getElementById('Guide'); //or grab it by tagname etc
-    Guide_a.href = `https://www.guidetopharmacology.org/GRAC/LigandDisplayForward?ligandId=${GTPL}`;
-    var Guide_h4 = document.getElementById('Guide_title'); //or grab it by tagname etc
-    var Guide_hyperlink = gene_search.link(`https://www.guidetopharmacology.org/GRAC/LigandDisplayForward?ligandId=${GTPL}`);
-    Guide_h4.innerHTML = `Guide to Pharmacology: ` + Guide_hyperlink;
+    var guide_url = `https://maayanlab.cloud/isitup/api?url=https://www.guidetopharmacology.org/GRAC/LigandDisplayForward?ligandId=${GTPL}`;
+    fetch(guide_url)
+    .then(function(response){
+      return response.json();
+    })
+    .then(function(data){
+      if (data.status === "yes"){
+        Guide_a.href = `https://www.guidetopharmacology.org/GRAC/LigandDisplayForward?ligandId=${GTPL}`;
+        var Guide_h4 = document.getElementById('Guide_title'); //or grab it by tagname etc
+        var Guide_hyperlink = gene_search.link(`https://www.guidetopharmacology.org/GRAC/LigandDisplayForward?ligandId=${GTPL}`);
+        Guide_h4.innerHTML = `Guide to Pharmacology: ` + Guide_hyperlink;
+      } else {
+        $('.guide_card').hide();
+      }
+    })
 
     var Drugmonizome_a = document.getElementById('Drugmonizome'); //or grab it by tagname etc
-    Drugmonizome_a.href = `https://maayanlab.cloud/drugmonizome/#/TermSearch/Small%20molecules?query=%7B%22limit%22:10,%22search%22:[%22${gene_search}%22]%7D`;
-    var Drugmonizome_h4 = document.getElementById('Drugmonizome_title'); //or grab it by tagname etc
-    var Drugmonizome_hyperlink = gene_search.link(`https://maayanlab.cloud/drugmonizome/#/TermSearch/Small%20molecules?query=%7B%22limit%22:10,%22search%22:[%22${gene_search}%22]%7D`);
-    Drugmonizome_h4.innerHTML = `Drugmonizome: ` + Drugmonizome_hyperlink;
+    var drugmonizome_url = `https://maayanlab.cloud/isitup/api?url=https://maayanlab.cloud/drugmonizome/#/TermSearch/Small%20molecules?query=%7B%22limit%22:10,%22search%22:[%22${gene_search}%22]%7D`;
+    fetch(drugmonizome_url)
+    .then(function(response){
+      return response.json();
+    })
+    .then(function(data){
+      if (data.status === "yes"){
+        Drugmonizome_a.href = `https://maayanlab.cloud/drugmonizome/#/TermSearch/Small%20molecules?query=%7B%22limit%22:10,%22search%22:[%22${gene_search}%22]%7D`;
+        var Drugmonizome_h4 = document.getElementById('Drugmonizome_title'); //or grab it by tagname etc
+        var Drugmonizome_hyperlink = gene_search.link(`https://maayanlab.cloud/drugmonizome/#/TermSearch/Small%20molecules?query=%7B%22limit%22:10,%22search%22:[%22${gene_search}%22]%7D`);
+        Drugmonizome_h4.innerHTML = `Drugmonizome: ` + Drugmonizome_hyperlink;
+      } else {
+        $('.drugmonizome_card').hide();
+      }
+    })
+
+    /*var rxlist_a = document.getElementById('RxList'); //or grab it by tagname etc
+    var rxlist_url = `https://maayanlab.cloud/isitup/api?url=https://www.rxlist.com/${gene_search}-drug.htm`;
+    fetch(rxlist_url)
+    .then(function(response){
+      return response.json();
+    })
+    .then(function(data){
+      if (data.status === "yes"){
+        rxlist_a.href = `https://www.rxlist.com/${gene_search}-drug.htm`;
+        var rxlist_h4 = document.getElementById('RxList_title'); //or grab it by tagname etc
+        var rxlist_hyperlink = gene_search.link(`https://www.rxlist.com/${gene_search}-drug.htm`);
+        rxlist_h4.innerHTML = `RxList: ` + rxlist_hyperlink;
+      } else {
+        fetch(`https://maayanlab.cloud/isitup/api?url=https://www.rxlist.com/${GenName}-drug.htm`)
+        .then(function(response){
+          return response.json();
+        })
+        .then(function(data){
+          if (data.status === "yes"){
+            rxlist_a.href = `https://www.rxlist.com/${GenName}-drug.htm`;
+            var rxlist_h4 = document.getElementById('RxList_title'); //or grab it by tagname etc
+            var rxlist_hyperlink = gene_search.link(`https://www.rxlist.com/${GenName}-drug.htm`);
+            rxlist_h4.innerHTML = `RxList: ` + rxlist_hyperlink;
+          } else{
+            $('.rxlist_card').hide();
+          }
+        })
+      }
+    })*/
+
+    
   })
 
   fetch(url)
@@ -2095,6 +2185,147 @@ function myFunction(gene_name) {
                     <a id="Drugmonizome" href="https://maayanlab.cloud/drugmonizome/#/TermSearch/Drug%20sets" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="DrugmonizomeonClick()">View on Site</a>
                   </div>
                   <p>Clicks: <a id="Drugmonizome_clicks">0</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow-sm drugenrichr_card" data-string="drug">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/DrugEnrichr_logo.png" alt="DrugEnrichr image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/DrugEnrichr_site.png" alt="DrugEnrichr site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="DrugEnrichr_title">DrugEnrichr</h4>
+                <p class="card-text">DrugEnrichr is a new drug set enrichment analysis tool. DrugEnrichr has the familiar Enrichr interface but instead of serving gene sets for search it is serving drug sets.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var DrugEnrichr_clicks = 0;
+
+                    function DrugEnrichronClick() {
+                      DrugEnrichr_clicks += 1;
+                      document.getElementById("DrugEnrichr_clicks").innerHTML = DrugEnrichr_clicks;
+                    };
+                  </script>
+                  <div class="btn-group">
+                    <a id="DrugEnrichr" href="https://maayanlab.cloud/DrugEnrichr/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="DrugEnrichronClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="DrugEnrichr_clicks">0</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow-sm drugscom_card" data-string="drug">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/Drugscom_logo.jpeg" alt="
+                Drugs.com image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/Drugscom_site.png" alt="Drugs.com site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="Drugscom_title">Drugs.com</h4>
+                <p class="card-text">Drugs.com is the largest, most widely visited, independent medicine information website available on the Internet. Drug.com's aim is to be the Internet’s most trusted resource for drug and related health information.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var Drugscom_clicks = 0;
+
+                    function DrugscomonClick() {
+                      Drugscom_clicks += 1;
+                      document.getElementById("Drugscom_clicks").innerHTML = Drugscom_clicks;
+                    };
+                  </script>
+                  <div class="btn-group">
+                    <a id="Drugscom" href="https://www.drugs.com/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="DrugscomonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="Drugscom_clicks">0</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow-sm rxlist_card" data-string="drug">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/RxList_logo.png" alt="RxList image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/RxList_site.png" alt="RxList site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="RxList_title">RxList</h4>
+                <p class="card-text">RxList is an online medical resource dedicated to offering detailed and current pharmaceutical information on brand and generic drugs.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var RxList_clicks = 0;
+
+                    function RxListonClick() {
+                      RxList_clicks += 1;
+                      document.getElementById("RxList_clicks").innerHTML = RxList_clicks;
+                    };
+                  </script>
+                  <div class="btn-group">
+                    <a id="RxList" href="https://www.rxlist.com/script/main/hp.asp" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="RxListonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="RxList_clicks">0</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow-sm drugcentral_card" data-string="drug">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/IDG_LOGO.png" alt="Drug Central image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/DrugCentral_site.png" alt="Drug Central site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="DrugCentral_title">Drug Central</h4>
+                <p class="card-text">DrugCentral provides information on active ingredients chemical entities, pharmaceutical products, drug mode of action, indications, pharmacologic action.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var DrugCentral_clicks = 0;
+
+                    function DrugCentralonClick() {
+                      DrugCentral_clicks += 1;
+                      document.getElementById("DrugCentral_clicks").innerHTML = DrugCentral_clicks;
+                    };
+                  </script>
+                  <div class="btn-group">
+                    <a id="DrugCentral" href="https://drugcentral.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="DrugCentralonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="DrugCentral_clicks">0</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow-sm zinc15_card" data-string="drug">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/ZINC15_logo.svg" alt="ZINC15 image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/ZINC15_site.png" alt="ZINC15 site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="ZINC15_title">ZINC15</h4>
+                <p class="card-text">ZINC is a free database of commercially-available compounds for virtual screening. ZINC contains over 230 million purchasable compounds in ready-to-dock, 3D formats. ZINC also contains over 750 million purchasable compounds you can search for analogs.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var ZINC15_clicks = 0;
+
+                    function ZINC15onClick() {
+                      ZINC15_clicks += 1;
+                      document.getElementById("ZINC15_clicks").innerHTML = ZINC15_clicks;
+                    };
+                  </script>
+                  <div class="btn-group">
+                    <a id="ZINC15" href="https://zinc15.docking.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="ZINC15onClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="ZINC15_clicks">0</a></p>
                 </div>
               </div>
             </div>
