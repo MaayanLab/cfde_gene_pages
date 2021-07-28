@@ -459,19 +459,20 @@ function myFunction(gene_name) {
 
       var gtex_a = document.getElementById('GTEx'); //or grab it by tagname etc
 
-      var url = `https://www.gtexportal.org/home/gene/${ensembl_id}`;
-      async function fetchAndDecode(url) {
-        let response = await fetch(url, {mode:'cors'});
-        if (!response.ok) {
-          console.log("failed");
-        } else {
+      var url = `https://maayanlab.cloud/isitup/api?url=https://www.gtexportal.org/home/gene/${ensembl_id}`;
+      fetch(url)
+      .then(function(response){
+        return response.json();
+      })
+      .then(function(data){
+        console.log(data);
+        if (data.status === "yes"){
           console.log("success");
           gtex_a.href = `https://www.gtexportal.org/home/gene/${ensembl_id}`;
           var gtex_h4 = document.getElementById('Gtex_title'); //or grab it by tagname etc
           gtex_h4.textContent = `GTEx Portal: ${gene_search}`;
         }
-      }
-      fetchAndDecode(url);
+      })
          
       /*gtex_a.href = `https://www.gtexportal.org/home/gene/${ensembl_id}`;
       var gtex_h4 = document.getElementById('Gtex_title'); //or grab it by tagname etc
