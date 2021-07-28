@@ -188,8 +188,63 @@
               <p class='pointer'>Examples: <a id="ACE2" class="link" onclick="myFunction('ACE2')">ACE2</a>, <a id="ULK4" class="link" onclick="myFunction('ULK4')">ULK4</a>, <a id="DPH7" class="link" onclick="myFunction('DPH7')">DPH7</a>, <a id="KL" class="link" onclick="myFunction('KL')">KL</a></p>
             </div>
           </form>
+        <p style="height: 10px;"><div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" onclick="CFFunction()">
+            <label class="form-check-label" for="inlineCheckbox1">CF Program</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="option2" value="option2" onclick="PSFunction()">
+            <label class="form-check-label" for="inlineRadio1">Primary Source</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="option3" value="option3" onclick="AgFunction()">
+            <label class="form-check-label" for="inlineRadio2">Aggregator</label>
+          </div></p>
 
           <script>
+
+function CFFunction() {
+  // Get the checkbox
+  var checkBox = document.getElementById("inlineCheckbox1");
+
+  // If the checkbox is checked, display the output text
+  if (checkBox.checked == true){
+    $(".card").each(function() {
+      if ($(this).data("string").indexOf("CF") < 0){
+        $(this).hide();
+      }
+    })
+  } else {
+    $(".card").each(function() {
+      if ($(this).data("string").indexOf("CF") < 0){
+        $(this).show();
+      }
+    })
+  }
+}
+
+function PSFunction() {
+  // Get the checkbox
+  var checkBox = document.getElementById("option2");
+
+  // If the checkbox is checked, display the output text
+  if (checkBox.checked == true){
+    text.style.display = "block";
+  } else {
+    text.style.display = "none";
+  }
+}
+
+function AgFunction() {
+  // Get the checkbox
+  var checkBox = document.getElementById("option3");
+  // If the checkbox is checked, display the output text
+  if (checkBox.checked == true){
+    
+  } else {
+    
+  }
+}
 
 function autocomplete(inp, arr) {
   /*the autocomplete function takes two arguments,
@@ -327,6 +382,12 @@ function myFunction(gene_name) {
         }
       })
       return drug_response.json();
+      var elem = document.querySelector('.album');
+      var msnry = new Masonry( elem, {
+        // options
+        itemSelector: '.card',
+        columnWidth: 200
+      });
     }
   })
   .then(function(data){
@@ -624,7 +685,7 @@ function myFunction(gene_name) {
             </div>
           </div>
           <div class="col">
-            <div class="card shadow-sm" data-string="gene">
+            <div class="card shadow-sm" data-string="gene CF">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/IDG_LOGO.png" alt="IDG image" width="100%" height="100%">
               </div>
@@ -656,7 +717,7 @@ function myFunction(gene_name) {
             </div>
           </div>
           <div class="col">
-            <div class="card shadow-sm" data-string="gene">
+            <div class="card shadow-sm" data-string="gene CF">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/IDG_LOGO.png" alt="IDG image" width="100%" height="100%">
               </div>
@@ -686,7 +747,7 @@ function myFunction(gene_name) {
             </div>
           </div>
           <div class="col align-items-center">
-            <div class="card shadow-sm" data-string="gene">
+            <div class="card shadow-sm" data-string="gene CF">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/LINCS_logo.gif" alt="LINCS image" width="100%" height="100%">
               </div>
@@ -1476,7 +1537,7 @@ function myFunction(gene_name) {
             </div>
           </div>
           <div class="col">
-            <div class="card shadow-sm" data-string="drug">
+            <div class="card shadow-sm" data-string="drug CF">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/HGB_logo.png" alt="Human Genome Browser image" width="100%" height="100%">
               </div>
