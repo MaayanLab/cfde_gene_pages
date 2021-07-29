@@ -183,8 +183,8 @@
           <form id="frm1" autocomplete="off" action="/action_page.php" method="GET"> 
             <div class="autocomplete mx-auto d-block" style="width:400px; height: 33px;">
               <input id="myInput" type="text" name="Gene" placeholder="Gene or Drug" style="height: 33px; width: 200px">
-              <input id="search" type="button" onclick="secondFunction()" value="Search" style="height: 33px;">
-              <p class='pointer'>Examples: <a id="ACE2" class="link" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" onclick="myFunction('ACE2')">ACE2</a>, <a id="ULK4" class="link" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" onclick="myFunction('ULK4')">ULK4</a>, <a id="DPH7" class="link" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" onclick="myFunction('DPH7')">DPH7</a>, <a id="KL" class="link" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" onclick="myFunction('KL')">KL</a>, <a id="aspirin" class="link" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" onclick="myFunction('aspirin')">aspirin</a></p>
+              <input id="search" type="button" onclick="myFunction()" value="Search" style="height: 33px;">
+              <p class='pointer'>Examples: <a id="ACE2" class="link" onclick="myFunction('ACE2')">ACE2</a>, <a id="ULK4" class="link" onclick="myFunction('ULK4')">ULK4</a>, <a id="DPH7" class="link" onclick="myFunction('DPH7')">DPH7</a>, <a id="KL" class="link" onclick="myFunction('KL')">KL</a>, <a id="aspirin" class="link" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" onclick="myFunction('aspirin')">aspirin</a></p>
               <script type="text/javascript">
                 /*$('a[data-toggle=collapse]').each(function () {
                   var $this = $(this);
@@ -375,11 +375,11 @@ var genes = GENES;
 /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
 autocomplete(document.getElementById("myInput"), genes);
 
-async function secondFunction(gene_name)  {
+/*async function secondFunction(gene_name)  {
   await myFunction(gene_name);
   console.log('made it');
   $('#collapseExample').collapse('show');
-}
+}*/
 
 function myFunction(gene_name) {
   if (gene_name === undefined){
@@ -522,8 +522,12 @@ function myFunction(gene_name) {
         var Drugmonizome_h4 = document.getElementById('Drugmonizome_title'); //or grab it by tagname etc
         var Drugmonizome_hyperlink = gene_search.link(`https://maayanlab.cloud/drugmonizome/#/TermSearch/Small%20molecules?query=%7B%22limit%22:10,%22search%22:[%22${gene_search}%22]%7D`);
         Drugmonizome_h4.innerHTML = `Drugmonizome: ` + Drugmonizome_hyperlink;
+        console.log('made it');
+        $('#collapseExample').collapse('show');
       } else {
         $('.drugmonizome_card').hide();
+        console.log('made it');
+        $('#collapseExample').collapse('show');
       }
     })
 
@@ -1122,8 +1126,12 @@ function myFunction(gene_name) {
           var HGB_h4 = document.getElementById('HGB_title'); //or grab it by tagname etc
           var HGB_hyperlink = gene_search.link(`https://genome.ucsc.edu/cgi-bin/hgGene?hgg_gene=${transcript}&hgg_type=knownGene`);
           HGB_h4.innerHTML = `Human Genome Browser: ` + HGB_hyperlink;
+          console.log('made it');
+          $('#collapseExample').collapse('show');
         } else{
           $('.hgb_card').hide();
+          console.log('made it');
+          $('#collapseExample').collapse('show');
         }
       })
     })
