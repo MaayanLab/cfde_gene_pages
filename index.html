@@ -192,9 +192,6 @@
               <p class='pointer'>Gene Examples: <a id="ACE2" class="link" onclick="myFunction('ACE2','gene')">ACE2</a>, <a id="ULK4" class="link" onclick="myFunction('ULK4')">ULK4</a>, <a id="DPH7" class="link" onclick="myFunction('DPH7','gene')">DPH7</a>, <a id="KL" class="link" onclick="myFunction('KL','gene')">KL</a> Drug Examples: <a id="aspirin" class="link" onclick="myFunction('aspirin','drug')">aspirin</a>, <a id="tylenol" class="link" onclick="myFunction('tylenol','drug')">tylenol</a></p>
               <script type="text/javascript">
                 $(document).ready(function(){
-                  $("#search").on("click", function(){
-                    $("#loading").html('<div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div>');
-                  });
                   $("#collapseExample").on("show.bs.collapse", function(){
                     $("#loading").html('');
                   });
@@ -229,6 +226,18 @@
           <p id="loading"></p>
 
           <script>
+
+/*function click_counter(button_name, url_path, counter_name){
+  $(button_name).click(function() {
+    $.ajax({
+        url: url_path,
+        type: 'POST',
+        data: {increment: true},
+    });
+    $(counter_name).html('Clicks: ' + data);
+  }
+}*/
+var counterValue;
 
 function CFFunction() {
   // Get the checkbox
@@ -287,6 +296,11 @@ function AgFunction() {
       }
     })
   }
+}
+
+function Complete(){
+  $('#collapseExample').collapse('show');
+  $("#loading").html('');
 }
 
 function autocomplete(inp, arr) {
@@ -396,6 +410,7 @@ autocomplete(document.getElementById("myInput"), genes);
 }*/
 
 function myFunction(gene_name, Stype) {
+  $("#loading").html('<div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div>');
   if (gene_name === undefined){
     var gene_search = document.getElementById("myInput").value;
   }else{
@@ -541,16 +556,12 @@ function myFunction(gene_name, Stype) {
           var Drugmonizome_h4 = document.getElementById('Drugmonizome_title'); //or grab it by tagname etc
           var Drugmonizome_hyperlink = gene_search.link(`https://maayanlab.cloud/drugmonizome/#/TermSearch/Small%20molecules?query=%7B%22limit%22:10,%22search%22:[%22${gene_search}%22]%7D`);
           Drugmonizome_h4.innerHTML = `Drugmonizome: ` + Drugmonizome_hyperlink;
-          console.log('made it');
-          $('#collapseExample').collapse('show');
         } else {
           $('.drugmonizome_card').hide();
-          console.log('made it');
-          $('#collapseExample').collapse('show');
         }
       })
 
-      /*var rxlist_a = document.getElementById('RxList'); //or grab it by tagname etc
+      var rxlist_a = document.getElementById('RxList'); //or grab it by tagname etc
       var rxlist_url = `https://maayanlab.cloud/isitup/api?url=https://www.rxlist.com/${gene_search}-drug.htm`;
       fetch(rxlist_url)
       .then(function(response){
@@ -562,8 +573,11 @@ function myFunction(gene_name, Stype) {
           var rxlist_h4 = document.getElementById('RxList_title'); //or grab it by tagname etc
           var rxlist_hyperlink = gene_search.link(`https://www.rxlist.com/${gene_search}-drug.htm`);
           rxlist_h4.innerHTML = `RxList: ` + rxlist_hyperlink;
+          Complete();
         } else {
-          fetch(`https://maayanlab.cloud/isitup/api?url=https://www.rxlist.com/${GenName}-drug.htm`)
+          $('.rxlist_card').hide();
+          Complete();
+          /*fetch(`https://maayanlab.cloud/isitup/api?url=https://www.rxlist.com/${GenName}-drug.htm`)
           .then(function(response){
             return response.json();
           })
@@ -576,10 +590,77 @@ function myFunction(gene_name, Stype) {
             } else{
               $('.rxlist_card').hide();
             }
-          })
+          })*/
+        }
+      })
+
+      var Drugenrichr_a = document.getElementById('DrugEnrichr'); //or grab it by tagname etc
+      var Drugenrichr_url = `https://maayanlab.cloud/isitup/api?url=https://maayanlab.cloud/DrugEnrichr/#!drug=${GenName}`;
+      fetch(Drugenrichr_url)
+      .then(function(response){
+        return response.json();
+      })
+      .then(function(data){
+        if (data.status === "yes"){
+          Drugenrichr_a.href = `https://maayanlab.cloud/DrugEnrichr/#!drug=${GenName}`;
+          var Drugenrichr_h4 = document.getElementById('DrugEnrichr_title'); //or grab it by tagname etc
+          var Drugenrichr_hyperlink = gene_search.link(`https://maayanlab.cloud/DrugEnrichr/#!drug=${GenName}`);
+          Drugenrichr_h4.innerHTML = `DrugEnrichr: ` + Drugenrichr_hyperlink;
+        } else {
+          $('.drugenrichr_card').hide();
+        }
+      })
+
+      var Drugscom_a = document.getElementById('Drugscom'); //or grab it by tagname etc
+      var Drugscom_url = `https://maayanlab.cloud/isitup/api?url=https://www.drugs.com/${gene_search}.html`;
+      fetch(Drugscom_url)
+      .then(function(response){
+        return response.json();
+      })
+      .then(function(data){
+        if (data.status === "yes"){
+          Drugscom_a.href = `https://www.drugs.com/${gene_search}.html`;
+          var Drugscom_h4 = document.getElementById('Drugscom_title'); //or grab it by tagname etc
+          var Drugscom_hyperlink = gene_search.link(`https://www.drugs.com/${gene_search}.html`);
+          Drugscom_h4.innerHTML = `Drugs.com: ` + Drugscom_hyperlink;
+        } else {
+          $('.drugscom_card').hide();
+        }
+      })
+
+      /*var Drugcentral_a = document.getElementById('DrugCentral'); //or grab it by tagname etc
+      var Drugcentral_url = `https://maayanlab.cloud/isitup/api?url=https://drugcentral.org/drugcard/74?q=${GenName}`;
+      fetch(Drugcentral_url)
+      .then(function(response){
+        return response.json();
+      })
+      .then(function(data){
+        if (data.status === "yes"){
+          Drugcentral_a.href = `https://drugcentral.org/drugcard/74?q=${GenName}`;
+          var Drugcentral_h4 = document.getElementById('DrugCentral_title'); //or grab it by tagname etc
+          var Drugcentral_hyperlink = gene_search.link(`https://drugcentral.org/drugcard/74?q=${GenName}`);
+          Drugcentral_h4.innerHTML = `Drug Central: ` + Drugcentral_hyperlink;
+        } else {
+          $('.drugcentral_card').hide();
         }
       })*/
 
+      var zinc15_a = document.getElementById('ZINC15'); //or grab it by tagname etc
+      var zinc15_url = `https://maayanlab.cloud/isitup/api?url=https://zinc15.docking.org/substances/search/?q=${gene_search}`;
+      fetch(zinc15_url)
+      .then(function(response){
+        return response.json();
+      })
+      .then(function(data){
+        if (data.status === "yes"){
+          zinc15.href = `https://zinc15.docking.org/substances/search/?q=${gene_search}`;
+          var zinc15_h4 = document.getElementById('ZINC15_title'); //or grab it by tagname etc
+          var zinc15_hyperlink = gene_search.link(`https://zinc15.docking.org/substances/search/?q=${gene_search}`);
+          zinc15_h4.innerHTML = `ZINC15: ` + zinc15_hyperlink;
+        } else {
+          $('.zinc15_card').hide();
+        }
+      })
       
     })
   } else {
@@ -1155,10 +1236,10 @@ function myFunction(gene_name, Stype) {
             var HGB_h4 = document.getElementById('HGB_title'); //or grab it by tagname etc
             var HGB_hyperlink = gene_search.link(`https://genome.ucsc.edu/cgi-bin/hgGene?hgg_gene=${transcript}&hgg_type=knownGene`);
             HGB_h4.innerHTML = `Human Genome Browser: ` + HGB_hyperlink;
-            $('#collapseExample').collapse('show');
+            Complete();
           } else{
             $('.hgb_card').hide();
-            $('#collapseExample').collapse('show');
+            Complete();
           }
         })
       })
@@ -1192,12 +1273,31 @@ function myFunction(gene_name, Stype) {
                 <p class="card-text">The Genotype-Tissue Expression (GTEx) Portal provides open access to data including gene expression, QTLs, and histology images.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var Gte_clicks = 0;
+
+                    function GteonClick() {
+                      $.ajax({
+                          url: "Counter.txt",
+                          async: false,
+                          success: function (data){
+                              // This is assuming that Counter.txt's value will always be a number.
+                              counterValue = parseInt(data);
+                          }
+                      });
+                      $("#Gte_clicks").html("<p>" + counterValue + "</p>");
+                      $("#GTEx").click(function () {
+                          $.ajax({
+                              url: "addcounter.php",
+                              success: function (){counterValue++;}
+                          });
+                          $("#Gte_clicks").html("<p>" + counterValue + "</p>");
+                      });
+                    }
+                    /*var Gte_clicks = 0;
 
                     function GteonClick() {
                       Gte_clicks += 1;
                       document.getElementById("Gte_clicks").innerHTML = Gte_clicks;
-                    };
+                    };*/
                   </script>
                   <div class="btn-group">
                     <a id="GTEx" href="https://www.gtexportal.org/home/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="GteonClick()" >View on Site</a>
@@ -2316,7 +2416,7 @@ function myFunction(gene_name, Stype) {
               </div>
             </div>
           </div>
-          <div class="col">
+          <!--<div class="col">
             <div class="card shadow-sm drugcentral_card" style="background-color: rgba(0, 0, 0, 0.2);" data-string="CF drug">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/IDG_LOGO.png" alt="Drug Central image" width="100%" height="100%">
@@ -2343,7 +2443,7 @@ function myFunction(gene_name, Stype) {
                 </div>
               </div>
             </div>
-          </div>
+          </div>-->
           <div class="col">
             <div class="card shadow-sm zinc15_card" data-string="drug">
               <div class="card-image-wrapper-1">
@@ -2429,8 +2529,8 @@ function myFunction(gene_name, Stype) {
   </div>
 </footer>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
     <!--<script src="assets/dist/js/bootstrap.bundle.min.js"></script>-->
