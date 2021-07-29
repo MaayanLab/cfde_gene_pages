@@ -375,6 +375,12 @@ var genes = GENES;
 /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
 autocomplete(document.getElementById("myInput"), genes);
 
+async function secondFunction(gene_name)  {
+  await myFunction(gene_name);
+  console.log('made it');
+  $('#collapseExample').collapse('show');
+}
+
 function myFunction(gene_name) {
   if (gene_name === undefined){
     var gene_search = document.getElementById("myInput").value;
@@ -1122,12 +1128,6 @@ function myFunction(gene_name) {
       })
     })
   })
-  
-async function secondFunction(gene_name)  {
-  await myFunction(gene_name);
-  console.log('made it');
-  $('#collapseExample').collapse('show');
-}
 };
   /*window.location.href= '/gene/' + gene_search;*/
 
