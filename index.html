@@ -462,7 +462,7 @@ function myFunction(gene_name, Stype) {
       });
       DrugBankNum = find_DBN[0];
 
-      if(gene_search == info.Synonym[0]){
+      if(gene_search.toLowerCase() == info.Synonym[0]){
         GenName = info.Synonym[1];
       }else {
         GenName = info.Synonym[0];
@@ -573,10 +573,8 @@ function myFunction(gene_name, Stype) {
           var rxlist_h4 = document.getElementById('RxList_title'); //or grab it by tagname etc
           var rxlist_hyperlink = gene_search.link(`https://www.rxlist.com/${GenName}-drug.htm`);
           rxlist_h4.innerHTML = `RxList: ` + rxlist_hyperlink;
-          Complete();
         } else {
           $('.rxlist_card').hide();
-          Complete();
           /*fetch(`https://maayanlab.cloud/isitup/api?url=https://www.rxlist.com/${GenName}-drug.htm`)
           .then(function(response){
             return response.json();
@@ -653,12 +651,14 @@ function myFunction(gene_name, Stype) {
       })
       .then(function(data){
         if (data.status === "yes"){
-          zinc15.href = `https://zinc15.docking.org/substances/search/?q=${GenName}`;
+          zinc15_a.href = `https://zinc15.docking.org/substances/search/?q=${GenName}`;
           var zinc15_h4 = document.getElementById('ZINC15_title'); //or grab it by tagname etc
           var zinc15_hyperlink = gene_search.link(`https://zinc15.docking.org/substances/search/?q=${GenName}`);
           zinc15_h4.innerHTML = `ZINC15: ` + zinc15_hyperlink;
+          Complete();
         } else {
           $('.zinc15_card').hide();
+          Complete();
         }
       })
       
