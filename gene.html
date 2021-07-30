@@ -133,265 +133,345 @@
 
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" data-masonry='{"percentPosition": true }'>
         <div class="col align-items-center">
-          <div class="card shadow-sm" style="background-color: rgba(0, 0, 0, 0.2);">
-            <div class="card-image-wrapper-1">
-             <img class="card-img-top img-fluid" src="CFDE_gene_page/test_img.png" alt="Gtex image" width="100%" height="100%">
-            </div>
-            <div class="card-image-wrapper-2">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/Gtex_site.png" alt="GTEx site image" width="100%" height="100%">
-            </div>
-            <div class="card-body">
-              <h4 id="Gtex_title" class="card-title">GTEx Portal</h4>
-              <p class="card-text">The Genotype-Tissue Expression (GTEx) Portal provides open access to data including gene expression, QTLs, and histology images.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <script type="text/javascript">
-                  var Gte_clicks = 0;
+            <div class="card shadow-sm GTEx_card" style="background-color: rgba(0, 0, 0, 0.2);" data-string="CF PS gene">
+              <div class="card-image-wrapper-1">
+               <img class="card-img-top img-fluid" src="CFDE_gene_page/test_img.png" alt="Gtex image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/Gtex_site.png" alt="GTEx site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="Gtex_title" class="card-title">GTEx Portal</h4>
+                <p class="card-text">The Genotype-Tissue Expression (GTEx) Portal provides open access to data including gene expression, QTLs, and histology images.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
 
-                  function GteonClick() {
-                    Gte_clicks += 1;
-                    document.getElementById("Gte_clicks").innerHTML = Gte_clicks;
-                  };
-                </script>
-                <div class="btn-group">
-                  <a id="GTEx" href="https://www.gtexportal.org/home/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="GteonClick()" >View on Site</a>
+                    function GteonClick() {
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/gteclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("Gte_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/gteclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("Gte_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
+                  </script>
+                  <div class="btn-group">
+                    <a id="GTEx" href="https://www.gtexportal.org/home/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="GteonClick()" >View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="Gte_clicks">0</a></p>
+                  <!--<img class="cf-logo" src="CFDE_gene_page/CF_logo.png">-->
                 </div>
-                <p>Clicks: <a id="Gte_clicks">0</a></p>
-                <!--<img class="cf-logo" src="CFDE_gene_page/CF_logo.png">-->
+                <!--<p>Clicks: <a id="Gte_clicks">0</a></p>-->
               </div>
             </div>
-            <!--<div class="card-footer">
-              <p>Clicks: <a id="Gte_clicks">0</a></p>
-            </div>-->
           </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm" style="background-color: rgba(0, 0, 0, 0.2);">
-            <div class="card-image-wrapper-1">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/IDG_LOGO.png" alt="IDG image" width="100%" height="100%">
-            </div>
-            <div class="card-image-wrapper-2">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/Pharos_site.png" alt="Pharos image" width="100%" height="100%">
-            </div>
-            <div class="card-body">
-              <h4 id="Pharos_title">Pharos</h4>
-              <p class="card-text">The Pharos interface provides facile access to most data types collected by the Knowledge Management Center for the IDG program.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <script type="text/javascript">
-                  var Phar_clicks = 0;
+          <div class="col">
+            <div class="card shadow-sm pharos_card" style="background-color: rgba(0, 0, 0, 0.2);" data-string="CF Ag gene">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/IDG_LOGO.png" alt="IDG image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/Pharos_site.png" alt="Pharos image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="Pharos_title">Pharos</h4>
+                <p class="card-text">The Pharos interface provides facile access to most data types collected by the Knowledge Management Center for the IDG program.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var Phar_clicks;
 
-                  function PharonClick() {
-                    Phar_clicks = Number(localStorage.getItem("Phar_clicks"));
-                    Phar_clicks += 1;
-                    localStorage.setItem("Phar_clicks",Phar_clicks); 
-                    document.getElementById("Phar_clicks").innerHTML = Phar_clicks;
-                  };
-                </script>
-                <div class="btn-group">
-                  <a id="Pharos" href="https://pharos.nih.gov/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="PharonClick()">View on Site</a>
+                    function PharonClick() {
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/pharclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("Phar_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/pharclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("Phar_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
+                  </script>
+                  <div class="btn-group">
+                    <a id="Pharos" href="https://pharos.nih.gov/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="PharonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="Phar_clicks">0</a></p>
+                  <!--<img class="cf-logo" src="CFDE_gene_page/CF_logo.png">-->
                 </div>
-                <p>Clicks: <a id="Phar_clicks">0</a></p>
-                <!--<img class="cf-logo" src="CFDE_gene_page/CF_logo.png">-->
+                <!--<p>Clicks: <a id="Phar_clicks">0</a></p>-->
               </div>
             </div>
-            <!--<div class="card-footer">
-              <p>Clicks: <a id="Phar_clicks">0</a></p>
-            </div>-->
           </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm" style="background-color: rgba(0, 0, 0, 0.2);">
-            <div class="card-image-wrapper-1">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/IDG_LOGO.png" alt="IDG image" width="100%" height="100%">
-            </div>
-            <div class="card-image-wrapper-2">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/Harmonizome_site.png" alt="Harmonizome image" width="100%" height="100%">
-            </div>
-            <div class="card-body">
-              <h4 id="Harmonizome_title">Harmonizome</h4>
-              <p class="card-text"> The Harmonizome is a collection of information about genes and proteins from 114 datasets provided by 66 online resources to facilitate access to and learning from biomedical Big Data.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <script type="text/javascript">
-                  var Harm_clicks = 0;
+          <div class="col">
+            <div class="card shadow-sm harmonziome_card" style="background-color: rgba(0, 0, 0, 0.2);" data-string="CF Ag gene">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/IDG_LOGO.png" alt="IDG image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/Harmonizome_site.png" alt="Harmonizome image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="Harmonizome_title">Harmonizome</h4>
+                <p class="card-text"> The Harmonizome is a collection of information about genes and proteins from 114 datasets provided by 66 online resources to facilitate access to and learning from biomedical Big Data.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var Harm_clicks;
 
-                  function HarmonClick() {
-                    Harm_clicks += 1;
-                    document.getElementById("Harm_clicks").innerHTML = Harm_clicks;
-                  };
-                </script>
-                <div class="btn-group">
-                  <a id="Harmonizome" href="https://maayanlab.cloud/Harmonizome/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="HarmonClick()">View on Site</a>
+                    function HarmonClick() {
+                     var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/harmclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("Harm_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/harmclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("Harm_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
+                  </script>
+                  <div class="btn-group">
+                    <a id="Harmonizome" href="https://maayanlab.cloud/Harmonizome/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="HarmonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="Harm_clicks">0</a></p>
+                  <!--<img class="cf-logo" src="CFDE_gene_page/CF_logo.png">-->
                 </div>
-                <p>Clicks: <a id="Harm_clicks">0</a></p>
-                <!--<img class="cf-logo" src="CFDE_gene_page/CF_logo.png">-->
+                <!--<p>Clicks: <a id="Harm_clicks">0</a></p>-->
               </div>
             </div>
-            <!--<div class="card-footer">
-              <p>Clicks: <a id="Harm_clicks">0</a></p>
-            </div>-->
           </div>
-        </div>
-        <div class="col align-items-center">
-          <div class="card shadow-sm" style="background-color: rgba(0, 0, 0, 0.2);">
-            <div class="card-image-wrapper-1">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/LINCS_logo.gif" alt="LINCS image" width="100%" height="100%">
-            </div>
-            <div class="card-image-wrapper-2">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/Lincs_site.png" alt="LINCS site image" width="100%" height="100%">
-            </div>
-            <div class="card-body">
-              <h4>LINCS Portal</h4>
-              <p class="card-text">The LINCS Data Portal 3.0 is a portal for serving and querying LINCS datasets and signatures. It provides a signature similarity search to query for mimicker or reverser signatures.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <script type="text/javascript">
-                  var LINCS_clicks = 0;
+          <div class="col align-items-center">
+            <div class="card shadow-sm LINCS_card" style="background-color: rgba(0, 0, 0, 0.2);" data-string="CF PS gene">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/LINCS_logo.gif" alt="LINCS image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/Lincs_site.png" alt="LINCS site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="LINCS_title">LINCS Portal</h4>
+                <p class="card-text">The LINCS Data Portal 3.0 is a portal for serving and querying LINCS datasets and signatures. It provides a signature similarity search to query for mimicker or reverser signatures.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var LINCS_clicks;
 
-                  function LINCSonClick() {
-                    LINCS_clicks += 1;
-                    document.getElementById("LINCS_clicks").innerHTML = LINCS_clicks;
-                  };
-                </script>
-                <div class="btn-group">
-                  <a href="https://ldp3.cloud/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="LINCSonClick()">View on Site</a>
+                    function LINCSonClick() {
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/lincsclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("LINCS_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/lincsclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("LINCS_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
+                  </script>
+                  <div class="btn-group">
+                    <a id="LINCS" href="https://ldp3.cloud/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="LINCSonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="LINCS_clicks">0</a></p>
+                  <!--<img class="cf-logo" src="CFDE_gene_page/CF_logo.png">-->
                 </div>
-                <p>Clicks: <a id="LINCS_clicks">0</a></p>
-                <!--<img class="cf-logo" src="CFDE_gene_page/CF_logo.png">-->
+                <!--<p>Clicks: <a id="LINCS_clicks">0</a></p>-->
               </div>
             </div>
-            <!--<div class="card-footer">
-              <p>Clicks: <a id="LINCS_clicks">0</a></p>
-            </div>-->
           </div>
-        </div>
 
-        <div class="col">
-          <div class="card shadow-sm" style="background-color: rgba(0, 0, 0, 0.2);">
-            <div class="card-image-wrapper-1">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/Metabolomics_logo.jpeg" alt="Metabolomics image" width="100%" height="100%">
-            </div>
-            <div class="card-image-wrapper-2">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/Metabolomics_site.png" alt="Metabolomics site image" width="100%" height="100%">
-            </div>
-            <div class="card-body">
-              <h4>Metabolomics Workbench</h4>
-              <p class="card-text">The Metabolomics Workbench serves as a repository for metabolomics data and metadata and provides analysis tools.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <script type="text/javascript">
-                  var Metab_clicks = 0;
+          <div class="col">
+            <div class="card shadow-sm metabolomics_card" style="background-color: rgba(0, 0, 0, 0.2);" data-string="CF PS gene">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/Metabolomics_logo.jpeg" alt="Metabolomics image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/Metabolomics_site.png" alt="Metabolomics site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4>Metabolomics Workbench</h4>
+                <p class="card-text">The Metabolomics Workbench serves as a repository for metabolomics data and metadata and provides analysis tools.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var Metab_clicks;
 
-                  function MetabonClick() {
-                    Metab_clicks += 1;
-                    document.getElementById("Metab_clicks").innerHTML = Metab_clicks;
-                  };
-                </script>
-                <div class="btn-group">
-                  <a href="https://www.metabolomicsworkbench.org/databases/proteome/MGP.php" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="MetabonClick()">View on Site</a>
+                    function MetabonClick() {
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/metabclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("Metab_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/metabclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("Metab_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
+                  </script>
+                  <div class="btn-group">
+                    <a href="https://www.metabolomicsworkbench.org/databases/proteome/MGP.php" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="MetabonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="Metab_clicks">0</a></p>
                 </div>
-                <p>Clicks: <a id="Metab_clicks">0</a></p>
-                <!--<img class="cf-logo" src="CFDE_gene_page/CF_logo.png">-->
               </div>
             </div>
-            <!--<div class="card-footer">
-              <p>Clicks: <a id="Metab_clicks">0</a></p>
-            </div>-->
           </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm" style="background-color: rgba(0, 0, 0, 0.2);">
-            <div class="card-image-wrapper-1">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/Glygen_logo.jpeg" alt="GlyGen image" width="75%" height="75%">
-            </div>
-            <div class="card-image-wrapper-2">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/Glygen_site.png" alt="GlyGen site image" width="100%" height="100%">
-            </div>
-            <div class="card-body">
-              <h4 id="GlyGen_title">GlyGen Portal</h4>
-              <p class="card-text">GlyGen provides computational and informatics resources and tools for glycosciences research using information from many data sources.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <script type="text/javascript">
-                  var GlyG_clicks = 0;
+          <div class="col">
+            <div class="card shadow-sm GlyGen_card" style="background-color: rgba(0, 0, 0, 0.2);" data-string="CF PS gene">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/Glygen_logo.jpeg" alt="GlyGen image" width="75%" height="75%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/Glygen_site.png" alt="GlyGen site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="GlyGen_title">GlyGen Portal</h4>
+                <p class="card-text">GlyGen provides computational and informatics resources and tools for glycosciences research using information from many data sources.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var GlyG_clicks;
 
-                  function GlyGonClick() {
-                    GlyG_clicks += 1;
-                    document.getElementById("GlyG_clicks").innerHTML = GlyG_clicks;
-                  };
-                </script>
-                <div class="btn-group">
-                  <a id="GlyGen" href="https://www.glygen.org/protein-search/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="GlyGonClick()">View on Site</a>
+                    function GlyGonClick() {
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/glygclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("GlyG_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/glygclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("GlyG_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
+                  </script>
+                  <div class="btn-group">
+                    <a id="GlyGen" href="https://www.glygen.org/protein-search/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="GlyGonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="GlyG_clicks">0</a></p>
                 </div>
-                <p>Clicks: <a id="GlyG_clicks">0</a></p>
               </div>
             </div>
-            <!--<div class="card-footer">
-              <p>Clicks: <a id="GlyG_clicks">0</a></p>
-            </div>-->
           </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm" style="background-color: rgba(0, 0, 0, 0.2);">
-            <div class="card-image-wrapper-1">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/komp_logo.png" alt="KOMP image" width="100%" height="100%">
-            </div>
-            <div class="card-image-wrapper-2">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/Impc_site.png" alt="IMPC site image" width="100%" height="100%">
-            </div>
-            <div class="card-body">
-              <h4 id="KOMP_title">KOMP- IMPC Portal</h4>
-              <p class="card-text">The International Mouse Phenotyping Consortium (IMPC) has information about the functions of protein-coding genes in the mouse genome.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <script type="text/javascript">
-                  var KOMP_clicks = 0;
+          <div class="col">
+            <div class="card shadow-sm komp_card" style="background-color: rgba(0, 0, 0, 0.2);" data-string="CF PS gene">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/komp_logo.png" alt="KOMP image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/Impc_site.png" alt="IMPC site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="KOMP_title">KOMP- IMPC Portal</h4>
+                <p class="card-text">The International Mouse Phenotyping Consortium (IMPC) has information about the functions of protein-coding genes in the mouse genome.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var KOMP_clicks;
 
-                  function KOMPonClick() {
-                    KOMP_clicks += 1;
-                    document.getElementById("KOMP_clicks").innerHTML = KOMP_clicks;
-                  };
-                </script>
-                <div class="btn-group">
-                  <a id="komp" href="https://www.mousephenotype.org" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="KOMPonClick()">View on Site</a>
+                    function KOMPonClick() {
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/kompclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("KOMP_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/kompclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("KOMP_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
+                  </script>
+                  <div class="btn-group">
+                    <a id="komp" href="https://www.mousephenotype.org" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="KOMPonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="KOMP_clicks">0</a></p>
                 </div>
-                <p>Clicks: <a id="KOMP_clicks">0</a></p>
               </div>
             </div>
-            <!--<div class="card-footer">
-              <p>Clicks: <a id="KOMP_clicks">0</a></p>
-            </div>-->
           </div>
-        </div>
 
-        <div class="col">
-          <div class="card shadow-sm" style="background-color: rgba(0, 0, 0, 0.2);">
-            <div class="card-image-wrapper-1">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/UDN_logo.jpeg" alt="UDN image" width="100%" height="100%">
-            </div>
-            <div class="card-image-wrapper-2">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/Udn_site.png" alt="UDN site image" width="100%" height="100%">
-            </div>
-            <div class="card-body">
-              <h4 id= "UDN_title">UDN Portal</h4>
-              <p class="card-text">This page contains information about genetic changes that were identified in a UDN participant.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <script type="text/javascript">
-                  var UDN_clicks = 0;
+          <div class="col">
+            <div class="card shadow-sm UDN_card" style="background-color: rgba(0, 0, 0, 0.2);" data-string="CF PS gene">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/UDN_logo.jpeg" alt="UDN image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/Udn_site.png" alt="UDN site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id= "UDN_title">UDN Portal</h4>
+                <p class="card-text">This page contains information about genetic changes that were identified in a UDN participant.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var UDN_clicks;
 
-                  function UDNonClick() {
-                    UDN_clicks += 1;
-                    document.getElementById("UDN_clicks").innerHTML = UDN_clicks;
-                  };
-                </script>
-                <div class="btn-group">
-                  <a id="UDN" href="https://undiagnosed.hms.harvard.edu/genes/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="UDNonClick()">View on Site</a>
+                    function UDNonClick() {
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/udnclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("UDN_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/udnclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("UDN_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
+                  </script>
+                  <div class="btn-group">
+                    <a id="UDN" href="https://undiagnosed.hms.harvard.edu/genes/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="UDNonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="UDN_clicks">0</a></p>
                 </div>
-                <p>Clicks: <a id="UDN_clicks">0</a></p>
               </div>
             </div>
-            <!--<div class="card-footer">
-              <p>Clicks: <a id="UDN_clicks">0</a></p>
-            </div>-->
           </div>
-        </div>
 
-        <div class="col">
-            <div class="card shadow-sm" style="background-color: rgba(0, 0, 0, 0.2);">
+          <div class="col">
+            <div class="card shadow-sm ARCHS4_card" style="background-color: rgba(0, 0, 0, 0.2);" data-string="CF PS gene">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/ARCHS4_logo.png" alt="ARCHS4 image" width="100%" height="100%">
               </div>
@@ -403,12 +483,25 @@
                 <p class="card-text">ARCHS4 provides access to gene counts from HiSeq 2000, HiSeq 2500 and NextSeq 500 platforms for human and mouse experiments from GEO and SRA.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var ARCHS4_clicks = 0;
+                    var ARCHS4_clicks;
 
                     function ARCHS4onClick() {
-                      ARCHS4_clicks += 1;
-                      document.getElementById("ARCHS4_clicks").innerHTML = ARCHS4_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/ARCHS4click");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("ARCHS4_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/ARCHS4click");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("ARCHS4_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="ARCHS4" href="https://maayanlab.cloud/archs4/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="ARCHS4onClick()">View on Site</a>
@@ -418,412 +511,534 @@
               </div>
             </div>
           </div>
+          <div class="col">
+            <div class="card shadow-sm NCBI_card" data-string="gene Ag">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/NCBI_logo.png" alt="NCBI image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/Ncbi_site.png" alt="NCBI site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="NCBI_title">NCBI Gene Database</h4>
+                <p class="card-text">The NCBI Gene page provides information about nomenclature, RefSeqs, maps, pathways, variations, phenotypes, and links to genome-, phenotype-, and locus-specific resources.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var NCBI_clicks;
 
-        <div class="col">
-          <div class="card shadow-sm">
-            <div class="card-image-wrapper-1">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/NCBI_logo.png" alt="NCBI image" width="100%" height="100%">
-            </div>
-            <div class="card-image-wrapper-2">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/Ncbi_site.png" alt="NCBI site image" width="100%" height="100%">
-            </div>
-            <div class="card-body">
-              <h4 id="NCBI_title">NCBI Gene Database</h4>
-              <p class="card-text">The NCBI Gene page provides information about nomenclature, RefSeqs, maps, pathways, variations, phenotypes, and links to genome-, phenotype-, and locus-specific resources.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <script type="text/javascript">
-                  var NCBI_clicks = 0;
+                    function NCBIonClick() {
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/NCBIclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("NCBI_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
 
-                  function NCBIonClick() {
-                    NCBI_clicks += 1;
-                    document.getElementById("NCBI_clicks").innerHTML = NCBI_clicks;
-                  };
-                </script>
-                <div class="btn-group">
-                  <a id="NCBI" href="https://www.ncbi.nlm.nih.gov/gene/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="NCBIonClick()">View on Site</a>
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/NCBIclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("NCBI_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
+                  </script>
+                  <div class="btn-group">
+                    <a id="NCBI" href="https://www.ncbi.nlm.nih.gov/gene/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="NCBIonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="NCBI_clicks">0</a></p>
                 </div>
-                <p>Clicks: <a id="NCBI_clicks">0</a></p>
               </div>
             </div>
-            <!--<div class="card-footer">
-              <p>Clicks: <a id="NCBI_clicks">0</a></p>
-            </div>-->
           </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <div class="card-image-wrapper-1">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/gc_logo.png" alt="Gene Cards image" width="100%" height="100%">
-            </div>
-            <div class="card-image-wrapper-2">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/Genecards_site.png" alt="Gene Cards site image" width="100%" height="100%">
-            </div>
-            <div class="card-body">
-              <h4 id="GeneCards_title">GeneCards</h4>
-              <p class="card-text">GeneCards is a searchable, integrative database that provides comprehensive, user-friendly information on all annotated and predicted human genes.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <script type="text/javascript">
-                  var GeneCard_clicks = 0;
+          <div class="col">
+            <div class="card shadow-sm GeneCards_card" data-string="gene Ag">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/gc_logo.png" alt="Gene Cards image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/Genecards_site.png" alt="Gene Cards site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="GeneCards_title">GeneCards</h4>
+                <p class="card-text">GeneCards is a searchable, integrative database that provides comprehensive, user-friendly information on all annotated and predicted human genes.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var GeneCard_clicks;
 
-                  function GeneCardonClick() {
-                    GeneCard_clicks += 1;
-                    document.getElementById("GeneCard_clicks").innerHTML = GeneCard_clicks;
-                  };
-                </script>
-                <div class="btn-group">
-                  <a id="GeneCards"href="https://www.genecards.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="GeneCardonClick()">View on Site</a>
+                    function GeneCardonClick() {
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/genecardclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("GeneCard_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/genecardclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("GeneCard_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
+                  </script>
+                  <div class="btn-group">
+                    <a id="GeneCards"href="https://www.genecards.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="GeneCardonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="GeneCard_clicks">0</a></p>
                 </div>
-                <p>Clicks: <a id="GeneCard_clicks">0</a></p>
               </div>
             </div>
-            <!--<div class="card-footer">
-              <p>Clicks: <a id="GeneCard_clicks">0</a></p>
-            </div>-->
           </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <div class="card-image-wrapper-1">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/enrichr_logo.png" alt="Enrichr image" width="100%" height="100%">
-            </div>
-            <div class="card-image-wrapper-2">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/Enrichr_site.png" alt="Enrichr site image" width="100%" height="100%">
-            </div>
-            <div class="card-body">
-              <h4 id="Enrichr_title">Enrichr</h4>
-              <p class="card-text">Enrichr is an enrichment analysis tool that provides various types of visualization summaries of collective functions of gene lists.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <script type="text/javascript">
-                  var Enrichr_clicks = 0;
+          <div class="col">
+            <div class="card shadow-sm enrichr_card" style="background-color: rgba(0, 0, 0, 0.2);" data-string="gene CF Ag">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/enrichr_logo.png" alt="Enrichr image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/Enrichr_site.png" alt="Enrichr site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="Enrichr_title">Enrichr</h4>
+                <p class="card-text">Enrichr is an enrichment analysis tool that provides various types of visualization summaries of collective functions of gene lists.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var Enrichr_clicks;
 
-                  function EnrichronClick() {
-                    Enrichr_clicks += 1;
-                    document.getElementById("Enrichr_clicks").innerHTML = Enrichr_clicks;
-                  };
-                </script>
-                <div class="btn-group">
-                  <a id="Enrichr" href="https://maayanlab.cloud/Enrichr/#find" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="EnrichronClick()">View on Site</a>
+                    function EnrichronClick() {
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/enrichrclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("Enrichr_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/enrichrclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("Enrichr_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
+                  </script>
+                  <div class="btn-group">
+                    <a id="Enrichr" href="https://maayanlab.cloud/Enrichr/#find" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="EnrichronClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="Enrichr_clicks">0</a></p>
                 </div>
-                <p>Clicks: <a id="Enrichr_clicks">0</a></p>
               </div>
             </div>
-            <!--<div class="card-footer">
-              <p>Clicks: <a id="Enrichr_clicks">0</a></p>
-            </div>-->
           </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <div class="card-image-wrapper-1">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/ENCODE_logo.jpeg" alt="Encode image" width="100%" height="100%">
-            </div>
-            <div class="card-image-wrapper-2">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/Encode_site.png" alt="ENCODE site image" width="100%" height="100%">
-            </div>
-            <div class="card-body">
-              <h4 id="ENCODE_title">ENCODE Portal</h4>
-              <p class="card-text">The ENCODE Consortium not only produces high-quality data, but also analyzes the data in an integrative fashion.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <script type="text/javascript">
-                  var ENCODE_clicks = 0;
+          <div class="col">
+            <div class="card shadow-sm ENCODE_card" data-string="gene PS">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/ENCODE_logo.jpeg" alt="Encode image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/Encode_site.png" alt="ENCODE site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="ENCODE_title">ENCODE Portal</h4>
+                <p class="card-text">The ENCODE Consortium not only produces high-quality data, but also analyzes the data in an integrative fashion.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var ENCODE_clicks;
 
-                  function ENCODEonClick() {
-                    ENCODE_clicks += 1;
-                    document.getElementById("ENCODE_clicks").innerHTML = ENCODE_clicks;
-                  };
-                </script>
-                <div class="btn-group">
-                  <a id="ENCODE" href="https://www.encodeproject.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="ENCODEonClick()">View on Site</a>
+                    function ENCODEonClick() {
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/ENCODEclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("ENCODE_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/ENCODEclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("ENCODE_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
+                  </script>
+                  <div class="btn-group">
+                    <a id="ENCODE" href="https://www.encodeproject.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="ENCODEonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="ENCODE_clicks">0</a></p>
                 </div>
-                <p>Clicks: <a id="ENCODE_clicks">0</a></p>
               </div>
             </div>
-            <!--<div class="card-footer">
-              <p>Clicks: <a id="ENCODE_clicks">0</a></p>
-            </div>-->
           </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <div class="card-image-wrapper-1">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/marrvel_logo.webp" alt="MARRVEL image" width="100%" height="100%">
-            </div>
-            <div class="card-image-wrapper-2">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/Marrvel_site.png" alt="MARRVEL site image" width="100%" height="100%">
-            </div>
-            <div class="card-body">
-              <h4 id="MARRVEL_title">MARRVEL</h4>
-              <p class="card-text">MARRVEL allows users to search multiple public variant databases simultaneously and provides a unified interface to facilitate the search process.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <script type="text/javascript">
-                  var MARRVEL_clicks = 0;
+          <div class="col">
+            <div class="card shadow-sm uniprot_card" data-string="gene Ag">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/uniprot_logo.png" alt="Uniprot image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/Uniprot_site.png" alt="UniProt site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="UniProt_title">UniProt</h4>
+                <p class="card-text">The mission of UniProt is to provide the scientific community with a comprehensive, high-quality and freely accessible resource of protein sequence and functional information.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var UniProt_clicks;
 
-                  function MARRVELonClick() {
-                    MARRVEL_clicks += 1;
-                    document.getElementById("MARRVEL_clicks").innerHTML = MARRVEL_clicks;
-                  };
-                </script>
-                <div class="btn-group">
-                  <a id="MARRVEL" href="http://marrvel.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="MARRVELonClick()">View on Site</a>
+                    function UniProtonClick() {
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/uniprotclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("UniProt_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/uniprotclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("UniProt_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
+                  </script>
+                  <div class="btn-group">
+                    <a id="UniProt" href="https://www.uniprot.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="UniProtonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="UniProt_clicks">0</a></p>
                 </div>
-                <p>Clicks: <a id="MARRVEL_clicks">0</a></p>
               </div>
             </div>
-            <!--<div class="card-footer">
-              <p>Clicks: <a id="MARRVEL_clicks">0</a></p>
-            </div>-->
           </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <div class="card-image-wrapper-1">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/uniprot_logo.png" alt="Uniprot image" width="100%" height="100%">
-            </div>
-            <div class="card-image-wrapper-2">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/Uniprot_site.png" alt="UniProt site image" width="100%" height="100%">
-            </div>
-            <div class="card-body">
-              <h4 id="UniProt_title">UniProt</h4>
-              <p class="card-text">The mission of UniProt is to provide the scientific community with a comprehensive, high-quality and freely accessible resource of protein sequence and functional information.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <script type="text/javascript">
-                  var UniProt_clicks = 0;
+          <div class="col">
+            <div class="card shadow-sm marrvel_card" data-string="gene Ag">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/marrvel_logo.webp" alt="MARRVEL image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/Marrvel_site.png" alt="MARRVEL site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="MARRVEL_title">MARRVEL</h4>
+                <p class="card-text">MARRVEL allows users to search multiple public variant databases simultaneously and provides a unified interface to facilitate the search process.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    var MARRVEL_clicks;
 
-                  function UniProtonClick() {
-                    UniProt_clicks += 1;
-                    document.getElementById("UniProt_clicks").innerHTML = UniProt_clicks;
-                  };
-                </script>
-                <div class="btn-group">
-                  <a id="UniProt" href="https://www.uniprot.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="UniProtonClick()">View on Site</a>
+                    function MARRVELonClick() {
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/MARRVELclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("MARRVEL_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/MARRVELclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("MARRVEL_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
+                  </script>
+                  <div class="btn-group">
+                    <a id="MARRVEL" href="http://marrvel.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="MARRVELonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="MARRVEL_clicks">0</a></p>
                 </div>
-                <p>Clicks: <a id="UniProt_clicks">0</a></p>
               </div>
             </div>
-            <!--<div class="card-footer">
-              <p>Clicks: <a id="UniProt_clicks">0</a></p>
-            </div>-->
           </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <div class="card-image-wrapper-1">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/biogps_logo.jpeg" alt="BioGPS image" width="100%" height="100%">
-            </div>
-            <div class="card-image-wrapper-2">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/BioGPS_site.png" alt="BioGPS site image" width="100%" height="100%">
-            </div>
-            <div class="card-body">
-              <h4 id="BioGPS_title">BioGPS</h4>
-              <p class="card-text">BioGPS is a free extensible and customizable gene annotation portal, a complete resource for learning about gene and protein function.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <script type="text/javascript">
-                  var BioGPS_clicks = 0;
+          
+          <div class="col">
+            <div class="card shadow-sm biogps_card" data-string="gene PS">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/biogps_logo.jpeg" alt="BioGPS image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/BioGPS_site.png" alt="BioGPS site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="BioGPS_title">BioGPS</h4>
+                <p class="card-text">BioGPS is a free extensible and customizable gene annotation portal, a complete resource for learning about gene and protein function.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
 
-                  function BioGPSonClick() {
-                    BioGPS_clicks += 1;
-                    document.getElementById("BioGPS_clicks").innerHTML = BioGPS_clicks;
-                  };
-                </script>
-                <div class="btn-group">
-                  <a id="BioGPS" href="http://biogps.org" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="BioGPSonClick()">View on Site</a>
+                    function BioGPSonClick() {
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/BIOGPSclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("BioGPS_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/BIOGPSclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("BioGPS_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
+                  </script>
+                  <div class="btn-group">
+                    <a id="BioGPS" href="http://biogps.org" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="BioGPSonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="BioGPS_clicks">0</a></p>
                 </div>
-                <p>Clicks: <a id="BioGPS_clicks">0</a></p>
               </div>
             </div>
-            <!--<div class="card-footer">
-              <p>Clicks: <a id="BioGPS_clicks">0</a></p>
-            </div>-->
           </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <div class="card-image-wrapper-1">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/hgnc_logo.jpeg" alt="HGNC image" width="100%" height="100%">
-            </div>
-            <div class="card-image-wrapper-2">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/hgnc_site.png" alt="HGNC site image" width="100%" height="100%">
-            </div>
-            <div class="card-body">
-              <h4 id="HGNC_title">HGNC</h4>
-              <p class="card-text">The HGNC database is a curated online repository of HGNC-approved gene nomenclature, gene groups and associated resources including links to genomic, proteomic and phenotypic information.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <script type="text/javascript">
-                  var HGNC_clicks = 0;
+          <div class="col">
+            <div class="card shadow-sm hgnc_card" data-string="gene Ag">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/hgnc_logo.jpeg" alt="HGNC image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/hgnc_site.png" alt="HGNC site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="HGNC_title">HGNC</h4>
+                <p class="card-text">The HGNC database is a curated online repository of HGNC-approved gene nomenclature, gene groups and associated resources including links to genomic, proteomic and phenotypic information.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
+                    function HGNConClick() {
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/HGNCclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("HGNC_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
 
-                  function HGNConClick() {
-                    HGNC_clicks += 1;
-                    document.getElementById("HGNC_clicks").innerHTML = HGNC_clicks;
-                  };
-                </script>
-                <div class="btn-group">
-                  <a id="HGNC" href="https://www.genenames.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="HGNConClick()">View on Site</a>
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/HGNCclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("HGNC_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
+                  </script>
+                  <div class="btn-group">
+                    <a id="HGNC" href="https://www.genenames.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="HGNConClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="HGNC_clicks">0</a></p>
                 </div>
-                <p>Clicks: <a id="HGNC_clicks">0</a></p>
               </div>
             </div>
-            <!--<div class="card-footer">
-              <p>Clicks: <a id="HGNC_clicks">0</a></p>
-            </div>-->
           </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <div class="card-image-wrapper-1">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/Ensembl_logo.png" alt="Ensembl image" width="100%" height="100%">
-            </div>
-            <div class="card-image-wrapper-2">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/Ensembl_site.png" alt="Ensembl site image" width="100%" height="100%">
-            </div>
-            <div class="card-body">
-              <h4 id="Ensembl_title">Ensembl</h4>
-              <p class="card-text">Ensembl is a genome browser for vertebrate genomes that supports research in comparative genomics, evolution, sequence variation and transcriptional regulation.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <script type="text/javascript">
-                  var Ensembl_clicks = 0;
+          <div class="col">
+            <div class="card shadow-sm ensembl_card" data-string="gene PS">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/Ensembl_logo.png" alt="Ensembl image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/Ensembl_site.png" alt="Ensembl site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="Ensembl_title">Ensembl</h4>
+                <p class="card-text">Ensembl is a genome browser for vertebrate genomes that supports research in comparative genomics, evolution, sequence variation and transcriptional regulation.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
 
-                  function EnsemblonClick() {
-                    Ensembl_clicks += 1;
-                    document.getElementById("Ensembl_clicks").innerHTML = Ensembl_clicks;
-                  };
-                </script>
-                <div class="btn-group">
-                  <a id="Ensembl" href="https://useast.ensembl.org/index.html" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="EnsemblonClick()">View on Site</a>
+                    function EnsemblonClick() {
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/ENSEMBLclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("Ensembl_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/ENSEMBLclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("Ensembl_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
+                  </script>
+                  <div class="btn-group">
+                    <a id="Ensembl" href="https://useast.ensembl.org/index.html" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="EnsemblonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="Ensembl_clicks">0</a></p>
                 </div>
-                <p>Clicks: <a id="Ensembl_clicks">0</a></p>
               </div>
             </div>
-            <!--<div class="card-footer">
-              <p>Clicks: <a id="HGNC_clicks">0</a></p>
-            </div>-->
           </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <div class="card-image-wrapper-1">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/Bgee_logo.png" alt="Bgee image" width="100%" height="100%">
-            </div>
-            <div class="card-image-wrapper-2">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/Bgee_site.png" alt="Bgee site image" width="100%" height="100%">
-            </div>
-            <div class="card-body">
-              <h4 id="Bgee_title">Bgee</h4>
-              <p class="card-text">Bgee is a database for retrieval and comparison of gene expression patterns across multiple animal species.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <script type="text/javascript">
-                  var Bgee_clicks = 0;
+          <div class="col">
+            <div class="card shadow-sm bgee_card" data-string="gene Ag">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/Bgee_logo.png" alt="Bgee image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/Bgee_site.png" alt="Bgee site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="Bgee_title">Bgee</h4>
+                <p class="card-text">Bgee is a database for retrieval and comparison of gene expression patterns across multiple animal species.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
 
-                  function BgeeonClick() {
-                    Bgee_clicks += 1;
-                    document.getElementById("Bgee_clicks").innerHTML = Bgee_clicks;
-                  };
-                </script>
-                <div class="btn-group">
-                  <a id="Bgee" href="https://bgee.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="BgeeonClick()">View on Site</a>
+                    function BgeeonClick() {
+                     var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/bgeeclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("Bgee_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/bgeeclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("Bgee_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
+                  </script>
+                  <div class="btn-group">
+                    <a id="Bgee" href="https://bgee.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="BgeeonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="Bgee_clicks">0</a></p>
                 </div>
-                <p>Clicks: <a id="Bgee_clicks">0</a></p>
               </div>
             </div>
-            <!--<div class="card-footer">
-              <p>Clicks: <a id="HGNC_clicks">0</a></p>
-            </div>-->
           </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <div class="card-image-wrapper-1">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/COSMIC_logo.png" alt="COSMIC image" width="100%" height="100%">
-            </div>
-            <div class="card-image-wrapper-2">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/COSMIC_site.png" alt="COSMIC site image" width="100%" height="100%">
-            </div>
-            <div class="card-body">
-              <h4 id="COSMIC_title">COSMIC</h4>
-              <p class="card-text">COSMIC, the Catalogue Of Somatic Mutations In Cancer, is the world's largest and most comprehensive resource for exploring the impact of somatic mutations in human cancer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <script type="text/javascript">
-                  var COSMIC_clicks = 0;
+          <div class="col">
+            <div class="card shadow-sm cosmic_card" data-string="gene PS">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/COSMIC_logo.png" alt="COSMIC image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/COSMIC_site.png" alt="COSMIC site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="COSMIC_title">COSMIC</h4>
+                <p class="card-text">COSMIC, the Catalogue Of Somatic Mutations In Cancer, is the world's largest and most comprehensive resource for exploring the impact of somatic mutations in human cancer.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
 
-                  function COSMIConClick() {
-                    COSMIC_clicks += 1;
-                    document.getElementById("COSMIC_clicks").innerHTML = COSMIC_clicks;
-                  };
-                </script>
-                <div class="btn-group">
-                  <a id="COSMIC" href="https://cancer.sanger.ac.uk/cosmic" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="COSMIConClick()">View on Site</a>
+                    function COSMIConClick() {
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/COSMICclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("COSMIC_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/COSMICclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("COSMIC_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
+                  </script>
+                  <div class="btn-group">
+                    <a id="COSMIC" href="https://cancer.sanger.ac.uk/cosmic" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="COSMIConClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="COSMIC_clicks">0</a></p>
                 </div>
-                <p>Clicks: <a id="COSMIC_clicks">0</a></p>
               </div>
             </div>
-            <!--<div class="card-footer">
-              <p>Clicks: <a id="HGNC_clicks">0</a></p>
-            </div>-->
           </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <div class="card-image-wrapper-1">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/ClinGen_logo.png" alt="ClinGen image" width="100%" height="100%">
-            </div>
-            <div class="card-image-wrapper-2">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/ClinGen_site.png" alt="ClinGen site image" width="100%" height="100%">
-            </div>
-            <div class="card-body">
-              <h4 id="ClinGen_title">ClinGen</h4>
-              <p class="card-text">ClinGen is a NIH funded resource dedicated to building a central resource that defines the clinical relevance of genes and variants for use in precision medicine and research.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <script type="text/javascript">
-                  var ClinGen_clicks = 0;
+          <div class="col">
+            <div class="card shadow-sm ClinGen_card" data-string="gene PS">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/ClinGen_logo.png" alt="ClinGen image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/ClinGen_site.png" alt="ClinGen site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="ClinGen_title">ClinGen</h4>
+                <p class="card-text">ClinGen is a NIH funded resource dedicated to building a central resource that defines the clinical relevance of genes and variants for use in precision medicine and research.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
 
-                  function ClinGenonClick() {
-                    ClinGen_clicks += 1;
-                    document.getElementById("ClinGen_clicks").innerHTML = ClinGen_clicks;
-                  };
-                </script>
-                <div class="btn-group">
-                  <a id="ClinGen" href="https://www.clinicalgenome.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="ClinGenonClick()">View on Site</a>
+                    function ClinGenonClick() {
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/CLINGENclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("ClinGen_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/CLINGENclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("ClinGen_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
+                  </script>
+                  <div class="btn-group">
+                    <a id="ClinGen" href="https://www.clinicalgenome.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="ClinGenonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="ClinGen_clicks">0</a></p>
                 </div>
-                <p>Clicks: <a id="ClinGen_clicks">0</a></p>
               </div>
             </div>
-            <!--<div class="card-footer">
-              <p>Clicks: <a id="HGNC_clicks">0</a></p>
-            </div>-->
           </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <div class="card-image-wrapper-1">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/GWAS_logo.jpeg" alt="GWAS image" width="100%" height="100%">
-            </div>
-            <div class="card-image-wrapper-2">
-              <img class="card-img-top img-fluid" src="CFDE_gene_page/GWAS_site.png" alt="GWAS site image" width="100%" height="100%">
-            </div>
-            <div class="card-body">
-              <h4 id="GWAS_title">GWAS Catalog</h4>
-              <p class="card-text">The GWAS Catalog provides a consistent, searchable, visualisable and freely available database of SNP-trait associations, which can be easily integrated with other resources.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <script type="text/javascript">
-                  var GWAS_clicks = 0;
+          <div class="col">
+            <div class="card shadow-sm gwas_card" data-string="gene PS">
+              <div class="card-image-wrapper-1">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/GWAS_logo.jpeg" alt="GWAS image" width="100%" height="100%">
+              </div>
+              <div class="card-image-wrapper-2">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/GWAS_site.png" alt="GWAS site image" width="100%" height="100%">
+              </div>
+              <div class="card-body">
+                <h4 id="GWAS_title">GWAS Catalog</h4>
+                <p class="card-text">The GWAS Catalog provides a consistent, searchable, visualisable and freely available database of SNP-trait associations, which can be easily integrated with other resources.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <script type="text/javascript">
 
-                  function GWASonClick() {
-                    GWAS_clicks += 1;
-                    document.getElementById("GWAS_clicks").innerHTML = GWAS_clicks;
-                  };
-                </script>
-                <div class="btn-group">
-                  <a id="GWAS" href="https://www.ebi.ac.uk/gwas/home" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="GWASonClick()">View on Site</a>
+                    function GWASonClick() {
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/GWASclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("GWAS_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/GWASclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("GWAS_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
+                  </script>
+                  <div class="btn-group">
+                    <a id="GWAS" href="https://www.ebi.ac.uk/gwas/home" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="GWASonClick()">View on Site</a>
+                  </div>
+                  <p>Clicks: <a id="GWAS_clicks">0</a></p>
                 </div>
-                <p>Clicks: <a id="GWAS_clicks">0</a></p>
               </div>
             </div>
-            <!--<div class="card-footer">
-              <p>Clicks: <a id="HGNC_clicks">0</a></p>
-            </div>-->
           </div>
-        </div>
-        <div class="col">
-            <div class="card shadow-sm">
+          <div class="col">
+            <div class="card shadow-sm PDBe_card" data-string="gene PS">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/PDBe_logo.png" alt="PDBe image" width="100%" height="100%">
               </div>
@@ -835,12 +1050,23 @@
                 <p class="card-text">PDBe-KB is a community-driven resource managed by the PDBe team, collating functional annotations and predictions for structure data in the PDB archive.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var PDBe_clicks = 0;
-
                     function PDBeonClick() {
-                      PDBe_clicks += 1;
-                      document.getElementById("PDBe_clicks").innerHTML = PDBe_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/PDBeclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("PDBe_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/PDBeclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("PDBe_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="PDBe" href="https://www.ebi.ac.uk/pdbe/pdbe-kb" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="PDBeonClick()">View on Site</a>
@@ -848,15 +1074,12 @@
                   <p>Clicks: <a id="PDBe_clicks">0</a></p>
                 </div>
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="HGNC_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
           <div class="col">
-            <div class="card shadow-sm">
+            <div class="card shadow-sm pdb_card" data-string="gene PS">
               <div class="card-image-wrapper-1">
-                <img class="card-img-top img-fluid" src="CFDE_gene_page/pdb_logo.png" alt="PDB image" width="100%" height="100%">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/PDB_logo.png" alt="PDB image" width="100%" height="100%">
               </div>
               <div class="card-image-wrapper-2">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/PDB_site.png" alt="PDB site image" width="100%" height="100%">
@@ -866,12 +1089,24 @@
                 <p class="card-text">PDB has information about the 3D shapes of proteins, nucleic acids, and complex assemblies that contribute to understanding everything from protein synthesis to health and disease.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var PDB_clicks = 0;
 
                     function PDBonClick() {
-                      PDB_clicks += 1;
-                      document.getElementById("PDB_clicks").innerHTML = PDB_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/PDBclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("PDB_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/PDBclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("PDB_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="PDB" href="https://www.rcsb.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="PDBonClick()">View on Site</a>
@@ -879,13 +1114,10 @@
                   <p>Clicks: <a id="PDB_clicks">0</a></p>
                 </div>
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="HGNC_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
           <div class="col">
-            <div class="card shadow-sm">
+            <div class="card shadow-sm geneva_card" style="background-color: rgba(0, 0, 0, 0.2);" data-string="CF gene Ag">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/GENEVA_logo.png" alt="GENEVA image" width="100%" height="100%">
               </div>
@@ -897,12 +1129,24 @@
                 <p class="card-text">GENEVA allows you to identify RNA-sequencing datasets from the Gene Expression Omnibus (GEO) that contains conditions modulating a gene or a gene signature.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var GENEVA_clicks = 0;
 
                     function GENEVAonClick() {
-                      GENEVA_clicks += 1;
-                      document.getElementById("GENEVA_clicks").innerHTML = GENEVA_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/GENEVAclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("GENEVA_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/GENEVAclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("GENEVA_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="GENEVA" href="https://genevatool.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="GENEVAonClick()">View on Site</a>
@@ -910,13 +1154,10 @@
                   <p>Clicks: <a id="GENEVA_clicks">0</a></p>
                 </div>
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="HGNC_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
           <div class="col">
-            <div class="card shadow-sm">
+            <div class="card shadow-sm mgi_card" data-string="gene PS">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/MGI_logo.jpeg" alt="MGI image" width="100%" height="100%">
               </div>
@@ -928,12 +1169,24 @@
                 <p class="card-text">MGI is the international database resource for the laboratory mouse, providing integrated genetic, genomic, and biological data to facilitate the study of human health and disease.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var MGI_clicks = 0;
 
                     function MGIonClick() {
-                      MGI_clicks += 1;
-                      document.getElementById("MGI_clicks").innerHTML = MGI_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/MGIclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("MGI_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/MGIclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("MGI_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="MGI" href="http://www.informatics.jax.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="MGIonClick()">View on Site</a>
@@ -941,13 +1194,10 @@
                   <p>Clicks: <a id="MGI_clicks">0</a></p>
                 </div>
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="HGNC_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
           <div class="col">
-            <div class="card shadow-sm">
+            <div class="card shadow-sm omim_card" data-string="gene PS">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/OMIM_logo.png" alt="OMIM image" width="100%" height="100%">
               </div>
@@ -959,12 +1209,24 @@
                 <p class="card-text">OMIM is a comprehensive, authoritative compendium of human genes and genetic phenotypes that is freely available and updated daily.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var OMIM_clicks = 0;
 
                     function OMIMonClick() {
-                      OMIM_clicks += 1;
-                      document.getElementById("OMIM_clicks").innerHTML = OMIM_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/OMIMclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("OMIM_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/OMIMclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("OMIM_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="OMIM" href="https://omim.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="OMIMonClick()">View on Site</a>
@@ -972,13 +1234,10 @@
                   <p>Clicks: <a id="OMIM_clicks">0</a></p>
                 </div>
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="HGNC_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
           <div class="col">
-            <div class="card shadow-sm">
+            <div class="card shadow-sm go_card" data-string="gene PS">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/GO_logo.jpeg" alt="Gene Ontology image" width="100%" height="100%">
               </div>
@@ -990,12 +1249,24 @@
                 <p class="card-text">The Gene Ontology (GO) knowledgebase is the world’s largest source of information on the functions of genes.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var GO_clicks = 0;
 
                     function GOonClick() {
-                      GO_clicks += 1;
-                      document.getElementById("GO_clicks").innerHTML = GO_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/GOclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("GO_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/GOclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("GO_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="GO" href="http://geneontology.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="GOonClick()">View on Site</a>
@@ -1003,13 +1274,10 @@
                   <p>Clicks: <a id="GO_clicks">0</a></p>
                 </div>
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="HGNC_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
           <div class="col">
-            <div class="card shadow-sm">
+            <div class="card shadow-sm reactome_card" style="background-color: rgba(0, 0, 0, 0.2);" data-string="gene CF PS">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/Reactome_logo.png" alt="Reactome image" width="100%" height="100%">
               </div>
@@ -1021,12 +1289,23 @@
                 <p class="card-text">Reactome is a free, open-source, curated and peer-reviewed pathway database that provides intuitive bioinformatics tools for the visualization, interpretation and analysis of pathway knowledge.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var Reactome_clicks = 0;
-
                     function ReactomeonClick() {
-                      Reactome_clicks += 1;
-                      document.getElementById("Reactome_clicks").innerHTML = Reactome_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/Reactomeclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("Reactome_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/Reactomeclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("Reactome_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="Reactome" href="https://reactome.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="ReactomeonClick()">View on Site</a>
@@ -1034,15 +1313,12 @@
                   <p>Clicks: <a id="Reactome_clicks">0</a></p>
                 </div>
               </div>
-              <!--<div class="card-footer">
-                <p>Clicks: <a id="HGNC_clicks">0</a></p>
-              </div>-->
             </div>
           </div>
-      <div class="col">
-            <div class="card shadow-sm">
+          <div class="col">
+            <div class="card shadow-sm kegg_card" data-string="gene PS">
               <div class="card-image-wrapper-1">
-                <img class="card-img-top img-fluid" src="CFDE_gene_page/KEGG_logo.png" alt="KEGG image" width="100%" height="100%">
+                <img class="card-img-top img-fluid" src="CFDE_gene_page/KEGG_logo.jpeg" alt="KEGG image" width="100%" height="100%">
               </div>
               <div class="card-image-wrapper-2">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/KEGG_site.png" alt="KEGG site image" width="100%" height="100%">
@@ -1052,12 +1328,24 @@
                 <p class="card-text">KEGG is a database resource for understanding high-level functions and utilities of the biological system from molecular-level information.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var KEGG_clicks = 0;
 
                     function KEGGonClick() {
-                      KEGG_clicks += 1;
-                      document.getElementById("KEGG_clicks").innerHTML = KEGG_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/KEGGclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("KEGG_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/KEGGclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("KEGG_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="KEGG" href="https://www.genome.jp/kegg/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="KEGGonClick()">View on Site</a>
@@ -1068,7 +1356,7 @@
             </div>
           </div>
           <div class="col">
-            <div class="card shadow-sm">
+            <div class="card shadow-sm monarch_card" data-string="gene PS">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/Monarch_logo.png" alt="Monarch Initiative image" width="100%" height="100%">
               </div>
@@ -1080,12 +1368,24 @@
                 <p class="card-text">The Monarch Initiative is an integrative data and analytic platform connecting phenotypes to genotypes across species, bridging basic and applied research with semantics-based analysis.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var Monarch_clicks = 0;
 
                     function MonarchonClick() {
-                      Monarch_clicks += 1;
-                      document.getElementById("Monarch_clicks").innerHTML = Monarch_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/monarchclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("Monarch_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/monarchclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("Monarch_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="Monarch" href="https://monarchinitiative.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="MonarchonClick()">View on Site</a>
@@ -1096,7 +1396,7 @@
             </div>
           </div>
           <div class="col">
-            <div class="card shadow-sm">
+            <div class="card shadow-sm hgb_card" data-string="gene PS">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/HGB_logo.png" alt="Human Genome Browser image" width="100%" height="100%">
               </div>
@@ -1108,12 +1408,24 @@
                 <p class="card-text">The Human Genome Browser includes a broad collection of vertebrate and model organism assemblies and annotations, along with a large suite of tools for viewing, analyzing and downloading data.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var HGB_clicks = 0;
 
                     function HGBonClick() {
-                      HGB_clicks += 1;
-                      document.getElementById("HGB_clicks").innerHTML = HGB_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/HGBclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("HGB_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/HGBclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("HGB_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="HGB" href="https://genome.ucsc.edu/cgi-bin/hgGateway" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="HGBonClick()">View on Site</a>
@@ -1167,8 +1479,7 @@
            ><i class="fas fa-envelope"></i
           ></a>
     </p>
-    <p class="mb-3">Links:</p>
-    <p class="mb-0"><a href="https://labs.icahn.mssm.edu/maayanlab/">Ma'ayan Laboratory of Computational Systems Biology</a></p>
+    <p class="mb-0">Prototype project developed by the CFDE Gene WG</p>
     <p class="mb-0"><a href="https://github.com/MaayanLab/cfde_gene_pages">Project's GitHub Repo</a></p>
     <p><a href="#">Back to top</a></p>
     <!--<p class="mb-0"><a href="https://commonfund.nih.gov/dataecosystem">NIH CFDE Program</a></p>

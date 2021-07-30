@@ -80,7 +80,7 @@
       .card-image-wrapper-2 {
         display: flex;
         width: 75%;
-        height: 175px;
+        height: 178px;
         margin: 5px 7px;
         /* Just to show the size of the image wrapper */
         background-color: white;
@@ -109,7 +109,7 @@
         overflow-x: hidden;
         overflow-y: scroll;
         position: absolute;
-        left: 171px;
+        left: 250px;
         z-index: 99;
         width: 200px;
         height:230px;
@@ -176,20 +176,20 @@
 
   <section class="py-1 text-center container">
     <div class="row py-lg-5">
-      <div class="col-lg-7 col-md-8 mx-auto">
+      <div class="col-lg-8 col-md-8 mx-auto">
         <!--<h1 class="fw-light"><img height="40px" width="70px" src="CFDE_gene_page/CFDE_logo.png">CFDE Gene Landing Pages</h1>-->
         <h1 class="fw-light">Gene and Drug Landing Page Aggregator</h1>
         <p class="lead text-muted">This page has links to 32 gene and 13 drug repositories that provide direct links to gene and drug landing pages. You can search by gene or drug name and then choose the sites that contain knowledge about your gene or drug.</p>
         <p>
           <form id="frm1" autocomplete="off" action="/action_page.php" method="GET"> 
-            <div class="autocomplete mx-auto d-block" style="width:550px; height: 33px;">
+            <div class="autocomplete mx-auto d-block" style="width:715px; height: 33px;">
               <select id="gene_drug_select" style="height: 33px;">
                 <option value="Gene">Gene</option>
                 <option value="Drug">Drug</option>
               </select>
               <input id="myInput" type="text" name="Gene" placeholder="Gene or Drug" style="height: 33px; width: 200px">
               <input id="search" type="button" onclick="myFunction()" value="Search" style="height: 33px;">
-              <p class='pointer'>Gene Examples: <a id="ACE2" class="link" onclick="myFunction('ACE2','gene')">ACE2</a>, <a id="ULK4" class="link" onclick="myFunction('ULK4')">ULK4</a>, <a id="DPH7" class="link" onclick="myFunction('DPH7','gene')">DPH7</a>, <a id="KL" class="link" onclick="myFunction('KL','gene')">KL</a> Drug Examples: <a id="aspirin" class="link" onclick="myFunction('aspirin','drug')">aspirin</a>, <a id="tylenol" class="link" onclick="myFunction('tylenol','drug')">tylenol</a></p>
+              <p class='pointer'>Gene Examples: <a id="ACE2" class="link" onclick="myFunction('ACE2','gene')">ACE2</a>, <a id="ULK4" class="link" onclick="myFunction('ULK4')">ULK4</a>, <a id="DPH7" class="link" onclick="myFunction('DPH7','gene')">DPH7</a>, <a id="KL" class="link" onclick="myFunction('KL','gene')">KL</a> Drug Examples: <a id="Imatinib" class="link" onclick="myFunction('imatinib','drug')">Imatinib</a>, <a id="Acetaminophen" class="link" onclick="myFunction('Acetaminophen','drug')">Acetaminophen</a>, <a id="Dexamethasone" class="link" onclick="myFunction('Dexamethasone','drug')">Dexamethasone</a></p>
               <script type="text/javascript">
                 $(document).ready(function(){
                   $("#collapseExample").on("show.bs.collapse", function(){
@@ -213,7 +213,7 @@
           </form>
           <p style="height: 10px;"><div class="form-check form-check-inline">
             <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" onclick="CFFunction()">
-            <label class="form-check-label" for="inlineCheckbox1">CF Program Only</label>
+            <label class="form-check-label" for="inlineCheckbox1">NIH CF Supported Only</label>
           </div>
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="checkbox" id="option2" value="option2" onclick="PSFunction()" checked>
@@ -562,16 +562,16 @@ function myFunction(gene_name, Stype) {
       })
 
       var rxlist_a = document.getElementById('RxList'); //or grab it by tagname etc
-      var rxlist_url = `https://maayanlab.cloud/isitup/api?url=https://www.rxlist.com/${gene_search}-drug.htm`;
+      var rxlist_url = `https://maayanlab.cloud/isitup/api?url=https://www.rxlist.com/${GenName}-drug.htm`;
       fetch(rxlist_url)
       .then(function(response){
         return response.json();
       })
       .then(function(data){
         if (data.status === "yes"){
-          rxlist_a.href = `https://www.rxlist.com/${gene_search}-drug.htm`;
+          rxlist_a.href = `https://www.rxlist.com/${GenName}-drug.htm`;
           var rxlist_h4 = document.getElementById('RxList_title'); //or grab it by tagname etc
-          var rxlist_hyperlink = gene_search.link(`https://www.rxlist.com/${gene_search}-drug.htm`);
+          var rxlist_hyperlink = gene_search.link(`https://www.rxlist.com/${GenName}-drug.htm`);
           rxlist_h4.innerHTML = `RxList: ` + rxlist_hyperlink;
           Complete();
         } else {
@@ -595,16 +595,16 @@ function myFunction(gene_name, Stype) {
       })
 
       var Drugenrichr_a = document.getElementById('DrugEnrichr'); //or grab it by tagname etc
-      var Drugenrichr_url = `https://maayanlab.cloud/isitup/api?url=https://maayanlab.cloud/DrugEnrichr/#!drug=${GenName}`;
+      var Drugenrichr_url = `https://maayanlab.cloud/isitup/api?url=https://maayanlab.cloud/DrugEnrichr/#!drug=${gene_search}`;
       fetch(Drugenrichr_url)
       .then(function(response){
         return response.json();
       })
       .then(function(data){
         if (data.status === "yes"){
-          Drugenrichr_a.href = `https://maayanlab.cloud/DrugEnrichr/#!drug=${GenName}`;
+          Drugenrichr_a.href = `https://maayanlab.cloud/DrugEnrichr/#!drug=${gene_search}`;
           var Drugenrichr_h4 = document.getElementById('DrugEnrichr_title'); //or grab it by tagname etc
-          var Drugenrichr_hyperlink = gene_search.link(`https://maayanlab.cloud/DrugEnrichr/#!drug=${GenName}`);
+          var Drugenrichr_hyperlink = gene_search.link(`https://maayanlab.cloud/DrugEnrichr/#!drug=${gene_search}`);
           Drugenrichr_h4.innerHTML = `DrugEnrichr: ` + Drugenrichr_hyperlink;
         } else {
           $('.drugenrichr_card').hide();
@@ -612,16 +612,16 @@ function myFunction(gene_name, Stype) {
       })
 
       var Drugscom_a = document.getElementById('Drugscom'); //or grab it by tagname etc
-      var Drugscom_url = `https://maayanlab.cloud/isitup/api?url=https://www.drugs.com/${gene_search}.html`;
+      var Drugscom_url = `https://maayanlab.cloud/isitup/api?url=https://www.drugs.com/${GenName}.html`;
       fetch(Drugscom_url)
       .then(function(response){
         return response.json();
       })
       .then(function(data){
         if (data.status === "yes"){
-          Drugscom_a.href = `https://www.drugs.com/${gene_search}.html`;
+          Drugscom_a.href = `https://www.drugs.com/${GenName}.html`;
           var Drugscom_h4 = document.getElementById('Drugscom_title'); //or grab it by tagname etc
-          var Drugscom_hyperlink = gene_search.link(`https://www.drugs.com/${gene_search}.html`);
+          var Drugscom_hyperlink = gene_search.link(`https://www.drugs.com/${GenName}.html`);
           Drugscom_h4.innerHTML = `Drugs.com: ` + Drugscom_hyperlink;
         } else {
           $('.drugscom_card').hide();
@@ -646,16 +646,16 @@ function myFunction(gene_name, Stype) {
       })*/
 
       var zinc15_a = document.getElementById('ZINC15'); //or grab it by tagname etc
-      var zinc15_url = `https://maayanlab.cloud/isitup/api?url=https://zinc15.docking.org/substances/search/?q=${gene_search}`;
+      var zinc15_url = `https://maayanlab.cloud/isitup/api?url=https://zinc15.docking.org/substances/search/?q=${GenName}`;
       fetch(zinc15_url)
       .then(function(response){
         return response.json();
       })
       .then(function(data){
         if (data.status === "yes"){
-          zinc15.href = `https://zinc15.docking.org/substances/search/?q=${gene_search}`;
+          zinc15.href = `https://zinc15.docking.org/substances/search/?q=${GenName}`;
           var zinc15_h4 = document.getElementById('ZINC15_title'); //or grab it by tagname etc
-          var zinc15_hyperlink = gene_search.link(`https://zinc15.docking.org/substances/search/?q=${gene_search}`);
+          var zinc15_hyperlink = gene_search.link(`https://zinc15.docking.org/substances/search/?q=${GenName}`);
           zinc15_h4.innerHTML = `ZINC15: ` + zinc15_hyperlink;
         } else {
           $('.zinc15_card').hide();
@@ -1275,29 +1275,22 @@ function myFunction(gene_name, Stype) {
                   <script type="text/javascript">
 
                     function GteonClick() {
-                      $.ajax({
-                          url: "Counter.txt",
-                          async: false,
-                          success: function (data){
-                              // This is assuming that Counter.txt's value will always be a number.
-                              counterValue = parseInt(data);
-                          }
-                      });
-                      $("#Gte_clicks").html("<p>" + counterValue + "</p>");
-                      $("#GTEx").click(function () {
-                          $.ajax({
-                              url: "addcounter.php",
-                              success: function (){counterValue++;}
-                          });
-                          $("#Gte_clicks").html("<p>" + counterValue + "</p>");
-                      });
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/gteclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("Gte_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
                     }
-                    /*var Gte_clicks = 0;
 
-                    function GteonClick() {
-                      Gte_clicks += 1;
-                      document.getElementById("Gte_clicks").innerHTML = Gte_clicks;
-                    };*/
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/gteclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("Gte_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="GTEx" href="https://www.gtexportal.org/home/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="GteonClick()" >View on Site</a>
@@ -1322,14 +1315,25 @@ function myFunction(gene_name, Stype) {
                 <p class="card-text">The Pharos interface provides facile access to most data types collected by the Knowledge Management Center for the IDG program.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var Phar_clicks = 0;
+                    var Phar_clicks;
 
                     function PharonClick() {
-                      Phar_clicks = Number(localStorage.getItem("Phar_clicks"));
-                      Phar_clicks += 1;
-                      localStorage.setItem("Phar_clicks",Phar_clicks); 
-                      document.getElementById("Phar_clicks").innerHTML = Phar_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/pharclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("Phar_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/pharclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("Phar_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="Pharos" href="https://pharos.nih.gov/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="PharonClick()">View on Site</a>
@@ -1354,12 +1358,25 @@ function myFunction(gene_name, Stype) {
                 <p class="card-text"> The Harmonizome is a collection of information about genes and proteins from 114 datasets provided by 66 online resources to facilitate access to and learning from biomedical Big Data.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var Harm_clicks = 0;
+                    var Harm_clicks;
 
                     function HarmonClick() {
-                      Harm_clicks += 1;
-                      document.getElementById("Harm_clicks").innerHTML = Harm_clicks;
-                    };
+                     var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/harmclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("Harm_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/harmclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("Harm_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="Harmonizome" href="https://maayanlab.cloud/Harmonizome/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="HarmonClick()">View on Site</a>
@@ -1384,12 +1401,25 @@ function myFunction(gene_name, Stype) {
                 <p class="card-text">The LINCS Data Portal 3.0 is a portal for serving and querying LINCS datasets and signatures. It provides a signature similarity search to query for mimicker or reverser signatures.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var LINCS_clicks = 0;
+                    var LINCS_clicks;
 
                     function LINCSonClick() {
-                      LINCS_clicks += 1;
-                      document.getElementById("LINCS_clicks").innerHTML = LINCS_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/lincsclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("LINCS_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/lincsclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("LINCS_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="LINCS" href="https://ldp3.cloud/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="LINCSonClick()">View on Site</a>
@@ -1415,12 +1445,25 @@ function myFunction(gene_name, Stype) {
                 <p class="card-text">The Metabolomics Workbench serves as a repository for metabolomics data and metadata and provides analysis tools.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var Metab_clicks = 0;
+                    var Metab_clicks;
 
                     function MetabonClick() {
-                      Metab_clicks += 1;
-                      document.getElementById("Metab_clicks").innerHTML = Metab_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/metabclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("Metab_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/metabclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("Metab_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a href="https://www.metabolomicsworkbench.org/databases/proteome/MGP.php" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="MetabonClick()">View on Site</a>
@@ -1443,12 +1486,25 @@ function myFunction(gene_name, Stype) {
                 <p class="card-text">GlyGen provides computational and informatics resources and tools for glycosciences research using information from many data sources.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var GlyG_clicks = 0;
+                    var GlyG_clicks;
 
                     function GlyGonClick() {
-                      GlyG_clicks += 1;
-                      document.getElementById("GlyG_clicks").innerHTML = GlyG_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/glygclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("GlyG_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/glygclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("GlyG_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="GlyGen" href="https://www.glygen.org/protein-search/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="GlyGonClick()">View on Site</a>
@@ -1471,12 +1527,25 @@ function myFunction(gene_name, Stype) {
                 <p class="card-text">The International Mouse Phenotyping Consortium (IMPC) has information about the functions of protein-coding genes in the mouse genome.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var KOMP_clicks = 0;
+                    var KOMP_clicks;
 
                     function KOMPonClick() {
-                      KOMP_clicks += 1;
-                      document.getElementById("KOMP_clicks").innerHTML = KOMP_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/kompclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("KOMP_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/kompclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("KOMP_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="komp" href="https://www.mousephenotype.org" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="KOMPonClick()">View on Site</a>
@@ -1500,12 +1569,25 @@ function myFunction(gene_name, Stype) {
                 <p class="card-text">This page contains information about genetic changes that were identified in a UDN participant.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var UDN_clicks = 0;
+                    var UDN_clicks;
 
                     function UDNonClick() {
-                      UDN_clicks += 1;
-                      document.getElementById("UDN_clicks").innerHTML = UDN_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/udnclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("UDN_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/udnclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("UDN_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="UDN" href="https://undiagnosed.hms.harvard.edu/genes/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="UDNonClick()">View on Site</a>
@@ -1529,12 +1611,25 @@ function myFunction(gene_name, Stype) {
                 <p class="card-text">ARCHS4 provides access to gene counts from HiSeq 2000, HiSeq 2500 and NextSeq 500 platforms for human and mouse experiments from GEO and SRA.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var ARCHS4_clicks = 0;
+                    var ARCHS4_clicks;
 
                     function ARCHS4onClick() {
-                      ARCHS4_clicks += 1;
-                      document.getElementById("ARCHS4_clicks").innerHTML = ARCHS4_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/ARCHS4click");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("ARCHS4_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/ARCHS4click");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("ARCHS4_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="ARCHS4" href="https://maayanlab.cloud/archs4/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="ARCHS4onClick()">View on Site</a>
@@ -1557,12 +1652,25 @@ function myFunction(gene_name, Stype) {
                 <p class="card-text">The NCBI Gene page provides information about nomenclature, RefSeqs, maps, pathways, variations, phenotypes, and links to genome-, phenotype-, and locus-specific resources.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var NCBI_clicks = 0;
+                    var NCBI_clicks;
 
                     function NCBIonClick() {
-                      NCBI_clicks += 1;
-                      document.getElementById("NCBI_clicks").innerHTML = NCBI_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/NCBIclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("NCBI_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/NCBIclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("NCBI_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="NCBI" href="https://www.ncbi.nlm.nih.gov/gene/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="NCBIonClick()">View on Site</a>
@@ -1585,12 +1693,25 @@ function myFunction(gene_name, Stype) {
                 <p class="card-text">GeneCards is a searchable, integrative database that provides comprehensive, user-friendly information on all annotated and predicted human genes.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var GeneCard_clicks = 0;
+                    var GeneCard_clicks;
 
                     function GeneCardonClick() {
-                      GeneCard_clicks += 1;
-                      document.getElementById("GeneCard_clicks").innerHTML = GeneCard_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/genecardclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("GeneCard_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/genecardclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("GeneCard_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="GeneCards"href="https://www.genecards.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="GeneCardonClick()">View on Site</a>
@@ -1613,12 +1734,25 @@ function myFunction(gene_name, Stype) {
                 <p class="card-text">Enrichr is an enrichment analysis tool that provides various types of visualization summaries of collective functions of gene lists.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var Enrichr_clicks = 0;
+                    var Enrichr_clicks;
 
                     function EnrichronClick() {
-                      Enrichr_clicks += 1;
-                      document.getElementById("Enrichr_clicks").innerHTML = Enrichr_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/enrichrclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("Enrichr_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/enrichrclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("Enrichr_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="Enrichr" href="https://maayanlab.cloud/Enrichr/#find" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="EnrichronClick()">View on Site</a>
@@ -1641,12 +1775,25 @@ function myFunction(gene_name, Stype) {
                 <p class="card-text">The ENCODE Consortium not only produces high-quality data, but also analyzes the data in an integrative fashion.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var ENCODE_clicks = 0;
+                    var ENCODE_clicks;
 
                     function ENCODEonClick() {
-                      ENCODE_clicks += 1;
-                      document.getElementById("ENCODE_clicks").innerHTML = ENCODE_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/ENCODEclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("ENCODE_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/ENCODEclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("ENCODE_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="ENCODE" href="https://www.encodeproject.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="ENCODEonClick()">View on Site</a>
@@ -1669,12 +1816,25 @@ function myFunction(gene_name, Stype) {
                 <p class="card-text">The mission of UniProt is to provide the scientific community with a comprehensive, high-quality and freely accessible resource of protein sequence and functional information.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var UniProt_clicks = 0;
+                    var UniProt_clicks;
 
                     function UniProtonClick() {
-                      UniProt_clicks += 1;
-                      document.getElementById("UniProt_clicks").innerHTML = UniProt_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/uniprotclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("UniProt_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/uniprotclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("UniProt_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="UniProt" href="https://www.uniprot.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="UniProtonClick()">View on Site</a>
@@ -1697,12 +1857,25 @@ function myFunction(gene_name, Stype) {
                 <p class="card-text">MARRVEL allows users to search multiple public variant databases simultaneously and provides a unified interface to facilitate the search process.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var MARRVEL_clicks = 0;
+                    var MARRVEL_clicks;
 
                     function MARRVELonClick() {
-                      MARRVEL_clicks += 1;
-                      document.getElementById("MARRVEL_clicks").innerHTML = MARRVEL_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/MARRVELclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("MARRVEL_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/MARRVELclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("MARRVEL_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="MARRVEL" href="http://marrvel.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="MARRVELonClick()">View on Site</a>
@@ -1726,12 +1899,24 @@ function myFunction(gene_name, Stype) {
                 <p class="card-text">BioGPS is a free extensible and customizable gene annotation portal, a complete resource for learning about gene and protein function.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var BioGPS_clicks = 0;
 
                     function BioGPSonClick() {
-                      BioGPS_clicks += 1;
-                      document.getElementById("BioGPS_clicks").innerHTML = BioGPS_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/BIOGPSclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("BioGPS_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/BIOGPSclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("BioGPS_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="BioGPS" href="http://biogps.org" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="BioGPSonClick()">View on Site</a>
@@ -1754,12 +1939,23 @@ function myFunction(gene_name, Stype) {
                 <p class="card-text">The HGNC database is a curated online repository of HGNC-approved gene nomenclature, gene groups and associated resources including links to genomic, proteomic and phenotypic information.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var HGNC_clicks = 0;
-
                     function HGNConClick() {
-                      HGNC_clicks += 1;
-                      document.getElementById("HGNC_clicks").innerHTML = HGNC_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/HGNCclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("HGNC_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/HGNCclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("HGNC_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="HGNC" href="https://www.genenames.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="HGNConClick()">View on Site</a>
@@ -1782,12 +1978,24 @@ function myFunction(gene_name, Stype) {
                 <p class="card-text">Ensembl is a genome browser for vertebrate genomes that supports research in comparative genomics, evolution, sequence variation and transcriptional regulation.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var Ensembl_clicks = 0;
 
                     function EnsemblonClick() {
-                      Ensembl_clicks += 1;
-                      document.getElementById("Ensembl_clicks").innerHTML = Ensembl_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/ENSEMBLclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("Ensembl_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/ENSEMBLclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("Ensembl_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="Ensembl" href="https://useast.ensembl.org/index.html" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="EnsemblonClick()">View on Site</a>
@@ -1810,12 +2018,24 @@ function myFunction(gene_name, Stype) {
                 <p class="card-text">Bgee is a database for retrieval and comparison of gene expression patterns across multiple animal species.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var Bgee_clicks = 0;
 
                     function BgeeonClick() {
-                      Bgee_clicks += 1;
-                      document.getElementById("Bgee_clicks").innerHTML = Bgee_clicks;
-                    };
+                     var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/bgeeclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("Bgee_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/bgeeclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("Bgee_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="Bgee" href="https://bgee.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="BgeeonClick()">View on Site</a>
@@ -1838,12 +2058,24 @@ function myFunction(gene_name, Stype) {
                 <p class="card-text">COSMIC, the Catalogue Of Somatic Mutations In Cancer, is the world's largest and most comprehensive resource for exploring the impact of somatic mutations in human cancer.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var COSMIC_clicks = 0;
 
                     function COSMIConClick() {
-                      COSMIC_clicks += 1;
-                      document.getElementById("COSMIC_clicks").innerHTML = COSMIC_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/COSMICclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("COSMIC_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/COSMICclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("COSMIC_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="COSMIC" href="https://cancer.sanger.ac.uk/cosmic" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="COSMIConClick()">View on Site</a>
@@ -1866,12 +2098,24 @@ function myFunction(gene_name, Stype) {
                 <p class="card-text">ClinGen is a NIH funded resource dedicated to building a central resource that defines the clinical relevance of genes and variants for use in precision medicine and research.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var ClinGen_clicks = 0;
 
                     function ClinGenonClick() {
-                      ClinGen_clicks += 1;
-                      document.getElementById("ClinGen_clicks").innerHTML = ClinGen_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/CLINGENclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("ClinGen_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/CLINGENclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("ClinGen_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="ClinGen" href="https://www.clinicalgenome.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="ClinGenonClick()">View on Site</a>
@@ -1894,12 +2138,24 @@ function myFunction(gene_name, Stype) {
                 <p class="card-text">The GWAS Catalog provides a consistent, searchable, visualisable and freely available database of SNP-trait associations, which can be easily integrated with other resources.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var GWAS_clicks = 0;
 
                     function GWASonClick() {
-                      GWAS_clicks += 1;
-                      document.getElementById("GWAS_clicks").innerHTML = GWAS_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/GWASclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("GWAS_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/GWASclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("GWAS_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="GWAS" href="https://www.ebi.ac.uk/gwas/home" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="GWASonClick()">View on Site</a>
@@ -1922,12 +2178,23 @@ function myFunction(gene_name, Stype) {
                 <p class="card-text">PDBe-KB is a community-driven resource managed by the PDBe team, collating functional annotations and predictions for structure data in the PDB archive.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var PDBe_clicks = 0;
-
                     function PDBeonClick() {
-                      PDBe_clicks += 1;
-                      document.getElementById("PDBe_clicks").innerHTML = PDBe_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/PDBeclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("PDBe_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/PDBeclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("PDBe_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="PDBe" href="https://www.ebi.ac.uk/pdbe/pdbe-kb" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="PDBeonClick()">View on Site</a>
@@ -1950,12 +2217,24 @@ function myFunction(gene_name, Stype) {
                 <p class="card-text">PDB has information about the 3D shapes of proteins, nucleic acids, and complex assemblies that contribute to understanding everything from protein synthesis to health and disease.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var PDB_clicks = 0;
 
                     function PDBonClick() {
-                      PDB_clicks += 1;
-                      document.getElementById("PDB_clicks").innerHTML = PDB_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/PDBclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("PDB_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/PDBclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("PDB_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="PDB" href="https://www.rcsb.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="PDBonClick()">View on Site</a>
@@ -1978,12 +2257,24 @@ function myFunction(gene_name, Stype) {
                 <p class="card-text">GENEVA allows you to identify RNA-sequencing datasets from the Gene Expression Omnibus (GEO) that contains conditions modulating a gene or a gene signature.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var GENEVA_clicks = 0;
 
                     function GENEVAonClick() {
-                      GENEVA_clicks += 1;
-                      document.getElementById("GENEVA_clicks").innerHTML = GENEVA_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/GENEVAclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("GENEVA_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/GENEVAclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("GENEVA_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="GENEVA" href="https://genevatool.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="GENEVAonClick()">View on Site</a>
@@ -2006,12 +2297,24 @@ function myFunction(gene_name, Stype) {
                 <p class="card-text">MGI is the international database resource for the laboratory mouse, providing integrated genetic, genomic, and biological data to facilitate the study of human health and disease.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var MGI_clicks = 0;
 
                     function MGIonClick() {
-                      MGI_clicks += 1;
-                      document.getElementById("MGI_clicks").innerHTML = MGI_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/MGIclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("MGI_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/MGIclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("MGI_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="MGI" href="http://www.informatics.jax.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="MGIonClick()">View on Site</a>
@@ -2034,12 +2337,24 @@ function myFunction(gene_name, Stype) {
                 <p class="card-text">OMIM is a comprehensive, authoritative compendium of human genes and genetic phenotypes that is freely available and updated daily.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var OMIM_clicks = 0;
 
                     function OMIMonClick() {
-                      OMIM_clicks += 1;
-                      document.getElementById("OMIM_clicks").innerHTML = OMIM_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/OMIMclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("OMIM_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/OMIMclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("OMIM_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="OMIM" href="https://omim.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="OMIMonClick()">View on Site</a>
@@ -2062,12 +2377,24 @@ function myFunction(gene_name, Stype) {
                 <p class="card-text">The Gene Ontology (GO) knowledgebase is the world’s largest source of information on the functions of genes.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var GO_clicks = 0;
 
                     function GOonClick() {
-                      GO_clicks += 1;
-                      document.getElementById("GO_clicks").innerHTML = GO_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/GOclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("GO_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/GOclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("GO_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="GO" href="http://geneontology.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="GOonClick()">View on Site</a>
@@ -2090,12 +2417,23 @@ function myFunction(gene_name, Stype) {
                 <p class="card-text">Reactome is a free, open-source, curated and peer-reviewed pathway database that provides intuitive bioinformatics tools for the visualization, interpretation and analysis of pathway knowledge.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var Reactome_clicks = 0;
-
                     function ReactomeonClick() {
-                      Reactome_clicks += 1;
-                      document.getElementById("Reactome_clicks").innerHTML = Reactome_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/Reactomeclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("Reactome_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/Reactomeclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("Reactome_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="Reactome" href="https://reactome.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="ReactomeonClick()">View on Site</a>
@@ -2118,12 +2456,24 @@ function myFunction(gene_name, Stype) {
                 <p class="card-text">KEGG is a database resource for understanding high-level functions and utilities of the biological system from molecular-level information.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var KEGG_clicks = 0;
 
                     function KEGGonClick() {
-                      KEGG_clicks += 1;
-                      document.getElementById("KEGG_clicks").innerHTML = KEGG_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/KEGGclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("KEGG_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/KEGGclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("KEGG_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="KEGG" href="https://www.genome.jp/kegg/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="KEGGonClick()">View on Site</a>
@@ -2146,12 +2496,24 @@ function myFunction(gene_name, Stype) {
                 <p class="card-text">The Monarch Initiative is an integrative data and analytic platform connecting phenotypes to genotypes across species, bridging basic and applied research with semantics-based analysis.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var Monarch_clicks = 0;
 
                     function MonarchonClick() {
-                      Monarch_clicks += 1;
-                      document.getElementById("Monarch_clicks").innerHTML = Monarch_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/monarchclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("Monarch_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/monarchclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("Monarch_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="Monarch" href="https://monarchinitiative.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="MonarchonClick()">View on Site</a>
@@ -2174,12 +2536,24 @@ function myFunction(gene_name, Stype) {
                 <p class="card-text">The Human Genome Browser includes a broad collection of vertebrate and model organism assemblies and annotations, along with a large suite of tools for viewing, analyzing and downloading data.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var HGB_clicks = 0;
 
                     function HGBonClick() {
-                      HGB_clicks += 1;
-                      document.getElementById("HGB_clicks").innerHTML = HGB_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/HGBclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("HGB_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/HGBclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("HGB_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="HGB" href="https://genome.ucsc.edu/cgi-bin/hgGateway" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="HGBonClick()">View on Site</a>
@@ -2202,12 +2576,24 @@ function myFunction(gene_name, Stype) {
                 <p class="card-text">PubChem, an open chemistry database at the NIH, mostly contains small molecules, but also larger molecules such as nucleotides, carbohydrates, lipids, peptides, and chemically-modified macromolecules.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var PubChem_clicks = 0;
 
                     function PubChemonClick() {
-                      PubChem_clicks += 1;
-                      document.getElementById("PubChem_clicks").innerHTML = PubChem_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/PubChemclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("PubChem_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/PubChemclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("PubChem_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="PubChem" href="https://pubchem.ncbi.nlm.nih.gov/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="PubChemonClick()">View on Site</a>
@@ -2231,12 +2617,24 @@ function myFunction(gene_name, Stype) {
                 <p class="card-text">ChEMBL is a manually curated database of bioactive molecules with drug-like properties. It brings together chemical, bioactivity and genomic data to aid the translation of genomic information into effective new drugs.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var ChEMBL_clicks = 0;
 
                     function ChEMBLonClick() {
-                      ChEMBL_clicks += 1;
-                      document.getElementById("ChEMBL_clicks").innerHTML = ChEMBL_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/ChEMBLclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("ChEMBL_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/ChEMBLclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("ChEMBL_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="ChEMBL" href="https://www.ebi.ac.uk/chembl/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="ChEMBLonClick()">View on Site</a>
@@ -2259,12 +2657,24 @@ function myFunction(gene_name, Stype) {
                 <p class="card-text">The International Union of Basic and Clinical Pharmacology (IUPHAR) / British Pharmacological Society (BPS) Guide to PHARMACOLOGY is an expert-curated resource of ligand-activity-target relationships, the majority of which come from high-quality pharmacological and medicinal chemistry literature.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var Guide_clicks = 0;
 
                     function GuideonClick() {
-                      Guide_clicks += 1;
-                      document.getElementById("Guide_clicks").innerHTML = Guide_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/guideclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("Guide_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/guideclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("Guide_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="Guide" href="https://www.guidetopharmacology.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="GuideonClick()">View on Site</a>
@@ -2288,12 +2698,24 @@ function myFunction(gene_name, Stype) {
                 <p class="card-text">DrugBank Online is a comprehensive, free-to-access, online database containing information on drugs and drug targets.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var DrugBank_clicks = 0;
 
                     function DrugBankonClick() {
-                      DrugBank_clicks += 1;
-                      document.getElementById("DrugBank_clicks").innerHTML = DrugBank_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/drugbankclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("DrugBank_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/drugbankclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("DrugBank_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="DrugBank" href="https://go.drugbank.com/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="DrugBankonClick()" >View on Site</a>
@@ -2316,12 +2738,24 @@ function myFunction(gene_name, Stype) {
                 <p class="card-text">Drugmonizome is a web portal for querying sets of known drugs and computing significant biomedical terms that drugs in the set share.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var Drugmonizome_clicks = 0;
 
                     function DrugmonizomeonClick() {
-                      Drugmonizome_clicks += 1;
-                      document.getElementById("Drugmonizome_clicks").innerHTML = Drugmonizome_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/drugmonizomeclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("Drugmonizome_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/drugmonizomeclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("Drugmonizome_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="Drugmonizome" href="https://maayanlab.cloud/drugmonizome/#/TermSearch/Drug%20sets" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="DrugmonizomeonClick()">View on Site</a>
@@ -2344,12 +2778,24 @@ function myFunction(gene_name, Stype) {
                 <p class="card-text">DrugEnrichr is a new drug set enrichment analysis tool. DrugEnrichr has the familiar Enrichr interface but instead of serving gene sets for search it is serving drug sets.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var DrugEnrichr_clicks = 0;
 
                     function DrugEnrichronClick() {
-                      DrugEnrichr_clicks += 1;
-                      document.getElementById("DrugEnrichr_clicks").innerHTML = DrugEnrichr_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/drugenrichrclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("DrugEnrichr_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/drugenrichrclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("DrugEnrichr_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="DrugEnrichr" href="https://maayanlab.cloud/DrugEnrichr/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="DrugEnrichronClick()">View on Site</a>
@@ -2373,12 +2819,24 @@ function myFunction(gene_name, Stype) {
                 <p class="card-text">Drugs.com is the largest, most widely visited, independent medicine information website available on the Internet. Drug.com's aim is to be the Internet’s most trusted resource for drug and related health information.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var Drugscom_clicks = 0;
 
                     function DrugscomonClick() {
-                      Drugscom_clicks += 1;
-                      document.getElementById("Drugscom_clicks").innerHTML = Drugscom_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/drugscomclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("Drugscom_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/drugscomclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("Drugscom_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="Drugscom" href="https://www.drugs.com/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="DrugscomonClick()">View on Site</a>
@@ -2401,12 +2859,24 @@ function myFunction(gene_name, Stype) {
                 <p class="card-text">RxList is an online medical resource dedicated to offering detailed and current pharmaceutical information on brand and generic drugs.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var RxList_clicks = 0;
 
                     function RxListonClick() {
-                      RxList_clicks += 1;
-                      document.getElementById("RxList_clicks").innerHTML = RxList_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/rxlistclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("RxList_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/rxlistclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("RxList_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="RxList" href="https://www.rxlist.com/script/main/hp.asp" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="RxListonClick()">View on Site</a>
@@ -2457,12 +2927,24 @@ function myFunction(gene_name, Stype) {
                 <p class="card-text">ZINC is a free database of commercially-available compounds for virtual screening. ZINC contains over 230 million purchasable compounds in ready-to-dock, 3D formats. ZINC also contains over 750 million purchasable compounds you can search for analogs.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var ZINC15_clicks = 0;
 
                     function ZINC15onClick() {
-                      ZINC15_clicks += 1;
-                      document.getElementById("ZINC15_clicks").innerHTML = ZINC15_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/ZINC15click");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("ZINC15_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/ZINC15click");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("ZINC15_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="ZINC15" href="https://zinc15.docking.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="ZINC15onClick()">View on Site</a>
@@ -2517,8 +2999,7 @@ function myFunction(gene_name, Stype) {
            ><i class="fas fa-envelope"></i
           ></a>
     </p>
-    <p class="mb-3">Links:</p>
-    <p class="mb-0"><a href="https://labs.icahn.mssm.edu/maayanlab/">Ma'ayan Laboratory of Computational Systems Biology</a></p>
+    <p class="mb-0">Prototype project developed by the CFDE Gene WG</p>
     <p class="mb-0"><a href="https://github.com/MaayanLab/cfde_gene_pages">Project's GitHub Repo</a></p>
     <p><a href="#">Back to top</a></p>
     <!--<p class="mb-0"><a href="https://commonfund.nih.gov/dataecosystem">NIH CFDE Program</a></p>

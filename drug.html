@@ -120,13 +120,25 @@
               <p class="card-text">DrugBank Online is a comprehensive, free-to-access, online database containing information on drugs and drug targets.</p>
               <div class="d-flex justify-content-between align-items-center">
                 <script type="text/javascript">
-                  var DrugBank_clicks = 0;
 
-                  function DrugBankonClick() {
-                    DrugBank_clicks += 1;
-                    document.getElementById("DrugBank_clicks").innerHTML = DrugBank_clicks;
-                  };
-                </script>
+                    function DrugBankonClick() {
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/drugbankclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("DrugBank_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/drugbankclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("DrugBank_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
+                  </script>
                 <div class="btn-group">
                   <a id="DrugBank" href="https://go.drugbank.com/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="DrugBankonClick()" >View on Site</a>
                 </div>
@@ -136,7 +148,7 @@
           </div>
         </div>
         <div class="col">
-            <div class="card shadow-sm">
+            <div class="card shadow-sm" style="background-color: rgba(0, 0, 0, 0.2);">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/chEMBL_logo.png" alt="ChEMBL image" width="100%" height="100%">
               </div>
@@ -148,12 +160,24 @@
                 <p class="card-text">ChEMBL is a manually curated database of bioactive molecules with drug-like properties. It brings together chemical, bioactivity and genomic data to aid the translation of genomic information into effective new drugs.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var ChEMBL_clicks = 0;
 
                     function ChEMBLonClick() {
-                      ChEMBL_clicks += 1;
-                      document.getElementById("ChEMBL_clicks").innerHTML = ChEMBL_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/ChEMBLclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("ChEMBL_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/ChEMBLclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("ChEMBL_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="ChEMBL" href="https://www.ebi.ac.uk/chembl/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="ChEMBLonClick()">View on Site</a>
@@ -165,7 +189,7 @@
           </div>
 
           <div class="col">
-            <div class="card shadow-sm">
+            <div class="card shadow-sm" style="background-color: rgba(0, 0, 0, 0.2);">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/DrugEnrichr_logo.png" alt="DrugEnrichr image" width="100%" height="100%">
               </div>
@@ -177,12 +201,24 @@
                 <p class="card-text">DrugEnrichr is a new drug set enrichment analysis tool. DrugEnrichr has the familiar Enrichr interface but instead of serving gene sets for search it is serving drug sets.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var DrugEnrichr_clicks = 0;
 
                     function DrugEnrichronClick() {
-                      DrugEnrichr_clicks += 1;
-                      document.getElementById("DrugEnrichr_clicks").innerHTML = DrugEnrichr_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/drugenrichrclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("DrugEnrichr_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/drugenrichrclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("DrugEnrichr_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="DrugEnrichr" href="https://maayanlab.cloud/DrugEnrichr/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="DrugEnrichronClick()">View on Site</a>
@@ -206,12 +242,24 @@
                 <p class="card-text">PubChem, an open chemistry database at the NIH, mostly contains small molecules, but also larger molecules such as nucleotides, carbohydrates, lipids, peptides, and chemically-modified macromolecules.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var PubChem_clicks = 0;
 
                     function PubChemonClick() {
-                      PubChem_clicks += 1;
-                      document.getElementById("PubChem_clicks").innerHTML = PubChem_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/PubChemclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("PubChem_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/PubChemclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("PubChem_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="PubChem" href="https://pubchem.ncbi.nlm.nih.gov/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="PubChemonClick()">View on Site</a>
@@ -222,7 +270,7 @@
             </div>
           </div>
           <div class="col">
-            <div class="card shadow-sm">
+            <div class="card shadow-sm" style="background-color: rgba(0, 0, 0, 0.2);">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/ARCHS4_logo.png" alt="Drugmonizome image" width="100%" height="100%">
               </div>
@@ -234,12 +282,24 @@
                 <p class="card-text">Drugmonizome is a web portal for querying sets of known drugs and computing significant biomedical terms that drugs in the set share.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var Drugmonizome_clicks = 0;
 
                     function DrugmonizomeonClick() {
-                      Drugmonizome_clicks += 1;
-                      document.getElementById("Drugmonizome_clicks").innerHTML = Drugmonizome_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/drugmonizomeclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("Drugmonizome_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/drugmonizomeclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("Drugmonizome_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="Drugmonizome" href="https://maayanlab.cloud/drugmonizome/#/TermSearch/Drug%20sets" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="DrugmonizomeonClick()">View on Site</a>
@@ -250,7 +310,7 @@
             </div>
           </div>
           <div class="col">
-            <div class="card shadow-sm">
+            <div class="card shadow-sm" style="background-color: rgba(0, 0, 0, 0.2);">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/LINCS_logo.gif" alt="LINCS data portal 2.0 image" width="100%" height="100%">
               </div>
@@ -262,17 +322,28 @@
                 <p class="card-text">LINCS is an NIH Common Fund program with the goal of generating a large-scale and comprehensive catalogue of perturbation-response signatures by utilizing a diverse collection of perturbations across many model systems and assay types.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var LINCS_clicks = 0;
-
                     function LINCSonClick() {
-                      LINCS_clicks += 1;
-                      document.getElementById("LINCS_clicks").innerHTML = LINCS_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/LINCS2click");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("LINCS2_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/LINCS2click");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("LINCS2_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="LINCS" href="http://lincsportal.ccs.miami.edu/signatures/home" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="LINCSonClick()">View on Site</a>
                   </div>
-                  <p>Clicks: <a id="LINCS_clicks">0</a></p>
+                  <p>Clicks: <a id="LINCS2_clicks">0</a></p>
                 </div>
               </div>
             </div>
@@ -291,12 +362,24 @@
                 <p class="card-text">Drugs.com is the largest, most widely visited, independent medicine information website available on the Internet. Drug.com's aim is to be the Internet’s most trusted resource for drug and related health information.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var Drugscom_clicks = 0;
 
                     function DrugscomonClick() {
-                      Drugscom_clicks += 1;
-                      document.getElementById("Drugscom_clicks").innerHTML = Drugscom_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/drugscomclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("Drugscom_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/drugscomclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("Drugscom_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="Drugscom" href="https://www.drugs.com/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="DrugscomonClick()">View on Site</a>
@@ -319,12 +402,24 @@
                 <p class="card-text">RxList is an online medical resource dedicated to offering detailed and current pharmaceutical information on brand and generic drugs.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var RxList_clicks = 0;
 
                     function RxListonClick() {
-                      RxList_clicks += 1;
-                      document.getElementById("RxList_clicks").innerHTML = RxList_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/rxlistclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("RxList_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/rxlistclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("RxList_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="RxList" href="https://www.rxlist.com/script/main/hp.asp" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="RxListonClick()">View on Site</a>
@@ -347,12 +442,23 @@
                 <p class="card-text">PharmGKB is a comprehensive resource that curates knowledge about the impact of genetic variation on drug response for clinicians and researchers.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var PharmGKB_clicks = 0;
-
                     function PharmGKBonClick() {
-                      PharmGKB_clicks += 1;
-                      document.getElementById("PharmGKB_clicks").innerHTML = PharmGKB_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/PharmGKBclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("PharmGKB_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/PharmGKBclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("PharmGKB_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="PharmGKB" href="https://www.pharmgkb.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="PharmGKBonClick()">View on Site</a>
@@ -375,12 +481,23 @@
                 <p class="card-text">Drugs@FDA includes information about drugs, including biological products, approved for human use in the United States, but does not include information about FDA-approved products regulated by the Center for Biologics Evaluation and Research.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var DrugsFDA_clicks = 0;
-
                     function DrugsFDAonClick() {
-                      DrugsFDA_clicks += 1;
-                      document.getElementById("DrugsFDA_clicks").innerHTML = DrugsFDA_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/DrugsFDAclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("DrugsFDA_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/DrugsFDAclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("DrugsFDA_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="DrugsFDA" href="https://www.accessdata.fda.gov/scripts/cder/daf/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="DrugsFDAonClick()">View on Site</a>
@@ -391,7 +508,7 @@
             </div>
           </div>
           <div class="col">
-            <div class="card shadow-sm">
+            <div class="card shadow-sm" style="background-color: rgba(0, 0, 0, 0.2);">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/IDG_LOGO.png" alt="Drug Central image" width="100%" height="100%">
               </div>
@@ -403,12 +520,23 @@
                 <p class="card-text">DrugCentral provides information on active ingredients chemical entities, pharmaceutical products, drug mode of action, indications, pharmacologic action.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var DrugCentral_clicks = 0;
-
                     function DrugCentralonClick() {
-                      DrugCentral_clicks += 1;
-                      document.getElementById("DrugCentral_clicks").innerHTML = DrugCentral_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/DrugCentralclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("DrugCentral_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/DrugCentralclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("DrugCentral_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="DrugCentral" href="https://drugcentral.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="DrugCentralonClick()">View on Site</a>
@@ -431,12 +559,24 @@
                 <p class="card-text">The International Union of Basic and Clinical Pharmacology (IUPHAR) / British Pharmacological Society (BPS) Guide to PHARMACOLOGY is an expert-curated resource of ligand-activity-target relationships, the majority of which come from high-quality pharmacological and medicinal chemistry literature.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var Guide_clicks = 0;
 
                     function GuideonClick() {
-                      Guide_clicks += 1;
-                      document.getElementById("Guide_clicks").innerHTML = Guide_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/guideclick");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("Guide_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/guideclick");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("Guide_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="Guide" href="https://www.guidetopharmacology.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="GuideonClick()">View on Site</a>
@@ -459,12 +599,24 @@
                 <p class="card-text">ZINC is a free database of commercially-available compounds for virtual screening. ZINC contains over 230 million purchasable compounds in ready-to-dock, 3D formats. ZINC also contains over 750 million purchasable compounds you can search for analogs.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <script type="text/javascript">
-                    var ZINC15_clicks = 0;
 
                     function ZINC15onClick() {
-                      ZINC15_clicks += 1;
-                      document.getElementById("ZINC15_clicks").innerHTML = ZINC15_clicks;
-                    };
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", "https://api.countapi.xyz/hit/maayanlab.github.io/ZINC15click");
+                      xhr.responseType = "json";
+                      xhr.onload = function() {
+                        document.getElementById("ZINC15_clicks").innerHTML = this.response.value;
+                      }
+                      xhr.send();
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "https://api.countapi.xyz/get/maayanlab.github.io/ZINC15click");
+                    xhr.responseType = "json";
+                    xhr.onload = function() {
+                      document.getElementById("ZINC15_clicks").innerHTML = this.response.value;
+                    }
+                    xhr.send();
                   </script>
                   <div class="btn-group">
                     <a id="ZINC15" href="https://zinc15.docking.org/" class="btn btn-sm btn-outline-primary" target="_blank"role="button" onClick="ZINC15onClick()">View on Site</a>
@@ -517,8 +669,7 @@
            ><i class="fas fa-envelope"></i
           ></a>
     </p>
-    <p class="mb-3">Links:</p>
-    <p class="mb-0"><a href="https://labs.icahn.mssm.edu/maayanlab/">Ma'ayan Laboratory of Computational Systems Biology</a></p>
+    <p class="mb-0">Prototype project developed by the CFDE Gene WG</p>
     <p class="mb-0"><a href="https://github.com/MaayanLab/cfde_gene_pages">Project's GitHub Repo</a></p>
     <p><a href="#">Back to top</a></p>
     <!--<p class="mb-0"><a href="https://commonfund.nih.gov/dataecosystem">NIH CFDE Program</a></p>
