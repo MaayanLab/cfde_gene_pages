@@ -189,7 +189,7 @@
               </select>
               <input id="myInput" type="text" name="Gene" placeholder="Gene or Drug" style="height: 33px; width: 200px">
               <input id="search" type="button" onclick="myFunction()" value="Search" style="height: 33px;">
-              <p class='pointer'>Gene Examples: <a id="ACE2" class="link" onclick="myFunction('ACE2','gene')">ACE2</a>, <a id="ULK4" class="link" onclick="myFunction('ULK4')">ULK4</a>, <a id="DPH7" class="link" onclick="myFunction('DPH7','gene')">DPH7</a>, <a id="KL" class="link" onclick="myFunction('KL','gene')">KL</a> Drug Examples: <a id="Imatinib" class="link" onclick="myFunction('imatinib','drug')">Imatinib</a>, <a id="Acetaminophen" class="link" onclick="myFunction('Acetaminophen','drug')">Acetaminophen</a>, <a id="Dexamethasone" class="link" onclick="myFunction('Dexamethasone','drug')">Dexamethasone</a></p>
+              <p class='pointer'>Gene Examples: <a id="ACE2" class="link" onclick="myFunction('ACE2','gene')">ACE2</a>, <a id="ULK4" class="link" onclick="myFunction('ULK4','gene')">ULK4</a>, <a id="DPH7" class="link" onclick="myFunction('DPH7','gene')">DPH7</a>, <a id="KL" class="link" onclick="myFunction('KL','gene')">KL</a> Drug Examples: <a id="Imatinib" class="link" onclick="myFunction('imatinib','drug')">Imatinib</a>, <a id="Acetaminophen" class="link" onclick="myFunction('Acetaminophen','drug')">Acetaminophen</a>, <a id="Dexamethasone" class="link" onclick="myFunction('Dexamethasone','drug')">Dexamethasone</a></p>
               <script type="text/javascript">
                 $(document).ready(function(){
                   $("#collapseExample").on("show.bs.collapse", function(){
@@ -251,11 +251,11 @@ function CFFunction() {
       }
     })
   } else {
-    $(".card").each(function() {
-      if ($(this).data("string").indexOf("CF") < 0){
+    /*$(".card").each(function() {
+      if ($(this).data("string").indexOf("CF") >= 0){
         $(this).show();
       }
-    })
+    })*/
   }
 }
 
@@ -265,11 +265,11 @@ function PSFunction() {
 
   // If the checkbox is checked, display the output text
   if (checkBox.checked == true){
-    $(".card").each(function() {
+    /*$(".card").each(function() {
       if ($(this).data("string").indexOf("PS") >= 0){
         $(this).show();
       }
-    })
+    })*/
   } else {
     $(".card").each(function() {
       if ($(this).data("string").indexOf("PS") >= 0){
@@ -284,11 +284,11 @@ function AgFunction() {
   var checkBox = document.getElementById("option3");
   // If the checkbox is checked, display the output text
   if (checkBox.checked == true){
-    $(".card").each(function() {
+    /*$(".card").each(function() {
       if ($(this).data("string").indexOf("Ag") >= 0){
         $(this).show();
       }
-    })
+    })*/
   } else {
     $(".card").each(function() {
       if ($(this).data("string").indexOf("Ag") >= 0){
@@ -655,9 +655,11 @@ function myFunction(gene_name, Stype) {
           var zinc15_h4 = document.getElementById('ZINC15_title'); //or grab it by tagname etc
           var zinc15_hyperlink = gene_search.link(`https://zinc15.docking.org/substances/search/?q=${GenName}`);
           zinc15_h4.innerHTML = `ZINC15: ` + zinc15_hyperlink;
+          CFFunction();
           Complete();
         } else {
           $('.zinc15_card').hide();
+          CFFunction();
           Complete();
         }
       })
@@ -1236,9 +1238,15 @@ function myFunction(gene_name, Stype) {
             var HGB_h4 = document.getElementById('HGB_title'); //or grab it by tagname etc
             var HGB_hyperlink = gene_search.link(`https://genome.ucsc.edu/cgi-bin/hgGene?hgg_gene=${transcript}&hgg_type=knownGene`);
             HGB_h4.innerHTML = `Human Genome Browser: ` + HGB_hyperlink;
+            CFFunction();
+            PSFunction();
+            AgFunction();
             Complete();
           } else{
             $('.hgb_card').hide();
+            CFFunction();
+            PSFunction();
+            AgFunction();
             Complete();
           }
         })
