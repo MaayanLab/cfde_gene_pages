@@ -593,16 +593,16 @@ function myFunction(gene_name, Stype) {
       })
 
       var Drugenrichr_a = document.getElementById('DrugEnrichr'); //or grab it by tagname etc
-      var Drugenrichr_url = `https://maayanlab.cloud/isitup/api?url=https://maayanlab.cloud/DrugEnrichr/#!drug=${gene_search}`;
+      var Drugenrichr_url = `https://maayanlab.cloud/isitup/api?url=https://maayanlab.cloud/DrugEnrichr/#find!drug=${gene_search}`;
       fetch(Drugenrichr_url)
       .then(function(response){
         return response.json();
       })
       .then(function(data){
         if (data.status === "yes"){
-          Drugenrichr_a.href = `https://maayanlab.cloud/DrugEnrichr/#!drug=${gene_search}`;
+          Drugenrichr_a.href = `https://maayanlab.cloud/DrugEnrichr/#find!drug=${gene_search}`;
           var Drugenrichr_h4 = document.getElementById('DrugEnrichr_title'); //or grab it by tagname etc
-          var Drugenrichr_hyperlink = gene_search.link(`https://maayanlab.cloud/DrugEnrichr/#!drug=${gene_search}`);
+          var Drugenrichr_hyperlink = gene_search.link(`https://maayanlab.cloud/DrugEnrichr/#find!drug=${gene_search}`);
           Drugenrichr_h4.innerHTML = `DrugEnrichr: ` + Drugenrichr_hyperlink;
         } else {
           $('.drugenrichr_card').hide();
