@@ -46,6 +46,8 @@
       /* This may not be needed depending on if you want to restrict the card size*/
       .card{
         max-width: 380px;
+        display:  inline-block;
+        margin-bottom: 8px;
       }
       /*.card-body{
         width: 100%;
@@ -55,6 +57,10 @@
       .card-footer{
         width: 100%;
         height: 37px;
+      }
+
+      .card-columns {
+        column-count: 3;
       }
 
       .card-image-wrapper {
@@ -237,8 +243,6 @@
     $(counter_name).html('Clicks: ' + data);
   }
 }*/
-var counterValue;
-
 function CFFunction() {
   // Get the checkbox
   var checkBox = document.getElementById("inlineCheckbox1");
@@ -410,6 +414,7 @@ autocomplete(document.getElementById("myInput"), genes);
 }*/
 
 function myFunction(gene_name, Stype) {
+  $('#collapseExample').collapse('hide');
   $("#loading").html('<div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div>');
   if (gene_name === undefined){
     var gene_search = document.getElementById("myInput").value;
@@ -1263,12 +1268,15 @@ function myFunction(gene_name, Stype) {
     </div>
   </section>
 
-  <div class="album py-5">
-    <div class="container">
+  <!--<div class="album py-5">-->
+    <div class="collapse" id="collapseExample">
+      <div class="container card-columns">
 
-      <div class="collapse" id="collapseExample">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-          <div class="col align-items-center">
+      
+        <!--<div class="card-columns">-->
+        <!--<div class=" row card-columns" data-masonry='{"percentPosition": true }'>-->
+        <!--<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+          <div class="col align-items-center">-->
             <div class="card shadow-sm GTEx_card" style="background-color: rgba(0, 0, 0, 0.2);" data-string="CF PS gene">
               <div class="card-image-wrapper-1">
                <img class="card-img-top img-fluid" src="CFDE_gene_page/test_img.png" alt="Gtex image" width="100%" height="100%">
@@ -1309,8 +1317,8 @@ function myFunction(gene_name, Stype) {
                 <!--<p>Clicks: <a id="Gte_clicks">0</a></p>-->
               </div>
             </div>
-          </div>
-          <div class="col">
+          <!--</div>
+          <div class="col">-->
             <div class="card shadow-sm pharos_card" style="background-color: rgba(0, 0, 0, 0.2);" data-string="CF Ag gene">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/IDG_LOGO.png" alt="IDG image" width="100%" height="100%">
@@ -1352,8 +1360,8 @@ function myFunction(gene_name, Stype) {
                 <!--<p>Clicks: <a id="Phar_clicks">0</a></p>-->
               </div>
             </div>
-          </div>
-          <div class="col">
+          <!--</div>
+          <div class="col">-->
             <div class="card shadow-sm harmonziome_card" style="background-color: rgba(0, 0, 0, 0.2);" data-string="CF Ag gene">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/IDG_LOGO.png" alt="IDG image" width="100%" height="100%">
@@ -1395,8 +1403,8 @@ function myFunction(gene_name, Stype) {
                 <!--<p>Clicks: <a id="Harm_clicks">0</a></p>-->
               </div>
             </div>
-          </div>
-          <div class="col align-items-center">
+          <!--</div>
+          <div class="col align-items-center">-->
             <div class="card shadow-sm LINCS_card" style="background-color: rgba(0, 0, 0, 0.2);" data-string="CF PS gene">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/LINCS_logo.gif" alt="LINCS image" width="100%" height="100%">
@@ -1438,9 +1446,9 @@ function myFunction(gene_name, Stype) {
                 <!--<p>Clicks: <a id="LINCS_clicks">0</a></p>-->
               </div>
             </div>
-          </div>
+          <!--</div>
 
-          <div class="col">
+          <div class="col">-->
             <div class="card shadow-sm metabolomics_card" style="background-color: rgba(0, 0, 0, 0.2);" data-string="CF PS gene">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/Metabolomics_logo.jpeg" alt="Metabolomics image" width="100%" height="100%">
@@ -1480,8 +1488,8 @@ function myFunction(gene_name, Stype) {
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col">
+          <!--</div>
+          <div class="col">-->
             <div class="card shadow-sm GlyGen_card" style="background-color: rgba(0, 0, 0, 0.2);" data-string="CF PS gene">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/Glygen_logo.jpeg" alt="GlyGen image" width="75%" height="75%">
@@ -1521,8 +1529,8 @@ function myFunction(gene_name, Stype) {
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col">
+          <!--</div>
+          <div class="col">-->
             <div class="card shadow-sm komp_card" style="background-color: rgba(0, 0, 0, 0.2);" data-string="CF PS gene">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/komp_logo.png" alt="KOMP image" width="100%" height="100%">
@@ -1562,9 +1570,9 @@ function myFunction(gene_name, Stype) {
                 </div>
               </div>
             </div>
-          </div>
+          <!--</div>
 
-          <div class="col">
+          <div class="col">-->
             <div class="card shadow-sm UDN_card" style="background-color: rgba(0, 0, 0, 0.2);" data-string="CF PS gene">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/UDN_logo.jpeg" alt="UDN image" width="100%" height="100%">
@@ -1604,9 +1612,9 @@ function myFunction(gene_name, Stype) {
                 </div>
               </div>
             </div>
-          </div>
+          <!--</div>
 
-          <div class="col">
+          <div class="col">-->
             <div class="card shadow-sm ARCHS4_card" style="background-color: rgba(0, 0, 0, 0.2);" data-string="CF PS gene">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/ARCHS4_logo.png" alt="ARCHS4 image" width="100%" height="100%">
@@ -1646,8 +1654,8 @@ function myFunction(gene_name, Stype) {
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col">
+          <!--</div>
+          <div class="col">-->
             <div class="card shadow-sm NCBI_card" data-string="gene Ag">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/NCBI_logo.png" alt="NCBI image" width="100%" height="100%">
@@ -1687,8 +1695,8 @@ function myFunction(gene_name, Stype) {
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col">
+          <!--</div>
+          <div class="col">-->
             <div class="card shadow-sm GeneCards_card" data-string="gene Ag">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/gc_logo.png" alt="Gene Cards image" width="100%" height="100%">
@@ -1728,8 +1736,8 @@ function myFunction(gene_name, Stype) {
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col">
+          <!--</div>
+          <div class="col">-->
             <div class="card shadow-sm enrichr_card" style="background-color: rgba(0, 0, 0, 0.2);" data-string="gene CF Ag">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/enrichr_logo.png" alt="Enrichr image" width="100%" height="100%">
@@ -1769,8 +1777,8 @@ function myFunction(gene_name, Stype) {
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col">
+          <!--</div>
+          <div class="col">-->
             <div class="card shadow-sm ENCODE_card" data-string="gene PS">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/ENCODE_logo.jpeg" alt="Encode image" width="100%" height="100%">
@@ -1810,8 +1818,8 @@ function myFunction(gene_name, Stype) {
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col">
+          <!--</div>
+          <div class="col">-->
             <div class="card shadow-sm uniprot_card" data-string="gene Ag">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/uniprot_logo.png" alt="Uniprot image" width="100%" height="100%">
@@ -1851,8 +1859,8 @@ function myFunction(gene_name, Stype) {
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col">
+          <!--</div>
+          <div class="col">-->
             <div class="card shadow-sm marrvel_card" data-string="gene Ag">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/marrvel_logo.webp" alt="MARRVEL image" width="100%" height="100%">
@@ -1892,9 +1900,9 @@ function myFunction(gene_name, Stype) {
                 </div>
               </div>
             </div>
-          </div>
+          <!--</div>
           
-          <div class="col">
+          <div class="col">-->
             <div class="card shadow-sm biogps_card" data-string="gene PS">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/biogps_logo.jpeg" alt="BioGPS image" width="100%" height="100%">
@@ -1933,8 +1941,8 @@ function myFunction(gene_name, Stype) {
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col">
+          <!--</div>
+          <div class="col">-->
             <div class="card shadow-sm hgnc_card" data-string="gene Ag">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/hgnc_logo.jpeg" alt="HGNC image" width="100%" height="100%">
@@ -1972,8 +1980,8 @@ function myFunction(gene_name, Stype) {
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col">
+          <!--</div>
+          <div class="col">-->
             <div class="card shadow-sm ensembl_card" data-string="gene PS">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/Ensembl_logo.png" alt="Ensembl image" width="100%" height="100%">
@@ -2012,8 +2020,8 @@ function myFunction(gene_name, Stype) {
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col">
+          <!--</div>
+          <div class="col">-->
             <div class="card shadow-sm bgee_card" data-string="gene Ag">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/Bgee_logo.png" alt="Bgee image" width="100%" height="100%">
@@ -2052,8 +2060,8 @@ function myFunction(gene_name, Stype) {
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col">
+          <!--</div>
+          <div class="col">-->
             <div class="card shadow-sm cosmic_card" data-string="gene PS">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/COSMIC_logo.png" alt="COSMIC image" width="100%" height="100%">
@@ -2092,8 +2100,8 @@ function myFunction(gene_name, Stype) {
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col">
+          <!--</div>
+          <div class="col">-->
             <div class="card shadow-sm ClinGen_card" data-string="gene PS">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/ClinGen_logo.png" alt="ClinGen image" width="100%" height="100%">
@@ -2132,8 +2140,8 @@ function myFunction(gene_name, Stype) {
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col">
+          <!--</div>
+          <div class="col">-->
             <div class="card shadow-sm gwas_card" data-string="gene PS">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/GWAS_logo.jpeg" alt="GWAS image" width="100%" height="100%">
@@ -2172,8 +2180,8 @@ function myFunction(gene_name, Stype) {
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col">
+          <!--</div>
+          <div class="col">-->
             <div class="card shadow-sm PDBe_card" data-string="gene PS">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/PDBe_logo.png" alt="PDBe image" width="100%" height="100%">
@@ -2211,8 +2219,8 @@ function myFunction(gene_name, Stype) {
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col">
+          <!--</div>
+          <div class="col">-->
             <div class="card shadow-sm pdb_card" data-string="gene PS">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/PDB_logo.png" alt="PDB image" width="100%" height="100%">
@@ -2251,8 +2259,8 @@ function myFunction(gene_name, Stype) {
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col">
+          <!--</div>
+          <div class="col">-->
             <div class="card shadow-sm geneva_card" style="background-color: rgba(0, 0, 0, 0.2);" data-string="CF gene Ag">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/GENEVA_logo.png" alt="GENEVA image" width="100%" height="100%">
@@ -2291,8 +2299,8 @@ function myFunction(gene_name, Stype) {
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col">
+          <!--</div>
+          <div class="col">-->
             <div class="card shadow-sm mgi_card" data-string="gene PS">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/MGI_logo.jpeg" alt="MGI image" width="100%" height="100%">
@@ -2331,8 +2339,8 @@ function myFunction(gene_name, Stype) {
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col">
+          <!--</div>
+          <div class="col">-->
             <div class="card shadow-sm omim_card" data-string="gene PS">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/OMIM_logo.png" alt="OMIM image" width="100%" height="100%">
@@ -2371,8 +2379,8 @@ function myFunction(gene_name, Stype) {
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col">
+          <!--</div>
+          <div class="col">-->
             <div class="card shadow-sm go_card" data-string="gene PS">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/GO_logo.jpeg" alt="Gene Ontology image" width="100%" height="100%">
@@ -2411,8 +2419,8 @@ function myFunction(gene_name, Stype) {
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col">
+          <!--</div>
+          <div class="col">-->
             <div class="card shadow-sm reactome_card" style="background-color: rgba(0, 0, 0, 0.2);" data-string="gene CF PS">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/Reactome_logo.png" alt="Reactome image" width="100%" height="100%">
@@ -2450,8 +2458,8 @@ function myFunction(gene_name, Stype) {
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col">
+          <!--</div>
+          <div class="col">-->
             <div class="card shadow-sm kegg_card" data-string="gene PS">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/KEGG_logo.jpeg" alt="KEGG image" width="100%" height="100%">
@@ -2490,8 +2498,8 @@ function myFunction(gene_name, Stype) {
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col">
+          <!--</div>
+          <div class="col">-->
             <div class="card shadow-sm monarch_card" data-string="gene PS">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/Monarch_logo.png" alt="Monarch Initiative image" width="100%" height="100%">
@@ -2530,8 +2538,8 @@ function myFunction(gene_name, Stype) {
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col">
+          <!--</div>
+          <div class="col">-->
             <div class="card shadow-sm hgb_card" data-string="gene PS">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/HGB_logo.png" alt="Human Genome Browser image" width="100%" height="100%">
@@ -2570,8 +2578,8 @@ function myFunction(gene_name, Stype) {
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col">
+          <!--</div>
+          <div class="col">-->
             <div class="card shadow-sm pubchem_card" data-string="drug">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/PubChem_logo.png" alt="PubChem image" width="100%" height="100%">
@@ -2610,9 +2618,9 @@ function myFunction(gene_name, Stype) {
                 </div>
               </div>
             </div>
-          </div>
+          <!--</div>
 
-          <div class="col">
+          <div class="col">-->
             <div class="card shadow-sm chembl_card" style="background-color: rgba(0, 0, 0, 0.2);" data-string="CF drug">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/chEMBL_logo.png" alt="ChEMBL image" width="100%" height="100%">
@@ -2651,8 +2659,8 @@ function myFunction(gene_name, Stype) {
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col">
+          <!--</div>
+          <div class="col">-->
             <div class="card shadow-sm guide_card" data-string="drug">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/Guide_logo.png" alt="Guide to Pharmacology image" width="100%" height="100%">
@@ -2691,9 +2699,9 @@ function myFunction(gene_name, Stype) {
                 </div>
               </div>
             </div>
-          </div>
+          <!--</div>
 
-          <div class="col">
+          <div class="col">-->
             <div class="card shadow-sm drugbank_card" data-string="drug">
               <div class="card-image-wrapper-1">
                <img class="card-img-top img-fluid" src="CFDE_gene_page/DrugBank_logo.png" alt="DrugBank image" width="100%" height="100%">
@@ -2732,8 +2740,8 @@ function myFunction(gene_name, Stype) {
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col">
+          <!--</div>
+          <div class="col">-->
             <div class="card shadow-sm drugmonizome_card" style="background-color: rgba(0, 0, 0, 0.2);" data-string="CF drug">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/ARCHS4_logo.png" alt="Drugmonizome image" width="100%" height="100%">
@@ -2772,8 +2780,8 @@ function myFunction(gene_name, Stype) {
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col">
+          <!--</div>
+          <div class="col">-->
             <div class="card shadow-sm drugenrichr_card" style="background-color: rgba(0, 0, 0, 0.2);" data-string="CF drug">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/DrugEnrichr_logo.png" alt="DrugEnrichr image" width="100%" height="100%">
@@ -2812,8 +2820,8 @@ function myFunction(gene_name, Stype) {
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col">
+          <!--</div>
+          <div class="col">-->
             <div class="card shadow-sm drugscom_card" data-string="drug">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/Drugscom_logo.jpeg" alt="
@@ -2853,8 +2861,8 @@ function myFunction(gene_name, Stype) {
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col">
+          <!--</div>
+          <div class="col">-->
             <div class="card shadow-sm rxlist_card" data-string="drug">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/RxList_logo.png" alt="RxList image" width="100%" height="100%">
@@ -2893,7 +2901,7 @@ function myFunction(gene_name, Stype) {
                 </div>
               </div>
             </div>
-          </div>
+         <!-- </div>-->
           <!--<div class="col">
             <div class="card shadow-sm drugcentral_card" style="background-color: rgba(0, 0, 0, 0.2);" data-string="CF drug">
               <div class="card-image-wrapper-1">
@@ -2922,7 +2930,7 @@ function myFunction(gene_name, Stype) {
               </div>
             </div>
           </div>-->
-          <div class="col">
+          <!--<div class="col">-->
             <div class="card shadow-sm zinc15_card" data-string="drug">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/ZINC15_logo.svg" alt="ZINC15 image" width="100%" height="100%">
