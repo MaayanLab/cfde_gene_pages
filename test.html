@@ -643,7 +643,6 @@ function myFunction(gene_name, Stype) {
       return response.json();
     })
     .then(function(data) {
-      console.log(data);
       if ($.isArray(data.hits)){
         if (data.total > 0){
           $(".card").each(function() {
@@ -712,6 +711,32 @@ function myFunction(gene_name, Stype) {
             $('.pharos_card').hide();
           }
         })
+
+        $.ajax({
+          url:"https://appyters.maayanlab.cloud/Gene_Centric_GEO_Reverse_Search/",
+          type:"POST",
+          data:{
+            Accept: "application/json",
+            species_input: "Human",
+            human_gene: gene_search,
+            mouse_gene: gene_search
+          },
+          success: function(data2){
+            console.log("https://appyters.maayanlab.cloud/Gene_Centric_GEO_Reverse_Search/"+data2.session_id)
+          },
+          dataType: "json",
+        })
+        /*$.post("https://appyters.maayanlab.cloud/Gene_Centric_GEO_Reverse_Search/",
+          {
+            Accept: "application/json",
+            species_input: "Human",
+            human_gene: gene_search,
+          },
+          contentType: "application/json",
+          dataType: "json",
+          function(return1){
+            console.log("Data: " + return1);
+          });*/
 
         var GlyGen_a = document.getElementById('GlyGen'); //or grab it by tagname etc
         var GlyGen_url = `https://maayanlab.cloud/isitup/api?url=https://www.glygen.org/protein/${uniprot_qb}`;
