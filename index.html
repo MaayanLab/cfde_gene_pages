@@ -1220,22 +1220,6 @@ function myFunction(gene_name, Stype) {
           },
           dataType: "json",
         })
-        /*
-        var GEO_search_url_test = `https://maayanlab.cloud/isitup/api?url=${GEO_search_url}`;
-        fetch(GEO_search_url_test)
-        .then(function(response){
-          return response.json();
-        })
-        .then(function(data){
-          if (data.status === "yes"){
-            GEO_search_a.href = GEO_search_url;
-            var GEO_search_h4 = document.getElementById('Monarch_title'); //or grab it by tagname etc
-            var GEO_search_hyperlink = gene_search.link(GEO_search_url);
-            GEO_search_h4.innerHTML = `Monarch Initiative: ` + GEO_search_hyperlink;
-          } else{
-            $('.GEO_search_card').hide();
-          }
-        })*/
         
         var HGB_a = document.getElementById('HGB'); //or grab it by tagname etc
         var hgb_url = `https://maayanlab.cloud/isitup/api?url=https://genome.ucsc.edu/cgi-bin/hgGene?hgg_gene=${transcript}&hgg_type=knownGene`;
@@ -2313,7 +2297,7 @@ function myFunction(gene_name, Stype) {
               </div>
             </div>
 
-            <div class="card shadow-sm GEO_search_card" data-string="gene">
+            <div class="card shadow-sm GEO_search_card" style="background-color: rgba(0, 0, 0, 0.2);" data-string="gene PS">
               <div class="card-image-wrapper-1">
                 <img class="card-img-top img-fluid" src="CFDE_gene_page/ARCHS4_logo.png" alt="Maayan Lab image" width="100%" height="100%">
               </div>
