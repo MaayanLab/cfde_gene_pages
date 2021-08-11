@@ -170,15 +170,18 @@
   <section class="py-1 text-center container">
     <div class="row py-lg-5">
       <div class="col-lg-10 col-md-8 mx-auto">
+        <!-- Title and Description -->
         <h1 class="fw-light">Gene and Drug Landing Page Aggregator</h1>
         <p class="lead text-muted">This page has links to 35 gene and 14 drug repositories that provide direct links to gene and drug landing pages. You can search by gene or drug name and then choose the sites that contain knowledge about your gene or drug. Common Fund program cards are colored in grey.</p>
         <p>
           <form id="frm1" autocomplete="off" action="/action_page.php" method="GET"> 
             <div class="autocomplete mx-auto d-block" style="width:100%; height: 33px;">
+              <!-- Gene and Drug Dropdown -->
               <select id="gene_drug_select" style="height: 33px;">
                 <option value="Gene">Gene</option>
                 <option value="Drug">Drug</option>
               </select>
+              <!-- Example Gene and Drugs -->
               <input id="myInput" type="text" name="Gene" placeholder="Gene or Drug" style="height: 33px; width: 200px">
               <input id="search" type="button" onclick="myFunction()" value="Search" style="height: 33px;">
               <p class='pointer'>Gene Examples: <a id="ACE2" class="link" onclick="myFunction('ACE2','gene')">ACE2</a>, <a id="ULK4" class="link" onclick="myFunction('ULK4','gene')">ULK4</a>, <a id="DPH7" class="link" onclick="myFunction('DPH7','gene')">DPH7</a>, <a id="KL" class="link" onclick="myFunction('KL','gene')">KL</a> Drug Examples: <a id="Imatinib" class="link" onclick="myFunction('imatinib','drug')">Imatinib</a>, <a id="Acetaminophen" class="link" onclick="myFunction('Acetaminophen','drug')">Acetaminophen</a>, <a id="Dexamethasone" class="link" onclick="myFunction('Dexamethasone','drug')">Dexamethasone</a></p>
@@ -191,6 +194,7 @@
               </script>
             </div>
           </form>
+          <!-- Filters -->
           <p style="height: 10px;"><div class="form-check form-check-inline">
             <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" onclick="CFFunction()">
             <label class="form-check-label" for="inlineCheckbox1">NIH CF Supported Only</label>
@@ -207,6 +211,7 @@
 
           <script>
 
+// Common Fund Filter 
 function CFFunction() {
   // Get the checkbox
   var checkBox = document.getElementById("inlineCheckbox1");
@@ -218,26 +223,16 @@ function CFFunction() {
         $(this).hide();
       }
     })
-  } else {
-    /*$(".card").each(function() {
-      if ($(this).data("string").indexOf("CF") >= 0){
-        $(this).show();
-      }
-    })*/
   }
 }
 
+// Primary Source Filter 
 function PSFunction() {
   // Get the checkbox
   var checkBox = document.getElementById("option2");
 
   // If the checkbox is checked, display the output text
   if (checkBox.checked == true){
-    /*$(".card").each(function() {
-      if ($(this).data("string").indexOf("PS") >= 0){
-        $(this).show();
-      }
-    })*/
   } else {
     $(".card").each(function() {
       if ($(this).data("string").indexOf("PS") >= 0){
@@ -247,16 +242,12 @@ function PSFunction() {
   }
 }
 
+// Aggregator Filter
 function AgFunction() {
   // Get the checkbox
   var checkBox = document.getElementById("option3");
   // If the checkbox is checked, display the output text
   if (checkBox.checked == true){
-    /*$(".card").each(function() {
-      if ($(this).data("string").indexOf("Ag") >= 0){
-        $(this).show();
-      }
-    })*/
   } else {
     $(".card").each(function() {
       if ($(this).data("string").indexOf("Ag") >= 0){
@@ -365,36 +356,45 @@ function autocomplete(inp, arr) {
   });
 }
 
-/*An array containing all the country names in the world:*/
+/*An array containing all the gene names:*/
 var genes = GENES;
 
-/*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
+/*initiate the autocomplete function on the "myInput" element, and pass along the genes array as possible autocomplete values:*/
 autocomplete(document.getElementById("myInput"), genes);
 
-
+/* Search feature */
 function myFunction(gene_name, Stype) {
+  /* hide all the cards */
   $('#collapseExample').collapse('hide');
+  /* Show loading circle */
   $("#loading").html('<div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div>');
+  // set gene_search equal to the searched term
   if (gene_name === undefined){
     var gene_search = document.getElementById("myInput").value;
   }else{
     var gene_search = gene_name;
+    // make the example search appear in the search bar
     document.getElementById("myInput").value = gene_name;
   }
   if(Stype === undefined){
+    // set type equal to the gene and drug dropdown selection 
     var type = document.getElementById('gene_drug_select').value;
   } else if(Stype === 'gene'){
+    // set the gene and drug dropdown selection to Gene
     document.getElementById('gene_drug_select').value = "Gene";
     var type = "Gene";
   } else{
+    // set the gene and drug dropdown selection to Drug
     document.getElementById('gene_drug_select').value = "Drug";
     var type = "Drug";
   }
   if(type === "Drug"){
     var drug_url = `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/${gene_search}/synonyms/JSON`;
 
+    // Send a GET request to the drug API
     fetch(drug_url)
     .then(function(drug_response){
+      // If GET request fails, hide all the drug cards
       if(!drug_response.ok){
         $(".card").each(function() {
           if ($(this).data("string").indexOf("drug") >= 0){
@@ -403,6 +403,7 @@ function myFunction(gene_name, Stype) {
         })
       }else{
         $(".card").each(function() {
+          //hide all non-drug cards
           if ($(this).data("string").indexOf("drug") < 0){
             $(this).hide();
           } else{
@@ -414,7 +415,7 @@ function myFunction(gene_name, Stype) {
     })
     .then(function(data){
       var info = data.InformationList.Information[0];
-
+      // pull some of the drug synonyms from the API response
       CID = info.CID;
       find_CHEMBL = $.grep(info.Synonym, function (item, index) {
           return item.trim().match(/^CHEMBL/);
