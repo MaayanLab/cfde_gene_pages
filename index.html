@@ -699,7 +699,11 @@ function myFunction(gene_name, Stype) {
           uniprot_qb = undefined
           MGI = undefined
         }
-        transcript= data.exac.transcript;
+        if (data.exac !== undefined) {
+          transcript= data.exac.transcript;
+        } else {
+          transcript = undefined
+        }
         entrezgene=data.entrezgene;
 
         var gtex_a = document.getElementById('GTEx'); //or grab it by tagname etc
@@ -1297,11 +1301,17 @@ function myFunction(gene_name, Stype) {
         })
         
         var HGB_a = document.getElementById('HGB'); //or grab it by tagname etc
-        var hgb_url = `https://maayanlab.cloud/isitup/api?url=https://genome.ucsc.edu/cgi-bin/hgGene?hgg_gene=${transcript}&hgg_type=knownGene`;
-        fetch(hgb_url)
-        .then(function(response){
-          return response.json();
-        })
+        var hgb_data
+        if (transcript !== undefined) {
+          var hgb_url = `https://maayanlab.cloud/isitup/api?url=https://genome.ucsc.edu/cgi-bin/hgGene?hgg_gene=${transcript}&hgg_type=knownGene`;
+          hgb_data = fetch(hgb_url)
+          .then(function(response){
+            return response.json();
+          })
+        } else {
+          hgb_data = Promise.resolve({ status: 'no' })
+        }
+        hgb_data
         .then(function(data){
           if (data.status === "yes"){
             HGB_a.href = `https://genome.ucsc.edu/cgi-bin/hgGene?hgg_gene=${transcript}&hgg_type=knownGene`;
