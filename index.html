@@ -692,8 +692,13 @@ function myFunction(gene_name, Stype) {
         ensembl_id = data.ensembl.gene;
         HGNC = data.HGNC;
         MIM = data.MIM;
-        uniprot_qb = data.pantherdb.uniprot_kb;
-        MGI = data.pantherdb.ortholog[0].MGI;
+        if (data.pantherdb !== undefined) {
+          uniprot_qb = data.pantherdb.uniprot_kb;
+          MGI = data.pantherdb.ortholog[0].MGI;
+        } else {
+          uniprot_qb = undefined
+          MGI = undefined
+        }
         transcript= data.exac.transcript;
         entrezgene=data.entrezgene;
 
@@ -715,11 +720,17 @@ function myFunction(gene_name, Stype) {
         })
 
         var pharos_a = document.getElementById('Pharos'); //or grab it by tagname etc
-        var pharos_url = `https://maayanlab.cloud/isitup/api?url=https://pharos.nih.gov/targets/${uniprot_qb}`;
-        fetch(pharos_url)
-        .then(function(response){
-          return response.json();
-        })
+        var pharos_data
+        if (uniprot_qb !== undefined) {
+          var pharos_url = `https://maayanlab.cloud/isitup/api?url=https://pharos.nih.gov/targets/${uniprot_qb}`;
+          pharos_data = fetch(pharos_url)
+            .then(function(response){
+              return response.json();
+            })
+        } else {
+          pharos_data = Promise.resolve({ status: 'no' })
+        }
+        pharos_data
         .then(function(data){
           if (data.status === "yes"){
             pharos_a.href = `https://pharos.nih.gov/targets/${uniprot_qb}`;
@@ -783,11 +794,17 @@ function myFunction(gene_name, Stype) {
         })
 
         var komp_a = document.getElementById('komp'); //or grab it by tagname etc
-        var komp_url = `https://maayanlab.cloud/isitup/api?url=https://www.mousephenotype.org/data/genes/MGI:${MGI}`;
-        fetch(komp_url)
-        .then(function(response){
-          return response.json();
-        })
+        var komp_data
+        if (MGI !== undefined) {
+          var komp_url = `https://maayanlab.cloud/isitup/api?url=https://www.mousephenotype.org/data/genes/MGI:${MGI}`;
+          komp_data = fetch(komp_url)
+          .then(function(response){
+            return response.json();
+          })
+        } else {
+          komp_data = Promise.resolve({ status: 'no' })
+        }
+        komp_data
         .then(function(data){
           if (data.status === "yes"){
             komp_a.href = `https://www.mousephenotype.org/data/genes/MGI:${MGI}`;
@@ -1107,11 +1124,17 @@ function myFunction(gene_name, Stype) {
         })
 
         var MGI_a = document.getElementById('MGI'); //or grab it by tagname etc
-        var mgi_url = `https://maayanlab.cloud/isitup/api?url=http://www.informatics.jax.org/marker/MGI:${MGI}`;
-        fetch(mgi_url)
-        .then(function(response){
-          return response.json();
-        })
+        var mgi_data
+        if (MGI !== undefined) {
+          var mgi_url = `https://maayanlab.cloud/isitup/api?url=http://www.informatics.jax.org/marker/MGI:${MGI}`;
+          mgi_data = fetch(mgi_url)
+          .then(function(response){
+            return response.json();
+          })
+        } else {
+          mgi_data = Promise.resolve({ status: 'no' })
+        }
+        mgi_data
         .then(function(data){
           if (data.status === "yes"){
             MGI_a.href = `http://www.informatics.jax.org/marker/MGI:${MGI}`;
