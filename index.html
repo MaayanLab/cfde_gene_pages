@@ -23,7 +23,14 @@
 
     <!-- Bootstrap core CSS -->
   <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
-
+    <style>
+      body {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+        min-width: 540px;
+      }
+    </style>
     <style>
       .default {cursor: default;}
       .pointer {cursor: pointer;}
@@ -165,7 +172,7 @@
   </div>
 </header>
 
-<main>
+<main class="flex-grow-1">
 
   <section class="py-1 text-center container">
     <div class="row py-lg-5">
@@ -3065,7 +3072,7 @@ function myFunction(gene_name, Stype) {
 
 </main>
 
-<footer class="text-muted py-5" style="background-color: rgba(0, 0, 0, 0.1);">
+<footer class="footer text-muted py-5" style="background-color: rgba(0, 0, 0, 0.1);">
   <div class="container">
     <p class="float-end mb-1">
       <a
