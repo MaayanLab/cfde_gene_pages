@@ -23,7 +23,14 @@
 
     <!-- Bootstrap core CSS -->
   <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
-
+    <style>
+      body {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+        min-width: 540px;
+      }
+    </style>
     <style>
       .default {cursor: default;}
       .pointer {cursor: pointer;}
@@ -165,8 +172,7 @@
   </div>
 </header>
 
-<main>
-
+<main class="flex-grow-1">
   <section class="py-1 text-center container">
     <div class="row py-lg-5">
       <div class="col-lg-10 col-md-8 mx-auto">
@@ -175,38 +181,50 @@
         <p class="lead text-muted">This page has links to 35 gene and 14 drug repositories that provide direct links to gene and drug landing pages. You can search by gene or drug name and then choose the sites that contain knowledge about your gene or drug. Common Fund program cards are colored in grey.</p>
         <p>
           <form id="frm1" autocomplete="off" action="/action_page.php" method="GET"> 
-            <div class="autocomplete mx-auto d-block" style="width:100%; height: 33px;">
-              <!-- Gene and Drug Dropdown -->
-              <select id="gene_drug_select" style="height: 33px;">
-                <option value="Gene">Gene</option>
-                <option value="Drug">Drug</option>
-              </select>
-              <!-- Example Gene and Drugs -->
-              <input id="myInput" type="text" name="Gene" placeholder="Gene or Drug" style="height: 33px; width: 200px">
-              <input id="search" type="button" onclick="myFunction()" value="Search" style="height: 33px;">
-              <p class='pointer'>Gene Examples: <a id="ACE2" class="link" onclick="myFunction('ACE2','gene')">ACE2</a>, <a id="ULK4" class="link" onclick="myFunction('ULK4','gene')">ULK4</a>, <a id="DPH7" class="link" onclick="myFunction('DPH7','gene')">DPH7</a>, <a id="KL" class="link" onclick="myFunction('KL','gene')">KL</a> Drug Examples: <a id="Imatinib" class="link" onclick="myFunction('imatinib','drug')">Imatinib</a>, <a id="Acetaminophen" class="link" onclick="myFunction('Acetaminophen','drug')">Acetaminophen</a>, <a id="Dexamethasone" class="link" onclick="myFunction('Dexamethasone','drug')">Dexamethasone</a></p>
-              <script type="text/javascript">
-                $(document).ready(function(){
-                  $("#collapseExample").on("show.bs.collapse", function(){
-                    $("#loading").html('');
+            <div class="form-group">
+              <div class="autocomplete mx-auto d-block" style="width:100%; height: 33px;">
+                <!-- Gene and Drug Dropdown -->
+                <select id="gene_drug_select" style="height: 33px;">
+                  <option value="Gene">Gene</option>
+                  <option value="Drug">Drug</option>
+                </select>
+                <!-- Example Gene and Drugs -->
+                <input id="myInput" type="text" name="Gene" placeholder="Gene or Drug" style="height: 33px; width: 200px">
+                <input id="search" type="button" onclick="myFunction()" value="Search" style="height: 33px;">
+                <script type="text/javascript">
+                  $(document).ready(function(){
+                    $("#collapseExample").on("show.bs.collapse", function(){
+                      $("#loading").html('');
+                    });
                   });
-                });
-              </script>
+                </script>
+            </div>
+            <div class="form-group">
+              <div class="d-flex flex-wrap align-content-around justify-content-center">
+                <div class="mx-1 text-nowrap">
+                  Gene Examples: <a id="ACE2" href="javascript:myFunction('ACE2','gene')">ACE2</a>, <a id="ULK4" href="javascript:myFunction('ULK4','gene')">ULK4</a>, <a id="DPH7" href="javascript:myFunction('DPH7','gene')">DPH7</a>, <a id="KL" href="javascript:myFunction('KL','gene')">KL</a>
+                </div>
+                <div class="mx-1 text-nowrap">
+                  Drug Examples: <a id="Imatinib" href="javascript:myFunction('imatinib','drug')">Imatinib</a>, <a id="Acetaminophen" href="javascript:myFunction('Acetaminophen','drug')">Acetaminophen</a>, <a id="Dexamethasone" href="javascript:myFunction('Dexamethasone','drug')">Dexamethasone</a>
+                </div>
+              </div>
+            </div>
+            <!-- Filters -->
+            <div class="form-group">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" onclick="CFFunction()">
+                <label class="form-check-label" for="inlineCheckbox1">NIH CF Supported Only</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="option2" value="option2" onclick="PSFunction()" checked>
+                <label class="form-check-label" for="inlineRadio1">Primary Source</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="option3" value="option3" onclick="AgFunction()" checked>
+                <label class="form-check-label" for="inlineRadio2">Aggregator</label>
+              </div>
             </div>
           </form>
-          <!-- Filters -->
-          <p style="height: 10px;"><div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" onclick="CFFunction()">
-            <label class="form-check-label" for="inlineCheckbox1">NIH CF Supported Only</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="option2" value="option2" onclick="PSFunction()" checked>
-            <label class="form-check-label" for="inlineRadio1">Primary Source</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="option3" value="option3" onclick="AgFunction()" checked>
-            <label class="form-check-label" for="inlineRadio2">Aggregator</label>
-          </div></p>
           <p id="loading"></p>
 
           <script>
@@ -3065,7 +3083,7 @@ function myFunction(gene_name, Stype) {
 
 </main>
 
-<footer class="text-muted py-5" style="background-color: rgba(0, 0, 0, 0.1);">
+<footer class="footer text-muted py-5" style="background-color: rgba(0, 0, 0, 0.1);">
   <div class="container">
     <p class="float-end mb-1">
       <a
