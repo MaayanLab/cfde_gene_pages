@@ -1,0 +1,33 @@
+{
+  "name": "cfde_gene_pages",
+  "version": "1.0.0",
+  "description": "Gene and Drug Landing Page Aggregator",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MaayanLab/cfde_gene_pages.git"
+  },
+  "author": "Ma'ayan Lab",
+  "license": "CC-BY-NC-SA-4.0",
+  "bugs": {
+    "url": "https://github.com/MaayanLab/cfde_gene_pages/issues"
+  },
+  "homepage": "https://github.com/MaayanLab/cfde_gene_pages#readme",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.4",
+    "@fortawesome/free-brands-svg-icons": "^5.15.4",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "@fortawesome/react-fontawesome": "^0.1.15",
+    "bootstrap": "^5.1.0",
+    "next": "^11.1.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-select": "^4.3.1"
+  }
+}
