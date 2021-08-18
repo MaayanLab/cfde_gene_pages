@@ -1079,7 +1079,7 @@ const manifest = [
 
 // Remove `false` entries so the key does not appear with `in` operator
 for (const item of manifest) {
-  for (const tag of item.tags) {
+  for (const tag in item.tags) {
     if (item.tags[tag] === false) delete item.tags[tag]
   }
 }
