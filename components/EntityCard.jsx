@@ -1,5 +1,12 @@
 import React from "react"
 import callable from '@/utils/callable'
+import memo from "@/utils/memo"
+
+const isitup = memo(async (url) => {
+  const isitup_res = await fetch(`https://maayanlab.cloud/isitup/api?url=${encodeURIComponent(url)}`)
+  const { status } = await isitup_res.json()
+  return status
+})
 
 export default function EntityCard(props) {
   const [clicks, setClicks] = React.useState()
@@ -12,9 +19,15 @@ export default function EntityCard(props) {
     } else {
       setHidden(true)
       try {
-        setClickurl(await callable(props.clickurl)(props.search))
+        const url = await callable(props.clickurl)(props.search)
+        if (typeof url !== 'string') throw new Error(`${props.name}: url is not a string`)
+        const status = await isitup(url)
+        if (status !== 'yes') throw new Error(`${props.name}: isitup returned ${status}`)
+        setClickurl(url)
         setHidden(false)
-      } catch (e) {}
+      } catch (e) {
+        console.warn(`${props.name} clickurl had error: ${e}`)
+      }
     }
   }, [props.search])
   if (hidden) return null
