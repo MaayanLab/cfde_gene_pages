@@ -39,23 +39,28 @@ export async function getStaticProps({ params: { entity, search } }) {
   if (!(entity in entities)) {
     return { notFound: true }
   }
-  const manifest = []
-  for (const item of (await import('@/manifest')).default) {
-    if (!(entity in item.tags)) continue
-    try {
-      const resolved_item = { ...item }
-      delete resolved_item.countapi
-      delete resolved_item.clickurl
-      resolved_item.clicks = await item.countapi.get()
-      resolved_item.resolved_url = await callable(item.clickurl)(search)
-      if (typeof resolved_item.resolved_url !== 'string') throw new Error(`${item.name}: url is not a string`)
-      resolved_item.status = await isitup(resolved_item.resolved_url)
-      if (resolved_item.status !== 'yes') throw new Error(`${item.name}: isitup returned ${resolved_item.status}`)
-      manifest.push(resolved_item)
-    } catch (e) {
-      console.warn(`${item.name} was not resolved: ${e}`)
-    }
-  }
+  const manifest = (
+    await Promise.all(
+      (await import('@/manifest')).default
+        .map(async (item) => {
+          if (!(entity in item.tags)) return
+          try {
+            const resolved_item = { ...item }
+            delete resolved_item.countapi
+            delete resolved_item.clickurl
+            resolved_item.clicks = await item.countapi.get()
+            resolved_item.resolved_url = await callable(item.clickurl)(search)
+            if (typeof resolved_item.resolved_url !== 'string') throw new Error(`${item.name}: url is not a string`)
+            resolved_item.status = await isitup(resolved_item.resolved_url)
+            if (resolved_item.status !== 'yes') throw new Error(`${item.name}: isitup returned ${resolved_item.status}`)
+            return resolved_item
+          } catch (e) {
+            console.warn(`${item.name} was not resolved: ${e}`)
+            return
+          }
+        })
+    )
+  ).filter(v => v !== undefined)
   return {
     props: {
       entity,
