@@ -1,36 +1,12 @@
 import React from "react"
-import callable from '@/utils/callable'
-import memo from "@/utils/memo"
-
-const isitup = memo(async (url) => {
-  const isitup_res = await fetch(`https://maayanlab.cloud/isitup/api?url=${encodeURIComponent(url)}`)
-  const { status } = await isitup_res.json()
-  return status
-})
 
 export default function EntityCard(props) {
-  const [clicks, setClicks] = React.useState()
-  React.useEffect(async () => setClicks(await props.countapi.get()), [props.countapi])
-  const [hidden, setHidden] = React.useState(true)
-  const [clickurl, setClickurl] = React.useState()
+  const [clicks, setClicks] = React.useState(props.clicks)
   React.useEffect(async () => {
-    if (props.search === undefined) {
-      setHidden(false)
-    } else {
-      setHidden(true)
-      try {
-        const url = await callable(props.clickurl)(props.search)
-        if (typeof url !== 'string') throw new Error(`${props.name}: url is not a string`)
-        const status = await isitup(url)
-        if (status !== 'yes') throw new Error(`${props.name}: isitup returned ${status}`)
-        setClickurl(url)
-        setHidden(false)
-      } catch (e) {
-        console.warn(`${props.name} clickurl had error: ${e}`)
-      }
+    if (props.countapi !== undefined) {
+      setClicks(await props.countapi.get())
     }
-  }, [props.search])
-  if (hidden) return null
+  }, [props.countapi])
   return (
     <div className="card shadow-sm" style={{ backgroundColor: props.tags.CF ? 'rgba(0, 0, 0, 0.2)' : undefined }}>
       {props.img1 !== undefined ? (
@@ -46,8 +22,8 @@ export default function EntityCard(props) {
       <div className="card-body">
         <h4 className="card-title">
           {props.title}
-          {clickurl !== undefined ? (
-            <span>: <a href={clickurl}>{props.search}</a></span>
+          {props.resolved_url !== undefined ? (
+            <span>: <a href={props.resolved_url}>{props.search}</a></span>
           ) : null}
         </h4>
         <p className="card-text">{props.description}</p>

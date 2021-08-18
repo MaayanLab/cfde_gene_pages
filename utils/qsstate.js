@@ -1,10 +1,10 @@
 import React from 'react'
-import { useRouter } from 'next/router'
+import useRouterEx from '@/utils/routerEx'
 
 export function useQsState(paramName, initialState, Codec) {
   if (Codec === undefined) Codec = JSON
   const initialStateString = Codec.stringify(initialState)
-  const router = useRouter()
+  const router = useRouterEx()
   const [param, setParam] = React.useState(paramName in router.query ? Codec.parse(router.query[paramName]) : initialState)
   React.useEffect(() => {
     const paramString = paramName in router.query ? router.query[paramName] : initialStateString

@@ -1,20 +1,26 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
-import { useQsState } from '@/utils/qsstate'
+import { gene_examples, drug_examples } from '@/manifest/examples'
 
 const Autocomplete = dynamic(() => import('@/components/Autocomplete'))
 
-const uriCodec = {
-  stringify: v => encodeURIComponent(v),
-  parse: v => decodeURIComponent(v),
-}
-
-export default function SearchControl({ onSubmit }) {
-  const [entity, setEntity] = useQsState('entity', 'gene', uriCodec)
-  const [search, setSearch] = useQsState('search', '', uriCodec)
-  const [CF, setCF] = useQsState('CF', false)
-  const [PS, setPS] = useQsState('PS', true)
-  const [Ag, setAg] = useQsState('Ag', true)
+export default function SearchControl({
+  entity: initEntity, search: initSearch,
+  CF, setCF, PS, setPS, Ag, setAg,
+  onSubmit,
+}) {
+  const [entity, setEntity] = React.useState('gene')
+  React.useEffect(() => {
+    if (initEntity !== undefined) { setEntity(initEntity) }
+  }, [initEntity])
+  const [search, setSearch] = React.useState('')
+  React.useEffect(() => {
+    if (initSearch !== undefined) { setSearch(initSearch) }
+  }, [initSearch])
+  //
+  if (CF === undefined) CF = false
+  if (PS === undefined) PS = true
+  if (Ag === undefined) Ag = true
   return (
     <section className="py-1 text-center container">
       <div className="row py-lg-5">
@@ -80,20 +86,22 @@ export default function SearchControl({ onSubmit }) {
                 </div>
               </div>
             </div>
-            <div className="form-group">
-              <div className="form-check form-check-inline">
-                <input className="form-check-input" type="checkbox" value="option1" checked={CF} onChange={(evt) => setCF(evt.target.checked)} />
-                <label className="form-check-label" htmlFor="inlineCheckbox1">NIH CF Supported Only</label>
+            {setCF && setPS && setAg ? (
+              <div className="form-group">
+                <div className="form-check form-check-inline">
+                  <input className="form-check-input" type="checkbox" value="option1" checked={CF} onChange={(evt) => setCF(evt.target.checked)} />
+                  <label className="form-check-label" htmlFor="inlineCheckbox1">NIH CF Supported Only</label>
+                </div>
+                <div className="form-check form-check-inline">
+                  <input className="form-check-input" type="checkbox" value="option2" checked={PS} onChange={(evt) => setPS(evt.target.checked)} />
+                  <label className="form-check-label" htmlFor="inlineRadio1">Primary Source</label>
+                </div>
+                <div className="form-check form-check-inline">
+                  <input className="form-check-input" type="checkbox" value="option3" checked={Ag} onChange={(evt) => setAg(evt.target.checked)} />
+                  <label className="form-check-label" htmlFor="inlineRadio2">Aggregator</label>
+                </div>
               </div>
-              <div className="form-check form-check-inline">
-                <input className="form-check-input" type="checkbox" value="option2" checked={PS} onChange={(evt) => setPS(evt.target.checked)} />
-                <label className="form-check-label" htmlFor="inlineRadio1">Primary Source</label>
-              </div>
-              <div className="form-check form-check-inline">
-                <input className="form-check-input" type="checkbox" value="option3" checked={Ag} onChange={(evt) => setAg(evt.target.checked)} />
-                <label className="form-check-label" htmlFor="inlineRadio2">Aggregator</label>
-              </div>
-            </div>
+            ) : null}
           </form>
         </div>
       </div>
