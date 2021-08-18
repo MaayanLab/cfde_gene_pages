@@ -52,7 +52,7 @@ export default function useRouterEx() {
   const [query, setQuery] = React.useState(fixup(router.pathname, router.asPath, router.query))
   React.useEffect(() => {
     setQuery(fixup(router.pathname, router.asPath, router.query))
-  }, [router.asPath])
+  }, [router.pathname, router.asPath, router.query])
   React.useEffect(() => {
     const start = () => setLoading(true)
     const stop = () => setLoading(false)
