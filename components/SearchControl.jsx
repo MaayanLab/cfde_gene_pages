@@ -57,8 +57,8 @@ export default function SearchControl({ onSubmit }) {
                       {ind > 0 ? ',' : null}
                       &nbsp;
                       <a
-                        href="javascript:"
-                        onClick={() => onSubmit({ entity: 'gene', search: gene, CF, PS, Ag })}>
+                        href="#"
+                        onClick={(evt) => { evt.preventDefault(); onSubmit({ entity: 'gene', search: gene, CF, PS, Ag }) }}>
                         {gene}
                       </a>
                     </span>
@@ -71,8 +71,8 @@ export default function SearchControl({ onSubmit }) {
                       {ind > 0 ? ',' : null}
                       &nbsp;
                       <a
-                        href="javascript:"
-                        onClick={() => onSubmit({ entity: 'drug', search: drug, CF, PS, Ag })}>
+                        href="#"
+                        onClick={(evt) => { evt.preventDefault(); onSubmit({ entity: 'drug', search: drug, CF, PS, Ag }) }}>
                         {drug}
                       </a>
                     </span>
