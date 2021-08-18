@@ -57,25 +57,25 @@ export default function App({ Component, pageProps }) {
               style={{ backgroundColor: '#3b5998' }}
               href="https://www.facebook.com/sharer/sharer.php?u=https://maayanlab.github.io/cfde_gene_pages/index.html"
               role="button"
-            ><FontAwesomeIcon icon={faFacebookF} /></a>
+            ><FontAwesomeIcon width={16} height={16} icon={faFacebookF} /></a>
             <a
               className="btn btn-primary btn-floating"
               style={{ backgroundColor: '#55acee' }}
               href="https://twitter.com/intent/tweet?url=https://maayanlab.github.io/cfde_gene_pages/index.html&text="
               role="button"
-            ><FontAwesomeIcon icon={faTwitter} /></a>
+            ><FontAwesomeIcon width={16} height={16} icon={faTwitter} /></a>
             <a
               className="btn btn-primary btn-floating"
               style={{ backgroundColor: '#0082ca' }}
               href="https://www.linkedin.com/shareArticle?mini=true&url=https://maayanlab.github.io/cfde_gene_pages/index.html"
               role="button"
-            ><FontAwesomeIcon icon={faLinkedinIn} /></a>
+            ><FontAwesomeIcon width={16} height={16} icon={faLinkedinIn} /></a>
             <a
               className="btn btn-primary btn-floating"
               style={{ backgroundColor: '#333333' }}
               href="mailto:info@example.com?&subject=&cc=&bcc=&body=https://maayanlab.github.io/cfde_gene_pages/index.html%0A"
               role="button"
-            ><FontAwesomeIcon icon={faEnvelope} /></a>
+            ><FontAwesomeIcon width={16} height={16} icon={faEnvelope} /></a>
           </p>
           <p className="mb-0">Prototype project developed by the CFDE Gene WG</p>
           <p className="mb-0"><a href="https://github.com/MaayanLab/cfde_gene_pages">Project's GitHub Repo</a></p>
