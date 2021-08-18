@@ -92,7 +92,7 @@ export default function Search(props) {
           {!manifest || router.loading ? (
             <Loader />
           ) : (
-            <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 justify-content-center">
               {manifest
                 .filter(item => {
                   if (CF === true && !('CF' in item.tags)) return false

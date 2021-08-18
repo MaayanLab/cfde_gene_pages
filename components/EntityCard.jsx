@@ -8,7 +8,7 @@ export default function EntityCard(props) {
     }
   }, [props.countapi])
   return (
-    <div className="card shadow-sm" style={{ backgroundColor: props.tags.CF ? 'rgba(0, 0, 0, 0.2)' : undefined }}>
+    <div className="card shadow-sm m-3 p-3" style={{ backgroundColor: props.tags.CF ? 'rgba(0, 0, 0, 0.2)' : undefined }}>
       {props.img1 !== undefined ? (
         <div className="card-image-wrapper-1">
           <img className="card-img-top img-fluid" src={props.img1.src} alt={props.img1.alt} width="100%" height="100%" />
