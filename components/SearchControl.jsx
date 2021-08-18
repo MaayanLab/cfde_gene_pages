@@ -10,11 +10,11 @@ const uriCodec = {
 }
 
 export default function SearchControl({ onSubmit }) {
-  const [entity, setEntity] = useQsState('e', 'gene', uriCodec)
-  const [search, setSearch] = useQsState('q', '', uriCodec)
-  const [CF, setCF] = useQsState('f.CF', false)
-  const [PS, setPS] = useQsState('f.PS', true)
-  const [Ag, setAg] = useQsState('f.AG', true)
+  const [entity, setEntity] = useQsState('entity', 'gene', uriCodec)
+  const [search, setSearch] = useQsState('search', '', uriCodec)
+  const [CF, setCF] = useQsState('CF', false)
+  const [PS, setPS] = useQsState('PS', true)
+  const [Ag, setAg] = useQsState('AG', true)
   return (
     <section className="py-1 text-center container">
       <div className="row py-lg-5">
@@ -26,7 +26,7 @@ export default function SearchControl({ onSubmit }) {
             autoComplete="off"
             onSubmit={(evt) => {
               evt.preventDefault()
-              onSubmit({ e: entity, q: search, CF, PS, Ag })
+              onSubmit({ entity, search, CF, PS, Ag })
             }}
           >
             <div className="input-group">
@@ -58,7 +58,7 @@ export default function SearchControl({ onSubmit }) {
                       &nbsp;
                       <a
                         href="javascript:"
-                        onClick={() => onSubmit({ e: 'gene', q: gene, CF, PS, Ag })}>
+                        onClick={() => onSubmit({ entity: 'gene', search: gene, CF, PS, Ag })}>
                         {gene}
                       </a>
                     </span>
@@ -72,7 +72,7 @@ export default function SearchControl({ onSubmit }) {
                       &nbsp;
                       <a
                         href="javascript:"
-                        onClick={() => onSubmit({ e: 'drug', q: drug, CF, PS, Ag })}>
+                        onClick={() => onSubmit({ entity: 'drug', search: drug, CF, PS, Ag })}>
                         {drug}
                       </a>
                     </span>

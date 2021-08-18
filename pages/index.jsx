@@ -14,7 +14,7 @@ export default function Home() {
       <SearchControl
         onSubmit={query => {
           router.push({
-            pathname: '/search',
+            pathname: '/[entity]/[search]',
             query,
           })
         }}

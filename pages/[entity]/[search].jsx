@@ -1,5 +1,6 @@
 import manifest from '@/manifest'
 import dynamic from 'next/dynamic'
+import { useQsState } from '@/utils/qsstate'
 import { useRouter } from 'next/router'
 
 const EntityCard = dynamic(() => import('@/components/EntityCard'))
@@ -7,12 +8,9 @@ const SearchControl = dynamic(() => import('@/components/SearchControl'))
 
 let entities = {'gene': true, 'drug': true}
 
-export function getServerSideProps({ query: { e: entity, q: search, CF, PS, Ag } }) {
+export function getServerSideProps({ query: { entity, search } }) {
   if (!(entity in entities) || search === undefined || search === '') return { notFound: true }
-  if (CF === undefined) CF = false
-  if (PS === undefined) PS = true
-  if (Ag === undefined) Ag = true
-  return { props: { entity, search, CF, PS, Ag } }
+  return { props:  { entity, search } }
 }
 
 export default function Search({ entity, search, CF, PS, Ag }) {
@@ -22,7 +20,7 @@ export default function Search({ entity, search, CF, PS, Ag }) {
       <SearchControl
         onSubmit={query => {
           router.push({
-            pathname: '/search',
+            pathname: '/[entity]/[search]',
             query,
           })
         }}
