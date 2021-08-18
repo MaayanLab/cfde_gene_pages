@@ -279,7 +279,7 @@ const manifest = [
       Ag: true,
     },
     img1: {
-      src: '/logos/enrichr_logo.png',
+      src: '/logos/ARCHS4_logo.png',
       alt: 'Enrichr image',
     },
     img2: {
@@ -892,7 +892,7 @@ const manifest = [
       drug: true,
     },
     img1: {
-      src: '/logos/DrugEnrichr_logo.png',
+      src: '/logos/ARCHS4_logo.png',
       alt: 'DrugEnrichr image',
     },
     img2: {
