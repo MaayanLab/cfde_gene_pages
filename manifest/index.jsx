@@ -773,6 +773,8 @@ const manifest = [
     tags: {
       drug: true,
       Ag: true,
+      CF: false,
+      PS: false,
     },
     img1: {
       src: '/logos/OpenTargets_logo.png',
@@ -792,6 +794,9 @@ const manifest = [
     name: 'pubchem',
     tags: {
       drug: true,
+      CF: false,
+      PS: false,
+      Ag: true,
     },
     img1: {
       src: '/logos/PubChem_logo.png',
@@ -810,8 +815,10 @@ const manifest = [
   {
     name: 'chembl',
     tags: {
-      CF: true,
       drug: true,
+      CF: false,
+      PS: false,
+      Ag: true,
     },
     img1: {
       src: '/logos/chEMBL_logo.png',
@@ -831,6 +838,9 @@ const manifest = [
     name: 'guide',
     tags: {
       drug: true,
+      CF: false,
+      PS: false,
+      Ag: true,
     },
     img1: {
       src: '/logos/Guide_logo.png',
@@ -850,6 +860,9 @@ const manifest = [
     name: 'drugbank',
     tags: {
       drug: true,
+      CF: false,
+      PS: false,
+      Ag: true,
     },
     img1: {
       src: '/logos/DrugBank_logo.png',
@@ -870,6 +883,8 @@ const manifest = [
     tags: {
       CF: true,
       drug: true,
+      PS: false,
+      Ag: true,
     },
     img1: {
       src: '/logos/ARCHS4_logo.png',
@@ -890,6 +905,8 @@ const manifest = [
     tags: {
       CF: true,
       drug: true,
+      PS: false,
+      Ag: true,
     },
     img1: {
       src: '/logos/ARCHS4_logo.png',
@@ -909,6 +926,9 @@ const manifest = [
     name: 'drugscom',
     tags: {
       drug: true,
+      CF: false,
+      PS: false,
+      Ag: true,
     },
     img1: {
       src: '/logos/Drugscom_logo.jpeg',
@@ -928,6 +948,9 @@ const manifest = [
     name: 'rxlist',
     tags: {
       drug: true,
+      CF: false,
+      PS: false,
+      Ag: true,
     },
     img1: {
       src: '/logos/RxList_logo.png',
@@ -949,6 +972,9 @@ const manifest = [
       CF: true,
       drug: true,
       hidden: true,
+      CF: true,
+      PS: false,
+      Ag: true,
     },
     img1: {
       src: '/logos/IDG_LOGO.png',
@@ -968,6 +994,9 @@ const manifest = [
     name: 'zinc15',
     tags: {
       drug: true,
+      CF: false,
+      PS: true,
+      Ag: false,
     },
     img1: {
       src: '/logos/ZINC15_logo.svg',
@@ -988,6 +1017,8 @@ const manifest = [
     tags: {
       CF: true,
       drug: true,
+      PS: true,
+      Ag: false,
     },
     img1: {
       src: '/logos/LINCS_logo.gif',
@@ -1006,6 +1037,9 @@ const manifest = [
     name: 'pharmgkb',
     tags: {
       drug: true,
+      CF: false,
+      PS: false,
+      Ag: true,
     },
     img1: {
       src: '/logos/PharmGKB_logo.png',
@@ -1024,6 +1058,9 @@ const manifest = [
     name: 'drugsfda',
     tags: {
       drug: true,
+      CF: false,
+      PS: true,
+      Ag: false,
     },
     img1: {
       src: '/logos/DrugsFDA_logo.png',
@@ -1039,5 +1076,12 @@ const manifest = [
     countapi: countable('maayanlab.github.io/DrugsFDAclick'),
   },
 ]
+
+// Remove `false` entries so the key does not appear with `in` operator
+for (const item of manifest) {
+  for (const tag in item.tags) {
+    if (item.tags[tag] === false) delete item.tags[tag]
+  }
+}
 
 export default manifest
