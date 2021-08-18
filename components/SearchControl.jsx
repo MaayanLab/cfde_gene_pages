@@ -14,7 +14,7 @@ export default function SearchControl({ onSubmit }) {
   const [search, setSearch] = useQsState('search', '', uriCodec)
   const [CF, setCF] = useQsState('CF', false)
   const [PS, setPS] = useQsState('PS', true)
-  const [Ag, setAg] = useQsState('AG', true)
+  const [Ag, setAg] = useQsState('Ag', true)
   return (
     <section className="py-1 text-center container">
       <div className="row py-lg-5">

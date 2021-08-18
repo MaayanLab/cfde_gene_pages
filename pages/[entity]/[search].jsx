@@ -13,8 +13,11 @@ export function getServerSideProps({ query: { entity, search } }) {
   return { props:  { entity, search } }
 }
 
-export default function Search({ entity, search, CF, PS, Ag }) {
+export default function Search({ entity, search }) {
   const router = useRouter()
+  const [CF, _setCF] = useQsState('CF', false)
+  const [PS, _setPS] = useQsState('PS', true)
+  const [Ag, _setAg] = useQsState('Ag', true)
   return (
     <>
       <SearchControl
@@ -30,8 +33,13 @@ export default function Search({ entity, search, CF, PS, Ag }) {
           <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             {manifest
               .filter(props => {
-                // TODO: other filters
-                return entity in props.tags
+                if (!(entity in props.tags)) return false
+                if (CF === true && !('CF' in props.tags)) return false
+                return (
+                  (PS === true && 'PS' in props.tags)
+                  || (Ag === true && 'Ag' in props.tags)
+                  || (PS === false && Ag === false)
+                )
               })
               .map((props) => (
                 <EntityCard
