@@ -49,6 +49,7 @@ export default function SearchControl({
                 type="text"
                 className="form-control"
                 placeholder="Gene or Drug"
+                autocomplete={entity}
                 value={search}
                 onChange={evt => setSearch(evt.target.value)}
               />
