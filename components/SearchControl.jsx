@@ -58,7 +58,7 @@ export default function SearchControl({
               <div className="d-flex flex-wrap align-content-around justify-content-center">
                 <div className="mx-1 text-nowrap">
                   Gene Examples:
-                  {['ACE2', 'ULK4', 'DPH7', 'KL'].map((gene, ind) => (
+                  {gene_examples.map((gene, ind) => (
                     <span key={gene}>
                       {ind > 0 ? ',' : null}
                       &nbsp;
@@ -72,7 +72,7 @@ export default function SearchControl({
                 </div>
                 <div className="mx-1 text-nowrap">
                   Drug Examples:
-                  {['Imatinib', 'Acetaminophen', 'Dexamethasone'].map((drug, ind) => (
+                  {drug_examples.map((drug, ind) => (
                     <span key={drug}>
                       {ind > 0 ? ',' : null}
                       &nbsp;

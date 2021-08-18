@@ -25,8 +25,12 @@ const isitup = memo(async (url) => {
 const entities = { 'gene': true, 'drug': true }
 
 export async function getStaticPaths() {
+  const { gene_examples, drug_examples } = await import('@/manifest/examples')
   return {
-    paths: [],
+    paths: [
+      ...gene_examples.map((search) => ({ params: { entity: 'gene', search } })),
+      ...drug_examples.map((search) => ({ params: { entity: 'drug', search } })),
+    ],
     fallback: 'blocking',
   }
 }
