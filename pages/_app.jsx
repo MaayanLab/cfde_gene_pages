@@ -14,9 +14,7 @@ export default function App({ Component, pageProps }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="Gene and Drug Landing Page Aggregator" />
         <meta name="author" content="Ma'ayan Lab" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="shortcut icon" href="/logos/logo.png" type="image/x-icon" />
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="theme-color" content="#ffffff" />
       </Head>
@@ -33,16 +31,20 @@ export default function App({ Component, pageProps }) {
             </div>
           </div>
         </div>
-        <div className="navbar navbar-dark bg-dark shadow-sm">
-          <div className="container">
+        <div className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+          <div className="container-fluid">
             <Link href="/" passHref>
               <a className="navbar-brand d-flex align-items-center">
-                <img height="40px" width="30px" style={{ color: 'white' }} src="/logos/new_logo.png" />
+                <img height="40px" width="40px" style={{ color: 'white' }} src="/logos/logo.png" />
                 <strong>&nbsp; Gene and Drug Landing Page Aggregator</strong>
               </a>
             </Link>
-            <Link href="/gene/" passHref><a className="nav-link" style={{ color: 'grey' }}>Gene Resources</a></Link>
-            <Link href="/drug/" passHref><a className="nav-link" style={{ color: 'grey' }}>Drug Resources</a></Link>
+            <div className="navbar-collapse collapse">
+              <div className="navbar-nav">
+                <Link href="/gene/" passHref><a className="nav-link" style={{color: 'grey'}}>Gene Resources</a></Link>
+                <Link href="/drug/" passHref><a className="nav-link" style={{color: 'grey'}}>Drug Resources</a></Link>
+              </div>
+            </div>
           </div>
         </div>
       </header>
@@ -53,26 +55,26 @@ export default function App({ Component, pageProps }) {
         <div className="container">
           <p className="float-end mb-1">
             <a
-              className="btn btn-primary btn-floating"
-              style={{ backgroundColor: '#3b5998' }}
+              className="btn btn-primary px-2 py-1 m-1"
+              style={{ backgroundColor: '#3b5998', borderRadius: '20px' }}
               href="https://www.facebook.com/sharer/sharer.php?u=https://maayanlab.github.io/cfde_gene_pages/index.html"
               role="button"
             ><FontAwesomeIcon width={16} height={16} icon={faFacebookF} /></a>
             <a
-              className="btn btn-primary btn-floating"
-              style={{ backgroundColor: '#55acee' }}
+              className="btn btn-primary px-2 py-1 m-1"
+              style={{ backgroundColor: '#55acee', borderRadius: '20px' }}
               href="https://twitter.com/intent/tweet?url=https://maayanlab.github.io/cfde_gene_pages/index.html&text="
               role="button"
             ><FontAwesomeIcon width={16} height={16} icon={faTwitter} /></a>
             <a
-              className="btn btn-primary btn-floating"
-              style={{ backgroundColor: '#0082ca' }}
+              className="btn btn-primary px-2 py-1 m-1"
+              style={{ backgroundColor: '#0082ca', borderRadius: '20px' }}
               href="https://www.linkedin.com/shareArticle?mini=true&url=https://maayanlab.github.io/cfde_gene_pages/index.html"
               role="button"
             ><FontAwesomeIcon width={16} height={16} icon={faLinkedinIn} /></a>
             <a
-              className="btn btn-primary btn-floating"
-              style={{ backgroundColor: '#333333' }}
+              className="btn btn-primary px-2 py-1 m-1"
+              style={{ backgroundColor: '#333333', borderRadius: '20px' }}
               href="mailto:info@example.com?&subject=&cc=&bcc=&body=https://maayanlab.github.io/cfde_gene_pages/index.html%0A"
               role="button"
             ><FontAwesomeIcon width={16} height={16} icon={faEnvelope} /></a>

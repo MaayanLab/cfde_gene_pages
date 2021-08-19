@@ -22,11 +22,11 @@ export default function SearchControl({
   if (PS === undefined) PS = true
   if (Ag === undefined) Ag = true
   return (
-    <section className="py-1 text-center container">
+    <section className="py-1 container">
       <div className="row py-lg-5">
         <div className="col-lg-10 col-md-8 mx-auto">
           <h1 className="fw-light">Gene and Drug Landing Page Aggregator</h1>
-          <p className="lead text-muted">This page has links to 35 gene and 14 drug repositories that provide direct links to gene and drug landing pages. You can search by gene or drug name and then choose the sites that contain knowledge about your gene or drug. Common Fund program cards are colored in grey.</p>
+          <p className="text-muted mb-5">This page has links to 35 gene and 14 drug repositories that provide direct links to gene and drug landing pages. You can search by gene or drug name and then choose the sites that contain knowledge about your gene or drug. Common Fund program cards are colored in grey.</p>
           <form
             className="row"
             autoComplete="off"
@@ -57,7 +57,7 @@ export default function SearchControl({
             </div>
             <div className="input-group">
               <div className="d-flex flex-wrap align-content-around justify-content-center">
-                <div className="mx-1 text-nowrap">
+                <div className="my-2 text-muted">
                   Gene Examples:
                   {gene_examples.map((gene, ind) => (
                     <span key={gene}>
@@ -71,7 +71,7 @@ export default function SearchControl({
                     </span>
                   ))}
                 </div>
-                <div className="mx-1 text-nowrap">
+                <div className="my-2 mx-3 text-muted">
                   Drug Examples:
                   {drug_examples.map((drug, ind) => (
                     <span key={drug}>

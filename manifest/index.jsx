@@ -339,7 +339,7 @@ const manifest = [
       Ag: true,
     },
     img1: {
-      src: '/logos/marrvel_logo.webp',
+      src: '/logos/marrvel_logo.png',
       alt: 'MARRVEL image',
     },
     img2: {
@@ -479,7 +479,7 @@ const manifest = [
       PS: true,
     },
     img1: {
-      src: '/logos/GWAS_logo.jpeg',
+      src: '/logos/GWAS_logo.png',
       alt: 'GWAS image',
     },
     img2: {
@@ -972,7 +972,6 @@ const manifest = [
       CF: true,
       drug: true,
       hidden: true,
-      CF: true,
       PS: false,
       Ag: true,
     },
