@@ -52,11 +52,11 @@ const manifest = [
     },
     img1: {
       src: '/logos/test_img.png',
-      alt: 'Gtex image',
+      alt: 'GTEx logo',
     },
     img2: {
       src: '/logos/Gtex_site.png',
-      alt: 'GTEx site image',
+      alt: 'GTEx site screenshot',
     },
     title: 'GTEx Portal',
     description: 'The Genotype-Tissue Expression (GTEx) Portal provides open access to data including gene expression, QTLs, and histology images.',
@@ -65,7 +65,7 @@ const manifest = [
     clickurl: async (search) => `https://www.gtexportal.org/home/gene/${await ensembl_id(search)}`,
   },
   {
-    name: 'pharos',
+    name: 'Pharos',
     tags: {
       CF: true,
       Ag: true,
@@ -73,11 +73,11 @@ const manifest = [
     },
     img1: {
       src: '/logos/IDG_LOGO.png',
-      alt: 'IDG image',
+      alt: 'IDG',
     },
     img2: {
       src: '/logos/Pharos_site.png',
-      alt: 'Pharos image',
+      alt: 'Pharos screenshot',
     },
     title: 'Pharos',
     description: 'The Pharos interface provides facile access to most data types collected by the Knowledge Management Center for the IDG program.',
@@ -86,22 +86,22 @@ const manifest = [
     clickurl: async (search) => `https://pharos.nih.gov/targets/${await uniprot_qb(search)}`,
   },
   {
-    name: 'harmonziome',
+    name: 'Harmonziome',
     tags: {
       CF: true,
       Ag: true,
       gene: true,
     },
     img1: {
-      src: '/logos/IDG_LOGO.png',
-      alt: 'IDG image',
+      src: '/logos/MaayanLab_logo.png',
+      alt: 'MaayanLab',
     },
     img2: {
       src: '/logos/Harmonizome_site.png',
-      alt: 'Harmonizome image',
+      alt: 'Harmonizome screenshot',
     },
     title: 'Harmonizome',
-    description: ' The Harmonizome is a collection of information about genes and proteins from 114 datasets provided by 66 online resources to facilitate access to and learning from biomedical Big Data.',
+    description: 'The Harmonizome is a collection of knowledge about genes and proteins from 114 datasets created by processing 66 online resources to facilitate discovery via data integration.',
     url: "https://maayanlab.cloud/Harmonizome/",
     countapi: countable('maayanlab.github.io/harmclick'),
     clickurl: async (search) => `https://maayanlab.cloud/Harmonizome/gene/${search}`,
@@ -121,8 +121,8 @@ const manifest = [
       src: '/logos/Lincs_site.png',
       alt: 'LINCS site image',
     },
-    title: 'LINCS Portal',
-    description: 'The LINCS Data Portal 3.0 is a portal for serving and querying LINCS datasets and signatures. It provides a signature similarity search to query for mimicker or reverser signatures.',
+    title: 'LINCS Data Portal',
+    description: 'The LINCS Data Portal 3.0 serves LINCS datasets and signatures. It provides a signature similarity search to query for mimicker or reverser signatures.',
     url: "https://ldp3.cloud/",
     countapi: countable('maayanlab.github.io/lincsclick'),
     clickurl: async (search) => `https://ldp3.cloud/#/MetadataSearch/Signatures?query={%22skip%22:0,%22limit%22:10,%22search%22:[%22${search}%22]`,
@@ -218,8 +218,8 @@ const manifest = [
       gene: true,
     },
     img1: {
-      src: '/logos/ARCHS4_logo.png',
-      alt: 'ARCHS4 image',
+      src: '/logos/MaayanLab_logo.png',
+      alt: 'MaayanLab',
     },
     img2: {
       src: '/logos/ARCHS4_site.png',
@@ -272,22 +272,22 @@ const manifest = [
     clickurl: async (search) => `https://www.genecards.org/cgi-bin/carddisp.pl?gene=${search}`
   },
   {
-    name: 'enrichr',
+    name: 'Enrichr',
     tags: {
       gene: true,
       CF: true,
       Ag: true,
     },
     img1: {
-      src: '/logos/ARCHS4_logo.png',
-      alt: 'Enrichr image',
+      src: '/logos/MaayanLab_logo.png',
+      alt: 'MaayanLab',
     },
     img2: {
       src: '/logos/Enrichr_site.png',
       alt: 'Enrichr site image',
     },
     title: 'Enrichr',
-    description: 'Enrichr is an enrichment analysis tool that provides various types of visualization summaries of collective functions of gene lists.',
+    description: 'Enrichr is an enrichment analysis tool that provides various types of visualization summaries of collective functions of gene sets.',
     url: "https://maayanlab.cloud/Enrichr/#find",
     countapi: countable('maayanlab.github.io/enrichrclick'),
     clickurl: async (search) => `https://maayanlab.cloud/Enrichr/#find!gene=${search}`,
@@ -300,7 +300,7 @@ const manifest = [
     },
     img1: {
       src: '/logos/ENCODE_logo.jpeg',
-      alt: 'Encode image',
+      alt: 'ENCODE image',
     },
     img2: {
       src: '/logos/Encode_site.png',
@@ -333,7 +333,7 @@ const manifest = [
     clickurl: async (search) => `https://www.uniprot.org/uniprot/${await uniprot_qb(search)}`,
   },
   {
-    name: 'marrvel',
+    name: 'MARRVEL',
     tags: {
       gene: true,
       Ag: true,
@@ -347,7 +347,7 @@ const manifest = [
       alt: 'MARRVEL site image',
     },
     title: 'MARRVEL',
-    description: 'MARRVEL allows users to search multiple public variant databases simultaneously and provides a unified interface to facilitate the search process.',
+    description: 'MARRVEL enables users to search multiple public variant databases simultaneously and provides a unified interface to facilitate the search process.',
     url: "http://marrvel.org/",
     countapi: countable('maayanlab.github.io/MARRVELclick'),
     clickurl: async (search) => `http://marrvel.org/human/gene/${await gene_id(search)}`,
@@ -600,15 +600,15 @@ const manifest = [
       PS: true,
     },
     img1: {
-      src: '/logos/ARCHS4_logo.png',
-      alt: 'Maayan Lab image',
+      src: '/logos/MaayanLab_logo.png',
+      alt: 'MaayanLab',
     },
     img2: {
       src: '/logos/GEO_search_site.png',
-      alt: 'PDB site image',
+      alt: 'Appyter screenshot',
     },
     title: 'Gene Centric GEO Reverse Search',
-    description: 'This appyter allows users to query for a gene in a species of interest, and returns an interactive volcano plot visualization of signatures in which the given gene is up- or down-regulated.',
+    description: 'This Appyter enables users to query for a gene in a species of interest; it returns an interactive volcano plot of signatures in which the gene is up- or down-regulated.',
     url: "https://appyters.maayanlab.cloud/#/Gene_Centric_GEO_Reverse_Search",
     countapi: countable('maayanlab.github.io/GEOsearchclick'),
     clickurl: async (search) => {
@@ -887,8 +887,8 @@ const manifest = [
       Ag: true,
     },
     img1: {
-      src: '/logos/ARCHS4_logo.png',
-      alt: 'Drugmonizome image',
+      src: '/logos/MaayanLab_logo.png',
+      alt: 'MaayanLab',
     },
     img2: {
       src: '/logos/Drugmonizome_site.png',
@@ -909,8 +909,8 @@ const manifest = [
       Ag: true,
     },
     img1: {
-      src: '/logos/ARCHS4_logo.png',
-      alt: 'DrugEnrichr image',
+      src: '/logos/MaayanLab_logo.png',
+      alt: 'MaayanLab',
     },
     img2: {
       src: '/logos/DrugEnrichr_site.png',
