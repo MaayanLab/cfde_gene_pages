@@ -47,7 +47,7 @@ export default function EntityCard(props) {
                         href={props.clickurl}
                         target="_blank"
                         onClick={() => countable(props.countapi).hit()}
-                    >Explore {props.search} on a {props.title} website</a></p>
+                    >Explore {props.search} with {props.title}</a></p>
                 ) : null}
                 <p className="card-text">{props.description}</p>
                 <div className="d-flex justify-content-between align-items-center">
