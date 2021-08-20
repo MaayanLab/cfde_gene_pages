@@ -7,8 +7,8 @@ const SearchPage = dynamic(() => import('@/components/SearchPage'))
 
 export default function SearchError(props) {
   const router = useRouterEx()
-  let entity = router.query.entity || props.entity
-  let search = router.query.search || props.search
+  let entity = router.query.entity || props.entity || ''
+  let search = router.query.search || props.search || ''
   if (router.query.path) {
     search = router.query.path.split('/')[2]
   } else {
