@@ -31,7 +31,7 @@ export default function App({ Component, pageProps }) {
             </div>
           </div>
         </div>
-        <div className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+        <div className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm px-3 py-2">
           <div className="container-fluid">
             <Link href="/" passHref>
               <a className="navbar-brand d-flex align-items-center">

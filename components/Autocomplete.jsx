@@ -6,7 +6,10 @@ const entity = {
     const res = await fetch('/autocomplete_genes.json')
     return await res.json()
   },
-  drug: async () => drug_examples,
+  drug: async () => {
+      const res = await fetch('/drugbank_vocabulary_drugs.json')
+      return await res.json()
+  },
 }
 
 export default function Autocomplete({ value, onChange, autocomplete }) {

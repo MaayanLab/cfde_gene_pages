@@ -88,7 +88,7 @@ const manifest = [
   {
     name: 'Harmonziome',
     tags: {
-      CF: true,
+      CF: false,
       Ag: true,
       gene: true,
     },
@@ -213,7 +213,7 @@ const manifest = [
   {
     name: 'ARCHS4',
     tags: {
-      CF: true,
+      CF: false,
       PS: true,
       gene: true,
     },
@@ -275,7 +275,7 @@ const manifest = [
     name: 'Enrichr',
     tags: {
       gene: true,
-      CF: true,
+      CF: false,
       Ag: true,
     },
     img1: {
@@ -903,7 +903,7 @@ const manifest = [
   {
     name: 'drugenrichr',
     tags: {
-      CF: true,
+      CF: false,
       drug: true,
       PS: false,
       Ag: true,
