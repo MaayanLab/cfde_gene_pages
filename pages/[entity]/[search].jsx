@@ -4,6 +4,8 @@ import callable from '@/utils/callable'
 import memo from "@/utils/memo"
 import full_manifest, { gene_id, drug_info } from '@/manifest'
 import useRouterEx from '@/utils/routerEx'
+import cmp from '@/manifest/cmp'
+import sorted from '@/utils/sorted'
 
 const EntityCard = dynamic(() => import('@/components/EntityCard'))
 const SearchPage = dynamic(() => import('@/components/SearchPage'))
@@ -89,7 +91,7 @@ export default function Search(props) {
     <SearchPage router={router} {...props}>{({ router, CF, PS, Ag }) => (
       props.manifest && !router.loading ? (
         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 justify-content-center">
-          {props.manifest
+          {sorted(props.manifest, cmp)
             .filter(item => {
               if (CF === true && !('CF' in item.tags)) return false
               return (
@@ -104,8 +106,7 @@ export default function Search(props) {
                 {...item}
                 search={props.search}
               />
-            ))
-          }
+            ))}
         </div>
       ) : null
     )}</SearchPage>

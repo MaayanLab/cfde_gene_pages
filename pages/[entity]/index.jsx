@@ -1,5 +1,7 @@
 import full_manifest from '@/manifest'
 import dynamic from 'next/dynamic'
+import cmp from '@/manifest/cmp'
+import sorted from '@/utils/sorted'
 
 const EntityCard = dynamic(() => import('@/components/EntityCard'))
 
@@ -41,7 +43,7 @@ export default function Entity(props) {
     <div className="album py-5 bg-light">
       <div className="container">
         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 justify-content-center">
-          {manifest
+          {sorted(props.manifest, cmp)
             .filter(item => props.entity in item.tags)
             .map(item => (
               <EntityCard key={item.name} {...item} />
