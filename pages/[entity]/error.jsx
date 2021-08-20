@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import dynamic from 'next/dynamic'
 import useRouterEx from '@/utils/routerEx'
 
@@ -13,14 +14,19 @@ export default function SearchError(props) {
     search = ''
   }
   return (
-    <SearchPage router={router} {...{...props, search}}>{({ router }) =>
-      !router.loading ? (
-        <div className="album py-5 bg-light">
-          <div className="container">
-            <div className="text-center">No information found for this {entity}</div>
+    <>
+      <Head>
+        <title>Gene and Drug Landing Page Aggregator: {search} ({capitalize(entity)})</title>
+      </Head>
+      <SearchPage router={router} {...{...props, search}}>{({ router }) =>
+        !router.loading ? (
+          <div className="album py-5 bg-light">
+            <div className="container">
+              <div className="text-center">No information found for this {entity}</div>
+            </div>
           </div>
-        </div>
-      ) : null
-    }</SearchPage>
+        ) : null
+      }</SearchPage>
+    </>
   )
 }

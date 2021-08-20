@@ -1,4 +1,5 @@
 import React from 'react'
+import Head from 'next/head'
 import dynamic from 'next/dynamic'
 import callable from '@/utils/callable'
 import memo from "@/utils/memo"
@@ -8,6 +9,7 @@ import cmp from '@/manifest/cmp'
 import sorted from '@/utils/sorted'
 import defined from '@/utils/defined'
 import countable from "@/utils/countable"
+import capitalize from '@/utils/capitalize'
 
 const EntityCard = dynamic(() => import('@/components/EntityCard'))
 const SearchPage = dynamic(() => import('@/components/SearchPage'))
@@ -87,27 +89,32 @@ export async function getStaticProps({ params: { entity, search } }) {
 export default function Search(props) {
   const router = useRouterEx()
   return (
-    <SearchPage router={router} {...props}>{({ router, CF, PS, Ag }) => (
-      props.manifest && !router.loading ? (
-        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 justify-content-center">
-          {sorted(props.manifest, cmp)
-            .filter(item => {
-              if (CF === true && !('CF' in item.tags)) return false
-              return (
-                (PS === true && 'PS' in item.tags)
-                || (Ag === true && 'Ag' in item.tags)
-                || (PS === false && Ag === false)
-              )
-            })
-            .map((item) => (
-              <EntityCard
-                key={item.name}
-                {...item}
-                search={props.search}
-              />
-            ))}
-        </div>
-      ) : null
-    )}</SearchPage>
+    <>
+      <Head>
+        <title>Gene and Drug Landing Page Aggregator: {props.search} ({capitalize(props.entity)})</title>
+      </Head>
+      <SearchPage router={router} {...props}>{({ router, CF, PS, Ag }) => (
+        props.manifest && !router.loading ? (
+          <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 justify-content-center">
+            {sorted(props.manifest, cmp)
+              .filter(item => {
+                if (CF === true && !('CF' in item.tags)) return false
+                return (
+                  (PS === true && 'PS' in item.tags)
+                  || (Ag === true && 'Ag' in item.tags)
+                  || (PS === false && Ag === false)
+                )
+              })
+              .map((item) => (
+                <EntityCard
+                  key={item.name}
+                  {...item}
+                  search={props.search}
+                />
+              ))}
+          </div>
+        ) : null
+      )}</SearchPage>
+    </>
   )
 }

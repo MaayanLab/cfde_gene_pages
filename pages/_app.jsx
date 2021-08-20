@@ -20,6 +20,7 @@ export default function App({ Component, pageProps }) {
         <link rel="shortcut icon" href="/logos/logo.png" type="image/x-icon" />
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="theme-color" content="#ffffff" />
+        <title>Gene and Drug Landing Page Aggregator</title>
       </Head>
       <header>
         <div className="collapse bg-dark" id="navbarHeader">
