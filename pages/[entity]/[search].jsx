@@ -88,6 +88,7 @@ export async function getStaticProps({ params: { entity, search } }) {
 
 export default function Search(props) {
   const router = useRouterEx()
+  const sortedManifest = React.useMemo(() => sorted(props.manifest, cmp), [props.manifest])
   return (
     <>
       <Head>
@@ -96,7 +97,7 @@ export default function Search(props) {
       <SearchPage router={router} {...props}>{({ router, CF, PS, Ag }) => (
         props.manifest && !router.loading ? (
           <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 justify-content-center">
-            {sorted(props.manifest, cmp)
+            {sortedManifest
               .filter(item => {
                 if (CF === true && !('CF' in item.tags)) return false
                 return (
