@@ -2,20 +2,26 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './_app.css'
 import Head from 'next/head'
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
+import getConfig from 'next/config'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebookF, faLinkedinIn, faTwitter } from '@fortawesome/free-brands-svg-icons'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
-import dynamic from 'next/dynamic'
 
 const Analytics = dynamic(() => import('@/components/Analytics'))
 
 export default function App({ Component, pageProps }) {
+  const { publicRuntimeConfig } = getConfig()
   return (
     <>
       <Head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="Gene and Drug Landing Page Aggregator" />
+        <meta property="og:title" content="Gene and Drug Landing Page Aggregator" />
+        <meta property="og:description" name="description" content="You can search by gene or drug name and then choose the sites that contain knowledge about your gene or drug." />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content={publicRuntimeConfig.origin} />
+        <meta property="og:url" content={`${publicRuntimeConfig.origin}/logos/logo.png`} />
         <meta name="author" content="Ma'ayan Lab" />
         <link rel="shortcut icon" href="/logos/logo.png" type="image/x-icon" />
         <link rel="manifest" href="/site.webmanifest" />
