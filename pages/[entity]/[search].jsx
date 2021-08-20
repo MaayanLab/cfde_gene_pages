@@ -2,6 +2,7 @@ import React from 'react'
 import dynamic from 'next/dynamic'
 import callable from '@/utils/callable'
 import memo from "@/utils/memo"
+import full_manifest, { gene_id, drug_info } from '@/manifest'
 import useRouterEx from '@/utils/routerEx'
 
 const EntityCard = dynamic(() => import('@/components/EntityCard'))
@@ -20,7 +21,6 @@ const isitup = memo(async (url) => {
     return e.toString()
   }
 })
-const entities = { 'gene': true, 'drug': true }
 
 export async function getStaticPaths() {
   const { gene_examples, drug_examples } = await import('@/manifest/examples')
@@ -34,12 +34,20 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params: { entity, search } }) {
-  if (!(entity in entities)) {
-    return { notFound: true }
+  try {
+    if (entity === 'gene') {
+      if ((await gene_id(search)) === undefined) throw new Error('NotFound')
+    } else if (entity === 'drug') {
+      if ((await drug_info(search)) === undefined) throw new Error('NotFound')
+    } else {
+      throw new Error('NotFound')
+    }
+  } catch (e) {
+    return { notFound: true, props: {} }
   }
   const manifest = (
     await Promise.all(
-      (await import('@/manifest')).default
+      full_manifest
         .map(async (item) => {
           if (!(entity in item.tags)) return
           try {

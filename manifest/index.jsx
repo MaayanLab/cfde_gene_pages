@@ -4,7 +4,7 @@ import defined from '@/utils/defined'
 
 const gene_query_url = 'https://mygene.info/v3'
 
-const gene_id = defined(memo(async (gene_search) => {
+export const gene_id = defined(memo(async (gene_search) => {
   let gene_res = await fetch(`${gene_query_url}/query?q=symbol:${gene_search}`)
   if (gene_res.ok) {
     let data = await gene_res.json()
@@ -28,7 +28,7 @@ const MGI = defined(async (gene_search) => (await gene_info(gene_search)).panthe
 const transcript = defined(async (gene_search) => (await gene_info(gene_search)).exac.transcript)
 const entrezgene = defined(async (gene_search) => (await gene_info(gene_search)).entrezgene)
 
-const drug_info = defined(memo(async (drug_search) => {
+export const drug_info = defined(memo(async (drug_search) => {
   const drug_query_url = 'https://pubchem.ncbi.nlm.nih.gov/rest'
   const drug_res = await fetch(`${drug_query_url}/pug/compound/name/${drug_search}/synonyms/JSON`)
   if (drug_res.ok) {
