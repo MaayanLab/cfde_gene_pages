@@ -40,6 +40,7 @@ export async function getStaticProps({ params: { entity } }) {
 }
 
 export default function Entity(props) {
+  const sortedManifest = React.useMemo(() => sorted(props.manifest.filter(item => props.entity in item.tags), cmp), [props.manifest])
   return (
     <>
       <Head>
@@ -48,8 +49,7 @@ export default function Entity(props) {
       <div className="album py-5 bg-light">
         <div className="container">
           <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 justify-content-center">
-            {sorted(props.manifest, cmp)
-              .filter(item => props.entity in item.tags)
+            {sortedManifest
               .map(item => (
                 <EntityCard key={item.name} {...item} />
               ))}
