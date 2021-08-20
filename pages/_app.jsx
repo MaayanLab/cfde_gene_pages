@@ -41,7 +41,7 @@ export default function App({ Component, pageProps }) {
             </div>
           </div>
         </div>
-        <div className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm px-3 py-2">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm px-3 py-2">
           <div className="container-fluid">
             <Link href="/" passHref>
               <a className="navbar-brand d-flex align-items-center">
@@ -49,6 +49,11 @@ export default function App({ Component, pageProps }) {
                 <strong>&nbsp; Gene and Drug Landing Page Aggregator</strong>
               </a>
             </Link>
+            <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                    aria-label="Toggle navigation">
+              <span className="navbar-toggler-icon"/>
+            </button>
             <div className="navbar-collapse collapse">
               <div className="navbar-nav">
                 <Link href="/gene/" passHref><a className="nav-link" style={{color: 'grey'}}>Gene Resources</a></Link>
@@ -56,7 +61,7 @@ export default function App({ Component, pageProps }) {
               </div>
             </div>
           </div>
-        </div>
+        </nav>
       </header>
       <main className="flex-grow-1">
         <Component {...pageProps} />
