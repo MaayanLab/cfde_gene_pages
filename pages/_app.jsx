@@ -5,6 +5,9 @@ import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebookF, faLinkedinIn, faTwitter } from '@fortawesome/free-brands-svg-icons'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import dynamic from 'next/dynamic'
+
+const Analytics = dynamic(() => import('@/components/Analytics'))
 
 export default function App({ Component, pageProps }) {
   return (
@@ -50,6 +53,7 @@ export default function App({ Component, pageProps }) {
       </header>
       <main className="flex-grow-1">
         <Component {...pageProps} />
+        <Analytics />
       </main>
       <footer className="footer text-muted py-5" style={{ backgroundColor: 'rgba(0, 0, 0, 0.1)' }}>
         <div className="container">
