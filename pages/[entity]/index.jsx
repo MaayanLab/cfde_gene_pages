@@ -23,15 +23,14 @@ export async function getStaticProps({ params: { entity } }) {
       full_manifest
         .map(async (item) => {
           if (!(entity in item.tags)) return
+          const resolved_item = { ...item }
+          delete resolved_item.clickurl
           try {
-            const resolved_item = { ...item }
-            delete resolved_item.clickurl
             resolved_item.clicks = await countable(item.countapi).get()
-            return resolved_item
           } catch (e) {
             console.warn(`${item.name} was not resolved: ${e}`)
-            return
           }
+          return resolved_item
         })
     )
   ).filter(v => v !== undefined)
