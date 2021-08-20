@@ -190,7 +190,7 @@ const manifest = [
       src: '/logos/Impc_site.png',
       alt: 'IMPC site image',
     },
-    title: 'KOMP- IMPC Portal',
+    title: 'KOMP-IMPC Portal',
     description: 'The International Mouse Phenotyping Consortium (IMPC) has information about the functions of protein-coding genes in the mouse genome.',
     url: "https://www.mousephenotype.org",
     countapi: 'maayanlab.github.io/kompclick',

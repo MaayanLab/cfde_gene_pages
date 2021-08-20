@@ -32,11 +32,7 @@ export default function EntityCard(props) {
                     {props.clickurl !== undefined ? (
                         <div className="col-sm-7">
                             <h5 className="card-title">
-            <span><a
-                href={props.clickurl}
-                target="_blank"
-                onClick={() => countable(props.countapi).hit()}
-            >{props.title}</a></span>
+                                {props.title}
                             </h5>
                         </div>
                     ) : null}
@@ -45,6 +41,13 @@ export default function EntityCard(props) {
                     <div className="card-image-wrapper-2">
                         <img className="card-img-top img-fluid" src={props.img2.src} alt={props.img2.alt} width="100%" height="100%" />
                     </div>
+                ) : null}
+                {props.clickurl !== undefined ? (
+                    <p><a
+                        href={props.clickurl}
+                        target="_blank"
+                        onClick={() => countable(props.countapi).hit()}
+                    >Explore {props.search} on a {props.title} website</a></p>
                 ) : null}
                 <p className="card-text">{props.description}</p>
                 <div className="d-flex justify-content-between align-items-center">

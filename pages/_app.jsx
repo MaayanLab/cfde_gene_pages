@@ -50,11 +50,11 @@ export default function App({ Component, pageProps }) {
               </a>
             </Link>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                    data-bs-target="#navbarCfde" aria-controls="navbarCfde" aria-expanded="false"
                     aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"/>
             </button>
-            <div className="navbar-collapse collapse">
+            <div className="navbar-collapse collapse" id="navbarCfde">
               <div className="navbar-nav">
                 <Link href="/gene/" passHref><a className="nav-link" style={{color: 'grey'}}>Gene Resources</a></Link>
                 <Link href="/drug/" passHref><a className="nav-link" style={{color: 'grey'}}>Drug Resources</a></Link>
