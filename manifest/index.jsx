@@ -1077,9 +1077,15 @@ const manifest = [
 ]
 
 // Remove `false` entries so the key does not appear with `in` operator
+// Also compute tag counts
+export const manifest_tag_counts = {}
 for (const item of manifest) {
   for (const tag in item.tags) {
     if (item.tags[tag] === false) delete item.tags[tag]
+    else {
+      if (!(tag in manifest_tag_counts)) manifest_tag_counts[tag] = 0
+      manifest_tag_counts[tag] += 1
+    }
   }
 }
 

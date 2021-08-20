@@ -1,6 +1,7 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
 import { gene_examples, drug_examples } from '@/manifest/examples'
+import { manifest_tag_counts } from '@/manifest'
 
 const Autocomplete = dynamic(() => import('@/components/Autocomplete'))
 
@@ -26,7 +27,7 @@ export default function SearchControl({
       <div className="row py-lg-5">
         <div className="col-lg-10 col-md-8 mx-auto">
           <h1 className="fw-light">Gene and Drug Landing Page Aggregator</h1>
-          <p className="text-muted mb-5">This page has links to 35 gene and 14 drug repositories that provide direct links to gene and drug landing pages. You can search by gene or drug name and then choose the sites that contain knowledge about your gene or drug. Common Fund program cards are colored in grey.</p>
+          <p className="text-muted mb-5">This page has links to {manifest_tag_counts.gene} gene and {manifest_tag_counts.drug} drug repositories that provide direct links to gene and drug landing pages. You can search by gene or drug name and then choose the sites that contain knowledge about your gene or drug. Common Fund program cards are colored in grey.</p>
           <form
             className="row"
             autoComplete="off"
