@@ -39,6 +39,14 @@ export const drug_info = defined(memo(async (drug_search) => {
 const CID = defined(async (drug_search) => (await drug_info(drug_search)).CID)
 const CHEMBL = defined(async (drug_search) => (await drug_info(drug_search)).Synonym.find(item => item.trim().match(/^CHEMBL/)))
 const DrugBankNum = defined(async (drug_search) => (await drug_info(drug_search)).Synonym.find(item => item.trim().match(/^DB/)))
+const GenName = defined(async (drug_search) => {
+  const info = (await drug_info(drug_search.toLowerCase()))
+  if (drug_search.toLowerCase() === info.Synonym[0]) {
+    return info.Synonym[1]
+  } else {
+    return info.Synonym[0]
+  }
+})
 const GTPL = defined(async (drug_search) => (await drug_info(drug_search)).Synonym.find(item => item.trim().match(/^GTPL/)).substring(4))
 
 const manifest = [
