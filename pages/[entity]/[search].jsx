@@ -1,13 +1,11 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
-import { useQsState } from '@/utils/qsstate'
 import callable from '@/utils/callable'
 import memo from "@/utils/memo"
 import useRouterEx from '@/utils/routerEx'
 
-const Loader = dynamic(() => import('@/components/Loader'))
 const EntityCard = dynamic(() => import('@/components/EntityCard'))
-const SearchControl = dynamic(() => import('@/components/SearchControl'))
+const SearchPage = dynamic(() => import('@/components/SearchPage'))
 
 const isitup = memo(async (url) => {
   try {
@@ -73,52 +71,29 @@ export async function getStaticProps({ params: { entity, search } }) {
 
 export default function Search(props) {
   const router = useRouterEx()
-  const { entity, search, manifest } = props
-  const [CF, setCF] = useQsState('CF', false)
-  const [PS, setPS] = useQsState('PS', true)
-  const [Ag, setAg] = useQsState('Ag', true)
   return (
-    <div>
-      <SearchControl
-        entity={router.query.entity || entity}
-        search={router.query.search || search}
-        CF={CF} setCF={setCF}
-        PS={PS} setPS={setPS}
-        Ag={Ag} setAg={setAg}
-        onSubmit={query => {
-          router.push({
-            pathname: '/[entity]/[search]',
-            query,
-          })
-        }}
-      />
-      <div className="album py-5 bg-light">
-        <div className="container">
-          {!manifest || router.loading ? (
-            <Loader />
-          ) : (
-            <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 justify-content-center">
-              {manifest
-                .filter(item => {
-                  if (CF === true && !('CF' in item.tags)) return false
-                  return (
-                    (PS === true && 'PS' in item.tags)
-                    || (Ag === true && 'Ag' in item.tags)
-                    || (PS === false && Ag === false)
-                  )
-                })
-                .map((item) => (
-                  <EntityCard
-                    key={item.name}
-                    {...item}
-                    search={search}
-                  />
-                ))
-              }
-            </div>
-          )}
+    <SearchPage router={router} {...props}>{({ router, CF, PS, Ag }) => (
+      props.manifest && !router.loading ? (
+        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 justify-content-center">
+          {props.manifest
+            .filter(item => {
+              if (CF === true && !('CF' in item.tags)) return false
+              return (
+                (PS === true && 'PS' in item.tags)
+                || (Ag === true && 'Ag' in item.tags)
+                || (PS === false && Ag === false)
+              )
+            })
+            .map((item) => (
+              <EntityCard
+                key={item.name}
+                {...item}
+                search={props.search}
+              />
+            ))
+          }
         </div>
-      </div>
-    </div>
+      ) : null
+    )}</SearchPage>
   )
 }
