@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import dynamic from 'next/dynamic'
 import useRouterEx from '@/utils/routerEx'
+import capitalize from '@/utils/capitalize'
 
 const SearchPage = dynamic(() => import('@/components/SearchPage'))
 

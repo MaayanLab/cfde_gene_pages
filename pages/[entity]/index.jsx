@@ -1,3 +1,4 @@
+import React from 'react'
 import full_manifest from '@/manifest'
 import dynamic from 'next/dynamic'
 import cmp from '@/manifest/cmp'
