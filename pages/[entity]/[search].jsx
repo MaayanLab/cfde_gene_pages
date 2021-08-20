@@ -6,6 +6,8 @@ import full_manifest, { gene_id, drug_info } from '@/manifest'
 import useRouterEx from '@/utils/routerEx'
 import cmp from '@/manifest/cmp'
 import sorted from '@/utils/sorted'
+import defined from '@/utils/defined'
+import countable from "@/utils/countable"
 
 const EntityCard = dynamic(() => import('@/components/EntityCard'))
 const SearchPage = dynamic(() => import('@/components/SearchPage'))
@@ -60,12 +62,9 @@ export async function getStaticProps({ params: { entity, search } }) {
           if (!(entity in item.tags)) return
           try {
             const resolved_item = { ...item }
-            delete resolved_item.countapi
-            delete resolved_item.clickurl
-            resolved_item.clicks = await item.countapi.get()
-            resolved_item.resolved_url = await callable(item.clickurl)(search)
-            if (typeof resolved_item.resolved_url !== 'string') throw new Error(`${item.name}: url is not a string`)
-            resolved_item.status = await isitup(resolved_item.resolved_url)
+            resolved_item.clicks = await countable(item.countapi).get()
+            resolved_item.clickurl = await defined(callable(item.clickurl))(search)
+            resolved_item.status = await isitup(resolved_item.clickurl)
             if (resolved_item.status !== 'yes') throw new Error(`${item.name}: isitup returned ${resolved_item.status}`)
             return resolved_item
           } catch (e) {

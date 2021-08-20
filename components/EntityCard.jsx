@@ -1,10 +1,11 @@
 import React from "react"
+import countable from "@/utils/countable"
 
 export default function EntityCard(props) {
     const [clicks, setClicks] = React.useState(props.clicks)
     React.useEffect(async () => {
         if (props.countapi !== undefined) {
-            setClicks(await props.countapi.get())
+            setClicks(await countable(props.countapi).get())
         }
     }, [props.countapi])
     return (
@@ -28,13 +29,13 @@ export default function EntityCard(props) {
                         </div>
                         // </div>
                     ) : null}
-                    {props.resolved_url !== undefined ? (
+                    {props.clickurl !== undefined ? (
                         <div className="col-sm-6">
                             <h5 className="card-title">
             <span><a
-                href={props.resolved_url}
+                href={props.clickurl}
                 target="_blank"
-                onClick={() => props.countapi.hit()}
+                onClick={() => countable(props.countapi).hit()}
             >{props.title}</a></span>
                             </h5>
                         </div>

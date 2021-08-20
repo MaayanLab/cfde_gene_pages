@@ -2,6 +2,7 @@ import full_manifest from '@/manifest'
 import dynamic from 'next/dynamic'
 import cmp from '@/manifest/cmp'
 import sorted from '@/utils/sorted'
+import countable from '@/utils/countable'
 
 const EntityCard = dynamic(() => import('@/components/EntityCard'))
 
@@ -24,9 +25,8 @@ export async function getStaticProps({ params: { entity } }) {
           if (!(entity in item.tags)) return
           try {
             const resolved_item = { ...item }
-            delete resolved_item.countapi
             delete resolved_item.clickurl
-            resolved_item.clicks = await item.countapi.get()
+            resolved_item.clicks = await countable(item.countapi).get()
             return resolved_item
           } catch (e) {
             console.warn(`${item.name} was not resolved: ${e}`)
