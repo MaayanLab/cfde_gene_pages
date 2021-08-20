@@ -13,7 +13,7 @@ export default function EntityCard(props) {
             backgroundImage: props.tags.CF ? "url('/logos/CFDE_logo.png')" : undefined,
             backgroundRepeat: "no-repeat",
             backgroundPosition: props.tags.CF ? "97% 2%" : undefined,
-            backgroundSize: props.tags.CF ? "83px 45px" : undefined
+            backgroundSize: props.tags.CF ? "50px 27px" : undefined
         }}>
             {/*{props.img1 !== undefined ? (*/}
             {/*  <div className="card-image-wrapper-1">*/}
@@ -30,7 +30,7 @@ export default function EntityCard(props) {
                         // </div>
                     ) : null}
                     {props.clickurl !== undefined ? (
-                        <div className="col-sm-6">
+                        <div className="col-sm-7">
                             <h5 className="card-title">
             <span><a
                 href={props.clickurl}
