@@ -19,11 +19,11 @@ export default function EntityCard(props) {
             {/*    <img className="card-img-top img-fluid" src={props.img1.src} alt={props.img1.alt} width="100%" height="100%" />*/}
             {/*  </div>*/}
             {/*) : null}*/}
-            {/*{props.img2 !== undefined ? (*/}
-            {/*  <div className="card-image-wrapper-2">*/}
-            {/*    <img className="card-img-top img-fluid" src={props.img2.src} alt={props.img2.alt} width="100%" height="100%" />*/}
-            {/*  </div>*/}
-            {/*) : null}*/}
+            {props.img2 !== undefined ? (
+              <div className="card-image-wrapper-2">
+                <img className="card-img-top img-fluid" src={props.img2.src} alt={props.img2.alt} width="100%" height="100%" />
+              </div>
+            ) : null}
             <div className="card-body">
 
                 <div className="row mb-3">
