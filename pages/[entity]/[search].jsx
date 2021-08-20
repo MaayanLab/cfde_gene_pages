@@ -34,6 +34,12 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params: { entity, search } }) {
+  if (search === 'error') {
+    return {
+      props: { error: true },
+      revalidate: false,
+    }
+  }
   try {
     if (entity === 'gene') {
       if ((await gene_id(search)) === undefined) throw new Error('NotFound')
