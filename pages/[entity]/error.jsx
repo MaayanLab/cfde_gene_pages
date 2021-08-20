@@ -17,7 +17,7 @@ export default function SearchError(props) {
       !router.loading ? (
         <div className="album py-5 bg-light">
           <div className="container">
-            <div className="text-center">No information found for this {entity}</div> : null}
+            <div className="text-center">No information found for this {entity}</div>
           </div>
         </div>
       ) : null
