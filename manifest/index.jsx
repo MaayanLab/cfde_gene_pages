@@ -776,6 +776,46 @@ const manifest = [
     clickurl: async (search) => `https://genetics.opentargets.org/gene/${await ensembl_id(search)}`,
   },
   {
+    name: 'genemania',
+    tags: {
+      gene: true,
+      Ag: true,
+    },
+    img1: {
+      src: '/logos/GeneMANIA_logo.png',
+      alt: 'GeneMANIA site logo',
+    },
+    img2: {
+      src: '/logos/GeneMANIA_site.png',
+      alt: 'GeneMANIA site image',
+    },
+    title: 'GeneMANIA',
+    description: 'GeneMANIA builds subnetworks around an input gene using functional association data.',
+    url: "http://genemania.org",
+    countapi: 'maayanlab.github.io/GeneMANIAclick',
+    clickurl: async (search) => `http://genemania.org/search/homo-sapiens/{${await GenName(search)}}`
+  },
+  {
+    name: 'humanproteinatlas',
+    tags: {
+      gene: true,
+      PS: true,
+    },
+    img1: {
+      src: '/logos/HPA_logo.png',
+      alt: 'Human Protein Atlas site logo',
+    },
+    img2: {
+      src: '/logos/HPA_site.png',
+      alt: 'Human Protein Atlas site image',
+    },
+    title: 'Human Protein Atlas',
+    description: 'The Human Protein Atlas aims to map all human proteins in cells, tissues and organs using the integration of various omics technologies.',
+    url: "https://www.proteinatlas.org",
+    countapi: 'maayanlab.github.io/HumanProteinAtlasclick',
+    clickurl: async (search) => `https://www.proteinatlas.org/{${await GenName(search)}}`
+  },
+  {
     name: 'OpenTargets',
     tags: {
       drug: true,
@@ -1081,50 +1121,6 @@ const manifest = [
     url: "https://www.accessdata.fda.gov/scripts/cder/daf/",
     countapi: 'maayanlab.github.io/DrugsFDAclick',
   },
-  {
-    name: 'genemania',
-    tags: {
-      drug: ,
-      CF: false,
-      PS: ,
-      Ag: ,
-    },
-    img1: {
-      src: '',
-      alt: '',
-    },
-    img2: {
-      src: '',
-      alt: '',
-    },
-    title: 'GeneMANIA',
-    description: 'GeneMANIA builds subnetworks around an input gene using functional association data.',
-    url: "http://genemania.org",
-    countapi: '',
-    clickurl: async (search) => `http://genemania.org/search/homo-sapiens/{${await GenName(search)}}`
-  },
-  {
-    name: 'humanproteinatlas',
-    tags: {
-      drug: ,
-      CF: false,
-      PS: ,
-      Ag: ,
-    },
-    img1: {
-      src: '',
-      alt: '',
-    },
-    img2: {
-      src: '',
-      alt: '',
-    },
-    title: 'Human Protein Atlas',
-    description: 'The Human Protein Atlas aims to map all human proteins in cells, tissues and organs using the integration of various omics technologies.',
-    url: "https://www.proteinatlas.org",
-    countapi: '',
-    clickurl: async (search) => `https://www.proteinatlas.org/{${await GenName(search)}}`
-  }
 ]
 
 // Remove `false` entries so the key does not appear with `in` operator
