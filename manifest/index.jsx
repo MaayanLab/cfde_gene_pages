@@ -132,7 +132,7 @@ const manifest = [
     description: 'The LINCS Data Portal 3.0 serves LINCS datasets and signatures. It provides a signature similarity search to query for mimicker or reverser signatures.',
     url: "https://ldp3.cloud/",
     countapi: 'maayanlab.github.io/lincsclick',
-    clickurl: async (search) => `https://ldp3.cloud/#/MetadataSearch/Signatures?query={%22skip%22:0,%22limit%22:10,%22search%22:[%22${search}%22]`,
+    clickurl: async (search) => `https://ldp3.cloud/#/MetadataSearch/Signatures?query={%22skip%22:0,%22limit%22:10,%22search%22:[%22${search}%22]}`,
   },
   {
     name: 'metabolomics',
