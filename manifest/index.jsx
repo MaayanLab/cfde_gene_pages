@@ -32,14 +32,13 @@ export const drug_info = defined(memo(async (drug_search) => {
   const drug_res = await fetch(`${drug_query_url}/pug/compound/name/${drug_search}/synonyms/JSON`)
   if (drug_res.ok) {
     const data = await drug_res.json()
-    const info = data.InformationList.Information[0]
-    return info
+    return data.InformationList.Information[0]
   }
 }))
 const CID = defined(async (drug_search) => (await drug_info(drug_search)).CID)
 const CHEMBL = defined(async (drug_search) => (await drug_info(drug_search)).Synonym.find(item => item.trim().match(/^CHEMBL/)))
 const DrugBankNum = defined(async (drug_search) => (await drug_info(drug_search)).Synonym.find(item => item.trim().match(/^DB/)))
-const GenName = defined(async (drug_search) => {
+const DrugName = defined(async (drug_search) => {
   const info = (await drug_info(drug_search.toLowerCase()))
   if (drug_search.toLowerCase() === info.Synonym[0]) {
     return info.Synonym[1]
@@ -793,7 +792,7 @@ const manifest = [
     description: 'GeneMANIA builds subnetworks around an input gene using functional association data.',
     url: "http://genemania.org",
     countapi: 'maayanlab.github.io/GeneMANIAclick',
-    clickurl: async (search) => `http://genemania.org/search/homo-sapiens/${await GenName(search)}`
+    clickurl: async (search) => `https://genemania.org/search/homo-sapiens/${search}`
   },
   {
     name: 'humanproteinatlas',
@@ -989,7 +988,7 @@ const manifest = [
     description: `Drugs.com is the largest, most widely visited, independent medicine information website available on the Internet. Drug.com's aim is to be the Internet’s most trusted resource for drug and related health information.`,
     url: "https://www.drugs.com/",
     countapi: 'maayanlab.github.io/drugscomclick',
-    clickurl: async (search) => `https://www.drugs.com/${await GenName(search)}.html`,
+    clickurl: async (search) => `https://www.drugs.com/${await DrugName(search)}.html`,
   },
   {
     name: 'rxlist',
@@ -1011,7 +1010,7 @@ const manifest = [
     description: 'RxList is an online medical resource dedicated to offering detailed and current pharmaceutical information on brand and generic drugs.',
     url: "https://www.rxlist.com/script/main/hp.asp",
     countapi: 'maayanlab.github.io/rxlistclick',
-    clickurl: async (search) => `https://www.rxlist.com/${await GenName(search)}-drug.htm`,
+    clickurl: async (search) => `https://www.rxlist.com/${await DrugName(search)}-drug.htm`,
   },
   {
     name: 'drugcentral',
@@ -1034,7 +1033,7 @@ const manifest = [
     description: 'DrugCentral provides information on active ingredients chemical entities, pharmaceutical products, drug mode of action, indications, pharmacologic action.',
     url: "https://drugcentral.org/",
     countapi: 'maayanlab.github.io/drugcentral',
-    clickurl: async (search) => `https://drugcentral.org/drugcard/74?q=${await GenName(search)}`,
+    clickurl: async (search) => `https://drugcentral.org/drugcard/74?q=${await DrugName(search)}`,
   },
   {
     name: 'zinc15',
@@ -1056,7 +1055,7 @@ const manifest = [
     description: 'ZINC is a free database of commercially-available compounds for virtual screening. ZINC contains over 230 million purchasable compounds in ready-to-dock, 3D formats. ZINC also contains over 750 million purchasable compounds you can search for analogs.',
     url: "https://zinc15.docking.org/",
     countapi: 'maayanlab.github.io/ZINC15click',
-    clickurl: async (search) => `https://zinc15.docking.org/substances/search/?q=${await GenName(search)}`,
+    clickurl: async (search) => `https://zinc15.docking.org/substances/search/?q=${await DrugName(search)}`,
   },
   {
     name: 'ldp2',
