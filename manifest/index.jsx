@@ -22,7 +22,7 @@ const gene_info = defined(memo(async (gene_search) => {
 }))
 const ensembl_id = defined(async (gene_search) => (await gene_info(gene_search)).ensembl.gene)
 const HGNC = defined(async (gene_search) => (await gene_info(gene_search)).HGNC)
-const uniprot_qb = defined(async (gene_search) => (await gene_info(gene_search)).pantherdb.uniprot_qb)
+const uniprot_kb = defined(async (gene_search) => (await gene_info(gene_search)).pantherdb.uniprot_kb)
 const MGI = defined(async (gene_search) => (await gene_info(gene_search)).pantherdb.ortholog[0].MGI)
 const transcript = defined(async (gene_search) => (await gene_info(gene_search)).exac.transcript)
 const entrezgene = defined(async (gene_search) => (await gene_info(gene_search)).entrezgene)
@@ -90,7 +90,7 @@ const manifest = [
     description: 'The Pharos interface provides facile access to most data types collected by the Knowledge Management Center for the IDG program.',
     url: "https://pharos.nih.gov/",
     countapi: 'maayanlab.github.io/pharclick',
-    clickurl: async (search) => `https://pharos.nih.gov/targets/${await uniprot_qb(search)}`,
+    clickurl: async (search) => `https://pharos.nih.gov/targets/${await uniprot_kb(search)}`,
   },
   {
     name: 'Harmonziome',
@@ -173,7 +173,7 @@ const manifest = [
     description: 'GlyGen provides computational and informatics resources and tools for glycosciences research using information from many data sources.',
     url: "https://www.glygen.org/protein-search/",
     countapi: 'maayanlab.github.io/glygclick',
-    clickurl: async (search) => `https://www.glygen.org/protein/${await uniprot_qb(search)}`,
+    clickurl: async (search) => `https://www.glygen.org/protein/${await uniprot_kb(search)}`,
   },
   {
     name: 'komp',
@@ -337,7 +337,7 @@ const manifest = [
     description: 'The mission of UniProt is to provide the scientific community with a comprehensive, high-quality and freely accessible resource of protein sequence and functional information.',
     url: "https://www.uniprot.org/",
     countapi: 'maayanlab.github.io/uniprotclick',
-    clickurl: async (search) => `https://www.uniprot.org/uniprot/${await uniprot_qb(search)}`,
+    clickurl: async (search) => `https://www.uniprot.org/uniprot/${await uniprot_kb(search)}`,
   },
   {
     name: 'MARRVEL',
@@ -517,7 +517,7 @@ const manifest = [
     description: 'PDBe-KB is a community-driven resource managed by the PDBe team, collating functional annotations and predictions for structure data in the PDB archive.',
     url: "https://www.ebi.ac.uk/pdbe/pdbe-kb",
     countapi: 'maayanlab.github.io/PDBeclick',
-    clickurl: async (search) => `https://www.ebi.ac.uk/pdbe/pdbe-kb/proteins/${await uniprot_qb(search)}`,
+    clickurl: async (search) => `https://www.ebi.ac.uk/pdbe/pdbe-kb/proteins/${await uniprot_kb(search)}`,
   },
   {
     name: 'pdb',
@@ -652,7 +652,7 @@ const manifest = [
     description: 'The Gene Ontology (GO) knowledgebase is the world’s largest source of information on the functions of genes.',
     url: "http://geneontology.org/",
     countapi: 'maayanlab.github.io/GOclick',
-    clickurl: async (search) => `http://amigo.geneontology.org/amigo/gene_product/UniProtKB:${await uniprot_qb(search)}`,
+    clickurl: async (search) => `http://amigo.geneontology.org/amigo/gene_product/UniProtKB:${await uniprot_kb(search)}`,
   },
   {
     name: 'reactome',
@@ -813,7 +813,7 @@ const manifest = [
     description: 'The Human Protein Atlas aims to map all human proteins in cells, tissues and organs using the integration of various omics technologies.',
     url: "https://www.proteinatlas.org",
     countapi: 'maayanlab.github.io/HumanProteinAtlasclick',
-    clickurl: async (search) => `https://www.proteinatlas.org/search/gene_name:${await GenName(search)}`
+    clickurl: async (search) => `https://www.proteinatlas.org/${await ensembl_id(search)}-${search}`
   },
   {
     name: 'OpenTargets',
