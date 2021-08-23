@@ -24,13 +24,13 @@ export default function EntityCard(props) {
                 <div className="row mb-3">
                     {props.img1 !== undefined ? (
                         // <div className="card-image-wrapper-1">
-                        <div className="col-sm-4">
+                        <div className="col-4">
                             <img className="img-fluid rounded" src={props.img1.src} alt={props.img1.alt}/>
                         </div>
                         // </div>
                     ) : null}
                     {props.clickurl !== undefined ? (
-                        <div className="col-sm-7">
+                        <div className="col-7">
                             <h5 className="card-title">
                                 {props.title}
                             </h5>
