@@ -793,7 +793,7 @@ const manifest = [
     description: 'GeneMANIA builds subnetworks around an input gene using functional association data.',
     url: "http://genemania.org",
     countapi: 'maayanlab.github.io/GeneMANIAclick',
-    clickurl: async (search) => `http://genemania.org/search/homo-sapiens/{${await GenName(search)}}`
+    clickurl: async (search) => `http://genemania.org/search/homo-sapiens/${await GenName(search)}`
   },
   {
     name: 'humanproteinatlas',
@@ -813,7 +813,7 @@ const manifest = [
     description: 'The Human Protein Atlas aims to map all human proteins in cells, tissues and organs using the integration of various omics technologies.',
     url: "https://www.proteinatlas.org",
     countapi: 'maayanlab.github.io/HumanProteinAtlasclick',
-    clickurl: async (search) => `https://www.proteinatlas.org/{${await GenName(search)}}`
+    clickurl: async (search) => `https://www.proteinatlas.org/search/gene_name:${await GenName(search)}`
   },
   {
     name: 'OpenTargets',
