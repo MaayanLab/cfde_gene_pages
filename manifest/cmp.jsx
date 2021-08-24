@@ -5,6 +5,12 @@ export default function cmp(a, b) {
   } else if (!a.tags.CF && b.tags.CF) {
     return 1
   }
+  // Maayanlab de-prioritized
+  if (a.tags.MaayanLab && !b.tags.MaayanLab) {
+    return 1
+  } else if (!a.tags.MaayanLab && b.tags.MaayanLab) {
+    return -1
+  }
   // More clicks prioritized
   const clicks = b.clicks - a.clicks
   if (clicks > 0) {

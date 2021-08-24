@@ -97,6 +97,7 @@ const manifest = [
       CF: false,
       Ag: true,
       gene: true,
+      MaayanLab: true,
     },
     img1: {
       src: '/logos/MaayanLab_logo.png',
@@ -222,6 +223,7 @@ const manifest = [
       CF: false,
       PS: true,
       gene: true,
+      MaayanLab: true,
     },
     img1: {
       src: '/logos/MaayanLab_logo.png',
@@ -283,6 +285,7 @@ const manifest = [
       gene: true,
       CF: false,
       Ag: true,
+      MaayanLab: true,
     },
     img1: {
       src: '/logos/MaayanLab_logo.png',
@@ -604,6 +607,7 @@ const manifest = [
     tags: {
       gene: true,
       PS: true,
+      MaayanLab: true,
     },
     img1: {
       src: '/logos/MaayanLab_logo.png',
@@ -931,6 +935,7 @@ const manifest = [
       drug: true,
       PS: false,
       Ag: true,
+      MaayanLab: true,
     },
     img1: {
       src: '/logos/MaayanLab_logo.png',
@@ -953,6 +958,7 @@ const manifest = [
       drug: true,
       PS: false,
       Ag: true,
+      MaayanLab: true,
     },
     img1: {
       src: '/logos/MaayanLab_logo.png',
