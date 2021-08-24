@@ -63,7 +63,7 @@ export default function EntityCard(props) {
                     {/*    href={props.url}*/}
                     {/*  >View on Site</a>*/}
                     {/*</div>*/}
-                    {clicks !== undefined ? <p>Clicks: <span>{clicks}</span></p> : null}
+                    {clicks !== undefined ? <small className="text-muted">Clicks: <span>{clicks}</span></small> : null}
                 </div>
             </div>
         </div>
