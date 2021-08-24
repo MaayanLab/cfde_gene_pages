@@ -31,9 +31,12 @@ export default function EntityCard(props) {
                     ) : null}
                     {props.clickurl !== undefined ? (
                         <div className="col-7">
+                            <a
+                                href={props.url}
+                                target="_blank">
                             <h5 className="card-title">
                                 {props.title}
-                            </h5>
+                            </h5></a>
                         </div>
                     ) : null}
                 </div>
