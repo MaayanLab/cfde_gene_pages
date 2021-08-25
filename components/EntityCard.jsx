@@ -25,7 +25,14 @@ export default function EntityCard(props) {
                     {props.img1 !== undefined ? (
                         // <div className="card-image-wrapper-1">
                         <div className="col-4">
-                            <img className="img-fluid rounded" src={props.img1.src} alt={props.img1.alt}/>
+                            <img
+                                className="img-fluid rounded"
+                                src={props.img1.src}
+                                alt={props.img1.alt}
+                                style={{
+                                    maxHeight: "50px",
+                                    maxWidth: "100px"
+                                }}/>
                         </div>
                         // </div>
                     ) : null}
@@ -42,7 +49,13 @@ export default function EntityCard(props) {
                 </div>
                 {props.img2 !== undefined ? (
                     <div className="card-image-wrapper-2">
-                        <img className="card-img-top img-fluid" src={props.img2.src} alt={props.img2.alt} width="100%" height="100%" />
+                        <img
+                            className="card-img-top img-fluid"
+                            src={props.img2.src}
+                            alt={props.img2.alt}
+                            style={{
+                                height: "170px"
+                            }}/>
                     </div>
                 ) : null}
                 {props.clickurl !== undefined ? (
@@ -53,17 +66,11 @@ export default function EntityCard(props) {
                     >Explore {props.search} with {props.title}</a></p>
                 ) : null}
                 <p className="card-text">{props.description}</p>
-                <div className="d-flex justify-content-between align-items-center">
-                    {/*<div className="btn-group">*/}
-                    {/*  <a*/}
-                    {/*    className="btn btn-sm btn-outline-primary"*/}
-                    {/*    target="_blank"*/}
-                    {/*    role="button"*/}
-                    {/*    onClick={() => props.countapi.hit()}*/}
-                    {/*    href={props.url}*/}
-                    {/*  >View on Site</a>*/}
-                    {/*</div>*/}
-                    {clicks !== undefined ? <small className="text-muted">Clicks: <span>{clicks}</span></small> : null}
+                <div style={{
+                    position: "absolute",
+                    bottom: "15px"
+                }}>
+                    {clicks !== undefined ? <small className="card-text text-muted">Clicks: <span>{clicks}</span></small> : null}
                 </div>
             </div>
         </div>

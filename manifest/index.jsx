@@ -35,6 +35,15 @@ export const drug_info = defined(memo(async (drug_search) => {
     return data.InformationList.Information[0]
   }
 }))
+
+export const rx_1st_alias = defined(memo(async (drug_search) => {
+  const rx_suggestion = await fetch(`https://www.rxlist.com/rxl/api/search/${drug_search}`)
+  if (rx_suggestion.ok) {
+    const data = await rx_suggestion.json()
+    return data[0].Name
+  }
+}))
+
 const CID = defined(async (drug_search) => (await drug_info(drug_search)).CID)
 const CHEMBL = defined(async (drug_search) => (await drug_info(drug_search)).Synonym.find(item => item.trim().match(/^CHEMBL/)))
 const DrugBankNum = defined(async (drug_search) => (await drug_info(drug_search)).Synonym.find(item => item.trim().match(/^DB/)))
@@ -47,6 +56,7 @@ const DrugName = defined(async (drug_search) => {
   }
 })
 const GTPL = defined(async (drug_search) => (await drug_info(drug_search)).Synonym.find(item => item.trim().match(/^GTPL/)).substring(4))
+const RxList = defined(async (drug_search) => (await  rx_1st_alias(drug_search)))
 
 const manifest = [
   {
@@ -162,7 +172,7 @@ const manifest = [
       gene: true,
     },
     img1: {
-      src: "logos/Glygen_logo.jpeg",
+      src: "/logos/Glygen_logo.png",
       alt: "GlyGen image",
     },
     img2: {
@@ -1014,9 +1024,9 @@ const manifest = [
     },
     title: 'RxList',
     description: 'RxList is an online medical resource dedicated to offering detailed and current pharmaceutical information on brand and generic drugs.',
-    url: "https://www.rxlist.com/script/main/hp.asp",
+    url: "https://www.rxlist.com/",
     countapi: 'maayanlab.github.io/rxlistclick',
-    clickurl: async (search) => `https://www.rxlist.com/${await DrugName(search)}-drug.htm`,
+    clickurl: async (search) => `https://www.rxlist.com/${await RxList(search)}-drug.htm`,
   },
   {
     name: 'drugcentral',
