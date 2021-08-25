@@ -25,7 +25,7 @@ export default function SearchControl({
   return (
     <section className="py-1 container">
       <div className="row py-lg-5">
-        <div className="col-lg-10 col-md-8 mx-auto">
+        <div className="col-lg-6 col-md-8 mx-auto">
           <h1 className="fw-light">Gene and Drug Landing Page Aggregator</h1>
           <p className="text-muted mb-5">This page has links to {manifest_tag_counts.gene} gene and {manifest_tag_counts.drug} drug repositories that provide direct links to gene and drug landing pages. You can search by gene or drug name and then choose the sites that contain knowledge about your gene or drug. Common Fund program cards are colored in grey.</p>
           <form

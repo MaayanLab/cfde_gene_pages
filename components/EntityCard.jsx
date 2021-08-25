@@ -9,6 +9,7 @@ export default function EntityCard(props) {
         }
     }, [props.countapi])
     return (
+        <div className="col">
         <div className="card shadow-sm m-3 px-3 pt-2 pb-3" title={ props.tags.CF ? "Affiliated with the CFDE" : undefined } style={{
             backgroundImage: props.tags.CF ? "url('/logos/CFDE_logo.png')" : undefined,
             backgroundRepeat: "no-repeat",
@@ -75,6 +76,7 @@ export default function EntityCard(props) {
                     {clicks !== undefined ? <small className="card-text text-muted">Clicks: <span>{clicks}</span></small> : null}
                 </div>
             </div>
+        </div>
         </div>
     )
 }

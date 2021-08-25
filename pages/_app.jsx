@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
+import './_app.css'
 import Head from 'next/head'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
@@ -8,6 +9,8 @@ import { faFacebookF, faLinkedinIn, faTwitter } from '@fortawesome/free-brands-s
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
 const Analytics = dynamic(() => import('@/components/Analytics'))
+
+
 
 export default function App({ Component, pageProps }) {
   const { publicRuntimeConfig } = getConfig()
@@ -54,11 +57,11 @@ export default function App({ Component, pageProps }) {
         </nav>
       </header>
 
-      <main className="flex-grow-1">
+      <main>
         <Component {...pageProps} />
         <Analytics />
       </main>
-      <footer className="footer mt-auto text-muted py-5" style={{ backgroundColor: 'rgba(0, 0, 0, 0.1)' }}>
+      <footer className="footer mt-auto text-muted pt-4 pb-3" style={{ backgroundColor: 'rgba(0, 0, 0, 0.1)' }}>
         <div className="container">
           <p className="float-end mb-1">
             <a
