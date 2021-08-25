@@ -45,7 +45,7 @@ export default function App({ Component, pageProps }) {
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
                     aria-label="Toggle navigation">
-              <span className="navbar-toggler-icon"></span>
+              <span className="navbar-toggler-icon"/>
             </button>
             <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
               <div className="navbar-nav">
@@ -67,25 +67,25 @@ export default function App({ Component, pageProps }) {
             <a
                 className="btn btn-primary px-2 py-1 m-1"
                 style={{ backgroundColor: '#3b5998', borderRadius: '20px' }}
-                href="https://www.facebook.com/sharer/sharer.php?u=https://maayanlab.github.io/cfde_gene_pages/index.html"
+                href="https://www.facebook.com/sharer/sharer.php?u=https://cfde-gene-pages.maayanlab.cloud/"
                 role="button"
             ><FontAwesomeIcon width={16} height={16} icon={faFacebookF} /></a>
             <a
                 className="btn btn-primary px-2 py-1 m-1"
                 style={{ backgroundColor: '#55acee', borderRadius: '20px' }}
-                href="https://twitter.com/intent/tweet?url=https://maayanlab.github.io/cfde_gene_pages/index.html&text="
+                href="https://twitter.com/intent/tweet?url=https://cfde-gene-pages.maayanlab.cloud/"
                 role="button"
             ><FontAwesomeIcon width={16} height={16} icon={faTwitter} /></a>
             <a
                 className="btn btn-primary px-2 py-1 m-1"
                 style={{ backgroundColor: '#0082ca', borderRadius: '20px' }}
-                href="https://www.linkedin.com/shareArticle?mini=true&url=https://maayanlab.github.io/cfde_gene_pages/index.html"
+                href="https://www.linkedin.com/shareArticle?mini=true&url=https://cfde-gene-pages.maayanlab.cloud/"
                 role="button"
             ><FontAwesomeIcon width={16} height={16} icon={faLinkedinIn} /></a>
             <a
                 className="btn btn-primary px-2 py-1 m-1"
                 style={{ backgroundColor: '#333333', borderRadius: '20px' }}
-                href="mailto:info@example.com?&subject=&cc=&bcc=&body=https://maayanlab.github.io/cfde_gene_pages/index.html%0A"
+                href="mailto:info@example.com?&subject=&cc=&bcc=&body=https://cfde-gene-pages.maayanlab.cloud/"
                 role="button"
             ><FontAwesomeIcon width={16} height={16} icon={faEnvelope} /></a>
           </p>
