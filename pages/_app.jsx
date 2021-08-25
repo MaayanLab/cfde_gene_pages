@@ -1,5 +1,4 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
-import './_app.css'
 import Head from 'next/head'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
@@ -28,77 +27,68 @@ export default function App({ Component, pageProps }) {
         <meta name="theme-color" content="#ffffff" />
         <title>Gene and Drug Landing Page Aggregator</title>
       </Head>
+
       <header>
-        <div className="collapse bg-dark" id="navbarHeader">
-          <div className="container">
-            <div className="row">
-              <div className="col-sm-8 col-md-7 py-4">
-                <h4 className="text-white">About</h4>
-              </div>
-              <div className="col-sm-4 offset-md-1 py-4">
-                <h4 className="text-white">More</h4>
-              </div>
-            </div>
-          </div>
-        </div>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm px-3 py-2">
           <div className="container-fluid">
+
             <Link href="/" passHref>
-              <a className="navbar-brand d-flex align-items-center">
-                <img height="40px" width="40px" style={{ color: 'white' }} src="/logos/logo.png" />
+              <a className="navbar-brand">
+                <img height="40px" width="40px" style={{color: "white"}} src="/logos/logo.png"/>
                 <strong>&nbsp; Gene and Drug Landing Page Aggregator</strong>
               </a>
             </Link>
+
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarCfde" aria-controls="navbarCfde" aria-expanded="false"
+                    data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
                     aria-label="Toggle navigation">
-              <span className="navbar-toggler-icon"/>
+              <span className="navbar-toggler-icon"></span>
             </button>
-            <div className="navbar-collapse collapse" id="navbarCfde">
+            <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
               <div className="navbar-nav">
-                <Link href="/gene/" passHref><a className="nav-link" style={{color: 'grey'}}>Gene Resources</a></Link>
-                <Link href="/drug/" passHref><a className="nav-link" style={{color: 'grey'}}>Drug Resources</a></Link>
+                <Link href="/gene/" passHref><a className="nav-link" style={{color: "grey"}}>Gene Resources</a></Link>
+                <Link href="/drug/" passHref><a className="nav-link" style={{color: "grey"}}>Drug Resources</a></Link>
               </div>
             </div>
           </div>
         </nav>
       </header>
+
       <main className="flex-grow-1">
         <Component {...pageProps} />
         <Analytics />
       </main>
-      <footer className="footer text-muted py-5" style={{ backgroundColor: 'rgba(0, 0, 0, 0.1)' }}>
+      <footer className="footer mt-auto text-muted py-5" style={{ backgroundColor: 'rgba(0, 0, 0, 0.1)' }}>
         <div className="container">
           <p className="float-end mb-1">
             <a
-              className="btn btn-primary px-2 py-1 m-1"
-              style={{ backgroundColor: '#3b5998', borderRadius: '20px' }}
-              href="https://www.facebook.com/sharer/sharer.php?u=https://maayanlab.github.io/cfde_gene_pages/index.html"
-              role="button"
+                className="btn btn-primary px-2 py-1 m-1"
+                style={{ backgroundColor: '#3b5998', borderRadius: '20px' }}
+                href="https://www.facebook.com/sharer/sharer.php?u=https://maayanlab.github.io/cfde_gene_pages/index.html"
+                role="button"
             ><FontAwesomeIcon width={16} height={16} icon={faFacebookF} /></a>
             <a
-              className="btn btn-primary px-2 py-1 m-1"
-              style={{ backgroundColor: '#55acee', borderRadius: '20px' }}
-              href="https://twitter.com/intent/tweet?url=https://maayanlab.github.io/cfde_gene_pages/index.html&text="
-              role="button"
+                className="btn btn-primary px-2 py-1 m-1"
+                style={{ backgroundColor: '#55acee', borderRadius: '20px' }}
+                href="https://twitter.com/intent/tweet?url=https://maayanlab.github.io/cfde_gene_pages/index.html&text="
+                role="button"
             ><FontAwesomeIcon width={16} height={16} icon={faTwitter} /></a>
             <a
-              className="btn btn-primary px-2 py-1 m-1"
-              style={{ backgroundColor: '#0082ca', borderRadius: '20px' }}
-              href="https://www.linkedin.com/shareArticle?mini=true&url=https://maayanlab.github.io/cfde_gene_pages/index.html"
-              role="button"
+                className="btn btn-primary px-2 py-1 m-1"
+                style={{ backgroundColor: '#0082ca', borderRadius: '20px' }}
+                href="https://www.linkedin.com/shareArticle?mini=true&url=https://maayanlab.github.io/cfde_gene_pages/index.html"
+                role="button"
             ><FontAwesomeIcon width={16} height={16} icon={faLinkedinIn} /></a>
             <a
-              className="btn btn-primary px-2 py-1 m-1"
-              style={{ backgroundColor: '#333333', borderRadius: '20px' }}
-              href="mailto:info@example.com?&subject=&cc=&bcc=&body=https://maayanlab.github.io/cfde_gene_pages/index.html%0A"
-              role="button"
+                className="btn btn-primary px-2 py-1 m-1"
+                style={{ backgroundColor: '#333333', borderRadius: '20px' }}
+                href="mailto:info@example.com?&subject=&cc=&bcc=&body=https://maayanlab.github.io/cfde_gene_pages/index.html%0A"
+                role="button"
             ><FontAwesomeIcon width={16} height={16} icon={faEnvelope} /></a>
           </p>
           <p className="mb-0">Prototype project developed by the CFDE Gene WG</p>
           <p className="mb-0"><a href="https://github.com/MaayanLab/cfde_gene_pages">Project's GitHub Repo</a></p>
-          <p><a href="#">Back to top</a></p>
-        </div>
+          <p><a href="#">Back to top</a></p>  </div>
       </footer>
     </>
   )

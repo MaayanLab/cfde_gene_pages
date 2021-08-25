@@ -24,15 +24,15 @@ export default function EntityCard(props) {
                 <div className="row mb-3">
                     {props.img1 !== undefined ? (
                         // <div className="card-image-wrapper-1">
-                        <div className="col-4">
+                        <div
+                            className="col-4"
+                            style={{
+                                height: "50px"
+                            }}>
                             <img
                                 className="img-fluid rounded"
                                 src={props.img1.src}
-                                alt={props.img1.alt}
-                                style={{
-                                    maxHeight: "50px",
-                                    maxWidth: "100px"
-                                }}/>
+                                alt={props.img1.alt}/>
                         </div>
                         // </div>
                     ) : null}
@@ -47,17 +47,19 @@ export default function EntityCard(props) {
                         </div>
                     ) : null}
                 </div>
+                <div className="row mb-1">
                 {props.img2 !== undefined ? (
-                    <div className="card-image-wrapper-2">
+                    <div
+                        className="card-image-wrapper-2"
+                        style={{
+                            height: "150px"}}>
                         <img
                             className="card-img-top img-fluid"
                             src={props.img2.src}
-                            alt={props.img2.alt}
-                            style={{
-                                height: "170px"
-                            }}/>
+                            alt={props.img2.alt}/>
                     </div>
                 ) : null}
+                </div>
                 {props.clickurl !== undefined ? (
                     <p><a
                         href={props.clickurl}
