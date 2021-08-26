@@ -378,7 +378,7 @@ const manifest = [
             PS: true,
         },
         img1: {
-            src: '/logos/biogps_logo.jpeg',
+            src: '/logos/biogps_logo.png',
             alt: 'BioGPS image',
         },
         img2: {
@@ -398,7 +398,7 @@ const manifest = [
             Ag: true,
         },
         img1: {
-            src: '/logos/hgnc_logo.jpeg',
+            src: '/logos/hgnc_logo.png',
             alt: 'HGNC image',
         },
         img2: {
