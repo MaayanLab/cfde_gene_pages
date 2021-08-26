@@ -29,7 +29,7 @@ export default function SearchControl({
     return (
         <section className="py-5 container">
             <div className="row py-lg-5">
-                <div className="col-lg-10 col-md-8 mx-auto">
+                <div className="col-8 col-sm-10 mx-auto">
                     <h1 className="fw-light">Gene and Drug Landing Page Aggregator</h1>
                     <p className="text-muted mb-5">This page has links to {manifest_tag_counts.gene} gene
                         and {manifest_tag_counts.drug} drug repositories that provide direct links to gene and drug
