@@ -60,24 +60,6 @@ export default function App({ Component, pageProps }) {
       <main>
         <Component {...pageProps} />
         <Analytics />
-
-          {/*<section className="py-5 text-center container">*/}
-          {/*  <div className="row py-lg-5">*/}
-          {/*    <div className="col-lg-6 col-md-8 mx-auto">*/}
-          {/*      <p>search</p>*/}
-          {/*    </div>*/}
-          {/*  </div>*/}
-          {/*</section>*/}
-
-          {/*<div className="album py-5 bg-light">*/}
-          {/*  <div className="container">*/}
-          {/*    <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">*/}
-          {/*      <p>cards</p>*/}
-          {/*    </div>*/}
-          {/*  </div>*/}
-          {/*</div>*/}
-
-
       </main>
       <footer className="footer mt-auto text-muted pt-4 pb-3" style={{ backgroundColor: 'rgba(0, 0, 0, 0.1)' }}>
         <div className="container">
