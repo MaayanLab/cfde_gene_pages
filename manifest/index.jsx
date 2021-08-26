@@ -911,7 +911,7 @@ const manifest = [
       alt: 'Guide to Pharmacology site image',
     },
     title: 'Guide to Pharmacology',
-    description: 'The International Union of Basic and Clinical Pharmacology (IUPHAR) / British Pharmacological Society (BPS) Guide to PHARMACOLOGY is an expert-curated resource of ligand-activity-target relationships, the majority of which come from high-quality pharmacological and medicinal chemistry literature.',
+    description: 'The Guide to PHARMACOLOGY is a searchable database of drug targets and the prescription medicines and experimental drugs that act on them.',
     url: "https://www.guidetopharmacology.org/",
     countapi: 'maayanlab.github.io/guideclick',
     clickurl: async (search) => `https://www.guidetopharmacology.org/GRAC/LigandDisplayForward?ligandId=${await GTPL(search)}`,
@@ -993,7 +993,7 @@ const manifest = [
       Ag: true,
     },
     img1: {
-      src: '/logos/Drugscom_logo.jpeg',
+      src: '/logos/Drugscom_logo.png',
       alt: 'Drugs.com image',
     },
     img2: {

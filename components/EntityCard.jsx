@@ -22,17 +22,13 @@ export default function EntityCard(props) {
                         height: "50px"
                     }}>
                         {props.img1 !== undefined ? (
-                            // <div className="card-image-wrapper-1">
-                            <div className="col-4"
-                                 style={{
-                                     maxHeight: "30px"
-                                 }}>
+                            <div className="col-4">
                                 <img
                                     className="img-fluid rounded"
                                     src={props.img1.src}
                                     alt={props.img1.alt}
                                     style={{
-                                        minWidth: "100%"
+                                        maxHeight: "60px"
                                     }}/>
                             </div>
                             // </div>
@@ -60,7 +56,7 @@ export default function EntityCard(props) {
                 }}>
                     {props.img2 !== undefined ? (
                         <div
-                            className="card-image-wrapper-2 pb-3"
+                            className="pb-3"
                             style={{
                                 maxWidth: "350px"
                             }}>
@@ -83,7 +79,7 @@ export default function EntityCard(props) {
                         {clicks !== undefined ? <small
                             className="card-text text-muted float-end mt-1">Clicks: <span>{clicks}</span></small> : null}
                         {props.clickurl !== undefined ? (
-                            <p className="mt-3"><a
+                            <p className="mt-2"><a
                                 href={props.clickurl}
                                 target="_blank"
                                 onClick={() => countable(props.countapi).hit()}
