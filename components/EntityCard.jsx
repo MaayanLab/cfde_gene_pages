@@ -18,9 +18,9 @@ export default function EntityCard(props) {
                     backgroundSize: props.tags.CF ? "50px 27px" : undefined
                 }}>
                     <div className="row mb-3"
-                         style={{
-                             height: "50px"
-                         }}>
+                    style={{
+                        height: "50px"
+                    }}>
                         {props.img1 !== undefined ? (
                             <div className="col-4">
                                 <img
@@ -31,9 +31,7 @@ export default function EntityCard(props) {
                                         maxHeight: "60px"
                                     }}/>
                             </div>
-                            // </div>
                         ) : null}
-                        {props.clickurl !== undefined ? (
                             <div className="col-7 mt-2">
                                 <a
                                     href={props.url}
@@ -42,18 +40,12 @@ export default function EntityCard(props) {
                                         {props.title}
                                     </h5></a>
                             </div>
-                        ) : null}
                     </div>
                 </div>
-                {/*{props.img1 !== undefined ? (*/}
-                {/*  <div className="card-image-wrapper-1">*/}
-                {/*    <img className="card-img-top img-fluid" src={props.img1.src} alt={props.img1.alt} width="100%" height="100%" />*/}
-                {/*  </div>*/}
-                {/*) : null}*/}
                 <div className="card-body"
-                     style={{
-                         height: "400px"
-                     }}>
+                style={{
+                    height: "400px"
+                }}>
                     {props.img2 !== undefined ? (
                         <div
                             className="pb-3"
@@ -72,21 +64,21 @@ export default function EntityCard(props) {
                     <p className="card-text">{props.description}</p>
                 </div>
                 <div className="card-footer"
-                     style={{
-                         height: "80px"
-                     }}>
+                style={{
+                    height: "80px"
+                }}>
                     <div className="container">
                         <div className="row">
-                            {clicks !== undefined ? <small
-                                className="card-text text-muted float-end mt-1">Clicks: <span>{clicks}</span></small> : null}
-                            {props.clickurl !== undefined ? (
-                                <p className="mt-2"><a
-                                    href={props.clickurl}
-                                    target="_blank"
-                                    onClick={() => countable(props.countapi).hit()}
-                                >Explore {props.search} with {props.title}</a></p>
-                            ) : null}
-                        </div>
+                        {clicks !== undefined ? <small
+                            className="card-text text-muted float-end mt-1">Clicks: <span>{clicks}</span></small> : null}
+                        {props.clickurl !== undefined ? (
+                            <p className="mt-2"><a
+                                href={props.clickurl}
+                                target="_blank"
+                                onClick={() => countable(props.countapi).hit()}
+                            >Explore {props.search} with {props.title}</a></p>
+                        ) : null}
+                    </div>
                     </div>
                 </div>
             </div>
