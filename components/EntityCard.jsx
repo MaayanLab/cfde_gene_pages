@@ -17,19 +17,22 @@ export default function EntityCard(props) {
                     backgroundPosition: props.tags.CF ? "97% 15%" : undefined,
                     backgroundSize: props.tags.CF ? "50px 27px" : undefined
                 }}>
-                    <div className="row mb-3">
+                    <div className="row mb-3"
+                    style={{
+                        height: "50px"
+                    }}>
                         {props.img1 !== undefined ? (
                             // <div className="card-image-wrapper-1">
                             <div className="col-4"
                                  style={{
-                                     height: "50px"
+                                     maxHeight: "30px"
                                  }}>
                                 <img
                                     className="img-fluid rounded"
                                     src={props.img1.src}
                                     alt={props.img1.alt}
                                     style={{
-                                        height: "100%"
+                                        minWidth: "100%"
                                     }}/>
                             </div>
                             // </div>
@@ -51,30 +54,36 @@ export default function EntityCard(props) {
                 {/*    <img className="card-img-top img-fluid" src={props.img1.src} alt={props.img1.alt} width="100%" height="100%" />*/}
                 {/*  </div>*/}
                 {/*) : null}*/}
-                <div className="card-body">
+                <div className="card-body"
+                style={{
+                    height: "400px"
+                }}>
                     {props.img2 !== undefined ? (
                         <div
-                            className="card-image-wrapper-2"
+                            className="card-image-wrapper-2 pb-3"
                             style={{
-                                height: "150px"
+                                maxWidth: "350px"
                             }}>
                             <img
                                 className="img-fluid"
                                 src={props.img2.src}
                                 alt={props.img2.alt}
                                 style={{
-                                    height: "100%"
+                                    minHeight: "100%"
                                 }}/>
                         </div>
                     ) : null}
                     <p className="card-text">{props.description}</p>
                 </div>
-                <div className="card-footer">
+                <div className="card-footer"
+                style={{
+                    height: "80px"
+                }}>
                     <div className="container">
                         {clicks !== undefined ? <small
-                            className="card-text text-muted float-end">Clicks: <span>{clicks}</span></small> : null}
+                            className="card-text text-muted float-end mt-1">Clicks: <span>{clicks}</span></small> : null}
                         {props.clickurl !== undefined ? (
-                            <p><a
+                            <p className="mt-3"><a
                                 href={props.clickurl}
                                 target="_blank"
                                 onClick={() => countable(props.countapi).hit()}
