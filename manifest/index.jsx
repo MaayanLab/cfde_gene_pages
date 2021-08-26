@@ -214,7 +214,7 @@ const manifest = [
       gene: true,
     },
     img1: {
-      src: '/logos/UDN_logo.jpeg',
+      src: '/logos/UDN_logo.png',
       alt: 'UDN image',
     },
     img2: {
@@ -318,7 +318,7 @@ const manifest = [
       PS: true,
     },
     img1: {
-      src: '/logos/ENCODE_logo.jpeg',
+      src: '/logos/ENCODE_logo.png',
       alt: 'ENCODE image',
     },
     img2: {
@@ -579,7 +579,7 @@ const manifest = [
       PS: true,
     },
     img1: {
-      src: '/logos/MGI_logo.jpeg',
+      src: '/logos/MGI_logo.png',
       alt: 'MGI image',
     },
     img2: {
@@ -654,7 +654,7 @@ const manifest = [
       PS: true,
     },
     img1: {
-      src: '/logos/GO_logo.jpeg',
+      src: '/logos/GO_logo.png',
       alt: 'Gene Ontology image',
     },
     img2: {
