@@ -69,14 +69,14 @@ export default function EntityCard(props) {
                      }}>
                         <div className="d-flex justify-content-between align-items-center">
                             {props.clickurl !== undefined ? (
-                                <p className="mt-2"><a
+                                <p className="mt-3"><a
                                     href={props.clickurl}
                                     target="_blank"
                                     onClick={() => countable(props.countapi).hit()}
                                 >Explore {props.search} with {props.title}</a></p>
                             ) : null}
                             {clicks !== undefined ? <small
-                                className="card-text text-muted mt-2">Clicks: <span>{clicks}</span></small> : null}
+                                className="card-text text-muted mt-1">Clicks: <span>{clicks}</span></small> : null}
                         </div>
                 </div>
             </div>
