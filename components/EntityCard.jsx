@@ -18,9 +18,9 @@ export default function EntityCard(props) {
                     backgroundSize: props.tags.CF ? "50px 27px" : undefined
                 }}>
                     <div className="row mb-3"
-                    style={{
-                        height: "50px"
-                    }}>
+                         style={{
+                             height: "50px"
+                         }}>
                         {props.img1 !== undefined ? (
                             <div className="col-4">
                                 <img
@@ -32,20 +32,20 @@ export default function EntityCard(props) {
                                     }}/>
                             </div>
                         ) : null}
-                            <div className="col-7 mt-2">
-                                <a
-                                    href={props.url}
-                                    target="_blank">
-                                    <h5 className="card-title">
-                                        {props.title}
-                                    </h5></a>
-                            </div>
+                        <div className="col-7 mt-2">
+                            <a
+                                href={props.url}
+                                target="_blank">
+                                <h5 className="card-title">
+                                    {props.title}
+                                </h5></a>
+                        </div>
                     </div>
                 </div>
                 <div className="card-body"
-                style={{
-                    height: "400px"
-                }}>
+                     style={{
+                         height: "400px"
+                     }}>
                     {props.img2 !== undefined ? (
                         <div
                             className="pb-3"
@@ -64,22 +64,20 @@ export default function EntityCard(props) {
                     <p className="card-text">{props.description}</p>
                 </div>
                 <div className="card-footer"
-                style={{
-                    height: "80px"
-                }}>
-                    <div className="container">
-                        <div className="row">
-                        {clicks !== undefined ? <small
-                            className="card-text text-muted float-end mt-1">Clicks: <span>{clicks}</span></small> : null}
-                        {props.clickurl !== undefined ? (
-                            <p className="mt-2"><a
-                                href={props.clickurl}
-                                target="_blank"
-                                onClick={() => countable(props.countapi).hit()}
-                            >Explore {props.search} with {props.title}</a></p>
-                        ) : null}
-                    </div>
-                    </div>
+                     style={{
+                         height: "80px"
+                     }}>
+                        <div className="d-flex justify-content-between align-items-center">
+                            {props.clickurl !== undefined ? (
+                                <p className="mt-2"><a
+                                    href={props.clickurl}
+                                    target="_blank"
+                                    onClick={() => countable(props.countapi).hit()}
+                                >Explore {props.search} with {props.title}</a></p>
+                            ) : null}
+                            {clicks !== undefined ? <small
+                                className="card-text text-muted mt-2">Clicks: <span>{clicks}</span></small> : null}
+                        </div>
                 </div>
             </div>
         </div>

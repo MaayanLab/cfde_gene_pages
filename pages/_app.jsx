@@ -91,6 +91,7 @@ export default function App({ Component, pageProps }) {
           </p>
           <p className="mb-0">Prototype project developed by the CFDE Gene WG</p>
           <p className="mb-0"><a href="https://github.com/MaayanLab/cfde_gene_pages">Project's GitHub Repo</a></p>
+          <p className="mb-0"><a href="https://docs.google.com/forms/d/1ifK44AvAay6JyUVXkKTzkHdX2QoWLRfZZ4T3sEFFR1U/">Suggest a new resource</a></p>
           <p><a href="#">Back to top</a></p>  </div>
       </footer>
     </>
