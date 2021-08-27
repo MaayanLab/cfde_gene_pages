@@ -96,7 +96,7 @@ export default function Search(props) {
             </Head>
             <SearchPage router={router} {...props}>{({router, CF, PS, Ag}) => (
                 props.manifest && !router.loading ? (
-                    <div className="album py-5">
+                    <div className="album pb-5">
                         <div className="container">
                             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 justify-content-center">
                                 {sortedManifest

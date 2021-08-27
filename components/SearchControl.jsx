@@ -27,7 +27,7 @@ export default function SearchControl({
     if (PS === undefined) PS = true
     if (Ag === undefined) Ag = true
     return (
-        <section className="py-5 container">
+        <section className="pt-5 pb-3 container">
             <div className="row py-lg-5">
                 <div className="col-8 col-sm-10 mx-auto">
                     <h1 className="fw-light">Gene and Drug Landing Page Aggregator</h1>
