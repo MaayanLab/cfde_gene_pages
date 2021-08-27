@@ -20,10 +20,12 @@ export default function App({ Component, pageProps }) {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta property="og:title" content="Gene and Drug Landing Page Aggregator" />
-        <meta property="og:description" name="description" content="You can search by gene or drug name and then choose the sites that contain knowledge about your gene or drug." />
+        <meta property="og:description"
+              name="description"
+              content={`${pageProps.search !== undefined ? ("Find knowledge about " + pageProps.search + " with the Gene and Drug Landing Page Aggregator") : ("Find knowledge about genes and drugs with the Gene and Drug Landing Page Aggregator")}`} />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content={publicRuntimeConfig.origin} />
-        <meta property="og:url" content={`${publicRuntimeConfig.origin}/logos/logo.png`} />
+        <meta property="og:image" content={`${publicRuntimeConfig.origin}/logos/thumbnail.png`} />
+        <meta property="og:url" content={publicRuntimeConfig.origin} />
         <meta name="author" content="Ma'ayan Lab" />
         <link rel="shortcut icon" href="/logos/logo.png" type="image/x-icon" />
         <link rel="manifest" href="/site.webmanifest" />
