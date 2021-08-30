@@ -61,7 +61,7 @@ export default function EntityCard(props) {
                                 }}/>
                         </div>
                     ) : null}
-                    <p className="card-text">{props.description}</p>
+                    <p className="card-text">{[props.description.split(props.title)[0], <a href={props.url}>{props.title}</a>, props.description.split(props.title)[1]]}</p>
                 </div>
                 <div className="card-footer"
                      style={{
