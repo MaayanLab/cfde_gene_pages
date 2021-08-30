@@ -3,7 +3,7 @@ import Head from 'next/head'
 import dynamic from 'next/dynamic'
 import callable from '@/utils/callable'
 import memo from "@/utils/memo"
-import full_manifest, {gene_id, drug_info} from '@/manifest'
+import full_manifest, {gene_id, drug_info, expand} from '@/manifest'
 import useRouterEx from '@/utils/routerEx'
 import cmp from '@/manifest/cmp'
 import sorted from '@/utils/sorted'
@@ -98,6 +98,8 @@ export default function Search(props) {
                 props.manifest && !router.loading ? (
                     <div className="album pb-5">
                         <div className="container">
+                            <p>Similar genes based on mRNA co-expression: {props.search}</p>
+                            <p>Similar genes based on literature: {props.search}</p>
                             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 justify-content-center">
                                 {sortedManifest
                                     .filter(item => {

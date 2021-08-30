@@ -14,6 +14,19 @@ export const gene_id = defined(memo(async (gene_search) => {
         }
     }
 }))
+
+export const expand = defined(async (gene_search, exp_type="coexpression", top= 10) => {
+  let gene_exp =  await fetch(`https://maayanlab.cloud/enrichrsearch/gene/expand?search=${gene_search}&top=${top}&type=${exp_type}`)
+    if (gene_exp.ok) {
+        let data = await gene_exp.json()
+        if ((Array.isArray(data.data))&&(data.success)) {
+            if (data.data.length > 0) {
+                return data.data.join(', ')
+            }
+        }
+    }
+})
+
 const gene_info = defined(memo(async (gene_search) => {
     const gene_res = await fetch(`${gene_query_url}/gene/${await gene_id(gene_search)}`)
     if (gene_res.ok) {
