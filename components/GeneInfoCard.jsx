@@ -1,4 +1,4 @@
-export default function GeneInfoCard({ search, organism, chromosome_location, ncbi_gene_id, similar_coexpression, similar_literature, predicted_tf, predicted_phospho }) {
+export default function GeneInfoCard({ search, organism, chromosome_location, ncbi_gene_id, biological_function, similar_coexpression, similar_literature, predicted_tf, predicted_phospho }) {
     return (
         <div className="col-lg-8 col-md-12">
             <div className="card shadow-sm m-3" title="Affiliated with the CFDE">
@@ -16,16 +16,32 @@ export default function GeneInfoCard({ search, organism, chromosome_location, nc
                     <div className="col-10">
                         <p className="card-text" style={{ fontSize: '0.8rem' }}><span style={{ fontWeight: 500 }}>Biological function</span>: {biological_function}</p>
                         <p className="card-text" style={{ fontSize: '0.8rem' }}><span style={{ fontWeight: 500 }}>Similar genes based on mRNA co-expression</span>:
-                            {similar_coexpression.map(gene => <a key={gene}>{gene}</a>)}
+                            <div className="d-inline-flex">
+                              {similar_coexpression.map(gene =>
+                                <a className="mx-1" key={gene} href="">{gene}</a>
+                              )}
+                            </div>
                         </p>
                         <p className="card-text" style={{ fontSize: '0.8rem' }}><span style={{ fontWeight: 500 }}>Similar genes based on literature</span>:
-                            {similar_literature.map(gene => <a key={gene}>{gene}</a>)}
+                            <div className="d-inline-flex">
+                              {similar_literature.map(gene =>
+                                <a className="mx-1" key={gene} href="">{gene}</a>
+                              )}
+                            </div>
                         </p>
                         <p className="card-text" style={{ fontSize: '0.8rem' }}><span style={{ fontWeight: 500 }}>Top 10 TF predicted to regulate {search}</span>:
-                            {predicted_tf.map(gene => <a key={gene}>{gene}</a>)}
+                            <div className="d-inline-flex">
+                              {predicted_tf.map(gene =>
+                                <a className="mx-1" key={gene} href="">{gene}</a>
+                              )}
+                            </div>
                         </p>
                         <p className="card-text" style={{ fontSize: '0.8rem' }}><span style={{ fontWeight: 500 }}>Top 10 kinases predicted to phosphorylate {search}</span>:
-                            {predicted_phospho.map(gene => <a key={gene}>{gene}</a>)}
+                            <div className="d-inline-flex">
+                              {predicted_phospho.map(gene =>
+                                <a className="mx-1" key={gene} href="">{gene}</a>
+                              )}
+                            </div>
                         </p>
                     </div>
                     <div className="col-2">

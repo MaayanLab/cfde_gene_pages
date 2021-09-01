@@ -13,6 +13,7 @@ import capitalize from '@/utils/capitalize'
 
 const EntityCard = dynamic(() => import('@/components/EntityCard'))
 const SearchPage = dynamic(() => import('@/components/SearchPage'))
+// const GeneInfoCard = dynamic(() => import('@/components/GeneInfoCard'))
 
 const isitup = memo(async (url) => {
     try {
@@ -99,7 +100,17 @@ export default function Search(props) {
                     <div className="album pb-5">
                         <div className="container">
                             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 justify-content-center">
-                                {/*<GeneInfoCard {...props} />*/}
+                                {/* <GeneInfoCard
+                                    search={props.search}
+                                    organism="human"
+                                    chromosome_location=""
+                                    ncbi_gene_id={props.search}
+                                    biological_function=""
+                                    similar_coexpression={[]}
+                                    similar_literature={[]}
+                                    predicted_tf={[]}
+                                    predicted_phospho={[]}
+                                /> */}
                                 {sortedManifest
                                     .filter(item => {
                                         if (CF === true && !('CF' in item.tags)) return false
