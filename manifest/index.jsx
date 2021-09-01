@@ -27,6 +27,23 @@ export const expand = defined(async (gene_search, exp_type="coexpression", top= 
     }
 })
 
+export const predict_regulators = defined(async (genes, type_url) => {
+    let request_options = {
+        method: 'POST',
+        headers: new Headers({"Content-Type": "application/json"}),
+        body: JSON.stringify({
+            "query_name": "gene_set_query",
+            "gene_set": genes
+        }),
+        redirect: 'follow'
+    };
+
+    fetch(`https://maayanlab.cloud/${type_url}/api/enrich/`, request_options)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
+})
+
 const gene_info = defined(memo(async (gene_search) => {
     const gene_res = await fetch(`${gene_query_url}/gene/${await gene_id(gene_search)}`)
     if (gene_res.ok) {
@@ -261,7 +278,7 @@ const manifest = [
             MaayanLab: true,
         },
         img1: {
-            src: '/logos/archs4_logo.png',
+            src: '/logos/archs_logo.png',
             alt: 'ARCHS4',
         },
         img2: {

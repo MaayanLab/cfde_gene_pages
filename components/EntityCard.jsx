@@ -17,13 +17,13 @@ export default function EntityCard(props) {
                     backgroundPosition: props.tags.CF ? "97% 15%" : undefined,
                     backgroundSize: props.tags.CF ? "50px 27px" : undefined
                 }}>
-                    <div className="row mb-3"
+                    <div className="row mt-2"
                          style={{
                              height: "50px"
                          }}>
                         {(props.img3 !== undefined)&&(props.img1 !== undefined) ? (
                             <>
-                            <div className="col-6 text-center">
+                            <div className="col-4 text-center">
                                 <a
                                     href={props.url}
                                     target="_blank">
@@ -32,6 +32,7 @@ export default function EntityCard(props) {
                                         src={props.img3.src}
                                         alt={props.img3.alt}
                                         style={{
+                                            maxHeight: "40px",
                                             maxWidth: "120px"
                                         }}/></a>
                             </div>
@@ -44,7 +45,8 @@ export default function EntityCard(props) {
                                         src={props.img1.src}
                                         alt={props.img1.alt}
                                         style={{
-                                            maxWidth: "120px"
+                                            maxHeight: "40px",
+                                            maxWidth: "120px",
                                         }}/></a>
                             </div>
                             </>
@@ -59,8 +61,8 @@ export default function EntityCard(props) {
                                     src={props.img1.src}
                                     alt={props.img1.alt}
                                     style={{
-                                        height: "50px",
-                                        maxWidth: "250px"
+                                        maxHeight: "40px",
+                                        maxWidth: "200px",
                                     }}/></a>
                             </div>
                         ) : null}
