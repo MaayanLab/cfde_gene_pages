@@ -98,9 +98,8 @@ export default function Search(props) {
                 props.manifest && !router.loading ? (
                     <div className="album pb-5">
                         <div className="container">
-                            {/*<p>Similar genes based on mRNA co-expression: {props.search}</p>*/}
-                            {/*<p>Similar genes based on literature: {props.search}</p>*/}
                             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 justify-content-center">
+                                {/*<GeneInfoCard {...props} />*/}
                                 {sortedManifest
                                     .filter(item => {
                                         if (CF === true && !('CF' in item.tags)) return false
