@@ -87,6 +87,10 @@ const manifest = [
             src: '/logos/Gtex_site.png',
             alt: 'GTEx site screenshot',
         },
+        img3: {
+            src: '',
+            alt: ''
+        },
         title: 'GTEx',
         description: 'The Genotype-Tissue Expression (GTEx) Portal provides open access to data including gene expression, QTLs, and histology images.',
         url: "https://www.gtexportal.org/home/",
@@ -101,12 +105,16 @@ const manifest = [
             gene: true,
         },
         img1: {
-            src: '/logos/IDG_LOGO.png',
-            alt: 'IDG',
+            src: '/logos/pharos_logo.png',
+            alt: 'Pharos',
         },
         img2: {
             src: '/logos/Pharos_site.png',
             alt: 'Pharos screenshot',
+        },
+        img3: {
+            src: '/logos/IDG_LOGO.png',
+            alt: 'IDG',
         },
         title: 'Pharos',
         description: 'The Pharos interface provides facile access to most data types collected by the Knowledge Management Center for the IDG program.',
@@ -123,12 +131,16 @@ const manifest = [
             MaayanLab: true,
         },
         img1: {
-            src: '/logos/MaayanLab_logo.png',
-            alt: 'MaayanLab',
+            src: '/logos/harmonizome_logo.png',
+            alt: 'Harmonizome',
         },
         img2: {
             src: '/logos/Harmonizome_site.png',
             alt: 'Harmonizome screenshot',
+        },
+        img3: {
+            src: '/logos/MaayanLab_logo.png',
+            alt: 'MaayanLab',
         },
         title: 'Harmonizome',
         description: 'The Harmonizome is a collection of knowledge about genes and proteins from 114 datasets created by processing 66 online resources to facilitate discovery via data integration.',
@@ -151,6 +163,10 @@ const manifest = [
             src: '/logos/Lincs_site.png',
             alt: 'LINCS site image',
         },
+        img3: {
+            src: '',
+            alt: ''
+        },
         title: 'LDP 3.0',
         description: 'The LINCS Data Portal 3.0 (LDP 3.0) serves LINCS datasets and signatures. It provides a signature similarity search to query for mimicker or reverser signatures.',
         url: "https://ldp3.cloud/",
@@ -172,6 +188,10 @@ const manifest = [
             src: '/logos/Metabolomics_site.png',
             alt: 'Metabolomics site image',
         },
+        img3: {
+            src: '',
+            alt: ''
+        },
         title: 'Metabolomics Workbench',
         description: 'The Metabolomics Workbench serves as a repository for metabolomics data and metadata and provides analysis tools.',
         url: 'https://www.metabolomicsworkbench.org/databases/proteome/MGP.php',
@@ -191,6 +211,10 @@ const manifest = [
         img2: {
             src: '/logos/Glygen_site.png',
             alt: 'GlyGen site image',
+        },
+        img3: {
+            src: '',
+            alt: ''
         },
         title: 'GlyGen',
         description: 'GlyGen provides computational and informatics resources and tools for glycosciences research using information from many data sources.',
@@ -213,6 +237,10 @@ const manifest = [
             src: '/logos/Impc_site.png',
             alt: 'IMPC site image',
         },
+        img3: {
+            src: '',
+            alt: ''
+        },
         title: 'KOMP-IMPC',
         description: 'The Knockout Mouse Programme - International Mouse Phenotyping Consortium (KOMP-IMPC) has information about the functions of protein-coding genes in the mouse genome.',
         url: "https://www.mousephenotype.org",
@@ -234,6 +262,10 @@ const manifest = [
             src: '/logos/Udn_site.png',
             alt: 'UDN site image',
         },
+        img3: {
+            src: '',
+            alt: ''
+        },
         title: 'UDN',
         description: 'This page contains information about genetic changes that were identified in a UDN participant.',
         url: "https://undiagnosed.hms.harvard.edu/genes/",
@@ -249,12 +281,16 @@ const manifest = [
             MaayanLab: true,
         },
         img1: {
-            src: '/logos/MaayanLab_logo.png',
-            alt: 'MaayanLab',
+            src: '/logos/archs4_logo.png',
+            alt: 'ARCHS4',
         },
         img2: {
             src: '/logos/ARCHS4_site.png',
             alt: 'ARCHS4 site image',
+        },
+        img3: {
+            src: '/logos/MaayanLab_logo.png',
+            alt: 'MaayanLab',
         },
         title: 'ARCHS4',
         description: 'ARCHS4 provides access to gene counts from HiSeq 2000, HiSeq 2500 and NextSeq 500 platforms for human and mouse experiments from GEO and SRA.',
@@ -276,6 +312,10 @@ const manifest = [
             src: '/logos/Ncbi_site.png',
             alt: 'NCBI site image',
         },
+        img3: {
+            src: '',
+            alt: ''
+        },
         title: 'NCBI Gene Database',
         description: 'The NCBI Gene Database page provides information about nomenclature, RefSeqs, maps, pathways, variations, phenotypes, and links to genome-, phenotype-, and locus-specific resources.',
         url: "https://www.ncbi.nlm.nih.gov/gene/",
@@ -296,6 +336,10 @@ const manifest = [
             src: '/logos/Genecards_site.png',
             alt: 'Gene Cards site image',
         },
+        img3: {
+            src: '',
+            alt: ''
+        },
         title: 'GeneCards',
         description: 'GeneCards is a searchable, integrative database that provides comprehensive, user-friendly information on all annotated and predicted human genes.',
         url: 'https://www.genecards.org/',
@@ -311,12 +355,16 @@ const manifest = [
             MaayanLab: true,
         },
         img1: {
-            src: '/logos/MaayanLab_logo.png',
-            alt: 'MaayanLab',
+            src: '/logos/enrichr_logo.png',
+            alt: 'Enrichr',
         },
         img2: {
             src: '/logos/Enrichr_site.png',
             alt: 'Enrichr site image',
+        },
+        img3: {
+            src: '/logos/MaayanLab_logo.png',
+            alt: 'MaayanLab',
         },
         title: 'Enrichr',
         description: 'Enrichr is an enrichment analysis tool that provides various types of visualization summaries of collective functions of gene sets.',
@@ -382,6 +430,10 @@ const manifest = [
             src: '/logos/Encode_site.png',
             alt: 'ENCODE site image',
         },
+        img3: {
+            src: '',
+            alt: ''
+        },
         title: 'ENCODE',
         description: 'The ENCODE Consortium not only produces high-quality data, but also analyzes the data in an integrative fashion.',
         url: "https://www.encodeproject.org/",
@@ -401,6 +453,10 @@ const manifest = [
         img2: {
             src: '/logos/Uniprot_site.png',
             alt: 'UniProt site image',
+        },
+        img3: {
+            src: '',
+            alt: ''
         },
         title: 'UniProt',
         description: 'The mission of UniProt is to provide the scientific community with a comprehensive, high-quality and freely accessible resource of protein sequence and functional information.',
@@ -422,6 +478,10 @@ const manifest = [
             src: '/logos/Marrvel_site.png',
             alt: 'MARRVEL site image',
         },
+        img3: {
+            src: '',
+            alt: ''
+        },
         title: 'MARRVEL',
         description: 'MARRVEL enables users to search multiple public variant databases simultaneously and provides a unified interface to facilitate the search process.',
         url: "http://marrvel.org/",
@@ -441,6 +501,10 @@ const manifest = [
         img2: {
             src: '/logos/BioGPS_site.png',
             alt: 'BioGPS site image',
+        },
+        img3: {
+            src: '',
+            alt: ''
         },
         title: 'BioGPS',
         description: 'BioGPS is a free extensible and customizable gene annotation portal, a complete resource for learning about gene and protein function.',
@@ -462,6 +526,10 @@ const manifest = [
             src: '/logos/hgnc_site.png',
             alt: 'HGNC site image',
         },
+        img3: {
+            src: '',
+            alt: ''
+        },
         title: 'HGNC',
         description: 'The HGNC database is a curated online repository of approved gene nomenclature, gene groups and associated resources including links to genomic, proteomic and phenotypic information.',
         url: "https://www.genenames.org/",
@@ -481,6 +549,10 @@ const manifest = [
         img2: {
             src: '/logos/Ensembl_site.png',
             alt: 'Ensembl site image',
+        },
+        img3: {
+            src: '',
+            alt: ''
         },
         title: 'Ensembl',
         description: 'Ensembl is a genome browser for vertebrate genomes that supports research in comparative genomics, evolution, sequence variation and transcriptional regulation.',
@@ -502,6 +574,10 @@ const manifest = [
             src: '/logos/Bgee_site.png',
             alt: 'Bgee site image',
         },
+        img3: {
+            src: '',
+            alt: ''
+        },
         title: 'Bgee',
         description: 'Bgee is a database for retrieval and comparison of gene expression patterns across multiple animal species.',
         url: "https://bgee.org/",
@@ -521,6 +597,10 @@ const manifest = [
         img2: {
             src: '/logos/COSMIC_site.png',
             alt: 'COSMIC site image',
+        },
+        img3: {
+            src: '',
+            alt: ''
         },
         title: 'COSMIC',
         description: "COSMIC, the Catalogue Of Somatic Mutations In Cancer, is the world's largest and most comprehensive resource for exploring the impact of somatic mutations in human cancer.",
@@ -542,6 +622,10 @@ const manifest = [
             src: '/logos/ClinGen_site.png',
             alt: 'ClinGen site image',
         },
+        img3: {
+            src: '',
+            alt: ''
+        },
         title: 'ClinGen',
         description: 'ClinGen is a NIH funded resource dedicated to building a central resource that defines the clinical relevance of genes and variants for use in precision medicine and research.',
         url: "https://www.clinicalgenome.org/",
@@ -561,6 +645,10 @@ const manifest = [
         img2: {
             src: '/logos/GWAS_site.png',
             alt: 'GWAS site image',
+        },
+        img3: {
+            src: '',
+            alt: ''
         },
         title: 'GWAS Catalog',
         description: 'The GWAS Catalog provides a consistent, searchable, visualisable and freely available database of SNP-trait associations, which can be easily integrated with other resources.',
@@ -582,6 +670,10 @@ const manifest = [
             src: '/logos/PDBe_site.png',
             alt: 'PDBe site image',
         },
+        img3: {
+            src: '',
+            alt: ''
+        },
         title: 'PDBe Knowledge Base',
         description: 'PDBe Knowledge Base is a community-driven resource managed by the PDBe team, collating functional annotations and predictions for structure data in the PDB archive.',
         url: "https://www.ebi.ac.uk/pdbe/pdbe-kb",
@@ -601,6 +693,10 @@ const manifest = [
         img2: {
             src: '/logos/PDB_site.png',
             alt: 'PDB site image',
+        },
+        img3: {
+            src: '',
+            alt: ''
         },
         title: 'PDB',
         description: 'PDB has information about the 3D shapes of proteins, nucleic acids, and complex assemblies that contribute to understanding everything from protein synthesis to health and disease.',
@@ -623,6 +719,10 @@ const manifest = [
             src: '/logos/GENEVA_site.png',
             alt: 'GENEVA site image',
         },
+        img3: {
+            src: '',
+            alt: ''
+        },
         title: 'GENEVA',
         description: 'GENEVA allows you to identify RNA-sequencing datasets from the Gene Expression Omnibus (GEO) that contains conditions modulating a gene or a gene signature.',
         url: "https://genevatool.org/",
@@ -642,6 +742,10 @@ const manifest = [
         img2: {
             src: '/logos/MGI_site.png',
             alt: 'MGI site image',
+        },
+        img3: {
+            src: '',
+            alt: ''
         },
         title: 'MGI',
         description: 'MGI is the international database resource for the laboratory mouse, providing integrated genetic, genomic, and biological data to facilitate the study of human health and disease.',
@@ -663,6 +767,10 @@ const manifest = [
             src: '/logos/OMIM_site.png',
             alt: 'OMIM site image',
         },
+        img3: {
+            src: '',
+            alt: ''
+        },
         title: 'OMIM',
         description: 'OMIM is a comprehensive, authoritative compendium of human genes and genetic phenotypes that is freely available and updated daily.',
         url: "https://omim.org/",
@@ -677,12 +785,16 @@ const manifest = [
             MaayanLab: true,
         },
         img1: {
-            src: '/logos/MaayanLab_logo.png',
-            alt: 'MaayanLab',
+            src: '/logos/appyters_logo.png',
+            alt: 'Gene Centric GEO Reverse Search Appyter',
         },
         img2: {
             src: '/logos/GEO_search_site.png',
             alt: 'Appyter screenshot',
+        },
+        img3: {
+            src: '/logos/MaayanLab_logo.png',
+            alt: 'MaayanLab',
         },
         title: 'Gene Centric GEO Reverse Search Appyter',
         description: 'Gene Centric GEO Reverse Search Appyter enables users to query for a gene in a species of interest; it returns an interactive volcano plot of signatures in which the gene is up- or down-regulated.',
@@ -718,6 +830,10 @@ const manifest = [
             src: '/logos/GO_site.png',
             alt: 'Gene Ontology site image',
         },
+        img3: {
+            src: '',
+            alt: ''
+        },
         title: 'Gene Ontology',
         description: 'The Gene Ontology (GO) knowledgebase is the world’s largest source of information on the functions of genes.',
         url: "http://geneontology.org/",
@@ -739,6 +855,10 @@ const manifest = [
             src: '/logos/Reactome_site.png',
             alt: 'Reactome site image',
         },
+        img3: {
+            src: '',
+            alt: ''
+        },
         title: 'Reactome',
         description: 'Reactome is a free, open-source, curated and peer-reviewed pathway database that provides intuitive bioinformatics tools for the visualization, interpretation and analysis of pathway knowledge.',
         url: "https://reactome.org/",
@@ -758,6 +878,10 @@ const manifest = [
         img2: {
             src: '/logos/KEGG_site.png',
             alt: 'KEGG site image',
+        },
+        img3: {
+            src: '',
+            alt: ''
         },
         title: 'KEGG',
         description: 'KEGG is a database resource for understanding high-level functions and utilities of the biological system from molecular-level information.',
@@ -779,6 +903,10 @@ const manifest = [
             src: '/logos/Monarch_site.png',
             alt: 'Monarch Initiative site image',
         },
+        img3: {
+            src: '',
+            alt: ''
+        },
         title: 'Monarch Initiative',
         description: 'The Monarch Initiative is an integrative data and analytic platform connecting phenotypes to genotypes across species, bridging basic and applied research with semantics-based analysis.',
         url: "https://monarchinitiative.org/",
@@ -798,6 +926,10 @@ const manifest = [
         img2: {
             src: '/logos/HGB_site.png',
             alt: 'Human Genome Browser site image',
+        },
+        img3: {
+            src: '',
+            alt: ''
         },
         title: 'Human Genome Browser',
         description: 'The Human Genome Browser includes a broad collection of vertebrate and model organism assemblies and annotations, along with a large suite of tools for viewing, analyzing and downloading data.',
@@ -819,6 +951,10 @@ const manifest = [
             src: '/logos/OpenTargets_site.png',
             alt: 'Open Targets site image',
         },
+        img3: {
+            src: '',
+            alt: ''
+        },
         title: 'Open Targets',
         description: 'The Open Targets Platform is a comprehensive tool that supports systematic identification and prioritisation of potential therapeutic drug targets by integrating publicly available datasets including data generated by the Open Targets consortium.',
         url: "https://platform.opentargets.org/",
@@ -838,6 +974,10 @@ const manifest = [
         img2: {
             src: '/logos/OpenTargetsGenetics_site.png',
             alt: 'Open Targets Genetics site image',
+        },
+        img3: {
+            src: '',
+            alt: ''
         },
         title: 'Open Targets Genetics',
         description: 'The Open Targets Genetics Portal is a tool highlighting variant-centric statistical evidence to allow both prioritisation of candidate causal variants at trait-associated loci and identification of potential drug targets.',
@@ -859,6 +999,10 @@ const manifest = [
             src: '/logos/GeneMANIA_site.png',
             alt: 'GeneMANIA site image',
         },
+        img3: {
+            src: '',
+            alt: ''
+        },
         title: 'GeneMANIA',
         description: 'GeneMANIA builds subnetworks around an input gene using functional association data.',
         url: "http://genemania.org",
@@ -878,6 +1022,10 @@ const manifest = [
         img2: {
             src: '/logos/HPA_site.png',
             alt: 'Human Protein Atlas site image',
+        },
+        img3: {
+            src: '',
+            alt: ''
         },
         title: 'Human Protein Atlas',
         description: 'The Human Protein Atlas aims to map all human proteins in cells, tissues and organs using the integration of various omics technologies.',
@@ -901,6 +1049,10 @@ const manifest = [
             src: '/logos/OpenTargets_site.png',
             alt: 'Open Targets site image',
         },
+        img3: {
+            src: '',
+            alt: ''
+        },
         title: 'Open Targets',
         description: 'The Open Targets Platform is a comprehensive tool that supports systematic identification and prioritisation of potential therapeutic drug targets by integrating publicly available datasets including data generated by the Open Targets consortium.',
         url: "https://platform.opentargets.org/",
@@ -922,6 +1074,10 @@ const manifest = [
         img2: {
             src: '/logos/PubChem_site.png',
             alt: 'PubChem site image',
+        },
+        img3: {
+            src: '',
+            alt: ''
         },
         title: 'PubChem',
         description: 'PubChem, an open chemistry database at the NIH, mostly contains small molecules, but also larger molecules such as nucleotides, carbohydrates, lipids, peptides, and chemically-modified macromolecules.',
@@ -945,6 +1101,10 @@ const manifest = [
             src: '/logos/ChEMBL_site.png',
             alt: 'ChEMBL site image',
         },
+        img3: {
+            src: '',
+            alt: ''
+        },
         title: 'ChEMBL',
         description: 'ChEMBL is a manually curated database of bioactive molecules with drug-like properties. It brings together chemical, bioactivity and genomic data to aid the translation of genomic information into effective new drugs.',
         url: "https://www.ebi.ac.uk/chembl/",
@@ -966,6 +1126,10 @@ const manifest = [
         img2: {
             src: '/logos/Guide_site.png',
             alt: 'Guide to Pharmacology site image',
+        },
+        img3: {
+            src: '',
+            alt: ''
         },
         title: 'Guide to Pharmacology',
         description: 'The Guide to Pharmacology is a searchable database of drug targets and the prescription medicines and experimental drugs that act on them.',
@@ -989,6 +1153,10 @@ const manifest = [
             src: '/logos/DrugBank_site.png',
             alt: 'DrugBank site image',
         },
+        img3: {
+            src: '',
+            alt: ''
+        },
         title: 'DrugBank',
         description: 'DrugBank Online is a comprehensive, free-to-access, online database containing information on drugs and drug targets.',
         url: "https://go.drugbank.com/",
@@ -1005,12 +1173,16 @@ const manifest = [
             MaayanLab: true,
         },
         img1: {
-            src: '/logos/MaayanLab_logo.png',
-            alt: 'MaayanLab',
+            src: '/logos/drugmonizome_logo.png',
+            alt: 'Drugmonizome',
         },
         img2: {
             src: '/logos/Drugmonizome_site.png',
             alt: 'Drugmonizome site image',
+        },
+        img3: {
+            src: '/logos/MaayanLab_logo.png',
+            alt: 'MaayanLab',
         },
         title: 'Drugmonizome',
         description: 'Drugmonizome is a web portal for querying sets of known drugs and computing significant biomedical terms that drugs in the set share.',
@@ -1028,12 +1200,16 @@ const manifest = [
             MaayanLab: true,
         },
         img1: {
-            src: '/logos/MaayanLab_logo.png',
-            alt: 'MaayanLab',
+            src: '/logos/drugenrichr_logo.png',
+            alt: 'DrugEnrichr',
         },
         img2: {
             src: '/logos/DrugEnrichr_site.png',
             alt: 'DrugEnrichr site image',
+        },
+        img3: {
+            src: '/logos/MaayanLab_logo.png',
+            alt: 'MaayanLab',
         },
         title: 'DrugEnrichr',
         description: 'DrugEnrichr is a new drug set enrichment analysis tool. DrugEnrichr has the familiar Enrichr interface but instead of serving gene sets for search it is serving drug sets.',
@@ -1057,6 +1233,10 @@ const manifest = [
             src: '/logos/Drugscom_site.png',
             alt: 'Drugs.com site image',
         },
+        img3: {
+            src: '',
+            alt: ''
+        },
         title: 'Drugs.com',
         description: `Drugs.com is the largest, most widely visited, independent medicine information website available on the Internet. Drug.com's aim is to be the Internet’s most trusted resource for drug and related health information.`,
         url: "https://www.drugs.com/",
@@ -1078,6 +1258,10 @@ const manifest = [
         img2: {
             src: '/logos/RxList_site.png',
             alt: 'RxList site image',
+        },
+        img3: {
+            src: '',
+            alt: ''
         },
         title: 'RxList',
         description: 'RxList is an online medical resource dedicated to offering detailed and current pharmaceutical information on brand and generic drugs.',
@@ -1102,6 +1286,10 @@ const manifest = [
             src: '/logos/DrugCentral_site.png',
             alt: 'Drug Central site image',
         },
+        img3: {
+            src: '',
+            alt: ''
+        },
         title: 'DrugCentral',
         description: 'DrugCentral provides information on active ingredients chemical entities, pharmaceutical products, drug mode of action, indications, pharmacologic action.',
         url: "https://drugcentral.org/",
@@ -1123,6 +1311,10 @@ const manifest = [
         img2: {
             src: '/logos/ZINC15_site.png',
             alt: 'ZINC15 site image',
+        },
+        img3: {
+            src: '',
+            alt: ''
         },
         title: 'ZINC15',
         description: 'ZINC15 is a free database of commercially-available compounds for virtual screening. ZINC contains over 230 million purchasable compounds in ready-to-dock, 3D formats. ZINC also contains over 750 million purchasable compounds you can search for analogs.',
@@ -1146,6 +1338,10 @@ const manifest = [
             src: '/logos/LINCS2_site.png',
             alt: 'LINCS Data Portal 2.0 site image',
         },
+        img3: {
+            src: '',
+            alt: ''
+        },
         title: 'LDP 2.0',
         description: 'LINCS is an NIH Common Fund program with the goal of generating a large-scale and comprehensive catalogue of perturbation-response signatures by utilizing a diverse collection of perturbations across many model systems and assay types.',
         url: "http://lincsportal.ccs.miami.edu/signatures/home",
@@ -1167,6 +1363,10 @@ const manifest = [
             src: '/logos/PharmGKB_site.png',
             alt: 'PharmGKB site image',
         },
+        img3: {
+            src: '',
+            alt: ''
+        },
         title: 'PharmGKB',
         description: 'PharmGKB is a comprehensive resource that curates knowledge about the impact of genetic variation on drug response for clinicians and researchers.',
         url: "https://www.pharmgkb.org/",
@@ -1187,6 +1387,10 @@ const manifest = [
         img2: {
             src: '/logos/DrugsFDA_site.png',
             alt: 'Drugs@FDA site image',
+        },
+        img3: {
+            src: '',
+            alt: ''
         },
         title: 'Drugs@FDA',
         description: 'Drugs@FDA includes information about drugs, including biological products, approved for human use in the United States, but does not include information about FDA-approved products regulated by the Center for Biologics Evaluation and Research.',

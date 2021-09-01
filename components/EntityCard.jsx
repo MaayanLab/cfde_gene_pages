@@ -21,6 +21,20 @@ export default function EntityCard(props) {
                          style={{
                              height: "50px"
                          }}>
+                        {props.img3 !== undefined ? (
+                            <div className="col-6 col-sm-12 text-center">
+                                <a
+                                    href={props.url}
+                                    target="_blank">
+                                    <img
+                                        className="img-fluid rounded"
+                                        src={props.img3.src}
+                                        alt={props.img3.alt}
+                                        style={{
+                                            maxHeight: "60px"
+                                        }}/></a>
+                            </div>
+                        ) : null}
                         {props.img1 !== undefined ? (
                             <div className="col-6 col-sm-12 text-center">
                                 <a
