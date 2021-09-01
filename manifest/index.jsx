@@ -324,50 +324,50 @@ const manifest = [
         countapi: 'maayanlab.github.io/enrichrclick',
         clickurl: async (search) => `https://maayanlab.cloud/Enrichr/#find!gene=${search}`,
     },
-    {
-        name: 'KEA3',
-        tags: {
-            gene: true,
-            CF: false,
-            Ag: true,
-            MaayanLab: true,
-        },
-        img1: {
-            src: '/logos/MaayanLab_logo.png',
-            alt: 'MaayanLab',
-        },
-        img2: {
-            src: '/logos/kea3_site.png',
-            alt: 'KEA3 site image',
-        },
-        title: 'KEA3',
-        description: 'Kinase Enrichment Analysis 3 (KEA3) infers upstream kinases whose putative substrates are overrepresented in a user-inputted list of proteins or differentially phosphorylated proteins.',
-        url: "https://maayanlab.cloud/kea3/",
-        countapi: 'maayanlab.github.io/KEA3click',
-        clickurl: async (search) => `https://maayanlab.cloud/kea3?gene=${search}`,
-    },
-    {
-        name: 'ChEA3',
-        tags: {
-            gene: true,
-            CF: false,
-            Ag: true,
-            MaayanLab: true,
-        },
-        img1: {
-            src: '/logos/MaayanLab_logo.png',
-            alt: 'MaayanLab',
-        },
-        img2: {
-            src: '/logos/chea3_site.png',
-            alt: 'ChEA3 site image',
-        },
-        title: 'ChEA3',
-        description: 'ChIP-X Enrichment Analysis 3 (ChEA3) predicts transcription factors (TFs) associated with user-input sets of genes.',
-        url: "https://maayanlab.cloud/chea3/",
-        countapi: 'maayanlab.github.io/ChEA3click',
-        clickurl: async (search) => `https://maayanlab.cloud/chea3?gene=${search}`,
-    },
+    // {
+    //     name: 'KEA3',
+    //     tags: {
+    //         gene: true,
+    //         CF: false,
+    //         Ag: true,
+    //         MaayanLab: true,
+    //     },
+    //     img1: {
+    //         src: '/logos/MaayanLab_logo.png',
+    //         alt: 'MaayanLab',
+    //     },
+    //     img2: {
+    //         src: '/logos/kea3_site.png',
+    //         alt: 'KEA3 site image',
+    //     },
+    //     title: 'KEA3',
+    //     description: 'Kinase Enrichment Analysis 3 (KEA3) infers upstream kinases whose putative substrates are overrepresented in a user-inputted list of proteins or differentially phosphorylated proteins.',
+    //     url: "https://maayanlab.cloud/kea3/",
+    //     countapi: 'maayanlab.github.io/KEA3click',
+    //     clickurl: async (search) => `https://maayanlab.cloud/kea3?gene=${search}`,
+    // },
+    // {
+    //     name: 'ChEA3',
+    //     tags: {
+    //         gene: true,
+    //         CF: false,
+    //         Ag: true,
+    //         MaayanLab: true,
+    //     },
+    //     img1: {
+    //         src: '/logos/MaayanLab_logo.png',
+    //         alt: 'MaayanLab',
+    //     },
+    //     img2: {
+    //         src: '/logos/chea3_site.png',
+    //         alt: 'ChEA3 site image',
+    //     },
+    //     title: 'ChEA3',
+    //     description: 'ChIP-X Enrichment Analysis 3 (ChEA3) predicts transcription factors (TFs) associated with user-input sets of genes.',
+    //     url: "https://maayanlab.cloud/chea3/",
+    //     countapi: 'maayanlab.github.io/ChEA3click',
+    //     clickurl: async (search) => `https://maayanlab.cloud/chea3?gene=${search}`,
+    // },
     {
         name: 'ENCODE',
         tags: {
