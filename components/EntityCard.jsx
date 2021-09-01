@@ -9,7 +9,7 @@ export default function EntityCard(props) {
         }
     }, [props.countapi])
     return (
-        <div className="col-8 col-sm-4">
+        <div className="col-lg-4 col-md-6 col-sm-12">
             <div className="card shadow-sm m-3" title={props.tags.CF ? "Affiliated with the CFDE" : undefined}>
                 <div className="card-header" style={{
                     backgroundImage: props.tags.CF ? "url('/logos/CFDE_logo.png')" : undefined,
