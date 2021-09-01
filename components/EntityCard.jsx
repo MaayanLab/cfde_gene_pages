@@ -32,7 +32,7 @@ export default function EntityCard(props) {
                                         src={props.img3.src}
                                         alt={props.img3.alt}
                                         style={{
-                                            maxHeight: "40px",
+                                            maxHeight: "50px",
                                             maxWidth: "120px"
                                         }}/></a>
                             </div>
@@ -45,7 +45,7 @@ export default function EntityCard(props) {
                                         src={props.img1.src}
                                         alt={props.img1.alt}
                                         style={{
-                                            maxHeight: "40px",
+                                            maxHeight: "50px",
                                             maxWidth: "120px",
                                         }}/></a>
                             </div>
@@ -61,7 +61,7 @@ export default function EntityCard(props) {
                                     src={props.img1.src}
                                     alt={props.img1.alt}
                                     style={{
-                                        maxHeight: "40px",
+                                        maxHeight: "50px",
                                         maxWidth: "200px",
                                     }}/></a>
                             </div>

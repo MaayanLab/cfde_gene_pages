@@ -797,7 +797,7 @@ const manifest = [
             PS: true,
         },
         img1: {
-            src: '/logos/KEGG_logo.jpeg',
+            src: '/logos/KEGG_logo.png',
             alt: 'KEGG image',
         },
         img2: {
