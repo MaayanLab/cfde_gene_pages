@@ -1,4 +1,4 @@
-export default function GeneInfoCard({ search, organism, chromosome_location, ncbi_gene_id, biological_function, similar_coexpression, similar_literature, predicted_tf, predicted_phospho }) {
+export default function GeneInfoCard({ search, organism, chromosome_location, ncbi_gene_id, biological_function, similar_coexpression, similar_literature, predicted_tf, predicted_kinases }) {
     return (
         <div className="col-lg-8 col-md-12">
             <div className="card shadow-sm m-3" title="Affiliated with the CFDE">
@@ -31,14 +31,14 @@ export default function GeneInfoCard({ search, organism, chromosome_location, nc
                         </p>
                         <p className="card-text" style={{ fontSize: '0.8rem' }}><span style={{ fontWeight: 500 }}>Top 10 TF predicted to regulate {search}</span>:
                             <div className="d-inline-flex">
-                              {predicted_tf.map(gene =>
+                              {predicted_tfs.map(gene =>
                                 <a className="mx-1" key={gene} href="">{gene}</a>
                               )}
                             </div>
                         </p>
                         <p className="card-text" style={{ fontSize: '0.8rem' }}><span style={{ fontWeight: 500 }}>Top 10 kinases predicted to phosphorylate {search}</span>:
                             <div className="d-inline-flex">
-                              {predicted_phospho.map(gene =>
+                              {predicted_kinases.map(gene =>
                                 <a className="mx-1" key={gene} href="">{gene}</a>
                               )}
                             </div>
