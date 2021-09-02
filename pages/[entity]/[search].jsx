@@ -3,7 +3,7 @@ import Head from 'next/head'
 import dynamic from 'next/dynamic'
 import callable from '@/utils/callable'
 import memo from "@/utils/memo"
-import full_manifest, {gene_id, drug_info, expand} from '@/manifest'
+import full_manifest, {gene_id, gene_info, drug_info, expand, predict_regulators} from '@/manifest'
 import useRouterEx from '@/utils/routerEx'
 import cmp from '@/manifest/cmp'
 import sorted from '@/utils/sorted'
@@ -58,6 +58,15 @@ export async function getStaticProps({params: {entity, search}}) {
     } catch (e) {
         return {notFound: true, props: {}}
     }
+
+    // const gene_info_card = {
+    //     gene_info: await gene_info(gene_id(search)),
+    //     similar_coexpression: await  expand([search], 'coexpression'),
+    //     similar_literature: await expand([search], 'generif'),
+    //     predicted_tfs: await  predict_regulators([search], 'chea3'),
+    //     predicted_kinases: await predict_regulators([search], 'kea3'),
+    // }
+
     const manifest = (
         await Promise.all(
             full_manifest
@@ -82,6 +91,7 @@ export async function getStaticProps({params: {entity, search}}) {
             entity,
             search,
             manifest,
+            // gene_info_card
         },
         revalidate: false,
     }
@@ -100,17 +110,17 @@ export default function Search(props) {
                     <div className="album pb-5">
                         <div className="container">
                             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 justify-content-center">
-                                {/* <GeneInfoCard
-                                    search={props.search}
-                                    organism="human"
-                                    chromosome_location=""
-                                    ncbi_gene_id={props.search}
-                                    biological_function=""
-                                    similar_coexpression={[]}
-                                    similar_literature={[]}
-                                    predicted_tf={[]}
-                                    predicted_phospho={[]}
-                                /> */}
+                                {/*<GeneInfoCard*/}
+                                {/*    search={props.search}*/}
+                                {/*    organism={props.gene_info_card.gene_info.organism}*/}
+                                {/*    chromosome_location={props.gene_info_card.gene_info.chromosome_location}*/}
+                                {/*    ncbi_gene_id={props.gene_info_card.gene_info.ncbi_gene_id}*/}
+                                {/*    biological_function={props.gene_info_card.gene_info.ncbi_gene_id.biological_function}*/}
+                                {/*    similar_coexpression={props.gene_info_card.similar_coexpression}*/}
+                                {/*    similar_literature={props.gene_info_card.similar_literature}*/}
+                                {/*    predicted_tfs={props.gene_info_card.predicted_tfs}*/}
+                                {/*    predicted_kinases={props.gene_info_card.predicted_kinases}*/}
+                                {/*/>*/}
                                 {sortedManifest
                                     .filter(item => {
                                         if (CF === true && !('CF' in item.tags)) return false

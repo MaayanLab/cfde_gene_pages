@@ -1,9 +1,17 @@
 import memo from '@/utils/memo'
 import defined from '@/utils/defined'
 
-const gene_query_url = 'https://mygene.info/v3'
+export const gene_query_url = 'https://mygene.info/v3'
 
-export const gene_id = defined(memo(async (gene_search) => {
+export const species_map = {
+    '9606': 'Homo sapiens',
+    '6239': 'Caenorhabditis elegans',
+    '7955': 'Danio rerio',
+    '7227': 'Drosophila melanogaster',
+    '10090': 'Mus musculus'
+}
+
+export const gene_id = defined(async (gene_search) => {
     let gene_res = await fetch(`${gene_query_url}/query?q=symbol:${gene_search}`)
     if (gene_res.ok) {
         let data = await gene_res.json()
@@ -13,13 +21,26 @@ export const gene_id = defined(memo(async (gene_search) => {
             }
         }
     }
-}))
+})
 
-export const expand = defined(async (gene_search, exp_type="coexpression", top= 10) => {
-  let gene_exp =  await fetch(`https://maayanlab.cloud/enrichrsearch/gene/expand?search=${gene_search}&top=${top}&type=${exp_type}`)
+export const gene_info = defined(async (gene_id) => {
+    let info = await fetch(`${gene_query_url}/gene/${gene_id}`)
+    if (info.ok) {
+        let data = await info.json()
+        return {
+            'ncbi_gene_id': data._id,
+            'organism': species_map[data.taxid],
+            'chromosome_location': data.map_location,
+            'biological_function': data.summary
+        }
+    }
+})
+
+export const expand = defined(async (gene_search, exp_type = "coexpression", top = 10) => {
+    let gene_exp = await fetch(`https://maayanlab.cloud/enrichrsearch/gene/expand?search=${gene_search}&top=${top}&type=${exp_type}`)
     if (gene_exp.ok) {
         let data = await gene_exp.json()
-        if ((Array.isArray(data.data))&&(data.success)) {
+        if ((Array.isArray(data.data)) && (data.success)) {
             if (data.data.length > 0) {
                 return data.data.join(', ')
             }
@@ -27,7 +48,7 @@ export const expand = defined(async (gene_search, exp_type="coexpression", top= 
     }
 })
 
-export const predict_regulators = defined(async (genes, type_url) => {
+export const  predict_regulators = defined(async (genes, type_url) => {
     let request_options = {
         method: 'POST',
         headers: new Headers({"Content-Type": "application/json"}),
@@ -38,18 +59,13 @@ export const predict_regulators = defined(async (genes, type_url) => {
         redirect: 'follow'
     };
 
-    fetch(`https://maayanlab.cloud/${type_url}/api/enrich/`, request_options)
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
+    let results = fetch(`https://maayanlab.cloud/${type_url}/api/enrich/`, request_options)
+    if (results.ok) {
+        let response = await results.json()
+        return response['Integrated--meanRank'].slice(0, 10).map(d => d.TF)
+    }
 })
 
-const gene_info = defined(memo(async (gene_search) => {
-    const gene_res = await fetch(`${gene_query_url}/gene/${await gene_id(gene_search)}`)
-    if (gene_res.ok) {
-        return await gene_res.json()
-    }
-}))
 const ensembl_id = defined(async (gene_search) => (await gene_info(gene_search)).ensembl.gene)
 const HGNC = defined(async (gene_search) => (await gene_info(gene_search)).HGNC)
 const uniprot_kb = defined(async (gene_search) => (await gene_info(gene_search)).pantherdb.uniprot_kb)
