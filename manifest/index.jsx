@@ -1174,7 +1174,7 @@ const manifest = [
             Ag: false,
         },
         img1: {
-            src: '/logos/zinc15_logo.svg',
+            src: '/logos/zinc15_logo.png',
             alt: 'ZINC15 image',
         },
         img2: {
