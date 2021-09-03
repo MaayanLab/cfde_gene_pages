@@ -26,35 +26,34 @@ export const gene_id = defined(async (gene_search) => {
     }
 })
 
-export const expand = defined(async (gene_search, exp_type = "coexpression", top = 10) => {
-    let gene_exp = await fetch(`https://maayanlab.cloud/enrichrsearch/gene/expand?search=${gene_search}&top=${top}&type=${exp_type}`)
+export const expand = defined(memo(async (gene_search, exp_type = "coexpression", top = 10) => {
+    const gene_exp = await fetch(`https://maayanlab.cloud/enrichrsearch/gene/expand?search=${gene_search}&top=${top}&type=${exp_type}`)
     if (gene_exp.ok) {
-        let data = await gene_exp.json()
-        if ((Array.isArray(data.data)) && (data.success)) {
-            if (data.data.length > 0) {
-                return data.data
+        const { data, success } = await gene_exp.json()
+        if ((Array.isArray(data)) && success) {
+            if (data.length > 0) {
+                return data
             }
         }
     }
-})
+}))
 
-export const  predict_regulators = defined(async (genes, type_url) => {
-    let request_options = {
+export const  predict_regulators = defined(memo(async (genes, type_url) => {
+    const results = await fetch(`https://maayanlab.cloud/${type_url}/api/enrich/`, {
         method: 'POST',
-        headers: new Headers({"Content-Type": "application/json"}),
+        headers: {
+            "Content-Type": "application/json"
+        },
         body: JSON.stringify({
-            "query_name": "gene_set_query",
-            "gene_set": genes
+            query_name: "gene_set_query",
+            gene_set: genes
         }),
-        redirect: 'follow'
-    };
-
-    let results = fetch(`https://maayanlab.cloud/${type_url}/api/enrich/`, request_options)
+    })
     if (results.ok) {
-        let response = await results.json()
+        const response = await results.json()
         return response['Integrated--meanRank'].slice(0, 10).map(d => d.TF)
     }
-})
+}))
 
 const gene_info = defined(memo(async (gene_search) => {
     const gene_res = await fetch(`${gene_query_url}/gene/${await gene_id(gene_search)}`)
