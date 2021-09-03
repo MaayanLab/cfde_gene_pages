@@ -106,6 +106,15 @@ const DrugName = defined(async (drug_search) => {
 const GTPL = defined(async (drug_search) => (await drug_info(drug_search)).Synonym.find(item => item.trim().match(/^GTPL/)).substring(4))
 const RxList = defined(async (drug_search) => (await rx_1st_alias(drug_search)))
 
+/**
+ * Each object attribute can be a literal value or an async callable that accepts the parameters:
+ *  { self, search }
+ *  self: The object itself with parameters currently evaluated (in order)
+ *  search: The current search term
+ * The whole item is resolved (by executing the functions as necessary) before the page is rendered
+ *  with the resolved manifest, note that manifest items are resolved independently and in parallel
+ *  so any dependent functions which make requests should be memoized promises for request deduplication.
+ */
 const manifest = [
     {
         name: 'GTEx',
