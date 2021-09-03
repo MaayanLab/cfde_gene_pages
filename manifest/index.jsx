@@ -81,6 +81,7 @@ const uniprot_kb = defined(async (gene_search) => (await gene_info(gene_search))
 const MGI = defined(async (gene_search) => (await gene_info(gene_search)).pantherdb.ortholog[0].MGI)
 const transcript = defined(async (gene_search) => (await gene_info(gene_search)).exac.transcript)
 const entrezgene = defined(async (gene_search) => (await gene_info(gene_search)).entrezgene)
+const pdb = defined(async (gene_search) => (await gene_info(gene_search)).pdb[0])
 
 export const drug_info = defined(memo(async (drug_search) => {
     const drug_query_url = 'https://pubchem.ncbi.nlm.nih.gov/rest'
@@ -139,6 +140,7 @@ const manifest = [
         similar_literature: try_or_else(async ({ search }) => await expand(search, 'generif'), null),
         predicted_tfs: try_or_else(async ({ search }) => await  predict_regulators([search], 'chea3'), null),
         predicted_kinases: try_or_else(async ({ search }) => await predict_regulators([search], 'kea3'), null),
+        protein3d: async ({ search }) => `https://www.ncbi.nlm.nih.gov/Structure/icn3d/full.html?mmdbid=${await pdb(search)}&width=300&height=300&showcommand=0&mobilemenu=1&showtitle=1&command=set background white`,
     },
     {
         name: 'GTEx',
