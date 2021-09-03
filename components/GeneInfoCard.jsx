@@ -15,34 +15,42 @@ export default function GeneInfoCard({ search, organism, chromosome_location, nc
                 <div className="card-body row">
                     <div className="col-10">
                         <p className="card-text" style={{ fontSize: '0.8rem' }}><span style={{ fontWeight: 500 }}>Biological function</span>: {biological_function}</p>
-                        <p className="card-text" style={{ fontSize: '0.8rem' }}><span style={{ fontWeight: 500 }}>Similar genes based on mRNA co-expression</span>:
-                            <div className="d-inline-flex">
-                              {similar_coexpression.map(gene =>
-                                <a className="mx-1" key={gene} href="">{gene}</a>
-                              )}
-                            </div>
-                        </p>
-                        <p className="card-text" style={{ fontSize: '0.8rem' }}><span style={{ fontWeight: 500 }}>Similar genes based on literature</span>:
-                            <div className="d-inline-flex">
-                              {similar_literature.map(gene =>
-                                <a className="mx-1" key={gene} href="">{gene}</a>
-                              )}
-                            </div>
-                        </p>
-                        <p className="card-text" style={{ fontSize: '0.8rem' }}><span style={{ fontWeight: 500 }}>Top 10 TF predicted to regulate {search}</span>:
-                            <div className="d-inline-flex">
-                              {predicted_tfs.map(gene =>
-                                <a className="mx-1" key={gene} href="">{gene}</a>
-                              )}
-                            </div>
-                        </p>
-                        <p className="card-text" style={{ fontSize: '0.8rem' }}><span style={{ fontWeight: 500 }}>Top 10 kinases predicted to phosphorylate {search}</span>:
-                            <div className="d-inline-flex">
-                              {predicted_kinases.map(gene =>
-                                <a className="mx-1" key={gene} href="">{gene}</a>
-                              )}
-                            </div>
-                        </p>
+                        {similar_coexpression !== undefined ? (
+                          <p className="card-text" style={{ fontSize: '0.8rem' }}><span style={{ fontWeight: 500 }}>Similar genes based on mRNA co-expression</span>:
+                              <div className="d-inline-flex">
+                                {similar_coexpression.map(gene =>
+                                  <a className="mx-1" key={gene} href="">{gene}</a>
+                                )}
+                              </div>
+                          </p>
+                        ) : null}
+                        {similar_literature !== undefined ? (
+                          <p className="card-text" style={{ fontSize: '0.8rem' }}><span style={{ fontWeight: 500 }}>Similar genes based on literature</span>:
+                              <div className="d-inline-flex">
+                                {similar_literature.map(gene =>
+                                  <a className="mx-1" key={gene} href="">{gene}</a>
+                                )}
+                              </div>
+                          </p>
+                        ) : null}
+                        {predicted_tfs !== undefined ? (
+                          <p className="card-text" style={{ fontSize: '0.8rem' }}><span style={{ fontWeight: 500 }}>Top 10 TF predicted to regulate {search}</span>:
+                              <div className="d-inline-flex">
+                                {predicted_tfs.map(gene =>
+                                  <a className="mx-1" key={gene} href="">{gene}</a>
+                                )}
+                              </div>
+                          </p>
+                        ) : null}
+                        {predicted_kinases !== undefined ? (
+                          <p className="card-text" style={{ fontSize: '0.8rem' }}><span style={{ fontWeight: 500 }}>Top 10 kinases predicted to phosphorylate {search}</span>:
+                              <div className="d-inline-flex">
+                                {predicted_kinases.map(gene =>
+                                  <a className="mx-1" key={gene} href="">{gene}</a>
+                                )}
+                              </div>
+                          </p>
+                        ) : null}
                     </div>
                     <div className="col-2">
                         <svg className="bd-placeholder-img img-thumbnail" xmlns="http://www.w3.org/2000/svg" role="img"
