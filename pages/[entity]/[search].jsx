@@ -8,26 +8,11 @@ import useRouterEx from '@/utils/routerEx'
 import cmp from '@/manifest/cmp'
 import sorted from '@/utils/sorted'
 import defined from '@/utils/defined'
-import countable from "@/utils/countable"
 import capitalize from '@/utils/capitalize'
 
 const EntityCard = dynamic(() => import('@/components/EntityCard'))
 const SearchPage = dynamic(() => import('@/components/SearchPage'))
 // const GeneInfoCard = dynamic(() => import('@/components/GeneInfoCard'))
-
-const isitup = memo(async (url) => {
-    try {
-        if (process.env.NODE_ENV === 'production') {
-            const isitup_res = await fetch(url)
-            if (isitup_res.status >= 400) {
-                throw new Error(isitup_res.statusText)
-            }
-        }
-        return 'yes'
-    } catch (e) {
-        return e.toString()
-    }
-})
 
 export async function getStaticPaths() {
     const {gene_examples, drug_examples} = await import('@/manifest/examples')
@@ -73,12 +58,14 @@ export async function getStaticProps({params: {entity, search}}) {
                 .map(async (item) => {
                     if (!(entity in item.tags)) return
                     try {
-                        const resolved_item = {...item}
-                        resolved_item.clicks = await countable(item.countapi).get()
-                        resolved_item.clickurl = await defined(callable(item.clickurl))(search)
-                        resolved_item.status = await isitup(resolved_item.clickurl)
-                        if (resolved_item.status !== 'yes') throw new Error(`${item.name}: isitup returned ${resolved_item.status}`)
-                        return resolved_item
+                        const self = {}
+                        for (const k in item) {
+                            self[k] = await defined(callable(item[k]))({
+                                self,
+                                search,
+                            })
+                        }
+                        return self
                     } catch (e) {
                         console.warn(`${item.name} was not resolved: ${e}`)
                         return
