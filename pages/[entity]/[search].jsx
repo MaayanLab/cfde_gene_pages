@@ -108,6 +108,7 @@ export default function Search(props) {
                                         return (
                                             <Component
                                                 key={item.name}
+                                                router={router}
                                                 {...item}
                                                 search={props.search}
                                             />

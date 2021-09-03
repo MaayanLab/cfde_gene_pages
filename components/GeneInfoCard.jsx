@@ -1,4 +1,4 @@
-export default function GeneInfoCard({ search, organism, chromosome_location, ncbi_gene_id, biological_function, similar_coexpression, similar_literature, predicted_tfs, predicted_kinases }) {
+export default function GeneInfoCard({ router, search, organism, chromosome_location, ncbi_gene_id, biological_function, similar_coexpression, similar_literature, predicted_tfs, predicted_kinases }) {
     return (
         <div className="col-lg-8 col-md-12">
             <div className="card shadow-sm m-3" title="Affiliated with the CFDE">
@@ -19,7 +19,17 @@ export default function GeneInfoCard({ search, organism, chromosome_location, nc
                           <p className="card-text" style={{ fontSize: '0.8rem' }}><span style={{ fontWeight: 500 }}>Similar genes based on mRNA co-expression</span>:
                               <div className="d-inline-flex">
                                 {similar_coexpression.map(gene =>
-                                  <a className="mx-1" key={gene} href="">{gene}</a>
+                                  <a
+                                    key={gene}
+                                    className="mx-1"
+                                    href="#"
+                                    onClick={evt => {
+                                      router.push({
+                                        pathname: '/[entity]/[search]',
+                                        query: { entity: 'gene', search: gene },
+                                      })
+                                    }}
+                                  >{gene}</a>
                                 )}
                               </div>
                           </p>
@@ -28,7 +38,17 @@ export default function GeneInfoCard({ search, organism, chromosome_location, nc
                           <p className="card-text" style={{ fontSize: '0.8rem' }}><span style={{ fontWeight: 500 }}>Similar genes based on literature</span>:
                               <div className="d-inline-flex">
                                 {similar_literature.map(gene =>
-                                  <a className="mx-1" key={gene} href="">{gene}</a>
+                                  <a
+                                    key={gene}
+                                    className="mx-1"
+                                    href="#"
+                                    onClick={evt => {
+                                      router.push({
+                                        pathname: '/[entity]/[search]',
+                                        query: { entity: 'gene', search: gene },
+                                      })
+                                    }}
+                                  >{gene}</a>
                                 )}
                               </div>
                           </p>
@@ -37,7 +57,17 @@ export default function GeneInfoCard({ search, organism, chromosome_location, nc
                           <p className="card-text" style={{ fontSize: '0.8rem' }}><span style={{ fontWeight: 500 }}>Top 10 TF predicted to regulate {search}</span>:
                               <div className="d-inline-flex">
                                 {predicted_tfs.map(gene =>
-                                  <a className="mx-1" key={gene} href="">{gene}</a>
+                                  <a
+                                    key={gene}
+                                    className="mx-1"
+                                    href="#"
+                                    onClick={evt => {
+                                      router.push({
+                                        pathname: '/[entity]/[search]',
+                                        query: { entity: 'gene', search: gene },
+                                      })
+                                    }}
+                                  >{gene}</a>
                                 )}
                               </div>
                           </p>
@@ -46,7 +76,17 @@ export default function GeneInfoCard({ search, organism, chromosome_location, nc
                           <p className="card-text" style={{ fontSize: '0.8rem' }}><span style={{ fontWeight: 500 }}>Top 10 kinases predicted to phosphorylate {search}</span>:
                               <div className="d-inline-flex">
                                 {predicted_kinases.map(gene =>
-                                  <a className="mx-1" key={gene} href="">{gene}</a>
+                                  <a
+                                    key={gene}
+                                    className="mx-1"
+                                    href="#"
+                                    onClick={evt => {
+                                      router.push({
+                                        pathname: '/[entity]/[search]',
+                                        query: { entity: 'gene', search: gene },
+                                      })
+                                    }}
+                                  >{gene}</a>
                                 )}
                               </div>
                           </p>
