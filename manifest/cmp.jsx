@@ -1,4 +1,9 @@
 export default function cmp(a, b) {
+  if (a.tags.pinned && !b.tags.pinned) {
+    return -1
+  } else if (!a.tags.pinned && b.tags.pinned) {
+    return 1
+  }
   // CF prioritized
   if (a.tags.CF && !b.tags.CF) {
     return -1

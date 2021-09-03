@@ -12,7 +12,13 @@ import capitalize from '@/utils/capitalize'
 
 const EntityCard = dynamic(() => import('@/components/EntityCard'))
 const SearchPage = dynamic(() => import('@/components/SearchPage'))
-// const GeneInfoCard = dynamic(() => import('@/components/GeneInfoCard'))
+const GeneInfoCard = dynamic(() => import('@/components/GeneInfoCard'))
+
+const components = {
+    GeneInfoCard,
+    EntityCard,
+    [undefined]: EntityCard,
+}
 
 export async function getStaticPaths() {
     const {gene_examples, drug_examples} = await import('@/manifest/examples')
@@ -44,14 +50,6 @@ export async function getStaticProps({params: {entity, search}}) {
         return {notFound: true, props: {}}
     }
 
-    // const gene_info_card = {
-    //     gene_info: await gene_info(gene_id(search)),
-    //     similar_coexpression: await  expand([search], 'coexpression'),
-    //     similar_literature: await expand([search], 'generif'),
-    //     predicted_tfs: await  predict_regulators([search], 'chea3'),
-    //     predicted_kinases: await predict_regulators([search], 'kea3'),
-    // }
-
     const manifest = (
         await Promise.all(
             full_manifest
@@ -78,7 +76,6 @@ export async function getStaticProps({params: {entity, search}}) {
             entity,
             search,
             manifest,
-            // gene_info_card
         },
         revalidate: false,
     }
@@ -97,19 +94,9 @@ export default function Search(props) {
                     <div className="album pb-5">
                         <div className="container">
                             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 justify-content-center">
-                                {/*<GeneInfoCard*/}
-                                {/*    search={props.search}*/}
-                                {/*    organism={props.gene_info_card.gene_info.organism}*/}
-                                {/*    chromosome_location={props.gene_info_card.gene_info.chromosome_location}*/}
-                                {/*    ncbi_gene_id={props.gene_info_card.gene_info.ncbi_gene_id}*/}
-                                {/*    biological_function={props.gene_info_card.gene_info.ncbi_gene_id.biological_function}*/}
-                                {/*    similar_coexpression={props.gene_info_card.similar_coexpression}*/}
-                                {/*    similar_literature={props.gene_info_card.similar_literature}*/}
-                                {/*    predicted_tfs={props.gene_info_card.predicted_tfs}*/}
-                                {/*    predicted_kinases={props.gene_info_card.predicted_kinases}*/}
-                                {/*/>*/}
                                 {sortedManifest
                                     .filter(item => {
+                                        if ('pinned' in item.tags) return true
                                         if (CF === true && !('CF' in item.tags)) return false
                                         return (
                                             (PS === true && 'PS' in item.tags)
@@ -117,13 +104,16 @@ export default function Search(props) {
                                             || (PS === false && Ag === false)
                                         )
                                     })
-                                    .map((item) => (
-                                        <EntityCard
-                                            key={item.name}
-                                            {...item}
-                                            search={props.search}
-                                        />
-                                    ))}
+                                    .map(({ component, ...item }) => {
+                                        const Component = components[component]
+                                        return (
+                                            <Component
+                                                key={item.name}
+                                                {...item}
+                                                search={props.search}
+                                            />
+                                        )
+                                    })}
                             </div>
                         </div>
                     </div>
