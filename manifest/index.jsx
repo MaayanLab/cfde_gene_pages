@@ -25,26 +25,13 @@ export const gene_id = defined(async (gene_search) => {
     }
 })
 
-export const gene_info = defined(async (gene_id) => {
-    let info = await fetch(`${gene_query_url}/gene/${gene_id}`)
-    if (info.ok) {
-        let data = await info.json()
-        return {
-            'ncbi_gene_id': data._id,
-            'organism': species_map[data.taxid],
-            'chromosome_location': data.map_location,
-            'biological_function': data.summary
-        }
-    }
-})
-
 export const expand = defined(async (gene_search, exp_type = "coexpression", top = 10) => {
     let gene_exp = await fetch(`https://maayanlab.cloud/enrichrsearch/gene/expand?search=${gene_search}&top=${top}&type=${exp_type}`)
     if (gene_exp.ok) {
         let data = await gene_exp.json()
         if ((Array.isArray(data.data)) && (data.success)) {
             if (data.data.length > 0) {
-                return data.data.join(', ')
+                return data.data
             }
         }
     }
@@ -68,6 +55,16 @@ export const  predict_regulators = defined(async (genes, type_url) => {
     }
 })
 
+const gene_info = defined(memo(async (gene_search) => {
+    const gene_res = await fetch(`${gene_query_url}/gene/${await gene_id(gene_search)}`)
+    if (gene_res.ok) {
+        return await gene_res.json()
+    }
+}))
+const ncbi_gene_id = defined(async (gene_search) => (await gene_info(gene_search))._id)
+const organism = defined(async (gene_search) => species_map[(await gene_info(gene_search)).taxid])
+const chromosome_location = defined(async (gene_search) => (await gene_info(gene_search)).map_location)
+const biological_function = defined(async (gene_search) => (await gene_info(gene_search)).summary)
 const ensembl_id = defined(async (gene_search) => (await gene_info(gene_search)).ensembl.gene)
 const HGNC = defined(async (gene_search) => (await gene_info(gene_search)).HGNC)
 const uniprot_kb = defined(async (gene_search) => (await gene_info(gene_search)).pantherdb.uniprot_kb)
