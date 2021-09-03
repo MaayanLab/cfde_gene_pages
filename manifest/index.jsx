@@ -177,31 +177,31 @@ const manifest = [
         countapi: 'maayanlab.github.io/harmclick',
         clickurl: async (search) => `https://maayanlab.cloud/Harmonizome/gene/${search}`,
     },
-    {
-        name: 'LINCS',
-        tags: {
-            CF: true,
-            PS: true,
-            gene: true,
-        },
-        img1: {
-            src: '/logos/ldp3_logo.png',
-            alt: 'LDP 3.0',
-        },
-        img2: {
-            src: '/logos/Lincs_site.png',
-            alt: 'LINCS site image',
-        },
-        img3: {
-            src: '/logos/LINCS_logo.gif',
-            alt: 'LINCS image',
-        },
-        title: 'LDP 3.0',
-        description: 'The LINCS Data Portal 3.0 (LDP 3.0) serves LINCS datasets and signatures. It provides a signature similarity search to query for mimicker or reverser signatures.',
-        url: "https://ldp3.cloud/",
-        countapi: 'maayanlab.github.io/lincsclick',
-        clickurl: async (search) => `https://ldp3.cloud/#/MetadataSearch/Signatures?query={%22skip%22:0,%22limit%22:10,%22search%22:[%22${search}%22]}`,
-    },
+    // {
+    //     name: 'LINCS',
+    //     tags: {
+    //         CF: true,
+    //         PS: true,
+    //         gene: true,
+    //     },
+    //     img1: {
+    //         src: '/logos/ldp3_logo.png',
+    //         alt: 'LDP 3.0',
+    //     },
+    //     img2: {
+    //         src: '/logos/Lincs_site.png',
+    //         alt: 'LINCS site image',
+    //     },
+    //     img3: {
+    //         src: '/logos/LINCS_logo.gif',
+    //         alt: 'LINCS image',
+    //     },
+    //     title: 'LDP 3.0',
+    //     description: 'The LINCS Data Portal 3.0 (LDP 3.0) serves LINCS datasets and signatures. It provides a signature similarity search to query for mimicker or reverser signatures.',
+    //     url: "https://ldp3.cloud/",
+    //     countapi: 'maayanlab.github.io/lincsclick',
+    //     clickurl: async (search) => `https://ldp3.cloud/#/MetadataSearch/Signatures?query={%22skip%22:0,%22limit%22:10,%22search%22:[%22${search}%22]}`,
+    // },
     {
         name: 'metabolomics',
         tags: {
