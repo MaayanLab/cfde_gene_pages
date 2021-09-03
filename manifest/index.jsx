@@ -114,6 +114,22 @@ const RxList = defined(async (drug_search) => (await rx_1st_alias(drug_search)))
  */
 const manifest = [
     {
+        name: 'GeneInfo',
+        component: 'GeneInfoCard',
+        tags: {
+            pinned: true,
+            gene: true,
+        },
+        organism: async ({ search }) => await organism(search),
+        ncbi_gene_id: async ({ search }) => await ncbi_gene_id(search),
+        chromosome_location: async ({ search }) => await chromosome_location(search),
+        biological_function: async ({ search }) => await biological_function(search),
+        similar_coexpression: async ({ search }) => await  expand(search, 'coexpression'),
+        similar_literature: async ({ search }) => await expand(search, 'generif'),
+        predicted_tfs: async ({ search }) => await  predict_regulators([search], 'chea3'),
+        predicted_kinases: async ({ search }) => await predict_regulators([search], 'kea3'),
+    },
+    {
         name: 'GTEx',
         tags: {
             CF: true,
