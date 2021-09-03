@@ -3,11 +3,16 @@ import full_manifest from '@/manifest'
 import dynamic from 'next/dynamic'
 import cmp from '@/manifest/cmp'
 import sorted from '@/utils/sorted'
-import countable from '@/utils/countable'
+import callable from '@/utils/callable'
 import Head from 'next/head'
 import capitalize from '@/utils/capitalize'
 
 const EntityCard = dynamic(() => import('@/components/EntityCard'))
+
+const components = {
+    EntityCard,
+    [undefined]: EntityCard,
+}
 
 export async function getStaticPaths() {
     return {
@@ -25,15 +30,19 @@ export async function getStaticProps({params: {entity}}) {
         await Promise.all(
             full_manifest
                 .map(async (item) => {
-                    if (!(entity in item.tags)) return
-                    const resolved_item = {...item}
-                    delete resolved_item.clickurl
+                    if (!(entity in item.tags) || ('searchonly' in item.tags)) return
                     try {
-                        resolved_item.clicks = await countable(item.countapi).get()
+                        const self = {}
+                        for (const k in item) {
+                            self[k] = await callable(item[k])({
+                                self,
+                            })
+                        }
+                        return self
                     } catch (e) {
-                        console.warn(`${item.name} was not resolved: ${e}`)
+                        console.warn(`${item.name} was not resolved\n${e.stack}`)
+                        return
                     }
-                    return resolved_item
                 })
         )
     ).filter(v => v !== undefined)
@@ -51,9 +60,15 @@ export default function Entity(props) {
                 <div className="container">
                     <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                         {sortedManifest
-                            .map(item => (
-                                <EntityCard key={item.name} {...item} />
-                            ))}
+                            .map(({ component, ...item }) => {
+                                const Component = components[component]
+                                return (
+                                    <Component
+                                        key={item.name}
+                                        {...item}
+                                    />
+                                )
+                            })}
                     </div>
                 </div>
             </div>

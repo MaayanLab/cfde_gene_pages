@@ -7,7 +7,6 @@ import full_manifest, {gene_id, gene_info, drug_info, expand, predict_regulators
 import useRouterEx from '@/utils/routerEx'
 import cmp from '@/manifest/cmp'
 import sorted from '@/utils/sorted'
-import defined from '@/utils/defined'
 import capitalize from '@/utils/capitalize'
 
 const EntityCard = dynamic(() => import('@/components/EntityCard'))
