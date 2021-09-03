@@ -15,7 +15,7 @@ export default function GeneInfoCard({ search, organism, chromosome_location, nc
                 <div className="card-body row">
                     <div className="col-10">
                         <p className="card-text" style={{ fontSize: '0.8rem' }}><span style={{ fontWeight: 500 }}>Biological function</span>: {biological_function}</p>
-                        {similar_coexpression !== undefined ? (
+                        {similar_coexpression !== null ? (
                           <p className="card-text" style={{ fontSize: '0.8rem' }}><span style={{ fontWeight: 500 }}>Similar genes based on mRNA co-expression</span>:
                               <div className="d-inline-flex">
                                 {similar_coexpression.map(gene =>
@@ -24,7 +24,7 @@ export default function GeneInfoCard({ search, organism, chromosome_location, nc
                               </div>
                           </p>
                         ) : null}
-                        {similar_literature !== undefined ? (
+                        {similar_literature !== null ? (
                           <p className="card-text" style={{ fontSize: '0.8rem' }}><span style={{ fontWeight: 500 }}>Similar genes based on literature</span>:
                               <div className="d-inline-flex">
                                 {similar_literature.map(gene =>
@@ -33,7 +33,7 @@ export default function GeneInfoCard({ search, organism, chromosome_location, nc
                               </div>
                           </p>
                         ) : null}
-                        {predicted_tfs !== undefined ? (
+                        {predicted_tfs !== null ? (
                           <p className="card-text" style={{ fontSize: '0.8rem' }}><span style={{ fontWeight: 500 }}>Top 10 TF predicted to regulate {search}</span>:
                               <div className="d-inline-flex">
                                 {predicted_tfs.map(gene =>
@@ -42,7 +42,7 @@ export default function GeneInfoCard({ search, organism, chromosome_location, nc
                               </div>
                           </p>
                         ) : null}
-                        {predicted_kinases !== undefined ? (
+                        {predicted_kinases !== null ? (
                           <p className="card-text" style={{ fontSize: '0.8rem' }}><span style={{ fontWeight: 500 }}>Top 10 kinases predicted to phosphorylate {search}</span>:
                               <div className="d-inline-flex">
                                 {predicted_kinases.map(gene =>

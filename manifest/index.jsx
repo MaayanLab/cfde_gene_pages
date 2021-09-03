@@ -2,6 +2,7 @@ import memo from '@/utils/memo'
 import defined from '@/utils/defined'
 import countable from "@/utils/countable"
 import isitup from "@/utils/isitup"
+import try_or_else from "@/utils/try_or_else"
 
 export const gene_query_url = 'https://mygene.info/v3'
 
@@ -124,10 +125,10 @@ const manifest = [
         ncbi_gene_id: async ({ search }) => await ncbi_gene_id(search),
         chromosome_location: async ({ search }) => await chromosome_location(search),
         biological_function: async ({ search }) => await biological_function(search),
-        similar_coexpression: async ({ search }) => await  expand(search, 'coexpression'),
-        similar_literature: async ({ search }) => await expand(search, 'generif'),
-        predicted_tfs: async ({ search }) => await  predict_regulators([search], 'chea3'),
-        predicted_kinases: async ({ search }) => await predict_regulators([search], 'kea3'),
+        similar_coexpression: try_or_else(async ({ search }) => await  expand(search, 'coexpression'), null),
+        similar_literature: try_or_else(async ({ search }) => await expand(search, 'generif'), null),
+        predicted_tfs: try_or_else(async ({ search }) => await  predict_regulators([search], 'chea3'), null),
+        predicted_kinases: try_or_else(async ({ search }) => await predict_regulators([search], 'kea3'), null),
     },
     {
         name: 'GTEx',
