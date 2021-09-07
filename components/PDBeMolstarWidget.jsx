@@ -28,8 +28,15 @@ export default function PDBeMolstarWidget({ options, style, ...props }) {
     if (!ref || !ref.current || !instance || !options) return
     instance.render(ref.current, options)
   }, [ref, instance, options])
-  if (style === undefined) style = {}
   return (
-    <div ref={ref} style={{...style, position: 'relative', flex: '1 0 auto' }} {...props} />
+    <div
+      ref={ref}
+      style={{
+        position: 'relative',
+        flex: '1 0 auto',
+        ...(style||{}),
+      }}
+      {...props}
+    />
   )
 }
