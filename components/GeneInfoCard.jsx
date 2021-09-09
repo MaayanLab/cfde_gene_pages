@@ -1,6 +1,6 @@
 export default function GeneInfoCard({ router, search, organism, chromosome_location, ncbi_gene_id, biological_function, similar_coexpression, similar_literature, predicted_tfs, predicted_kinases, protein3d }) {
     return (
-        <div className="col-lg-8 col-md-12">
+        <div className="col-lg-4 col-md-6 col-sm-12">
             <div className="card shadow-sm m-3" title="Affiliated with the CFDE">
                 <div className="card-header">
                     <div className="d-flex mt-2 mb-3">
