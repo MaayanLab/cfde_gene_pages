@@ -36,7 +36,7 @@ export const gene_id = defined(async (gene_search) => {
     }
 })
 
-export const expand = defined(memo(async (gene_search, exp_type = "coexpression", top = 10) => {
+export const expand = defined(memo(async (gene_search, exp_type = "coexpression", top = 5) => {
     const gene_exp = await fetch(`https://maayanlab.cloud/enrichrsearch/gene/expand?search=${gene_search}&top=${top}&type=${exp_type}`)
     if (gene_exp.ok) {
         const { data, success } = await gene_exp.json()
@@ -48,7 +48,7 @@ export const expand = defined(memo(async (gene_search, exp_type = "coexpression"
     }
 }))
 
-export const  predict_regulators = defined(memo(async (genes, type_url) => {
+export const  predict_regulators = defined(memo(async (genes, type_url, top = 5) => {
     const results = await fetch(`https://maayanlab.cloud/${type_url}/api/enrich/`, {
         method: 'POST',
         headers: {
@@ -61,7 +61,7 @@ export const  predict_regulators = defined(memo(async (genes, type_url) => {
     })
     if (results.ok) {
         const response = await results.json()
-        return response['Integrated--meanRank'].slice(0, 10).map(d => d.TF)
+        return response['Integrated--meanRank'].slice(0, top).map(d => d.TF)
     }
 }))
 
@@ -71,16 +71,24 @@ const gene_info = defined(memo(async (gene_search) => {
         return await gene_res.json()
     }
 }))
+
+const clean_cut = defined((desc, max_len = 400) => {
+    // Cut a description by a sentence end no longer than max_len
+    let stump = desc.slice(0, max_len).lastIndexOf('.')
+    return desc.slice(0, stump+1)
+})
+
 const ncbi_gene_id = defined(async (gene_search) => (await gene_info(gene_search))._id)
 const organism = defined(async (gene_search) => species_map[(await gene_info(gene_search)).taxid])
 const chromosome_location = defined(async (gene_search) => (await gene_info(gene_search)).map_location)
-const biological_function = defined(async (gene_search) => (await gene_info(gene_search)).summary)
+const biological_function = defined(async (gene_search) => clean_cut((await gene_info(gene_search)).summary))
 const ensembl_id = defined(async (gene_search) => (await gene_info(gene_search)).ensembl.gene)
 const HGNC = defined(async (gene_search) => (await gene_info(gene_search)).HGNC)
-const uniprot_kb = defined(async (gene_search) => (await gene_info(gene_search)).pantherdb.uniprot_kb)
+const uniprot_kb = defined(async (gene_search) => (await gene_info(gene_search)).uniprot['Swiss-Prot'])
 const MGI = defined(async (gene_search) => (await gene_info(gene_search)).pantherdb.ortholog[0].MGI)
 const transcript = defined(async (gene_search) => (await gene_info(gene_search)).exac.transcript)
 const entrezgene = defined(async (gene_search) => (await gene_info(gene_search)).entrezgene)
+const pdb = defined(async (gene_search) => (await gene_info(gene_search)).pdb[0])
 
 export const drug_info = defined(memo(async (drug_search) => {
     const drug_query_url = 'https://pubchem.ncbi.nlm.nih.gov/rest'
@@ -139,6 +147,7 @@ const manifest = [
         similar_literature: try_or_else(async ({ search }) => await expand(search, 'generif'), null),
         predicted_tfs: try_or_else(async ({ search }) => await  predict_regulators([search], 'chea3'), null),
         predicted_kinases: try_or_else(async ({ search }) => await predict_regulators([search], 'kea3'), null),
+        protein3d: async ({ search }) => `https://www.ncbi.nlm.nih.gov/Structure/icn3d/full.html?mmdbid=${await pdb(search)}&width=300&height=300&showcommand=0&mobilemenu=1&showtitle=1&command=set background white`,
     },
     {
         name: 'GTEx',
@@ -495,6 +504,26 @@ const manifest = [
         url: "https://www.uniprot.org/",
         countapi: 'maayanlab.github.io/uniprotclick',
         clickurl: if_search(async ({ search }) => `https://www.uniprot.org/uniprot/${await uniprot_kb(search)}`),
+    },
+    {
+        name: 'alphafold',
+        tags: {
+            gene: true,
+            PS: true,
+        },
+        img1: {
+            src: '/logos/alphafold_logo.png',
+            alt: 'AlphaFold logo',
+        },
+        img2: {
+            src: '/logos/alphafold_site.png',
+            alt: 'AlphaFold site image',
+        },
+        title: 'AlphaFold DB',
+        description: 'AlphaFold DB provides open access to protein structure predictions for the human proteome and 20 other key organisms to accelerate scientific research.',
+        url: "https://alphafold.ebi.ac.uk/",
+        countapi: 'maayanlab.github.io/alphafoldclick',
+        clickurl: if_search(async ({ search }) => `https://alphafold.ebi.ac.uk/entry/${await uniprot_kb(search)}`),
     },
     {
         name: 'MARRVEL',
@@ -1166,28 +1195,6 @@ const manifest = [
         url: "https://www.drugs.com/",
         countapi: 'maayanlab.github.io/drugscomclick',
         clickurl: if_search(async ({ search }) => `https://www.drugs.com/${await DrugName(search)}.html`),
-    },
-    {
-        name: 'rxlist',
-        tags: {
-            drug: true,
-            CF: false,
-            PS: false,
-            Ag: true,
-        },
-        img1: {
-            src: '/logos/RxList_logo.png',
-            alt: 'RxList image',
-        },
-        img2: {
-            src: '/logos/RxList_site.png',
-            alt: 'RxList site image',
-        },
-        title: 'RxList',
-        description: 'RxList is an online medical resource dedicated to offering detailed and current pharmaceutical information on brand and generic drugs.',
-        url: "https://www.rxlist.com/",
-        countapi: 'maayanlab.github.io/rxlistclick',
-        clickurl: if_search(async ({ search }) => `https://www.rxlist.com/${await RxList(search)}-drug.htm`),
     },
     {
         name: 'drugcentral',
