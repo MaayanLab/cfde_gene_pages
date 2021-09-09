@@ -503,7 +503,7 @@ const manifest = [
         name: 'alphafold',
         tags: {
             gene: true,
-            Ag: true,
+            PS: true,
         },
         img1: {
             src: '/logos/alphafold_logo.png',
