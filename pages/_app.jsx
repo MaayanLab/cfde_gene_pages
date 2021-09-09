@@ -9,7 +9,7 @@ import { faFacebookF, faLinkedinIn, faTwitter } from '@fortawesome/free-brands-s
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
 const Analytics = dynamic(() => import('@/components/Analytics'))
-
+const PDBeMolstarPluginContext = dynamic(() => import('@/components/PDBeMolstarWidget').then(({ PDBeMolstarPluginContext }) => PDBeMolstarPluginContext))
 
 
 export default function App({ Component, pageProps }) {
@@ -60,7 +60,9 @@ export default function App({ Component, pageProps }) {
       </header>
 
       <main>
-        <Component {...pageProps} />
+        <PDBeMolstarPluginContext>
+          <Component {...pageProps} />
+        </PDBeMolstarPluginContext>
         <Analytics />
       </main>
       <footer className="footer mt-auto text-muted pt-4 pb-3" style={{ backgroundColor: 'rgba(0, 0, 0, 0.1)' }}>

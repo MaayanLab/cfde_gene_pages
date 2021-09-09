@@ -1,3 +1,7 @@
+import dynamic from 'next/dynamic'
+
+const PDBeMolstarWidget = dynamic(() => import('@/components/PDBeMolstarWidget'))
+
 export default function GeneInfoCard({ router, search, organism, chromosome_location, ncbi_gene_id, biological_function, similar_coexpression, similar_literature, predicted_tfs, predicted_kinases, protein3d }) {
     return (
         <div className="col-lg-4 col-md-6 col-sm-12">
@@ -98,9 +102,16 @@ export default function GeneInfoCard({ router, search, organism, chromosome_loca
                             ) : null}
                         </div>
                         <div className="col-4">
-                            <iframe className="img-fluid"
-                                    src={protein3d}
-                                    style={{ border: "none" }}/>
+                            <PDBeMolstarWidget
+                                style={{ height: 100, width: 100 }}
+                                options={{
+                                    customData: {
+                                        url: protein3d,
+                                        format: 'pdb'
+                                    },
+                                    hideControls: true,
+                                }}
+                            />
                         </div>
                     </div>
                 </div>
