@@ -77,7 +77,8 @@ const chromosome_location = defined(async (gene_search) => (await gene_info(gene
 const biological_function = defined(async (gene_search) => (await gene_info(gene_search)).summary)
 const ensembl_id = defined(async (gene_search) => (await gene_info(gene_search)).ensembl.gene)
 const HGNC = defined(async (gene_search) => (await gene_info(gene_search)).HGNC)
-const uniprot_kb = defined(async (gene_search) => (await gene_info(gene_search)).pantherdb.uniprot_kb)
+// const uniprot_kb = defined(async (gene_search) => (await gene_info(gene_search)).pantherdb.uniprot_kb)
+const uniprot_kb = defined(async (gene_search) => (await gene_info(gene_search)).uniprot['Swiss-Prot'])
 const MGI = defined(async (gene_search) => (await gene_info(gene_search)).pantherdb.ortholog[0].MGI)
 const transcript = defined(async (gene_search) => (await gene_info(gene_search)).exac.transcript)
 const entrezgene = defined(async (gene_search) => (await gene_info(gene_search)).entrezgene)
@@ -124,24 +125,24 @@ const RxList = defined(async (drug_search) => (await rx_1st_alias(drug_search)))
  *  so any dependent functions which make requests should be memoized promises for request deduplication.
  */
 const manifest = [
-    {
-        name: 'GeneInfo',
-        component: 'GeneInfoCard',
-        tags: {
-            pinned: true,
-            searchonly: true,
-            gene: true,
-        },
-        organism: async ({ search }) => await organism(search),
-        ncbi_gene_id: async ({ search }) => await ncbi_gene_id(search),
-        chromosome_location: async ({ search }) => await chromosome_location(search),
-        biological_function: async ({ search }) => await biological_function(search),
-        similar_coexpression: try_or_else(async ({ search }) => await  expand(search, 'coexpression'), null),
-        similar_literature: try_or_else(async ({ search }) => await expand(search, 'generif'), null),
-        predicted_tfs: try_or_else(async ({ search }) => await  predict_regulators([search], 'chea3'), null),
-        predicted_kinases: try_or_else(async ({ search }) => await predict_regulators([search], 'kea3'), null),
-        protein3d: async ({ search }) => `https://www.ncbi.nlm.nih.gov/Structure/icn3d/full.html?mmdbid=${await pdb(search)}&width=300&height=300&showcommand=0&mobilemenu=1&showtitle=1&command=set background white`,
-    },
+    // {
+    //     name: 'GeneInfo',
+    //     component: 'GeneInfoCard',
+    //     tags: {
+    //         pinned: true,
+    //         searchonly: true,
+    //         gene: true,
+    //     },
+    //     organism: async ({ search }) => await organism(search),
+    //     ncbi_gene_id: async ({ search }) => await ncbi_gene_id(search),
+    //     chromosome_location: async ({ search }) => await chromosome_location(search),
+    //     biological_function: async ({ search }) => await biological_function(search),
+    //     similar_coexpression: try_or_else(async ({ search }) => await  expand(search, 'coexpression'), null),
+    //     similar_literature: try_or_else(async ({ search }) => await expand(search, 'generif'), null),
+    //     predicted_tfs: try_or_else(async ({ search }) => await  predict_regulators([search], 'chea3'), null),
+    //     predicted_kinases: try_or_else(async ({ search }) => await predict_regulators([search], 'kea3'), null),
+    //     protein3d: async ({ search }) => `https://www.ncbi.nlm.nih.gov/Structure/icn3d/full.html?mmdbid=${await pdb(search)}&width=300&height=300&showcommand=0&mobilemenu=1&showtitle=1&command=set background white`,
+    // },
     {
         name: 'GTEx',
         tags: {
@@ -497,6 +498,26 @@ const manifest = [
         url: "https://www.uniprot.org/",
         countapi: 'maayanlab.github.io/uniprotclick',
         clickurl: if_search(async ({ search }) => `https://www.uniprot.org/uniprot/${await uniprot_kb(search)}`),
+    },
+    {
+        name: 'alphafold',
+        tags: {
+            gene: true,
+            Ag: true,
+        },
+        img1: {
+            src: '/logos/alphafold_logo.png',
+            alt: 'AlphaFold logo',
+        },
+        img2: {
+            src: '/logos/alphafold_site.png',
+            alt: 'AlphaFold site image',
+        },
+        title: 'AlphaFold DB',
+        description: 'AlphaFold DB provides open access to protein structure predictions for the human proteome and 20 other key organisms to accelerate scientific research.',
+        url: "https://alphafold.ebi.ac.uk/",
+        countapi: 'maayanlab.github.io/alphafoldclick',
+        clickurl: if_search(async ({ search }) => `https://alphafold.ebi.ac.uk/entry/${await uniprot_kb(search)}`),
     },
     {
         name: 'MARRVEL',
@@ -1168,28 +1189,6 @@ const manifest = [
         url: "https://www.drugs.com/",
         countapi: 'maayanlab.github.io/drugscomclick',
         clickurl: if_search(async ({ search }) => `https://www.drugs.com/${await DrugName(search)}.html`),
-    },
-    {
-        name: 'rxlist',
-        tags: {
-            drug: true,
-            CF: false,
-            PS: false,
-            Ag: true,
-        },
-        img1: {
-            src: '/logos/RxList_logo.png',
-            alt: 'RxList image',
-        },
-        img2: {
-            src: '/logos/RxList_site.png',
-            alt: 'RxList site image',
-        },
-        title: 'RxList',
-        description: 'RxList is an online medical resource dedicated to offering detailed and current pharmaceutical information on brand and generic drugs.',
-        url: "https://www.rxlist.com/",
-        countapi: 'maayanlab.github.io/rxlistclick',
-        clickurl: if_search(async ({ search }) => `https://www.rxlist.com/${await RxList(search)}-drug.htm`),
     },
     {
         name: 'drugcentral',
