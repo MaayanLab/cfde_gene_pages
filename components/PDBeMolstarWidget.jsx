@@ -28,6 +28,7 @@ export default function PDBeMolstarWidget({ options, style, ...props }) {
   React.useEffect(() => {
     if (!ref || !ref.current || !instance || !options) return
     instance.render(ref.current, options)
+    instance.visual.toggleSpin(true)
   }, [ref, instance, options])
   return (
     <div

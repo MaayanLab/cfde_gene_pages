@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic'
 
 const PDBeMolstarWidget = dynamic(() => import('@/components/PDBeMolstarWidget'))
 
-export default function GeneInfoCard({ router, search, organism, chromosome_location, ncbi_gene_id, ncbi_gene_url, biological_function, similar_coexpression, similar_literature, predicted_tfs, predicted_kinases, protein3d }) {
+export default function GeneInfoCard({ router, search, organism, chromosome_location, ncbi_gene_id, ncbi_gene_url, biological_function, similar_coexpression, similar_literature, predicted_tfs, predicted_kinases, moleculeId, protein3d }) {
     return (
         <div className="col-lg-4 col-md-6 col-sm-12">
             <div className="card shadow-sm m-3" title="Affiliated with the CFDE">
@@ -18,15 +18,15 @@ export default function GeneInfoCard({ router, search, organism, chromosome_loca
                 </div>
                 <div className="card-body">
                     <div className="row">
-                        <div className="col-4">
+                        <div className="col">
                             <PDBeMolstarWidget
-                                style={{ height: 100, width: 100 }}
+                                style={{ height: 150, width: '100%' }}
                                 options={{
-                                    customData: {
-                                        url: protein3d,
-                                        format: 'pdb'
-                                    },
+                                    moleculeId,
                                     hideControls: true,
+                                    hideCanvasControls: ['expand', 'selection', 'animation'],
+                                    selectInteraction: false,
+                                    bgColor: { r: 255, g: 255, b: 255 },
                                 }}
                             />
                         </div>
