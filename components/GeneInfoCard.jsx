@@ -1,4 +1,4 @@
-export default function GeneInfoCard({ router, search, organism, chromosome_location, ncbi_gene_id, biological_function, similar_coexpression, similar_literature, predicted_tfs, predicted_kinases, protein3d }) {
+export default function GeneInfoCard({ router, search, organism, chromosome_location, ncbi_gene_id, ncbi_gene_url, biological_function, similar_coexpression, similar_literature, predicted_tfs, predicted_kinases, protein3d }) {
     return (
         <div className="col-lg-4 col-md-6 col-sm-12">
             <div className="card shadow-sm m-3" title="Affiliated with the CFDE">
@@ -16,7 +16,7 @@ export default function GeneInfoCard({ router, search, organism, chromosome_loca
                     <div className="row">
                         <div className="col-12">
                             <p className="card-text" style={{ fontSize: '0.8rem' }}>
-                                <span style={{ fontWeight: 500 }}>Biological function</span>: {biological_function} <a href="">...</a></p>
+                                <span style={{ fontWeight: 500 }}>Biological function</span>: {biological_function} <a href={ncbi_gene_url}>...</a></p>
                         </div>
                     </div>
                     <div className="row">

@@ -79,6 +79,7 @@ const clean_cut = defined((desc, max_len = 400) => {
 })
 
 const ncbi_gene_id = defined(async (gene_search) => (await gene_info(gene_search))._id)
+const ncbi_gene_url = defined(async (gene_search) => `https://www.ncbi.nlm.nih.gov/gene/${(await gene_info(gene_search))._id}`)
 const organism = defined(async (gene_search) => species_map[(await gene_info(gene_search)).taxid])
 const chromosome_location = defined(async (gene_search) => (await gene_info(gene_search)).map_location)
 const biological_function = defined(async (gene_search) => clean_cut((await gene_info(gene_search)).summary))
@@ -134,6 +135,7 @@ const manifest = [
         ncbi_gene_id: async ({ search }) => await ncbi_gene_id(search),
         chromosome_location: async ({ search }) => await chromosome_location(search),
         biological_function: async ({ search }) => await biological_function(search),
+        ncbi_gene_url: async ({ search }) => await ncbi_gene_url(search),
         similar_coexpression: try_or_else(async ({ search }) => await  expand(search, 'coexpression'), null),
         similar_literature: try_or_else(async ({ search }) => await expand(search, 'generif'), null),
         predicted_tfs: try_or_else(async ({ search }) => await  predict_regulators([search], 'chea3'), null),
