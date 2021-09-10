@@ -104,18 +104,18 @@ export default function SearchControl({
                         {setCF && setPS && setAg ? (
                             <div className="form-group">
                                 <div className="form-check form-check-inline">
-                                    <input className="form-check-input" type="checkbox" value="option1" checked={CF}
+                                    <input id="inlineCheckbox1" className="form-check-input" type="checkbox" value="option1" checked={CF}
                                            onChange={(evt) => setCF(evt.target.checked)}/>
                                     <label className="form-check-label" htmlFor="inlineCheckbox1">NIH CF Supported
                                         Only</label>
                                 </div>
                                 <div className="form-check form-check-inline">
-                                    <input className="form-check-input" type="checkbox" value="option2" checked={PS}
+                                    <input id="inlineRadio1" className="form-check-input" type="checkbox" value="option2" checked={PS}
                                            onChange={(evt) => setPS(evt.target.checked)}/>
                                     <label className="form-check-label" htmlFor="inlineRadio1">Primary Source</label>
                                 </div>
                                 <div className="form-check form-check-inline">
-                                    <input className="form-check-input" type="checkbox" value="option3" checked={Ag}
+                                    <input id="inlineRadio2" className="form-check-input" type="checkbox" value="option3" checked={Ag}
                                            onChange={(evt) => setAg(evt.target.checked)}/>
                                     <label className="form-check-label" htmlFor="inlineRadio2">Aggregator</label>
                                 </div>

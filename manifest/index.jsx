@@ -75,7 +75,7 @@ const gene_info = defined(memo(async (gene_search) => {
 const clean_cut = defined((desc, max_len = 400) => {
     // Cut a description by a sentence end no longer than max_len
     let stump = desc.slice(0, max_len).lastIndexOf('.')
-    return desc.slice(0, stump+1)
+    return desc.slice(0, stump)
 })
 
 const ncbi_gene_id = defined(async (gene_search) => (await gene_info(gene_search))._id)
@@ -99,14 +99,6 @@ export const drug_info = defined(memo(async (drug_search) => {
     }
 }))
 
-export const rx_1st_alias = defined(memo(async (drug_search) => {
-    const rx_suggestion = await fetch(`https://www.rxlist.com/rxl/api/search/${drug_search}`)
-    if (rx_suggestion.ok) {
-        const data = await rx_suggestion.json()
-        return data[0].Name
-    }
-}))
-
 const CID = defined(async (drug_search) => (await drug_info(drug_search)).CID)
 const CHEMBL = defined(async (drug_search) => (await drug_info(drug_search)).Synonym.find(item => item.trim().match(/^CHEMBL/)))
 const DrugBankNum = defined(async (drug_search) => (await drug_info(drug_search)).Synonym.find(item => item.trim().match(/^DB/)))
@@ -119,7 +111,6 @@ const DrugName = defined(async (drug_search) => {
     }
 })
 const GTPL = defined(async (drug_search) => (await drug_info(drug_search)).Synonym.find(item => item.trim().match(/^GTPL/)).substring(4))
-const RxList = defined(async (drug_search) => (await rx_1st_alias(drug_search)))
 
 /**
  * Each object attribute can be a literal value or an async callable that accepts the parameters:

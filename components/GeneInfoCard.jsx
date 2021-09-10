@@ -15,14 +15,15 @@ export default function GeneInfoCard({ router, search, organism, chromosome_loca
                 <div className="card-body row">
                     <div className="row">
                         <div className="col-12">
-                            <p className="card-text" style={{ fontSize: '0.8rem' }}><span style={{ fontWeight: 500 }}>Biological function</span>: {biological_function}</p>
+                            <p className="card-text" style={{ fontSize: '0.8rem' }}>
+                                <span style={{ fontWeight: 500 }}>Biological function</span>: {biological_function} <a href="">...</a></p>
                         </div>
                     </div>
                     <div className="row">
                         <div className="col-8">
                             {similar_coexpression !== null ? (
-                                <p className="card-text" style={{ fontSize: '0.8rem' }}><span style={{ fontWeight: 500 }}>Similar genes based on mRNA co-expression</span>:
-                                    <div className="d-inline-flex">
+                                <div className="card-text" style={{ fontSize: '0.8rem' }}><span style={{ fontWeight: 500 }}>Similar genes based on mRNA co-expression</span>:
+                                    <p className="d-inline-flex">
                                         {similar_coexpression.map(gene =>
                                             <a
                                                 key={gene}
@@ -36,12 +37,12 @@ export default function GeneInfoCard({ router, search, organism, chromosome_loca
                                                 }}
                                             >{gene}</a>
                                         )}
-                                    </div>
-                                </p>
+                                    </p>
+                                </div>
                             ) : null}
                             {similar_literature !== null ? (
-                                <p className="card-text" style={{ fontSize: '0.8rem' }}><span style={{ fontWeight: 500 }}>Similar genes based on literature</span>:
-                                    <div className="d-inline-flex">
+                                <div className="card-text" style={{ fontSize: '0.8rem' }}><span style={{ fontWeight: 500 }}>Similar genes based on literature</span>:
+                                    <p className="d-inline-flex">
                                         {similar_literature.map(gene =>
                                             <a
                                                 key={gene}
@@ -55,12 +56,12 @@ export default function GeneInfoCard({ router, search, organism, chromosome_loca
                                                 }}
                                             >{gene}</a>
                                         )}
-                                    </div>
-                                </p>
+                                    </p>
+                                </div>
                             ) : null}
                             {predicted_tfs !== null ? (
-                                <p className="card-text" style={{ fontSize: '0.8rem' }}><span style={{ fontWeight: 500 }}>Top 10 TF predicted to regulate {search}</span>:
-                                    <div className="d-inline-flex">
+                                <div className="card-text" style={{ fontSize: '0.8rem' }}><span style={{ fontWeight: 500 }}>Top 10 TF predicted to regulate {search}</span>:
+                                    <p className="d-inline-flex">
                                         {predicted_tfs.map(gene =>
                                             <a
                                                 key={gene}
@@ -74,12 +75,12 @@ export default function GeneInfoCard({ router, search, organism, chromosome_loca
                                                 }}
                                             >{gene}</a>
                                         )}
-                                    </div>
-                                </p>
+                                    </p>
+                                </div>
                             ) : null}
                             {predicted_kinases !== null ? (
-                                <p className="card-text" style={{ fontSize: '0.8rem' }}><span style={{ fontWeight: 500 }}>Top 10 kinases predicted to phosphorylate {search}</span>:
-                                    <div className="d-inline-flex">
+                                <div className="card-text" style={{ fontSize: '0.8rem' }}><span style={{ fontWeight: 500 }}>Top 10 kinases predicted to phosphorylate {search}</span>:
+                                    <p className="d-inline-flex">
                                         {predicted_kinases.map(gene =>
                                             <a
                                                 key={gene}
@@ -93,8 +94,8 @@ export default function GeneInfoCard({ router, search, organism, chromosome_loca
                                                 }}
                                             >{gene}</a>
                                         )}
-                                    </div>
-                                </p>
+                                    </p>
+                                </div>
                             ) : null}
                         </div>
                         <div className="col-4">
