@@ -3,6 +3,7 @@ import defined from '@/utils/defined'
 import countable from "@/utils/countable"
 import isitup from "@/utils/isitup"
 import try_or_else from "@/utils/try_or_else"
+import ensure_array from "@/utils/ensure_array"
 
 function if_search(func) {
     return async (props) => {
@@ -89,7 +90,7 @@ const uniprot_kb = defined(async (gene_search) => (await gene_info(gene_search))
 const MGI = defined(async (gene_search) => (await gene_info(gene_search)).pantherdb.ortholog[0].MGI)
 const transcript = defined(async (gene_search) => (await gene_info(gene_search)).exac.transcript)
 const entrezgene = defined(async (gene_search) => (await gene_info(gene_search)).entrezgene)
-const pdb = defined(async (gene_search) => (await gene_info(gene_search)).pdb[0])
+const pdb = defined(async (gene_search) => ensure_array((await gene_info(gene_search)).pdb)[0])
 
 export const drug_info = defined(memo(async (drug_search) => {
     const drug_query_url = 'https://pubchem.ncbi.nlm.nih.gov/rest'
@@ -140,7 +141,8 @@ const manifest = [
         similar_literature: try_or_else(async ({ search }) => await expand(search, 'generif'), null),
         predicted_tfs: try_or_else(async ({ search }) => await  predict_regulators([search], 'chea3'), null),
         predicted_kinases: try_or_else(async ({ search }) => await predict_regulators([search], 'kea3'), null),
-        protein3d: async ({ search }) => `https://www.ncbi.nlm.nih.gov/Structure/icn3d/full.html?mmdbid=${await pdb(search)}&width=350&height=150&showcommand=0&mobilemenu=1&showtitle=0&command=set background white`,
+        moleculeId: async ({ search }) => (await pdb(search)).toLowerCase(),
+        protein3d: async ({ search }) => `https://www.ncbi.nlm.nih.gov/Structure/icn3d/full.html?mmdbid=${await pdb(search)}&width=300&height=300&showcommand=0&mobilemenu=1&showtitle=0&command=set background white`,
     },
     {
         name: 'GTEx',
