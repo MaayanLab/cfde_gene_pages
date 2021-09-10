@@ -3,12 +3,12 @@ export default function GeneInfoCard({ router, search, organism, chromosome_loca
         <div className="col-lg-4 col-md-6 col-sm-12">
             <div className="card shadow-sm m-3" title="Affiliated with the CFDE">
                 <div className="card-header">
-                    <div className="d-flex mt-2 mb-3">
-                        <div className="m-3 vertical-align text-nowrap text-center"><h1 style={{ whiteSpace: 'nowrap' }}>{search}</h1></div>
+                    <div className="d-flex">
+                        <div className="mx-3 vertical-align text-nowrap text-center"><h1 style={{ whiteSpace: 'nowrap' }}>{search}</h1></div>
                         <div className="d-flex mt-2 flex-grow flex-wrap">
-                            <div className="mx-2 text-nowrap"><span style={{ fontWeight: 500 }}>Organism</span>: {organism}</div>
-                            <div className="mx-2 text-nowrap"><span style={{ fontWeight: 500 }}>Chromosome location</span>: {chromosome_location}</div>
-                            <div className="mx-2 text-nowrap"><span style={{ fontWeight: 500 }}>NCBI Gene ID</span>: {ncbi_gene_id}</div>
+                            <small style={{ fontWeight: 500 }}>Organism</small>: {organism}
+                            <small style={{ fontWeight: 500 }}>Chromosome location</small>: {chromosome_location}
+                            <small style={{ fontWeight: 500 }}>NCBI Gene ID</small>: {ncbi_gene_id}
                         </div>
                     </div>
                 </div>
