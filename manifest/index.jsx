@@ -140,7 +140,7 @@ const manifest = [
         similar_literature: try_or_else(async ({ search }) => await expand(search, 'generif'), null),
         predicted_tfs: try_or_else(async ({ search }) => await  predict_regulators([search], 'chea3'), null),
         predicted_kinases: try_or_else(async ({ search }) => await predict_regulators([search], 'kea3'), null),
-        protein3d: async ({ search }) => `https://www.ncbi.nlm.nih.gov/Structure/icn3d/full.html?mmdbid=${await pdb(search)}&width=300&height=300&showcommand=0&mobilemenu=1&showtitle=0&command=set background white`,
+        protein3d: async ({ search }) => `https://www.ncbi.nlm.nih.gov/Structure/icn3d/full.html?mmdbid=${await pdb(search)}&width=350&height=150&showcommand=0&mobilemenu=1&showtitle=0&command=set background white`,
     },
     {
         name: 'GTEx',

@@ -14,7 +14,7 @@ export default function GeneInfoCard({ router, search, organism, chromosome_loca
                 </div>
                 <div className="card-body">
                     <div className="row">
-                        <div className="col-4">
+                        <div className="col-12">
                             <iframe className="img-fluid"
                                     src={protein3d}
                                     style={{ border: "none" }}/>
