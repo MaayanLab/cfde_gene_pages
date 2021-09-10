@@ -79,7 +79,7 @@ const clean_cut = defined((desc, max_len = 400) => {
 })
 
 const ncbi_gene_id = defined(async (gene_search) => (await gene_info(gene_search))._id)
-const ncbi_gene_url = defined(async (gene_search) => `https://www.ncbi.nlm.nih.gov/gene/${(await gene_info(gene_search))._id}`)
+const ncbi_gene_url = defined(async (gene_search) => `${(await gene_info(gene_search))._id}`)
 const organism = defined(async (gene_search) => species_map[(await gene_info(gene_search)).taxid])
 const chromosome_location = defined(async (gene_search) => (await gene_info(gene_search)).map_location)
 const biological_function = defined(async (gene_search) => clean_cut((await gene_info(gene_search)).summary))
@@ -140,7 +140,7 @@ const manifest = [
         similar_literature: try_or_else(async ({ search }) => await expand(search, 'generif'), null),
         predicted_tfs: try_or_else(async ({ search }) => await  predict_regulators([search], 'chea3'), null),
         predicted_kinases: try_or_else(async ({ search }) => await predict_regulators([search], 'kea3'), null),
-        protein3d: async ({ search }) => `https://www.ncbi.nlm.nih.gov/Structure/icn3d/full.html?mmdbid=${await pdb(search)}&width=300&height=300&showcommand=0&mobilemenu=1&showtitle=1&command=set background white`,
+        protein3d: async ({ search }) => `https://www.ncbi.nlm.nih.gov/Structure/icn3d/full.html?mmdbid=${await pdb(search)}&width=300&height=300&showcommand=0&mobilemenu=1&showtitle=0&command=set background white`,
     },
     {
         name: 'GTEx',

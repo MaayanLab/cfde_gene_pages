@@ -12,7 +12,14 @@ export default function GeneInfoCard({ router, search, organism, chromosome_loca
                         </div>
                     </div>
                 </div>
-                <div className="card-body row">
+                <div className="card-body">
+                    <div className="row">
+                        <div className="col-4">
+                            <iframe className="img-fluid"
+                                    src={protein3d}
+                                    style={{ border: "none" }}/>
+                        </div>
+                    </div>
                     <div className="row">
                         <div className="col-12">
                             <p className="card-text" style={{ fontSize: '0.8rem' }}>
@@ -97,11 +104,6 @@ export default function GeneInfoCard({ router, search, organism, chromosome_loca
                                     </p>
                                 </div>
                             ) : null}
-                        </div>
-                        <div className="col-4">
-                            <iframe className="img-fluid"
-                                    src={protein3d}
-                                    style={{ border: "none" }}/>
                         </div>
                     </div>
                 </div>
