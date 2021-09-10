@@ -21,6 +21,7 @@ export default function GeneInfoCard({ router, search, organism, chromosome_loca
                         <div className="col">
                             <PDBeMolstarWidget
                                 style={{ height: 150, width: '100%' }}
+                                actuallyHideControls
                                 options={{
                                     moleculeId,
                                     hideControls: true,
