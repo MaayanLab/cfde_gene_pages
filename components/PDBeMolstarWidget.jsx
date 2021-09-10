@@ -1,19 +1,20 @@
 import React from 'react'
 import Head from 'next/head'
+import Script from 'next/script'
 
 const PDBeMolstarPluginContext_ = React.createContext()
 
 export function PDBeMolstarPluginContext({ children }) {
   const [instance, setInstance] = React.useState()
-  React.useEffect(() => {
-    setInstance(new PDBeMolstarPlugin())
-  }, [])
   return (
     <>
       <Head>
         <link rel="stylesheet" type="text/css" href="https://www.ebi.ac.uk/pdbe/pdb-component-library/css/pdbe-molstar-1.1.0.css" />
-        <script type="text/javascript" src="https://www.ebi.ac.uk/pdbe/pdb-component-library/js/pdbe-molstar-plugin-1.1.0.js"></script>
       </Head>
+      <Script
+        src="https://www.ebi.ac.uk/pdbe/pdb-component-library/js/pdbe-molstar-plugin-1.1.0.js"
+        onLoad={() => setInstance(new PDBeMolstarPlugin())}
+      />
       <PDBeMolstarPluginContext_.Provider value={instance}>
         {children}
       </PDBeMolstarPluginContext_.Provider>
