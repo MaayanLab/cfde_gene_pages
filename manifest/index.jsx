@@ -75,10 +75,11 @@ const gene_info = defined(memo(async (gene_search) => {
 const clean_cut = defined((desc, max_len = 400) => {
     // Cut a description by a sentence end no longer than max_len
     let stump = desc.slice(0, max_len).lastIndexOf('.')
-    return desc.slice(0, stump+1)
+    return desc.slice(0, stump)
 })
 
 const ncbi_gene_id = defined(async (gene_search) => (await gene_info(gene_search))._id)
+const ncbi_gene_url = defined(async (gene_search) => `${(await gene_info(gene_search))._id}`)
 const organism = defined(async (gene_search) => species_map[(await gene_info(gene_search)).taxid])
 const chromosome_location = defined(async (gene_search) => (await gene_info(gene_search)).map_location)
 const biological_function = defined(async (gene_search) => clean_cut((await gene_info(gene_search)).summary))
@@ -99,14 +100,6 @@ export const drug_info = defined(memo(async (drug_search) => {
     }
 }))
 
-export const rx_1st_alias = defined(memo(async (drug_search) => {
-    const rx_suggestion = await fetch(`https://www.rxlist.com/rxl/api/search/${drug_search}`)
-    if (rx_suggestion.ok) {
-        const data = await rx_suggestion.json()
-        return data[0].Name
-    }
-}))
-
 const CID = defined(async (drug_search) => (await drug_info(drug_search)).CID)
 const CHEMBL = defined(async (drug_search) => (await drug_info(drug_search)).Synonym.find(item => item.trim().match(/^CHEMBL/)))
 const DrugBankNum = defined(async (drug_search) => (await drug_info(drug_search)).Synonym.find(item => item.trim().match(/^DB/)))
@@ -119,7 +112,6 @@ const DrugName = defined(async (drug_search) => {
     }
 })
 const GTPL = defined(async (drug_search) => (await drug_info(drug_search)).Synonym.find(item => item.trim().match(/^GTPL/)).substring(4))
-const RxList = defined(async (drug_search) => (await rx_1st_alias(drug_search)))
 
 /**
  * Each object attribute can be a literal value or an async callable that accepts the parameters:
@@ -143,11 +135,12 @@ const manifest = [
         ncbi_gene_id: async ({ search }) => await ncbi_gene_id(search),
         chromosome_location: async ({ search }) => await chromosome_location(search),
         biological_function: async ({ search }) => await biological_function(search),
+        ncbi_gene_url: async ({ search }) => await ncbi_gene_url(search),
         similar_coexpression: try_or_else(async ({ search }) => await  expand(search, 'coexpression'), null),
         similar_literature: try_or_else(async ({ search }) => await expand(search, 'generif'), null),
         predicted_tfs: try_or_else(async ({ search }) => await  predict_regulators([search], 'chea3'), null),
         predicted_kinases: try_or_else(async ({ search }) => await predict_regulators([search], 'kea3'), null),
-        protein3d: async ({ search }) => `https://www.ncbi.nlm.nih.gov/Structure/icn3d/full.html?mmdbid=${await pdb(search)}&width=300&height=300&showcommand=0&mobilemenu=1&showtitle=1&command=set background white`,
+        protein3d: async ({ search }) => `https://www.ncbi.nlm.nih.gov/Structure/icn3d/full.html?mmdbid=${await pdb(search)}&width=300&height=300&showcommand=0&mobilemenu=1&showtitle=0&command=set background white`,
     },
     {
         name: 'GTEx',
