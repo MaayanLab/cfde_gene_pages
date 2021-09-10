@@ -3,6 +3,7 @@ import defined from '@/utils/defined'
 import countable from "@/utils/countable"
 import isitup from "@/utils/isitup"
 import try_or_else from "@/utils/try_or_else"
+import ensure_array from "@/utils/ensure_array"
 
 function if_search(func) {
     return async (props) => {
@@ -89,7 +90,7 @@ const uniprot_kb = defined(async (gene_search) => (await gene_info(gene_search))
 const MGI = defined(async (gene_search) => (await gene_info(gene_search)).pantherdb.ortholog[0].MGI)
 const transcript = defined(async (gene_search) => (await gene_info(gene_search)).exac.transcript)
 const entrezgene = defined(async (gene_search) => (await gene_info(gene_search)).entrezgene)
-const pdb = defined(async (gene_search) => (await gene_info(gene_search)).pdb[0])
+const pdb = defined(async (gene_search) => ensure_array((await gene_info(gene_search)).pdb)[0])
 
 export const drug_info = defined(memo(async (drug_search) => {
     const drug_query_url = 'https://pubchem.ncbi.nlm.nih.gov/rest'
