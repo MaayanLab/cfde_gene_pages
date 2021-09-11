@@ -124,25 +124,25 @@ const GTPL = defined(async (drug_search) => (await drug_info(drug_search)).Synon
  *  so any dependent functions which make requests should be memoized promises for request deduplication.
  */
 const manifest = [
-    {
-        name: 'GeneInfo',
-        component: 'GeneInfoCard',
-        tags: {
-            pinned: true,
-            searchonly: true,
-            gene: true,
-        },
-        organism: async ({ search }) => await organism(search),
-        ncbi_gene_id: async ({ search }) => await ncbi_gene_id(search),
-        chromosome_location: async ({ search }) => await chromosome_location(search),
-        biological_function: async ({ search }) => await biological_function(search),
-        ncbi_gene_url: async ({ search }) => await ncbi_gene_url(search),
-        similar_coexpression: try_or_else(async ({ search }) => await  expand(search, 'coexpression'), null),
-        similar_literature: try_or_else(async ({ search }) => await expand(search, 'generif'), null),
-        predicted_tfs: try_or_else(async ({ search }) => await  predict_regulators([search], 'chea3'), null),
-        predicted_kinases: try_or_else(async ({ search }) => await predict_regulators([search], 'kea3'), null),
-        moleculeId: async ({ search }) => (await pdb(search)).toLowerCase(),
-    },
+    // {
+    //     name: 'GeneInfo',
+    //     component: 'GeneInfoCard',
+    //     tags: {
+    //         pinned: true,
+    //         searchonly: true,
+    //         gene: true,
+    //     },
+    //     organism: async ({ search }) => await organism(search),
+    //     ncbi_gene_id: async ({ search }) => await ncbi_gene_id(search),
+    //     chromosome_location: async ({ search }) => await chromosome_location(search),
+    //     biological_function: async ({ search }) => await biological_function(search),
+    //     ncbi_gene_url: async ({ search }) => await ncbi_gene_url(search),
+    //     similar_coexpression: try_or_else(async ({ search }) => await  expand(search, 'coexpression'), null),
+    //     similar_literature: try_or_else(async ({ search }) => await expand(search, 'generif'), null),
+    //     predicted_tfs: try_or_else(async ({ search }) => await  predict_regulators([search], 'chea3'), null),
+    //     predicted_kinases: try_or_else(async ({ search }) => await predict_regulators([search], 'kea3'), null),
+    //     moleculeId: async ({ search }) => (await pdb(search)).toLowerCase(),
+    // },
     {
         name: 'GTEx',
         tags: {
