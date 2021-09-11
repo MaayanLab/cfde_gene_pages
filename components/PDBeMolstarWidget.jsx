@@ -22,23 +22,38 @@ export function PDBeMolstarPluginContext({ children }) {
   )
 }
 
-export default function PDBeMolstarWidget({ options, style, ...props }) {
+export default function PDBeMolstarWidget({ options, actuallyHideControls, style, ...props }) {
   const ref = React.useRef()
   const instance = React.useContext(PDBeMolstarPluginContext_)
   React.useEffect(() => {
-    if (!ref || !ref.current || !instance || !options) return
-    instance.render(ref.current, options)
-    instance.visual.toggleSpin(true)
-  }, [ref, instance, options])
+    if (ref && ref.current && instance && options) {
+      try {
+        instance.render(ref.current, options)
+        instance.visual.toggleSpin(true)
+      } catch (e) {
+        console.error(e)
+      }
+    }
+    return () => instance.clear()
+  }, [ref.current, instance, options])
   return (
-    <div
-      ref={ref}
-      style={{
-        position: 'relative',
-        flex: '1 0 auto',
-        ...(style||{}),
-      }}
-      {...props}
-    />
+    <>
+      {actuallyHideControls ? (
+        <style jsx global>{`
+          .msp-viewport-controls {
+            display: none;
+          }
+        `}</style>
+      ) : null}
+      <div
+        ref={ref}
+        style={{
+          position: 'relative',
+          flex: '1 0 auto',
+          ...(style||{}),
+        }}
+        {...props}
+      />
+    </>
   )
 }
