@@ -2,17 +2,17 @@ import dynamic from 'next/dynamic'
 
 const PDBeMolstarWidget = dynamic(() => import('@/components/PDBeMolstarWidget'))
 
-export default function GeneInfoCard({ router, search, organism, chromosome_location, ncbi_gene_id, ncbi_gene_url, biological_function, similar_coexpression, similar_literature, predicted_tfs, predicted_kinases, moleculeId, protein3d }) {
+export default function GeneInfoCard({ router, search, organism, chromosome_location, ncbi_gene_id, ncbi_gene_url, biological_function, similar_coexpression, similar_literature, predicted_tfs, predicted_kinases, moleculeId }) {
     return (
         <div className="col-xl-4 col-lg-6 col-md-12">
             <div className="card shadow-sm m-3" title="Affiliated with the CFDE">
                 <div className="card-header">
                     <div className="d-flex">
-                        <div className="mx-3 vertical-align text-nowrap text-center"><h1 style={{ whiteSpace: 'nowrap' }}>{search}</h1></div>
+                        <div className="mx-3 mt-4 vertical-align text-nowrap text-center"><h1 style={{ whiteSpace: 'nowrap' }}>{search}</h1></div>
                         <div className="d-flex mt-2 flex-grow flex-wrap">
-                            <small style={{ fontWeight: 500 }}>Organism</small>: {organism}
-                            <small style={{ fontWeight: 500 }}>Chromosome location</small>: {chromosome_location}
-                            <small style={{ fontWeight: 500 }}>NCBI Gene ID</small>: {ncbi_gene_id}
+                            <p style={{ fontSize: ".875em" }}><span style={{ fontWeight: 500 }}>Organism</span>: {organism}</p>
+                            <p style={{ fontSize: ".875em" }}><span style={{ fontWeight: 500 }}>Chromosome location</span>: {chromosome_location}</p>
+                            <p style={{ fontSize: ".875em" }}><span style={{ fontWeight: 500 }}>NCBI Gene ID</span>: {ncbi_gene_id}</p>
                         </div>
                     </div>
                 </div>
@@ -20,7 +20,7 @@ export default function GeneInfoCard({ router, search, organism, chromosome_loca
                     <div className="row">
                         <div className="col">
                             <PDBeMolstarWidget
-                                style={{ height: 150, width: '100%' }}
+                                style={{ width: '100%', height: 300 }}
                                 options={{
                                     moleculeId,
                                     hideControls: true,
