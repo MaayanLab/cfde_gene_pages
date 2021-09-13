@@ -1151,7 +1151,7 @@ const manifest = [
             MaayanLab: true,
         },
         img1: {
-            src: '/logos/drugenrichr_logo.png',
+            src: '/logos/DrugEnrichr_logo.png',
             alt: 'DrugEnrichr',
         },
         img2: {
