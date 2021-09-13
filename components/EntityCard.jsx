@@ -102,7 +102,7 @@ export default function EntityCard(props) {
                                     href={props.clickurl}
                                     target="_blank"
                                     onClick={() => countable(props.countapi).hit()}
-                                >Explore {props.search} with {props.title}</a></p>
+                                >Explore genes and proteins with {props.title}</a></p>
                             ) : null}
                             {clicks !== undefined ? <small
                                 className="card-text text-muted mt-1">Clicks: <span>{clicks}</span></small> : null}
