@@ -1221,7 +1221,7 @@ const manifest = [
         name: 'zinc15',
         tags: {
             drug: true,
-            CF: false,
+            CF: true,
             PS: true,
             Ag: false,
         },
