@@ -49,7 +49,7 @@ export const expand = defined(memo(async (gene_search, exp_type = "coexpression"
     }
 }))
 
-export const  predict_regulators = defined(memo(async (genes, type_url, top = 5) => {
+export const predict_regulators = defined(memo(async (genes, type_url, top = 5) => {
     const results = await fetch(`https://maayanlab.cloud/${type_url}/api/enrich/`, {
         method: 'POST',
         headers: {

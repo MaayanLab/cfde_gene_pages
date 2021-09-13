@@ -21,22 +21,38 @@ export default function EntityCard(props) {
                          style={{
                              height: "50px"
                          }}>
-                        {(props.img3 !== undefined)&&(props.img1 !== undefined) ? (
+                        {(props.img3 !== undefined) && (props.img1 !== undefined) ? (
                             <>
-                            <div className="col-4 text-center">
-                                <a
-                                    href={props.url}
-                                    target="_blank">
-                                    <img
-                                        className="img-fluid rounded"
-                                        src={props.img3.src}
-                                        alt={props.img3.alt}
-                                        style={{
-                                            maxHeight: "50px",
-                                            maxWidth: "120px"
-                                        }}/></a>
-                            </div>
-                            <div className="col-6">
+                                <div className="col-4 text-center">
+                                    <a
+                                        href={props.url}
+                                        target="_blank">
+                                        <img
+                                            className="img-fluid rounded"
+                                            src={props.img3.src}
+                                            alt={props.img3.alt}
+                                            style={{
+                                                maxHeight: "50px",
+                                                maxWidth: "120px"
+                                            }}/></a>
+                                </div>
+                                <div className="col-6">
+                                    <a
+                                        href={props.url}
+                                        target="_blank">
+                                        <img
+                                            className="img-fluid rounded"
+                                            src={props.img1.src}
+                                            alt={props.img1.alt}
+                                            style={{
+                                                maxHeight: "50px",
+                                                maxWidth: "120px",
+                                            }}/></a>
+                                </div>
+                            </>
+                        ) : null}
+                        {(props.img3 === undefined) && (props.img1 !== undefined) ? (
+                            <div className="col-6 col-sm-12 text-center">
                                 <a
                                     href={props.url}
                                     target="_blank">
@@ -46,24 +62,8 @@ export default function EntityCard(props) {
                                         alt={props.img1.alt}
                                         style={{
                                             maxHeight: "50px",
-                                            maxWidth: "120px",
+                                            maxWidth: "200px",
                                         }}/></a>
-                            </div>
-                            </>
-                        ) : null}
-                        {(props.img3 === undefined)&&(props.img1 !== undefined) ? (
-                            <div className="col-6 col-sm-12 text-center">
-                                <a
-                                    href={props.url}
-                                    target="_blank">
-                                <img
-                                    className="img-fluid rounded"
-                                    src={props.img1.src}
-                                    alt={props.img1.alt}
-                                    style={{
-                                        maxHeight: "50px",
-                                        maxWidth: "200px",
-                                    }}/></a>
                             </div>
                         ) : null}
                     </div>
@@ -96,17 +96,34 @@ export default function EntityCard(props) {
                      style={{
                          height: "80px"
                      }}>
-                        <div className="d-flex justify-content-between align-items-center">
-                            {props.clickurl !== undefined ? (
-                                <p className="mt-3"><a
+                    <div className="d-flex justify-content-between align-items-center">
+                        {props.clickurl !== undefined && props.search !== undefined ? (
+                            <p className="mt-3">
+                                <a
                                     href={props.clickurl}
                                     target="_blank"
                                     onClick={() => countable(props.countapi).hit()}
-                                >Explore genes and proteins with {props.title}</a></p>
-                            ) : null}
-                            {clicks !== undefined ? <small
-                                className="card-text text-muted mt-1">Clicks: <span>{clicks}</span></small> : null}
-                        </div>
+                                >Explore {props.search} with {props.title}</a></p>
+                            ) : [(props.search === undefined) && (props.tags.gene) ? (
+                                <p className="mt-2">
+                                    <a
+                                        href={props.url}
+                                        target="_blank"
+                                        onClick={() => countable(props.countapi).hit()}
+                                    >Explore genes and proteins with {props.title}</a></p>
+                                ) : [(props.search === undefined) && (props.tags.drug) ? (
+                                    <p className="mt-2">
+                                        <a
+                                            href={props.url}
+                                            target="_blank"
+                                            onClick={() => countable(props.countapi).hit()}
+                                        >Explore drugs and small molecules with {props.title}</a></p>
+                                ) : null]
+                            ]
+                        }
+                        {clicks !== undefined ? <small
+                            className="card-text text-muted mt-1">Clicks: <span>{clicks}</span></small> : null}
+                    </div>
                 </div>
             </div>
         </div>
