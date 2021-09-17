@@ -91,6 +91,44 @@ export default function EntityCard(props) {
                         <span>{props.description.split(props.title)[0]}</span>
                         <a href={props.url}>{props.title}</a>
                         <span>{props.description.split(props.title)[1]}</span></p>
+                    {props.similar_coexpression !== null ? (
+                        <div className="card-text" style={{ fontSize: '0.8rem' }}><span style={{ fontWeight: 500 }}>Similar genes based on mRNA co-expression</span>:
+                            <p className="d-inline-flex">
+                                {props.similar_coexpression.map(gene =>
+                                    <a
+                                        key={gene}
+                                        className="mx-1"
+                                        href="#"
+                                        onClick={evt => {
+                                            router.push({
+                                                pathname: '/[entity]/[search]',
+                                                query: { entity: 'gene', search: gene },
+                                            })
+                                        }}
+                                    >{gene}</a>
+                                )}
+                            </p>
+                        </div>
+                    ) : null}
+                    {props.similar_literature !== null ? (
+                        <div className="card-text" style={{ fontSize: '0.8rem' }}><span style={{ fontWeight: 500 }}>Similar genes based on literature</span>:
+                            <p className="d-inline-flex">
+                                {props.similar_literature.map(gene =>
+                                    <a
+                                        key={gene}
+                                        className="mx-1"
+                                        href="#"
+                                        onClick={evt => {
+                                            router.push({
+                                                pathname: '/[entity]/[search]',
+                                                query: { entity: 'gene', search: gene },
+                                            })
+                                        }}
+                                    >{gene}</a>
+                                )}
+                            </p>
+                        </div>
+                    ) : null}
                 </div>
                 <div className="card-footer"
                      style={{
