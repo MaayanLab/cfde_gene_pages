@@ -91,8 +91,6 @@ const MGI = defined(async (gene_search) => (await gene_info(gene_search)).panthe
 const transcript = defined(async (gene_search) => (await gene_info(gene_search)).exac.transcript)
 const entrezgene = defined(async (gene_search) => (await gene_info(gene_search)).entrezgene)
 const pdb = defined(async (gene_search) => ensure_array((await gene_info(gene_search)).pdb)[0])
-const similar_coexpression= defined(async ({ search }) => await  expand(search, 'coexpression'))
-const similar_literature = defined(async ({ search }) => await expand(search, 'generif'))
 
 export const drug_info = defined(memo(async (drug_search) => {
     const drug_query_url = 'https://pubchem.ncbi.nlm.nih.gov/rest'
@@ -141,6 +139,8 @@ const manifest = [
     //     ncbi_gene_url: async ({ search }) => await ncbi_gene_url(search),
     //     similar_coexpression: try_or_else(async ({ search }) => await  expand(search, 'coexpression'), null),
     //     similar_literature: try_or_else(async ({ search }) => await expand(search, 'generif'), null),
+    //     predicted_tfs: try_or_else(async ({ search }) => await  predict_regulators([search], 'chea3'), null),
+    //     predicted_kinases: try_or_else(async ({ search }) => await predict_regulators([search], 'kea3'), null),
     //     moleculeId: async ({ search }) => (await pdb(search)).toLowerCase(),
     // },
     {
@@ -347,8 +347,6 @@ const manifest = [
         description: 'ARCHS4 provides access to gene counts from HiSeq 2000, HiSeq 2500 and NextSeq 500 platforms for human and mouse experiments from GEO and SRA.',
         url: "https://maayanlab.cloud/archs4/",
         countapi: 'maayanlab.github.io/ARCHS4click',
-        similar_coexpression: if_search(async ({ search }) => await expand(search, 'coexpression')),
-        similar_literature: if_search(async ({ search }) => await expand(search, 'generif')),
         clickurl: if_search(async ({ search }) => `https://maayanlab.cloud/archs4/gene/${search}`),
     },
     {
@@ -438,7 +436,6 @@ const manifest = [
     //     url: "https://maayanlab.cloud/kea3/",
     //     countapi: 'maayanlab.github.io/KEA3click',
     //     clickurl: if_search(async ({ search }) => `https://maayanlab.cloud/kea3?gene=${search}`),
-    //     predicted_kinases: try_or_else(async ({ search }) => await predict_regulators([search], 'kea3'), null),
     // },
     // {
     //     name: 'ChEA3',
@@ -461,7 +458,6 @@ const manifest = [
     //     url: "https://maayanlab.cloud/chea3/",
     //     countapi: 'maayanlab.github.io/ChEA3click',
     //     clickurl: if_search(async ({ search }) => `https://maayanlab.cloud/chea3?gene=${search}`),
-    //     predicted_tfs: try_or_else(async ({ search }) => await  predict_regulators([search], 'chea3'), null),
     // },
     {
         name: 'ENCODE',
