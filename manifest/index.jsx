@@ -66,7 +66,7 @@ export const predict_regulators = defined(memo(async (genes, type_url, top = 5) 
     }
 }))
 
-const gene_info = defined(memo(async (gene_search) => {
+export const gene_info = defined(memo(async (gene_search) => {
     const gene_res = await fetch(`${gene_query_url}/gene/${await gene_id(gene_search)}`)
     if (gene_res.ok) {
         return await gene_res.json()
@@ -348,6 +348,8 @@ const manifest = [
         url: "https://maayanlab.cloud/archs4/",
         countapi: 'maayanlab.github.io/ARCHS4click',
         clickurl: if_search(async ({ search }) => `https://maayanlab.cloud/archs4/gene/${search}`),
+        similar_coexpression: try_or_else(async ({ search }) => await  expand(search, 'coexpression'), null),
+        similar_literature: try_or_else(async ({ search }) => await expand(search, 'generif'), null),
     },
     {
         name: 'NCBI',

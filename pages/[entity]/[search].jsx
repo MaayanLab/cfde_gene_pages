@@ -115,6 +115,53 @@ export default function Search(props) {
                                         )
                                     })}
                             </div>
+
+                                {sortedManifest
+                                    .filter(item => {
+                                        if (item.name === 'ARCHS4') return true
+                                    }).map(({ component, ...item }) => {
+                                        return (
+                                            <div className="row justify-content-center mt-5">
+                                                <div className="col-12">
+                                                    <p>
+                                                <span style={{ fontWeight: 500 }}>Similar genes based on mRNA co-expression: </span>{item.similar_coexpression === undefined
+                                                    ? ''
+                                                    : item.similar_coexpression.map(gene =>
+                                                            <a
+                                                                key={gene}
+                                                                className="mx-1"
+                                                                href="#"
+                                                                onClick={evt => {
+                                                                    router.push({
+                                                                        pathname: '/[entity]/[search]',
+                                                                        query: { entity: 'gene', search: gene },
+                                                                    })
+                                                                }}
+                                                            >{gene}</a>
+                                                    )}
+                                                    </p>
+                                                  <p>
+                                                <span style={{ fontWeight: 500 }}>Similar genes based on literature: </span>{item.similar_literature === undefined
+                                                    ? ''
+                                                    : item.similar_coexpression.map(gene =>
+                                                        <a
+                                                            key={gene}
+                                                            className="mx-1"
+                                                            href="#"
+                                                            onClick={evt => {
+                                                                router.push({
+                                                                    pathname: '/[entity]/[search]',
+                                                                    query: { entity: 'gene', search: gene },
+                                                                })
+                                                            }}
+                                                        >{gene}</a>
+                                                    )}
+                                                  </p>
+                                                </div>
+                                            </div>
+                                        )
+                                    })
+                                }
                         </div>
                     </div>
                 ) : null
