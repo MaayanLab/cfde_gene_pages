@@ -143,7 +143,7 @@ export default function Search(props) {
                                                   <p>
                                                 <span style={{ fontWeight: 500 }}>Similar genes based on literature: </span>{item.similar_literature === undefined
                                                     ? ''
-                                                    : item.similar_coexpression.map(gene =>
+                                                    : item.similar_literature.map(gene =>
                                                         <a
                                                             key={gene}
                                                             className="mx-1"

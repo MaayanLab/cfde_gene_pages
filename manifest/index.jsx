@@ -348,8 +348,8 @@ const manifest = [
         url: "https://maayanlab.cloud/archs4/",
         countapi: 'maayanlab.github.io/ARCHS4click',
         clickurl: if_search(async ({ search }) => `https://maayanlab.cloud/archs4/gene/${search}`),
-        similar_coexpression: try_or_else(async ({ search }) => await  expand(search, 'coexpression'), null),
-        similar_literature: try_or_else(async ({ search }) => await expand(search, 'generif'), null),
+        similar_coexpression: try_or_else(async ({ search }) => await  expand(search, 'coexpression', 10), null),
+        similar_literature: try_or_else(async ({ search }) => await expand(search, 'generif', 10), null),
     },
     {
         name: 'NCBI',
