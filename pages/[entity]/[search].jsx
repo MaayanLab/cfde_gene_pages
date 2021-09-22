@@ -103,7 +103,7 @@ export default function Search(props) {
                                             || (PS === false && Ag === false)
                                         )
                                     })
-                                    .map(({ component, ...item }) => {
+                                    .map(({component, ...item}) => {
                                         const Component = components[component]
                                         return (
                                             <Component
@@ -116,32 +116,38 @@ export default function Search(props) {
                                     })}
                             </div>
 
-                                {sortedManifest
-                                    .filter(item => {
-                                        if (item.name === 'ARCHS4') return true
-                                    }).map(({ component, ...item }) => {
-                                        return (
-                                            <div className="row justify-content-center mt-5">
-                                                <div className="col-12">
-                                                    <p>
-                                                <span style={{ fontWeight: 500 }}>Similar genes based on mRNA co-expression: </span>{item.similar_coexpression === undefined
+                            {sortedManifest
+                                .filter(item => {
+                                    if (item.name === 'ARCHS4') return true
+                                }).map(({component, ...item}) => {
+                                    return (
+                                        <div className="row justify-content-center mt-5">
+                                            <div className="col-12">
+                                                <p>
+                                                    {(item.similar_coexpression === undefined) || (item.similar_coexpression === null)
+                                                        ? ''
+                                                        :<span style={{fontWeight: 500}}>Similar genes based on mRNA co-expression: </span>}
+                                                    {(item.similar_coexpression === undefined) || (item.similar_coexpression === null)
                                                     ? ''
                                                     : item.similar_coexpression.map(gene =>
-                                                            <a
-                                                                key={gene}
-                                                                className="mx-1"
-                                                                href="#"
-                                                                onClick={evt => {
-                                                                    router.push({
-                                                                        pathname: '/[entity]/[search]',
-                                                                        query: { entity: 'gene', search: gene },
-                                                                    })
-                                                                }}
-                                                            >{gene}</a>
+                                                        <a
+                                                            key={gene}
+                                                            className="mx-1"
+                                                            href="#"
+                                                            onClick={evt => {
+                                                                router.push({
+                                                                    pathname: '/[entity]/[search]',
+                                                                    query: {entity: 'gene', search: gene},
+                                                                })
+                                                            }}
+                                                        >{gene}</a>
                                                     )}
-                                                    </p>
-                                                  <p>
-                                                <span style={{ fontWeight: 500 }}>Similar genes based on literature: </span>{item.similar_literature === undefined
+                                                </p>
+                                                <p>
+                                                    {(item.similar_literature === undefined) || (item.similar_literature === null)
+                                                        ? ''
+                                                        : <span style={{fontWeight: 500}}>Similar genes based on literature: </span>}
+                                                    {(item.similar_literature === undefined) || (item.similar_literature === null)
                                                     ? ''
                                                     : item.similar_literature.map(gene =>
                                                         <a
@@ -151,17 +157,17 @@ export default function Search(props) {
                                                             onClick={evt => {
                                                                 router.push({
                                                                     pathname: '/[entity]/[search]',
-                                                                    query: { entity: 'gene', search: gene },
+                                                                    query: {entity: 'gene', search: gene},
                                                                 })
                                                             }}
                                                         >{gene}</a>
                                                     )}
-                                                  </p>
-                                                </div>
+                                                </p>
                                             </div>
-                                        )
-                                    })
-                                }
+                                        </div>
+                                    )
+                                })
+                            }
                         </div>
                     </div>
                 ) : null
