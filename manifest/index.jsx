@@ -372,6 +372,26 @@ const manifest = [
         clickurl: if_search(async ({ search }) => `https://www.ncbi.nlm.nih.gov/gene/${await gene_id(search)}`),
     },
     {
+        name: 'WikiPathways',
+        tags: {
+            gene: true,
+            Ag: true,
+        },
+        img1: {
+            src: '/logos/wikipathways_logo.png',
+            alt: 'WikiPathways logo',
+        },
+        img2: {
+            src: '/logos/wikipathways_site.png',
+            alt: 'WikiPathways site image',
+        },
+        title: 'WikiPathways',
+        description: 'WikiPathways was established to facilitate the contribution and maintenance of pathway information by the biology community.',
+        url: "https://www.wikipathways.org/",
+        countapi: 'maayanlab.github.io/WikiPathwaysclick',
+        clickurl: if_search(async ({ search }) => `https://www.wikipathways.org//index.php?query={search}&title=Special%3ASearchPathways&doSearch=1&sa=Search`),
+    },
+    {
         name: 'GeneCards',
         tags: {
             gene: true,
