@@ -392,6 +392,27 @@ const manifest = [
         clickurl: if_search(async ({ search }) => `https://www.wikipathways.org//index.php?query={search}&title=Special%3ASearchPathways&doSearch=1&sa=Search`),
     },
     {
+        name: 'Protein Capture Reagents Program',
+        tags: {
+            gene: true,
+            Ag: true,
+            CF: true,
+        },
+        img1: {
+            src: '/logos/pcrp_logo.png',
+            alt: 'Protein Capture Reagents Program logo',
+        },
+        img2: {
+            src: '/logos/pcrp_site.png',
+            alt: 'Protein Capture Reagents Program site image',
+        },
+        title: 'Protein Capture Reagents Program',
+        description: 'The goal of the Common Fund’s Protein Capture Reagents Program is to develop a community resource of renewable, high-quality protein capture reagents, such as antibodies, with a focus on the creation of transcription factor reagents and testing next generation capture technologies.',
+        url: 'https://proteincapture.org/',
+        countapi: 'maayanlab.github.io/ProteinCaptureReagentsProgramclick',
+        clickurl: if_search(async ({ search }) => `https://proteincapture.org/reagent_portal/?hgnc_name_value=${search}#proteins`),
+    },
+    {
         name: 'GeneCards',
         tags: {
             gene: true,
