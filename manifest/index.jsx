@@ -73,6 +73,13 @@ export const gene_info = defined(memo(async (gene_search) => {
     }
 }))
 
+export const medchemexpress = defined(async (gene_search) => {
+    const mce = await fetch(`https://www.medchemexpress.com/search.html?q=${gene_search}&ft=&fa=&fp=`)
+    if (mce.ok) {
+        return gene_search
+    }
+})
+
 const clean_cut = defined((desc, max_len = 400) => {
     // Cut a description by a sentence end no longer than max_len
     let stump = desc.slice(0, max_len).lastIndexOf('.')
@@ -1068,6 +1075,26 @@ const manifest = [
         url: "https://platform.opentargets.org/",
         countapi: 'maayanlab.github.io/OpenTargetsclick',
         clickurl: if_search(async ({ search }) => `https://platform.opentargets.org/drug/${await CHEMBL(search)}`),
+    },
+    {
+        name: 'MedChemExpress',
+        tags: {
+            drug: true,
+            Ag: true,
+        },
+        img1: {
+            src: '/logos/medchemexpress_logo.png',
+            alt: 'MedChemExpress logo',
+        },
+        img2: {
+            src: '/logos/medchemexpress_site.png',
+            alt: 'MedChemExpress site image',
+        },
+        title: 'MedChemExpress',
+        description: 'MedChemExpress (MCE) offers a wide range of high-quality research chemicals and biochemicals (novel life-science reagents, reference compounds and natural compounds) for scientific use.',
+        url: "https://www.medchemexpress.com/",
+        countapi: 'maayanlab.github.io/MedChemExpressclick',
+        clickurl: if_search(async ({ search }) => `https://www.medchemexpress.com/${await medchemexpress(search)}.html`),
     },
     {
         name: 'pubchem',
