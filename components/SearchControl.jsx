@@ -34,7 +34,7 @@ export default function SearchControl({
                     <p className="text-muted mb-5">This page has links to {manifest_tag_counts.gene} gene
                         and {manifest_tag_counts.drug} drug repositories that provide direct links to gene and drug
                         landing pages. You can search by gene or drug name and then choose the sites that contain
-                        knowledge about your gene or drug. Common Fund program cards are colored in grey.</p>
+                        knowledge about your gene or drug of interest. Resources supported by the NIH Common Fund are listed first and have the CFDE logo at their top right corner.</p>
                     <form
                         className="row"
                         autoComplete="off"
