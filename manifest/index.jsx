@@ -80,6 +80,18 @@ export const medchemexpress = defined(async (gene_search) => {
     }
 })
 
+export const appyter = defined(async (appyter_name, args) => {
+    const ret = await fetch(`https://appyters.maayanlab.cloud/${appyter_name}/`, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+        },
+        body: JSON.stringify(args),
+    })
+    const {session_id} = await ret.json()
+    return `https://appyters.maayanlab.cloud/${appyter_name}/${session_id}`
+})
+
 const clean_cut = defined((desc, max_len = 400) => {
     // Cut a description by a sentence end no longer than max_len
     let stump = desc.slice(0, max_len).lastIndexOf('.')
@@ -247,6 +259,28 @@ const manifest = [
     //     countapi: 'maayanlab.github.io/lincsclick',
     //     clickurl: if_search(async ({ search }) => `https://ldp3.cloud/#/MetadataSearch/Signatures?query={%22skip%22:0,%22limit%22:10,%22search%22:[%22${search}%22]}`),
     // },
+    {
+        name: 'PrismEXP',
+        tags: {
+            CF: false,
+            PS: true,
+            gene: true,
+            MaayanLab: true
+        },
+        img1: {
+            src: '/logos/prismexp_logo.png',
+            alt: 'PrismEXP logo',
+        },
+        img2: {
+            src: '/logos/prismexp_site.png',
+            alt: 'PrismEXP Appyter site image',
+        },
+        title: 'PrismEXP Appyter',
+        description: '',
+        url: 'https://appyters.maayanlab.cloud/#/PrismEXP',
+        countapi: 'maayanlab.github.io/PrismEXPclick',
+        clickurl: if_search(async ({ search }) => `${await appyter('PrismEXP', {'gene_symbol': search, 'gmt_select': 'GO_Biological_Process_2018'})}`)
+    },
     {
         name: 'metabolomics',
         tags: {
@@ -857,21 +891,7 @@ const manifest = [
         description: 'Gene Centric GEO Reverse Search Appyter enables users to query for a gene in a species of interest; it returns an interactive volcano plot of signatures in which the gene is up- or down-regulated.',
         url: "https://appyters.maayanlab.cloud/#/Gene_Centric_GEO_Reverse_Search",
         countapi: 'maayanlab.github.io/GEOsearchclick',
-        clickurl: if_search(async ({ search }) => {
-            const ret = await fetch(`https://appyters.maayanlab.cloud/Gene_Centric_GEO_Reverse_Search/`, {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                },
-                body: JSON.stringify({
-                    species_input: "Human",
-                    human_gene: search,
-                    mouse_gene: search,
-                }),
-            })
-            const {session_id} = await ret.json()
-            return `https://appyters.maayanlab.cloud/Gene_Centric_GEO_Reverse_Search/${session_id}`
-        }),
+        clickurl: if_search(async ({ search }) => appyter('Gene_Centric_GEO_Reverse_Search', { species_input: "Human", human_gene: search,  mouse_gene: search})),
     },
     {
         name: 'go',
