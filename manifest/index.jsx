@@ -445,7 +445,7 @@ const manifest = [
         description: 'WikiPathways was established to facilitate the contribution and maintenance of pathway information by the biology community.',
         url: "https://www.wikipathways.org/",
         countapi: 'maayanlab.github.io/WikiPathwaysclick',
-        clickurl: if_search(async ({ search }) => `https://www.wikipathways.org//index.php?query={search}&title=Special%3ASearchPathways&doSearch=1&sa=Search`),
+        clickurl: if_search(async ({ search }) => `https://www.wikipathways.org//index.php?query=${search}&title=Special%3ASearchPathways&doSearch=1&sa=Search`),
     },
     {
         name: 'Protein Capture Reagents Program',
@@ -696,7 +696,7 @@ const manifest = [
         title: 'exRNA Atlas',
         description: 'The exRNA Atlas is the data repository of the Extracellular RNA Communication Consortium (ERCC). The repository includes small RNA sequencing and qPCR-derived exRNA profiles from human and mouse biofluids.',
         url: 'https://exrna-atlas.org/',
-        countapi: 'maayanlab.github.io/exRNAAtlas',
+        countapi: 'maayanlab.github.io/exRNAAtlasclick',
         clickurl: if_search(async ({ search }) => exrna(search))
     },
     {

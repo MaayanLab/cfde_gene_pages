@@ -39,7 +39,7 @@ export default function App({ Component, pageProps }) {
 
             <Link href="/" passHref>
               <a className="navbar-brand">
-                <img height="40px" width="40px" style={{color: "white"}} src="/logos/logo.png"/>
+                <img height="40px" width="40px" style={{color: "white"}}  alt="CFDE Gene and Drug Landing Page Aggregator logo" src="/logos/logo.png"/>
                 <strong>&nbsp; Gene and Drug Landing Page Aggregator</strong>
               </a>
             </Link>
