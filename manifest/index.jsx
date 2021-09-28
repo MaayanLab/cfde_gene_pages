@@ -92,6 +92,17 @@ export const appyter = defined(async (appyter_name, args) => {
     return `https://appyters.maayanlab.cloud/${appyter_name}/${session_id}`
 })
 
+export const exrna = defined(async (gene_search) => {
+    let census_types = ['miRNAs', 'piRNAs', 'snRNAs', 'snoRNAs', 'tRNAs'];
+
+    for(const census_type of census_types){
+        const rq = await fetch(`https://exrna-atlas.org/exat/api/doc/census/${census_type}/${gene_search}`);
+        if (rq.ok) {
+            return `https://exrna-atlas.org/exat/censusResults?identifiers=${gene_search}&library=${census_type.slice(0, -1)}`
+        }
+    }
+})
+
 const clean_cut = defined((desc, max_len = 400) => {
     // Cut a description by a sentence end no longer than max_len
     let stump = desc.slice(0, max_len).lastIndexOf('.')
@@ -275,8 +286,12 @@ const manifest = [
             src: '/logos/prismexp_site.png',
             alt: 'PrismEXP Appyter site image',
         },
-        title: 'PrismEXP Appyter',
-        description: '',
+        img3: {
+            src: '/logos/MaayanLab_logo.png',
+            alt: 'MaayanLab',
+        },
+        title: 'PrismEXP',
+        description: 'Automated Vector Quantization of Massive Co-expression RNA-seq Data Improves Gene Function Prediction (PrismEXP) is a new statistical approach for accurate gene function prediction.',
         url: 'https://appyters.maayanlab.cloud/#/PrismEXP',
         countapi: 'maayanlab.github.io/PrismEXPclick',
         clickurl: if_search(async ({ search }) => `${await appyter('PrismEXP', {'gene_symbol': search, 'gmt_select': 'GO_Biological_Process_2018'})}`)
@@ -662,6 +677,27 @@ const manifest = [
         url: "https://www.genenames.org/",
         countapi: 'maayanlab.github.io/HGNCclick',
         clickurl: if_search(async ({ search }) => `https://www.genenames.org/data/gene-symbol-report/#!/symbol/${search}`),
+    },
+    {
+        name: 'exRNAAtlas',
+        tags: {
+            gene: true,
+            PS: true,
+            CF: true
+        },
+        img1: {
+            src: '/logos/exrna_logo.png',
+            alt: 'exRNA Atlas logo'
+        },
+        img2: {
+            src: '/logos/exrna_site.png',
+            alt: 'exRNA Atlas site'
+        },
+        title: 'exRNA Atlas',
+        description: 'The exRNA Atlas is the data repository of the Extracellular RNA Communication Consortium (ERCC). The repository includes small RNA sequencing and qPCR-derived exRNA profiles from human and mouse biofluids.',
+        url: 'https://exrna-atlas.org/',
+        countapi: 'maayanlab.github.io/exRNAAtlas',
+        clickurl: if_search(async ({ search }) => exrna(search))
     },
     {
         name: 'ensembl',
