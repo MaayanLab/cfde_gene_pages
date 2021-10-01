@@ -49,6 +49,18 @@ export const expand = defined(memo(async (gene_search, exp_type = "coexpression"
     }
 }))
 
+export const expand_drug = defined(memo(async (drug_search, exp_type = "L1000_coexpression", top = 5) => {
+    const gene_exp = await fetch(`https://maayanlab.cloud/enrichrsearch/drug/expand?search=${drug_search}&top=${top}&type=${exp_type}`)
+    if (gene_exp.ok) {
+        const { data, success } = await gene_exp.json()
+        if ((Array.isArray(data)) && success) {
+            if (data.length > 0) {
+                return data
+            }
+        }
+    }
+}))
+
 export const predict_regulators = defined(memo(async (genes, type_url, top = 5) => {
     const results = await fetch(`https://maayanlab.cloud/${type_url}/api/enrich/`, {
         method: 'POST',
@@ -94,7 +106,6 @@ export const appyter = defined(async (appyter_name, args) => {
 
 export const exrna = defined(async (gene_search) => {
     let census_types = ['miRNAs', 'piRNAs', 'snRNAs', 'snoRNAs', 'tRNAs'];
-
     for(const census_type of census_types){
         const rq = await fetch(`https://exrna-atlas.org/exat/api/doc/census/${census_type}/${gene_search}`);
         if (rq.ok) {
@@ -173,6 +184,161 @@ const manifest = [
     //     predicted_kinases: try_or_else(async ({ search }) => await predict_regulators([search], 'kea3'), null),
     //     moleculeId: async ({ search }) => (await pdb(search)).toLowerCase(),
     // },
+
+    // {
+    //     name: 'Signor',
+    //     tags: {
+    //         CF: false,
+    //         PS: true,
+    //         gene: true,
+    //     },
+    //     img1: {
+    //         src: '/logos/Signor_logo.png',
+    //         alt: 'Signor logo',
+    //     },
+    //     img2: {
+    //         src: '/logos/Signor_site.png',
+    //         alt: 'Signor site screenshot',
+    //     },
+    //     title: '',
+    //     description: '',
+    //     url: "",
+    //     countapi: 'maayanlab.github.io/Signorclick',
+    //     clickurl: if_search(async ({search}) => `https://signor.uniroma2.it/relation_result.php?id=${await uniprot_kb(search)}`),
+    // },
+
+    // {
+    //     name: 'dataMED',
+    //     tags: {
+    //         CF: false,
+    //         Ag: true,
+    //         gene: true,
+    //     },
+    //     img1: {
+    //         src: '/logos/dataMED_logo.png',
+    //         alt: 'dataMED logo',
+    //     },
+    //     img2: {
+    //         src: '/logos/dataMED_site.png',
+    //         alt: 'dataMED site screenshot',
+    //     },
+    //     title: 'dataMED',
+    //     description: '',
+    //     url: "https://datamed.org/",
+    //     countapi: 'maayanlab.github.io/dataMEDclick',
+    //     clickurl: if_search(async ({ search }) => `https://datamed.org/search.php?query=${search}&searchtype=data`),
+    // },
+
+    // {
+    //     name: 'Oma',
+    //     tags: {
+    //         CF: false,
+    //         PS: false,
+    //         gene: true,
+    //     },
+    //     img1: {
+    //         src: '/logos/Oma_logo.png',
+    //         alt: 'Oma logo',
+    //     },
+    //     img2: {
+    //         src: '/logos/Oma_site.png',
+    //         alt: 'Oma site screenshot',
+    //     },
+    //     title: 'Oma',
+    //     description: '',
+    //     url: "https://omabrowser.org/",
+    //     countapi: 'maayanlab.github.io/Omaclick',
+    //     clickurl: if_search(async ({ search }) => `https://omabrowser.org/oma/search/?type=all&query=${search}`),
+    // },
+
+    // {
+    //     name: 'alliancegenome',
+    //     tags: {
+    //         CF: false,
+    //         Ag: true,
+    //         gene: true,
+    //     },
+    //     img1: {
+    //         src: '/logos/alliancegenome_logo.png',
+    //         alt: 'Alliance of Genome Resources logo',
+    //     },
+    //     img2: {
+    //         src: '/logos/alliancegenome_site.png',
+    //         alt: 'Alliance of Genome Resources site screenshot',
+    //     },
+    //     title: 'Alliance of Genome Resources',
+    //     description: '',
+    //     url: "https://www.alliancegenome.org/",
+    //     countapi: 'maayanlab.github.io/alliancegenomeclick',
+    //     clickurl: if_search(async ({ search }) => `https://www.alliancegenome.org/gene/HGNC:${await HGNC(search)}`),
+    // },
+
+
+
+    {
+        name: '',
+        tags: {
+            CF: false,
+            PS: true,
+            gene: true,
+        },
+        img1: {
+            src: '/logos/_logo.png',
+            alt: ' logo',
+        },
+        img2: {
+            src: '/logos/_site.png',
+            alt: ' site screenshot',
+        },
+        title: '',
+        description: '',
+        url: "",
+        countapi: 'maayanlab.github.io/click',
+        clickurl: if_search(async ({ search }) => `${search}`),
+    },
+    {
+        name: '',
+        tags: {
+            CF: false,
+            PS: true,
+            gene: true,
+        },
+        img1: {
+            src: '/logos/_logo.png',
+            alt: ' logo',
+        },
+        img2: {
+            src: '/logos/_site.png',
+            alt: ' site screenshot',
+        },
+        title: '',
+        description: '',
+        url: "",
+        countapi: 'maayanlab.github.io/click',
+        clickurl: if_search(async ({ search }) => `${search}`),
+    },
+    {
+        name: '',
+        tags: {
+            CF: false,
+            PS: true,
+            gene: true,
+        },
+        img1: {
+            src: '/logos/_logo.png',
+            alt: ' logo',
+        },
+        img2: {
+            src: '/logos/_site.png',
+            alt: ' site screenshot',
+        },
+        title: '',
+        description: '',
+        url: "",
+        countapi: 'maayanlab.github.io/click',
+        clickurl: if_search(async ({ search }) => `${search}`),
+    },
+
     {
         name: 'GTEx',
         tags: {
