@@ -133,6 +133,15 @@ const transcript = defined(async (gene_search) => (await gene_info(gene_search))
 const entrezgene = defined(async (gene_search) => (await gene_info(gene_search)).entrezgene)
 const pdb = defined(async (gene_search) => ensure_array((await gene_info(gene_search)).pdb)[0])
 
+export const metabolomicswb = defined(async (gene_search) => {
+    const mgp = await fetch(`https://www.metabolomicsworkbench.org/rest/protein/uniprot_id/${await uniprot_kb(gene_search)}/mgp_id/`)
+    if (mgp.ok) {
+        let mgp_resp = await mgp.json()
+        console.log(mgp_resp)
+        return mgp_resp['Row1']['mgp_id']
+    }
+})
+
 export const drug_info = defined(memo(async (drug_search) => {
     const drug_query_url = 'https://pubchem.ncbi.nlm.nih.gov/rest'
     const drug_res = await fetch(`${drug_query_url}/pug/compound/name/${drug_search}/synonyms/JSON`)
@@ -202,7 +211,7 @@ const manifest = [
     //     },
     //     title: '',
     //     description: '',
-    //     url: "",
+    //     url: "https://signor.uniroma2.it/",
     //     countapi: 'maayanlab.github.io/Signorclick',
     //     clickurl: if_search(async ({search}) => `https://signor.uniroma2.it/relation_result.php?id=${await uniprot_kb(search)}`),
     // },
@@ -272,72 +281,6 @@ const manifest = [
     //     countapi: 'maayanlab.github.io/alliancegenomeclick',
     //     clickurl: if_search(async ({ search }) => `https://www.alliancegenome.org/gene/HGNC:${await HGNC(search)}`),
     // },
-
-
-
-    {
-        name: '',
-        tags: {
-            CF: false,
-            PS: true,
-            gene: true,
-        },
-        img1: {
-            src: '/logos/_logo.png',
-            alt: ' logo',
-        },
-        img2: {
-            src: '/logos/_site.png',
-            alt: ' site screenshot',
-        },
-        title: '',
-        description: '',
-        url: "",
-        countapi: 'maayanlab.github.io/click',
-        clickurl: if_search(async ({ search }) => `${search}`),
-    },
-    {
-        name: '',
-        tags: {
-            CF: false,
-            PS: true,
-            gene: true,
-        },
-        img1: {
-            src: '/logos/_logo.png',
-            alt: ' logo',
-        },
-        img2: {
-            src: '/logos/_site.png',
-            alt: ' site screenshot',
-        },
-        title: '',
-        description: '',
-        url: "",
-        countapi: 'maayanlab.github.io/click',
-        clickurl: if_search(async ({ search }) => `${search}`),
-    },
-    {
-        name: '',
-        tags: {
-            CF: false,
-            PS: true,
-            gene: true,
-        },
-        img1: {
-            src: '/logos/_logo.png',
-            alt: ' logo',
-        },
-        img2: {
-            src: '/logos/_site.png',
-            alt: ' site screenshot',
-        },
-        title: '',
-        description: '',
-        url: "",
-        countapi: 'maayanlab.github.io/click',
-        clickurl: if_search(async ({ search }) => `${search}`),
-    },
 
     {
         name: 'GTEx',
@@ -479,7 +422,8 @@ const manifest = [
         },
         title: 'Metabolomics Workbench',
         description: 'The Metabolomics Workbench serves as a repository for metabolomics data and metadata and provides analysis tools.',
-        url: 'https://www.metabolomicsworkbench.org/databases/proteome/MGP.php',
+        url: 'https://www.metabolomicsworkbench.org/',
+        clickurl: if_search(async ({ search }) => `https://www.metabolomicsworkbench.org/databases/proteome/MGP_detail.php?MGP_ID=${await metabolomicswb(search)}`),
         countapi: 'maayanlab.github.io/metabclick',
     },
     {

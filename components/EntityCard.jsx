@@ -122,7 +122,7 @@ export default function EntityCard(props) {
                             ]
                         }
                         {clicks !== undefined ? <small
-                            className="card-text text-muted mt-1">Clicks: <span>{clicks}</span></small> : null}
+                            className="card-text text-muted mb-2" style={{ width: "100px"}}>Clicks: <span>{clicks}</span></small> : null}
                     </div>
                 </div>
             </div>
