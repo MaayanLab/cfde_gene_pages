@@ -46,7 +46,7 @@ export async function getStaticProps({params: {entity}}) {
         )
     ).filter(v => v !== undefined)
     manifest.sort(cmp)
-    return {props: {entity, manifest}, revalidate: 60}
+    return {props: {entity, manifest}, revalidate: 60*60}
 }
 
 export default function Entity(props) {

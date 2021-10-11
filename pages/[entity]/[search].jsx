@@ -75,7 +75,7 @@ export async function getStaticProps({params: {entity, search}}) {
             search,
             manifest,
         },
-        revalidate: false,
+        revalidate: 60*60,
     }
 }
 
