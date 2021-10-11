@@ -119,7 +119,7 @@ export default function Search(props) {
                                     if (item.name === 'ARCHS4') return true
                                 }).map(({component, ...item}) => {
                                     return (
-                                        <div className="row justify-content-center mt-5">
+                                        <div key={item.name} className="row justify-content-center mt-5">
                                             <div className="col-12">
                                                 <p>
                                                     {(item.similar_coexpression === undefined) || (item.similar_coexpression === null)
