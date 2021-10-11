@@ -10,7 +10,7 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
 const Analytics = dynamic(() => import('@/components/Analytics'))
 const PDBeMolstarPluginContext = dynamic(() => import('@/components/PDBeMolstarWidget').then(({ PDBeMolstarPluginContext }) => PDBeMolstarPluginContext))
-
+const CollapsibleNavbarNav = dynamic(() => import('@/components/CollapsibleNavbarNav'), { ssr: false })
 
 export default function App({ Component, pageProps }) {
   const { publicRuntimeConfig } = getConfig()
@@ -44,17 +44,10 @@ export default function App({ Component, pageProps }) {
               </a>
             </Link>
 
-            <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
-                    aria-label="Toggle navigation">
-              <span className="navbar-toggler-icon"/>
-            </button>
-            <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-              <div className="navbar-nav">
-                <Link href="/gene/" passHref><a className="nav-link" style={{color: "grey"}}>Gene Resources</a></Link>
-                <Link href="/drug/" passHref><a className="nav-link" style={{color: "grey"}}>Drug Resources</a></Link>
-              </div>
-            </div>
+            <CollapsibleNavbarNav>
+              <Link href="/gene/" passHref><a className="nav-link" style={{color: "grey"}}>Gene Resources</a></Link>
+              <Link href="/drug/" passHref><a className="nav-link" style={{color: "grey"}}>Drug Resources</a></Link>
+            </CollapsibleNavbarNav>
           </div>
         </nav>
       </header>
