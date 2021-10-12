@@ -142,6 +142,15 @@ export const metabolomicswb = defined(async (gene_search) => {
     }
 })
 
+export const ldp2_id = defined(async (drug_search) => {
+    const url = `https://lincsportal.ccs.miami.edu/sigc-api/small-molecule/fetch-by-name?name=${drug_search}&returnSignatureIDs=false`
+    const pert_res = await fetch(url)
+    if (pert_res.ok) {
+        const data = await pert_res.json()
+        return data['data']['perturbagen_id'][0]
+    }
+})
+
 export const drug_info = defined(memo(async (drug_search) => {
     const drug_query_url = 'https://pubchem.ncbi.nlm.nih.gov/rest'
     const drug_res = await fetch(`${drug_query_url}/pug/compound/name/${drug_search}/synonyms/JSON`)
@@ -1494,7 +1503,7 @@ const manifest = [
             CF: true,
             drug: true,
             PS: true,
-            Ag: false,
+            Ag: false
         },
         img1: {
             src: '/logos/ldp2_logo.png',
@@ -1510,8 +1519,9 @@ const manifest = [
         },
         title: 'LDP 2.0',
         description: 'LDP 2.0 includes data about over 20,000 small molecules, including approved drugs, compounds in clinical trials, and tool-compounds. Chemical structures are searchable by substructure.',
-        url: "http://lincsportal.ccs.miami.edu/signatures/home",
+        url: "https://lincsportal.ccs.miami.edu/signatures/home",
         countapi: 'maayanlab.github.io/LINCS2click',
+        clickurl: if_search(async ({ search }) => `https://lincsportal.ccs.miami.edu/signatures/perturbations/${await ldp2_id(search)}`)
     },
     {
         name: 'pharmgkb',
