@@ -5,7 +5,6 @@ import callable from '@/utils/callable'
 import full_manifest, {gene_id, drug_info} from '@/manifest'
 import useRouterEx from '@/utils/routerEx'
 import cmp from '@/manifest/cmp'
-import sorted from '@/utils/sorted'
 import capitalize from '@/utils/capitalize'
 
 const EntityCard = dynamic(() => import('@/components/EntityCard'))
@@ -69,19 +68,19 @@ export async function getStaticProps({params: {entity, search}}) {
                 })
         )
     ).filter(v => v !== undefined)
+    manifest.sort(cmp)
     return {
         props: {
             entity,
             search,
             manifest,
         },
-        revalidate: false,
+        revalidate: 60*60,
     }
 }
 
 export default function Search(props) {
     const router = useRouterEx()
-    const sortedManifest = React.useMemo(() => sorted(props.manifest, cmp), [props.manifest])
     return (
         <>
             <Head>
@@ -92,7 +91,7 @@ export default function Search(props) {
                     <div className="album pb-5">
                         <div className="container">
                             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 justify-content-center">
-                                {sortedManifest
+                                {props.manifest
                                     .filter(item => {
                                         if ('pinned' in item.tags) return true
                                         if (CF === true && !('CF' in item.tags)) return false
@@ -115,12 +114,12 @@ export default function Search(props) {
                                     })}
                             </div>
 
-                            {sortedManifest
+                            {props.manifest
                                 .filter(item => {
                                     if (item.name === 'ARCHS4') return true
                                 }).map(({component, ...item}) => {
                                     return (
-                                        <div className="row justify-content-center mt-5">
+                                        <div key={item.name} className="row justify-content-center mt-5">
                                             <div className="col-12">
                                                 <p>
                                                     {(item.similar_coexpression === undefined) || (item.similar_coexpression === null)

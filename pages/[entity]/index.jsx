@@ -2,7 +2,6 @@ import React from 'react'
 import full_manifest from '@/manifest'
 import dynamic from 'next/dynamic'
 import cmp from '@/manifest/cmp'
-import sorted from '@/utils/sorted'
 import callable from '@/utils/callable'
 import Head from 'next/head'
 import capitalize from '@/utils/capitalize'
@@ -46,11 +45,11 @@ export async function getStaticProps({params: {entity}}) {
                 })
         )
     ).filter(v => v !== undefined)
-    return {props: {entity, manifest}, revalidate: 60}
+    manifest.sort(cmp)
+    return {props: {entity, manifest}, revalidate: 60*60}
 }
 
 export default function Entity(props) {
-    const sortedManifest = React.useMemo(() => sorted(props.manifest.filter(item => props.entity in item.tags), cmp), [props.manifest])
     return (
         <>
             <Head>
@@ -59,7 +58,7 @@ export default function Entity(props) {
             <div className="album py-5 bg-light">
                 <div className="container">
                     <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                        {sortedManifest
+                        {props.manifest
                             .map(({ component, ...item }) => {
                                 const Component = components[component]
                                 return (

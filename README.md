@@ -1,6 +1,6 @@
 # CFDE Gene Pages
 
-<https://cfde-gene-pages.maayanlab.cloud/>
+<https://cfde-gene-pages.cloud/>
 
 ## Development
 
