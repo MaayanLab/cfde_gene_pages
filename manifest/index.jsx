@@ -354,31 +354,84 @@ const manifest = [
         countapi: 'maayanlab.github.io/harmclick',
         clickurl: if_search(async ({ search }) => `https://maayanlab.cloud/Harmonizome/gene/${search}`),
     },
-    // {
-    //     name: 'LINCS',
-    //     tags: {
-    //         CF: true,
-    //         PS: true,
-    //         gene: true,
-    //     },
-    //     img1: {
-    //         src: '/logos/ldp3_logo.png',
-    //         alt: 'LDP 3.0',
-    //     },
-    //     img2: {
-    //         src: '/logos/Lincs_site.png',
-    //         alt: 'LINCS site image',
-    //     },
-    //     img3: {
-    //         src: '/logos/LINCS_logo.gif',
-    //         alt: 'LINCS image',
-    //     },
-    //     title: 'LDP 3.0',
-    //     description: 'The LINCS Data Portal 3.0 (LDP 3.0) serves LINCS datasets and signatures. It provides a signature similarity search to query for mimicker or reverser signatures.',
-    //     url: "https://ldp3.cloud/",
-    //     countapi: 'maayanlab.github.io/lincsclick',
-    //     clickurl: if_search(async ({ search }) => `https://ldp3.cloud/#/MetadataSearch/Signatures?query={%22skip%22:0,%22limit%22:10,%22search%22:[%22${search}%22]}`),
-    // },
+    {
+        name: 'SigCom LINCS',
+        tags: {
+            CF: true,
+            Ag: true,
+            gene: true,
+            MaayanLab: true,
+        },
+        img1: {
+            src: '/logos/sigcom_logo.png',
+            alt: 'SigCom LINCS',
+        },
+        img2: {
+            src: '/logos/sigcom_site.png',
+            alt: 'SigCom LINCS site image',
+        },
+        img3: {
+            src: '/logos/LINCS_logo.gif',
+            alt: 'LINCS image',
+        },
+        title: 'SigCom LINCS',
+        description: 'SigCom LINCS data portal serves LINCS datasets and signatures. It provides a signature similarity search to query for mimicker or reverser signatures.',
+        url: "https://maayanlab.cloud/sigcom-lincs",
+        countapi: 'maayanlab.github.io/SigComLINCSGeneclick',
+        // https://maayanlab.cloud/sigcom-lincs/metadata-api/entities?filter={%22skip%22:0,%22limit%22:10,%22where%22:{%22meta.symbol%22:%20%22STAT3%22},%22fields%22:[%22id%22]}
+        clickurl: if_search(async ({ search }) => `https://maayanlab.cloud/sigcom-lincs/#/MetadataSearch/Genes?query={%22skip%22:0,%22limit%22:10,%22search%22:[%22${search}%22]}`),
+    },
+    {
+        name: 'SigCom LINCS',
+        tags: {
+            CF: true,
+            Ag: true,
+            drug: true,
+            MaayanLab: true,
+        },
+        img1: {
+            src: '/logos/sigcom_logo.png',
+            alt: 'SigCom LINCS',
+        },
+        img2: {
+            src: '/logos/sigcom_site.png',
+            alt: 'SigCom LINCS site image',
+        },
+        img3: {
+            src: '/logos/LINCS_logo.gif',
+            alt: 'LINCS image',
+        },
+        title: 'SigCom LINCS',
+        description: 'SigCom LINCS data portal serves LINCS datasets and signatures. It provides a signature similarity search to query for mimicker or reverser signatures.',
+        url: "https://maayanlab.cloud/sigcom-lincs",
+        countapi: 'maayanlab.github.io/SigComLINCSDrugclick',
+        clickurl: if_search(async ({ search }) => `https://maayanlab.cloud/sigcom-lincs/#/MetadataSearch/Signatures?query={%22skip%22:0,%22limit%22:10,%22search%22:[%22${search}%22]}`),
+    },
+    {
+        name: 'IDG Reactome Portal',
+        tags: {
+            CF: true,
+            PS: true,
+            gene: true,
+        },
+        img1: {
+            src: '/logos/Reactome_IDG_logo.png',
+            alt: 'LDP 3.0',
+        },
+        img2: {
+            src: '/logos/Reactome_IDG_site.png',
+            alt: 'IDG Reactome Portal site image',
+        },
+        img3: {
+            src: '/logos/IDG_LOGO.png',
+            alt: 'IDG',
+        },
+        title: 'IDG Reactome Portal',
+        description: 'IDG Reactome Portal provides biologist-friendly way to visualize proteins, complexes, and reactions in high-quality Reactome pathways.',
+        url: "https://idg.reactome.org/",
+        countapi: 'maayanlab.github.io/IDGReactomeGeneclick',
+        clickurl: if_search(async ({ search }) => `https://idg.reactome.org/search/${search}`),
+    },
     {
         name: 'PrismEXP',
         tags: {
@@ -624,50 +677,6 @@ const manifest = [
         countapi: 'maayanlab.github.io/enrichrclick',
         clickurl: if_search(async ({ search }) => `https://maayanlab.cloud/Enrichr/#find!gene=${search}`),
     },
-    // {
-    //     name: 'KEA3',
-    //     tags: {
-    //         gene: true,
-    //         CF: false,
-    //         Ag: true,
-    //         MaayanLab: true,
-    //     },
-    //     img1: {
-    //         src: '/logos/MaayanLab_logo.png',
-    //         alt: 'MaayanLab',
-    //     },
-    //     img2: {
-    //         src: '/logos/kea3_site.png',
-    //         alt: 'KEA3 site image',
-    //     },
-    //     title: 'KEA3',
-    //     description: 'Kinase Enrichment Analysis 3 (KEA3) infers upstream kinases whose putative substrates are overrepresented in a user-inputted list of proteins or differentially phosphorylated proteins.',
-    //     url: "https://maayanlab.cloud/kea3/",
-    //     countapi: 'maayanlab.github.io/KEA3click',
-    //     clickurl: if_search(async ({ search }) => `https://maayanlab.cloud/kea3?gene=${search}`),
-    // },
-    // {
-    //     name: 'ChEA3',
-    //     tags: {
-    //         gene: true,
-    //         CF: false,
-    //         Ag: true,
-    //         MaayanLab: true,
-    //     },
-    //     img1: {
-    //         src: '/logos/MaayanLab_logo.png',
-    //         alt: 'MaayanLab',
-    //     },
-    //     img2: {
-    //         src: '/logos/chea3_site.png',
-    //         alt: 'ChEA3 site image',
-    //     },
-    //     title: 'ChEA3',
-    //     description: 'ChIP-X Enrichment Analysis 3 (ChEA3) predicts transcription factors (TFs) associated with user-input sets of genes.',
-    //     url: "https://maayanlab.cloud/chea3/",
-    //     countapi: 'maayanlab.github.io/ChEA3click',
-    //     clickurl: if_search(async ({ search }) => `https://maayanlab.cloud/chea3?gene=${search}`),
-    // },
     {
         name: 'ENCODE',
         tags: {
