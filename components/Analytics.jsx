@@ -31,8 +31,8 @@ export default function Analytics() {
         strategy="lazyOnload"
         onLoad={() => {
           if (window.gtag !== undefined) return
-          window.dataLayter = window.dataLayer || []
-          window.gtag = (...args) => { dataLayer.push(args) }
+          window.dataLayer = window.dataLayer || []
+          window.gtag = (...args) => { window.dataLayer.push(args) }
           window.gtag('js', new Date())
           window.gtag('config', publicRuntimeConfig.gaId, { send_page_view: !!basePath })
         }}
