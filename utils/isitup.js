@@ -1,4 +1,5 @@
 import memo from '@/utils/memo'
+import fetch from 'isomorphic-unfetch'
 
 const isitup = memo(async (url) => {
     try {
