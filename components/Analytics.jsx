@@ -1,18 +1,12 @@
 import React from 'react'
+import Script from 'next/script'
 import getConfig from 'next/config'
-import ReactGA from 'react-ga'
 import useRouterEx from '@/utils/routerEx'
 
 export default function Analytics() {
   const router = useRouterEx()
+  const { publicRuntimeConfig } = getConfig()
   const [basePath, setBasePath] = React.useState()
-  React.useEffect(() => {
-    if (!window.GA_INITIALIZED) {
-      const { publicRuntimeConfig } = getConfig()
-      ReactGA.initialize(publicRuntimeConfig.gaId)
-      window.GA_INITIALIZED = true
-    }
-  }, [])
   React.useEffect(() => {
     if (!router.asPath) return
     const [_basePath, _1] = router.asPath.split('?', 1)
@@ -21,10 +15,26 @@ export default function Analytics() {
         setBasePath(_basePath)
       }
     }
-  }, [router.asPath])
+  }, [router.asPath, basePath])
   React.useEffect(() => {
-    if (!basePath) return
-    ReactGA.pageview(basePath)
+    if (!window.gtag || !basePath) return
+    window.gtag('js', new Date())
+    window.gtag('config', publicRuntimeConfig.gaId)
   }, [basePath])
-  return null
+  return (
+    <>
+      <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=${publicRuntimeConfig.gaId}`}
+        strategy="lazyOnload"
+        onLoad={() => {
+          window.dataLayter = window.dataLayer || []
+          window.gtag = (...args) => { dataLayer.push(args) }
+          if (basePath) {
+            window.gtag('js', new Date())
+            window.gtag('config', publicRuntimeConfig.gaId)
+          }
+        }}
+      />
+    </>
+  )
 }
