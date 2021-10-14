@@ -17,10 +17,11 @@ export default async function* async_proceed(gen) {
     do {
       yield current.value
       current = buffer.pop()
-      if (current === undefined) {
+      while (current === undefined) {
         // backoff, yield is ahead of the buffer
         await (new Promise((resolve, _reject) => setTimeout(resolve, 1000*(0.5+Math.random()))))
+	current = buffer.pop()
       }
-    } while (!(current||{}).done)
+    } while (!current.done)
   }
 }
