@@ -137,7 +137,6 @@ export const metabolomicswb = defined(async (gene_search) => {
     const mgp = await fetch(`https://www.metabolomicsworkbench.org/rest/protein/uniprot_id/${await uniprot_kb(gene_search)}/mgp_id/`)
     if (mgp.ok) {
         let mgp_resp = await mgp.json()
-        console.log(mgp_resp)
         return mgp_resp['Row1']['mgp_id']
     }
 })
