@@ -1,13 +1,13 @@
 import React from "react"
-import { drug_examples } from "@/manifest/examples"
+import fetchEx from "@/utils/fetchEx"
 
 const entity = {
   gene: async () => {
-    const res = await fetch('/autocomplete_genes.json')
+    const res = await fetchEx('/autocomplete_genes.json')
     return await res.json()
   },
   drug: async () => {
-      const res = await fetch('/drugbank_vocabulary_drugs.json')
+      const res = await fetchEx('/drugbank_vocabulary_drugs.json')
       return await res.json()
   },
 }
