@@ -18,8 +18,11 @@ export default function Analytics() {
   }, [router.asPath, basePath])
   React.useEffect(() => {
     if (!window.gtag || !basePath) return
-    window.gtag('js', new Date())
-    window.gtag('config', publicRuntimeConfig.gaId)
+    window.gtag('event', 'page_view', {
+      page_title: document.title,
+      page_location: location.href,
+      page_path: location.pathname,
+    })
   }, [basePath])
   return (
     <>
@@ -27,12 +30,11 @@ export default function Analytics() {
         src={`https://www.googletagmanager.com/gtag/js?id=${publicRuntimeConfig.gaId}`}
         strategy="lazyOnload"
         onLoad={() => {
+          if (window.gtag !== undefined) return
           window.dataLayter = window.dataLayer || []
           window.gtag = (...args) => { dataLayer.push(args) }
-          if (basePath) {
-            window.gtag('js', new Date())
-            window.gtag('config', publicRuntimeConfig.gaId)
-          }
+          window.gtag('js', new Date())
+          window.gtag('config', publicRuntimeConfig.gaId, { send_page_view: !!basePath })
         }}
       />
     </>
