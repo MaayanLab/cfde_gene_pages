@@ -32,7 +32,8 @@ export default function Analytics() {
         onLoad={() => {
           if (window.gtag !== undefined) return
           window.dataLayer = window.dataLayer || []
-          window.gtag = (...args) => { window.dataLayer.push(args) }
+          function gtag() { window.dataLayer.push(arguments) }
+          window.gtag = gtag
           window.gtag('js', new Date())
           window.gtag('config', publicRuntimeConfig.gaId, { send_page_view: !!basePath })
         }}
