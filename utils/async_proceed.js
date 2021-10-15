@@ -3,25 +3,29 @@
  *  so that work can continue even if the results
  *  have not been awaited.
  */
-export default async function* async_proceed(gen) {
-  const it = gen[Symbol.asyncIterator]()
-  const buffer = [await it.next()]
-  if (!buffer[0].done) {
-    (async () => {
-      for await(const el of gen) {
-        buffer.push({ value: el, done: false })
-      }
-    })().finally(() => buffer.push({ done: true }))
+export default async function* async_proceed(gen, { backoff }) {
+  if (backoff === undefined) {
+    backoff = 1000
+  }
+  const buffer = []
+  ;(async () => {
+    for await (const value of gen) {
+      buffer.push({ done: false, value })
+    }
+  })().finally(() => buffer.push({ done: true }))
 
-    let current = buffer.pop()
-    do {
+  let current
+  while (true) {
+    while (current === undefined) {
+      // backoff, yield is ahead of the buffer
+      await (new Promise((resolve, _reject) => setTimeout(resolve, backoff * (0.5 + Math.random()))))
+      current = buffer.shift()
+    }
+    if (current.done) {
+      break
+    } else {
       yield current.value
-      current = buffer.pop()
-      while (current === undefined) {
-        // backoff, yield is ahead of the buffer
-        await (new Promise((resolve, _reject) => setTimeout(resolve, 1000*(0.5+Math.random()))))
-	current = buffer.pop()
-      }
-    } while (!current.done)
+    }
+    current = buffer.shift()
   }
 }
