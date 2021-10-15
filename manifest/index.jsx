@@ -133,11 +133,34 @@ const transcript = defined(async (gene_search) => (await gene_info(gene_search))
 const entrezgene = defined(async (gene_search) => (await gene_info(gene_search)).entrezgene)
 const pdb = defined(async (gene_search) => ensure_array((await gene_info(gene_search)).pdb)[0])
 
+export const wikipedia = defined(async (search) => {
+    const res = await fetch(`https://en.wikipedia.org/wiki/${search}`)
+    if (res.ok) {
+        return `https://en.wikipedia.org/wiki/${search}`
+    }
+})
+
+export const pubmed = defined(async (search) => {
+    // It always returns 200
+    const res = await fetch(`https://pubmed.ncbi.nlm.nih.gov/?term=${search}`)
+    if (res.ok) {
+        return `https://pubmed.ncbi.nlm.nih.gov/?term=${search}`
+    }
+})
+
+export const phosphosite = defined(async (gene_search) => {
+    const res = await fetch`https://www.phosphosite.org/simpleSearchSubmitAction.action?searchStr=${gene_search}`
+    if (res.ok) {
+        let results = await res.json()
+        let id = results['paginationResults'][0]
+        return `https://www.phosphosite.org/proteinAction?id=${id}`
+    }
+})
+
 export const metabolomicswb = defined(async (gene_search) => {
     const mgp = await fetch(`https://www.metabolomicsworkbench.org/rest/protein/uniprot_id/${await uniprot_kb(gene_search)}/mgp_id/`)
     if (mgp.ok) {
         let mgp_resp = await mgp.json()
-        console.log(mgp_resp)
         return mgp_resp['Row1']['mgp_id']
     }
 })
