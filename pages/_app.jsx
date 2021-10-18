@@ -47,6 +47,7 @@ export default function App({ Component, pageProps }) {
             <CollapsibleNavbarNav>
               <Link href="/gene/" passHref><a className="nav-link" style={{color: "grey"}}>Gene Resources</a></Link>
               <Link href="/drug/" passHref><a className="nav-link" style={{color: "grey"}}>Drug Resources</a></Link>
+              <Link href="/downloads/" passHref><a className="nav-link" style={{color: "grey"}}>Downloads</a></Link>
             </CollapsibleNavbarNav>
           </div>
         </nav>
