@@ -1,3 +1,5 @@
+import fetch from 'isomorphic-unfetch'
+
 export default async function fetchEx(url, opts) {
   if (opts === undefined) opts = {}
   let timeout = opts.timeout || 5000

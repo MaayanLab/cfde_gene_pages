@@ -4,13 +4,13 @@ import ensure_array from '@/utils/ensure_array'
 import to_tsv from '@/utils/to_tsv'
 
 function serveContentType(req, res, value) {
-  if (req.headers.accept == 'text/tsv') {
-    res.setHeader('Content-Type', 'text/tsv')
-    res.write(to_tsv(ensure_array(value)))
-    res.end()
-  } else { // if (req.headers.accept == 'application/json') {
+  if (req.headers.accept == 'application/json') {
     res.setHeader('Content-Type', 'application/json')
     res.write(JSON.stringify(value))
+    res.end()
+  } else {//if (req.headers.accept == 'text/tsv') {
+    res.setHeader('Content-Type', 'text/tsv')
+    res.write(to_tsv(ensure_array(value), ['title','description','url','tags.CF','tags.PS','tags.Ag']))
     res.end()
   }
 }
