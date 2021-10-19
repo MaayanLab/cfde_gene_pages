@@ -15,7 +15,9 @@ module.exports = {
           return config.entry().then(entry => {
             const _entry = {...entry}
             for (const file of fs.readdirSync(path.resolve('services'))) {
-              _entry[path.basename(file, '.js')] = path.resolve('services', file)
+              if (file.endsWith('.js')) {
+                _entry[path.basename(file, '.js')] = path.resolve('services', file)
+              }
             }
             return _entry
           })
