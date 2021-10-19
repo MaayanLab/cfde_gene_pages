@@ -98,6 +98,7 @@ export const appyter = defined(async (appyter_name, args) => {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify(args),
     })
@@ -511,6 +512,86 @@ const manifest = [
         url: 'https://www.metabolomicsworkbench.org/',
         clickurl: if_search(async ({ search }) => `https://www.metabolomicsworkbench.org/databases/proteome/MGP_detail.php?MGP_ID=${await metabolomicswb(search)}`),
         countapi: 'maayanlab.github.io/metabclick',
+    },
+    {
+        name: 'Wikipedia',
+        tags: {
+            Ag: true,
+            gene: true,
+        },
+        img1: {
+            src: '/logos/wiki_logo.png',
+            alt: 'Wikipedia image',
+        },
+        img2: {
+            src: '/logos/wiki_site.png',
+            alt: 'Wikipedia site image',
+        },
+        title: 'Wikipedia',
+        description: 'Wikipedia is a free content, multilingual online encyclopedia written and maintained by a community of volunteers through a model of open collaboration, using a wiki-based editing system',
+        url: 'https://en.wikipedia.org/',
+        clickurl: if_search(async ({ search }) => await wikipedia(search)),
+        countapi: 'maayanlab.github.io/wikipediaclick',
+    },
+    {
+        name: 'Wikipedia',
+        tags: {
+            Ag: true,
+            drug: true,
+        },
+        img1: {
+            src: '/logos/wiki_logo.png',
+            alt: 'Wikipedia image',
+        },
+        img2: {
+            src: '/logos/wiki_site.png',
+            alt: 'Wikipedia site image',
+        },
+        title: 'Wikipedia',
+        description: 'Wikipedia is a free content, multilingual online encyclopedia written and maintained by a community of volunteers through a model of open collaboration, using a wiki-based editing system',
+        url: 'https://en.wikipedia.org/',
+        clickurl: if_search(async ({ search }) => await wikipedia(search)),
+        countapi: 'maayanlab.github.io/wikipediaclick',
+    },
+    {
+        name: 'PubMed',
+        tags: {
+            Ag: true,
+            gene: true,
+        },
+        img1: {
+            src: '/logos/pubmed_logo.png',
+            alt: 'PubMed image',
+        },
+        img2: {
+            src: '/logos/pubmed_site.png',
+            alt: 'PubMed site image',
+        },
+        title: 'PubMed',
+        description: 'PubMed comprises more than 33 million citations for biomedical literature from MEDLINE, life science journals, and online books.',
+        url: 'https://pubmed.ncbi.nlm.nih.gov/',
+        clickurl: if_search(async ({ search }) => await pubmed(search)),
+        countapi: 'maayanlab.github.io/pubmedclick',
+    },
+    {
+        name: 'PubMed',
+        tags: {
+            Ag: true,
+            drug: true,
+        },
+        img1: {
+            src: '/logos/pubmed_logo.png',
+            alt: 'PubMed image',
+        },
+        img2: {
+            src: '/logos/pubmed_site.png',
+            alt: 'PubMed site image',
+        },
+        title: 'PubMed',
+        description: 'PubMed comprises more than 33 million citations for biomedical literature from MEDLINE, life science journals, and online books.',
+        url: 'https://pubmed.ncbi.nlm.nih.gov/',
+        clickurl: if_search(async ({ search }) => await pubmed(search)),
+        countapi: 'maayanlab.github.io/pubmedclick',
     },
     {
         name: 'GlyGen',
