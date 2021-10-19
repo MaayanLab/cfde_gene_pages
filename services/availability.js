@@ -1,3 +1,4 @@
+import fs from 'fs'
 import async_proceed from '@/utils/async_proceed'
 import async_zip from '@/utils/async_zip'
 import callable from '@/utils/callable'
@@ -6,14 +7,23 @@ import callable from '@/utils/callable'
  * This function takes a long time to execute and produces an availability matrix
  *  showing which sites are available for ewhich gene.
  */
-export default async function availability(entity) {
-  let entities
-  if (entity === 'gene') {
-    entities = (await import('@/public/autocomplete_genes.json')).default
-  } else if (entity === 'drug') {
-    entities = (await import('@/public/drugbank_vocabulary_drugs.json')).default
-  } else {
-    throw Exception('Not Implemented')
+export default async function availability(entity_type, entities) {
+  if (entities === undefined) {
+    if (entity_type === 'gene') {
+      entities = (await import('@/public/autocomplete_genes.json')).default
+    } else if (entity_type === 'drug') {
+      entities = (await import('@/public/drugbank_vocabulary_drugs.json')).default
+    } else {
+      throw Exception('Not Implemented')
+    }
+  } else if (typeof entities === 'string') {
+    const content = await (new Promise((resolve, reject) =>
+      fs.readFile(entities, (err, data) => {
+        if (err) reject(err)
+        else resolve(data)
+      })
+    ))
+    entities = JSON.parse(content.toString())
   }
   const { default: manifest } = await import('@/manifest')
   const filteredManifest = manifest
