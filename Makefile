@@ -16,7 +16,7 @@ $(DOWNLOADS)/genes.tsv: $(DOWNLOADS)/
 	$(NODE) .next/server/availability.js gene > $@
 
 $(DOWNLOADS)/genes.png: $(DOWNLOADS)/genes.tsv $(DOWNLOADS)/
-	$(PYTHON) services/clustermap.py -i $< -o $>
+	$(PYTHON) services/clustermap.py -i $< -o $@
 
 $(DOWNLOADS)/drugs.tsv: $(DOWNLOADS)/
 	$(NODE) .next/server/availability.js drug > $@
