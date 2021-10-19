@@ -20,3 +20,6 @@ $(DOWNLOADS)/drugs.tsv:
 
 $(DOWNLOADS)/drugs.png: $(DOWNLOADS)/drugs.tsv
 	$(PYTHON) services/clustermap.py -i $^ -o $@
+
+.PHONY: downloads
+downloads: $(DOWNLOADS)/genes.tsv $(DOWNLOADS)/genes.png $(DOWNLOADS)/drugs.tsv $(DOWNLOADS)/drugs.png
