@@ -29,7 +29,7 @@ export default async function availability(entity_type, entities) {
   const filteredManifest = manifest
     .filter(rc => (rc.tags[entity] && !rc.tags.searchonly))
   //
-  console.log(['', ...filteredManifest.map(({ name }) => name)].join('\t'))
+  console.log(['', ...filteredManifest.map(({ title }) => title)].join('\t'))
   for await (const row of async_zip(
     (async function *() {
       for (const _entity of entities) {
