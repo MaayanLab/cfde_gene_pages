@@ -6,22 +6,28 @@ NPM=npm
 node_modules/:
 	$(NPM) install
 
-.next/server/availability.js: node_modules/
+.next/server/availability.js: | node_modules/
 	$(NPM) run build
 
 $(DOWNLOADS)/:
 	mkdir -p $(DOWNLOADS)
 
-$(DOWNLOADS)/genes.tsv: $(DOWNLOADS)/
+$(DOWNLOADS)/genes.tsv: | $(DOWNLOADS)/
 	$(NODE) .next/server/availability.js gene > $@
 
-$(DOWNLOADS)/genes.png: $(DOWNLOADS)/genes.tsv $(DOWNLOADS)/
+$(DOWNLOADS)/gene-resource-manifest.tsv: | $(DOWNLOADS)/
+	$(NODE) .next/server/manifest.js gene > $@
+
+$(DOWNLOADS)/genes.png: | $(DOWNLOADS)/ $(DOWNLOADS)/genes.tsv
 	$(PYTHON) services/clustermap.py -i $< -o $@
 
-$(DOWNLOADS)/drugs.tsv: $(DOWNLOADS)/
+$(DOWNLOADS)/drugs.tsv: | $(DOWNLOADS)/
 	$(NODE) .next/server/availability.js drug > $@
 
-$(DOWNLOADS)/drugs.png: $(DOWNLOADS)/drugs.tsv $(DOWNLOADS)/
+$(DOWNLOADS)/drug-resource-manifest.tsv: | $(DOWNLOADS)/
+	$(NODE) .next/server/manifest.js drug > $@
+
+$(DOWNLOADS)/drugs.png: | $(DOWNLOADS)/ $(DOWNLOADS)/drugs.tsv
 	$(PYTHON) services/clustermap.py -i $< -o $@
 
 .PHONY: downloads
