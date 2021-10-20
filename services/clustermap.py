@@ -4,10 +4,14 @@ import seaborn as sns
 from matplotlib import pyplot as plt
 
 @click.command()
-@click.option('-i', '--input', type=click.Path(file_okay=True), help='Dataframe')
-@click.option('-o', '--output', type=click.Path(), help='Figure')
-def clustermap(input, output):
+@click.option('-i', '--input', type=click.Path(file_okay=True), required=True, help='Dataframe')
+@click.option('-m', '--manifest', type=click.Path(file_okay=True), help='Dataframe for manifest')
+@click.option('-o', '--output', type=click.Path(), required=True, help='Figure')
+def clustermap(input, manifest, output):
   df = pd.read_csv(input, sep='\t', index_col=0)
+  if manifest:
+    df_manifest = pd.read_csv(manifest, sep='\t')
+    df.columns = df_manifest.set_index('name').loc[df.columns, 'title']
   g = sns.clustermap(
     df.T,
     col_cluster=False,
