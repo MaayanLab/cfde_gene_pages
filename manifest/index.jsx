@@ -79,12 +79,11 @@ export const predict_regulators = defined(memo(async (genes, type_url, top = 5) 
     }
 }))
 
-export const gene_info = defined(memo(async (gene_search) => {
+export const gene_info = defined(memo(try_or_else(async (gene_search) => {
     const gene_res = await fetchEx(`${gene_query_url}/gene/${await gene_id(gene_search)}`)
-    if (gene_res.ok) {
-        return await gene_res.json()
-    }
-}))
+    if (!gene_res.ok) throw new Error('gene_info status is not OK')
+    return await gene_res.json()
+})))
 
 export const medchemexpress = defined(async (gene_search) => {
     const mce = await fetchEx(`https://www.medchemexpress.com/search.html?q=${gene_search}&ft=&fa=&fp=`)
@@ -176,14 +175,13 @@ export const ldp2_id = defined(async (drug_search) => {
     }
 })
 
-export const drug_info = defined(memo(async (drug_search) => {
+export const drug_info = defined(memo(try_or_else(async (drug_search) => {
     const drug_query_url = 'https://pubchem.ncbi.nlm.nih.gov/rest'
     const drug_res = await fetchEx(`${drug_query_url}/pug/compound/name/${drug_search}/synonyms/JSON`)
-    if (drug_res.ok) {
-        const data = await drug_res.json()
-        return data.InformationList.Information[0]
-    }
-}))
+    if (!drug_res.ok) throw new Error('drug_info status is not OK')
+    const data = await drug_res.json()
+    return data.InformationList.Information[0]
+})))
 
 const CID = defined(async (drug_search) => (await drug_info(drug_search)).CID)
 const CHEMBL = defined(async (drug_search) => (await drug_info(drug_search)).Synonym.find(item => item.trim().match(/^CHEMBL/)))
