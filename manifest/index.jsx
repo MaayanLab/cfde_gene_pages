@@ -134,21 +134,6 @@ const transcript = defined(async (gene_search) => (await gene_info(gene_search))
 const entrezgene = defined(async (gene_search) => (await gene_info(gene_search)).entrezgene)
 const pdb = defined(async (gene_search) => ensure_array((await gene_info(gene_search)).pdb)[0])
 
-export const wikipedia = defined(memo(async (search) => {
-    const res = await fetchEx(`https://en.wikipedia.org/wiki/${search}`)
-    if (res.ok) {
-        return `https://en.wikipedia.org/wiki/${search}`
-    }
-}))
-
-export const pubmed = defined(memo(async (search) => {
-    // It always returns 200
-    const res = await fetchEx(`https://pubmed.ncbi.nlm.nih.gov/?term=${search}`)
-    if (res.ok) {
-        return `https://pubmed.ncbi.nlm.nih.gov/?term=${search}`
-    }
-}))
-
 export const phosphosite = defined(memo(async (gene_search) => {
     const res = await fetchEx(`https://www.phosphosite.org/simpleSearchSubmitAction.action?searchStr=${gene_search}`)
     if (res.ok) {
@@ -516,25 +501,6 @@ const manifest = [
         tags: {
             Ag: true,
             gene: true,
-        },
-        img1: {
-            src: '/logos/wiki_logo.png',
-            alt: 'Wikipedia image',
-        },
-        img2: {
-            src: '/logos/wiki_site.png',
-            alt: 'Wikipedia site image',
-        },
-        title: 'Wikipedia',
-        description: 'Wikipedia is a free content, multilingual online encyclopedia written and maintained by a community of volunteers through a model of open collaboration, using a wiki-based editing system',
-        url: 'https://en.wikipedia.org/',
-        clickurl: if_search(async ({ search }) => await wikipedia(search)),
-        countapi: 'maayanlab.github.io/wikipediaclick',
-    },
-    {
-        name: 'Wikipedia',
-        tags: {
-            Ag: true,
             drug: true,
         },
         img1: {
@@ -548,7 +514,7 @@ const manifest = [
         title: 'Wikipedia',
         description: 'Wikipedia is a free content, multilingual online encyclopedia written and maintained by a community of volunteers through a model of open collaboration, using a wiki-based editing system',
         url: 'https://en.wikipedia.org/',
-        clickurl: if_search(async ({ search }) => await wikipedia(search)),
+        clickurl: if_search(async ({ search }) => `https://en.wikipedia.org/wiki/${search}`),
         countapi: 'maayanlab.github.io/wikipediaclick',
     },
     {
@@ -556,25 +522,6 @@ const manifest = [
         tags: {
             Ag: true,
             gene: true,
-        },
-        img1: {
-            src: '/logos/pubmed_logo.png',
-            alt: 'PubMed image',
-        },
-        img2: {
-            src: '/logos/pubmed_site.png',
-            alt: 'PubMed site image',
-        },
-        title: 'PubMed',
-        description: 'PubMed comprises more than 33 million citations for biomedical literature from MEDLINE, life science journals, and online books.',
-        url: 'https://pubmed.ncbi.nlm.nih.gov/',
-        clickurl: if_search(async ({ search }) => await pubmed(search)),
-        countapi: 'maayanlab.github.io/pubmedclick',
-    },
-    {
-        name: 'PubMed',
-        tags: {
-            Ag: true,
             drug: true,
         },
         img1: {
@@ -588,7 +535,7 @@ const manifest = [
         title: 'PubMed',
         description: 'PubMed comprises more than 33 million citations for biomedical literature from MEDLINE, life science journals, and online books.',
         url: 'https://pubmed.ncbi.nlm.nih.gov/',
-        clickurl: if_search(async ({ search }) => await pubmed(search)),
+        clickurl: if_search(async ({ search }) => `https://pubmed.ncbi.nlm.nih.gov/?term=${search}`),
         countapi: 'maayanlab.github.io/pubmedclick',
     },
     {
