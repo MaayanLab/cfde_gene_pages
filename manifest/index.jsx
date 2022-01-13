@@ -3,7 +3,7 @@ import defined from '@/utils/defined'
 import countable from "@/utils/countable"
 import isitup from "@/utils/isitup"
 import try_or_else from "@/utils/try_or_else"
-import ensure_array from "@/utils/ensure_array"
+// import ensure_array from "@/utils/ensure_array"
 import fetchEx from '@/utils/fetchEx'
 
 function if_search(func) {
@@ -50,34 +50,34 @@ const expand = defined(memo(async (gene_search, exp_type = "coexpression", top =
     }
 }))
 
-const expand_drug = defined(memo(async (drug_search, exp_type = "L1000_coexpression", top = 5) => {
-    const gene_exp = await fetchEx(`https://maayanlab.cloud/enrichrsearch/drug/expand?search=${drug_search}&top=${top}&type=${exp_type}`)
-    if (gene_exp.ok) {
-        const { data, success } = await gene_exp.json()
-        if ((Array.isArray(data)) && success) {
-            if (data.length > 0) {
-                return data
-            }
-        }
-    }
-}))
+// const expand_drug = defined(memo(async (drug_search, exp_type = "L1000_coexpression", top = 5) => {
+//     const gene_exp = await fetchEx(`https://maayanlab.cloud/enrichrsearch/drug/expand?search=${drug_search}&top=${top}&type=${exp_type}`)
+//     if (gene_exp.ok) {
+//         const { data, success } = await gene_exp.json()
+//         if ((Array.isArray(data)) && success) {
+//             if (data.length > 0) {
+//                 return data
+//             }
+//         }
+//     }
+// }))
 
-const predict_regulators = defined(memo(async (genes, type_url, top = 5) => {
-    const results = await fetchEx(`https://maayanlab.cloud/${type_url}/api/enrich/`, {
-        method: 'POST',
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            query_name: "gene_set_query",
-            gene_set: genes
-        }),
-    })
-    if (results.ok) {
-        const response = await results.json()
-        return response['Integrated--meanRank'].slice(0, top).map(d => d.TF)
-    }
-}))
+// const predict_regulators = defined(memo(async (genes, type_url, top = 5) => {
+//     const results = await fetchEx(`https://maayanlab.cloud/${type_url}/api/enrich/`, {
+//         method: 'POST',
+//         headers: {
+//             "Content-Type": "application/json"
+//         },
+//         body: JSON.stringify({
+//             query_name: "gene_set_query",
+//             gene_set: genes
+//         }),
+//     })
+//     if (results.ok) {
+//         const response = await results.json()
+//         return response['Integrated--meanRank'].slice(0, top).map(d => d.TF)
+//     }
+// }))
 
 const gene_info = defined(memo(try_or_else(async (gene_search) => {
     const gene_res = await fetchEx(`${gene_query_url}/gene/${await gene_id(gene_search)}`)
@@ -121,27 +121,27 @@ const clean_cut = defined((desc, max_len = 400) => {
     return desc.slice(0, stump)
 })
 
-const ncbi_gene_id = defined(async (gene_search) => (await gene_info(gene_search))._id)
-const ncbi_gene_url = defined(async (gene_search) => `${(await gene_info(gene_search))._id}`)
-const organism = defined(async (gene_search) => species_map[(await gene_info(gene_search)).taxid])
-const chromosome_location = defined(async (gene_search) => (await gene_info(gene_search)).map_location)
-const biological_function = defined(async (gene_search) => clean_cut((await gene_info(gene_search)).summary))
+// const ncbi_gene_id = defined(async (gene_search) => (await gene_info(gene_search))._id)
+// const ncbi_gene_url = defined(async (gene_search) => `${(await gene_info(gene_search))._id}`)
+// const organism = defined(async (gene_search) => species_map[(await gene_info(gene_search)).taxid])
+// const chromosome_location = defined(async (gene_search) => (await gene_info(gene_search)).map_location)
+// const biological_function = defined(async (gene_search) => clean_cut((await gene_info(gene_search)).summary))
 const ensembl_id = defined(async (gene_search) => (await gene_info(gene_search)).ensembl.gene)
 const HGNC = defined(async (gene_search) => (await gene_info(gene_search)).HGNC)
 const uniprot_kb = defined(async (gene_search) => (await gene_info(gene_search)).uniprot['Swiss-Prot'])
 const MGI = defined(async (gene_search) => (await gene_info(gene_search)).pantherdb.ortholog[0].MGI)
 const transcript = defined(async (gene_search) => (await gene_info(gene_search)).exac.transcript)
 const entrezgene = defined(async (gene_search) => (await gene_info(gene_search)).entrezgene)
-const pdb = defined(async (gene_search) => ensure_array((await gene_info(gene_search)).pdb)[0])
+// const pdb = defined(async (gene_search) => ensure_array((await gene_info(gene_search)).pdb)[0])
 
-const phosphosite = defined(memo(async (gene_search) => {
-    const res = await fetchEx(`https://www.phosphosite.org/simpleSearchSubmitAction.action?searchStr=${gene_search}`)
-    if (res.ok) {
-        let results = await res.json()
-        let id = results['paginationResults'][0]
-        return `https://www.phosphosite.org/proteinAction?id=${id}`
-    }
-}))
+// const phosphosite = defined(memo(async (gene_search) => {
+//     const res = await fetchEx(`https://www.phosphosite.org/simpleSearchSubmitAction.action?searchStr=${gene_search}`)
+//     if (res.ok) {
+//         let results = await res.json()
+//         let id = results['paginationResults'][0]
+//         return `https://www.phosphosite.org/proteinAction?id=${id}`
+//     }
+// }))
 
 const metabolomicswb = defined(memo(async (gene_search) => {
     const mgp = await fetchEx(`https://www.metabolomicsworkbench.org/rest/protein/uniprot_id/${await uniprot_kb(gene_search)}/mgp_id/`)
