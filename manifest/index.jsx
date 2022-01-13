@@ -253,6 +253,7 @@ const manifest = [
     //     url: "https://datamed.org/",
     //     countapi: 'maayanlab.github.io/dataMEDclick',
     //     clickurl: if_search(async ({ search }) => `https://datamed.org/search.php?query=${search}&searchtype=data`),
+    //     example: 'https://datamed.org/search.php?query=${gene-symbol}&searchtype=data',
     // },
 
     // {
@@ -275,6 +276,7 @@ const manifest = [
     //     url: "https://omabrowser.org/",
     //     countapi: 'maayanlab.github.io/Omaclick',
     //     clickurl: if_search(async ({ search }) => `https://omabrowser.org/oma/search/?type=all&query=${search}`),
+    //     example: 'https://omabrowser.org/oma/search/?type=all&query=${gene-symbol}',
     // },
 
     // {
@@ -297,6 +299,7 @@ const manifest = [
     //     url: "https://www.alliancegenome.org/",
     //     countapi: 'maayanlab.github.io/alliancegenomeclick',
     //     clickurl: if_search(async ({ search }) => `https://www.alliancegenome.org/gene/HGNC:${await HGNC(search)}`),
+    //     example: 'https://www.alliancegenome.org/gene/HGNC:${HGNC}',
     // },
 
     {
@@ -319,6 +322,7 @@ const manifest = [
         url: "https://www.gtexportal.org/home/",
         countapi: 'maayanlab.github.io/gteclick',
         clickurl: if_search(async ({ search }) => `https://www.gtexportal.org/home/gene/${await ensembl_id(search)}`),
+        example: 'https://www.gtexportal.org/home/gene/${ensembl_id}',
     },
     {
         name: 'Pharos',
@@ -344,6 +348,7 @@ const manifest = [
         url: "https://pharos.nih.gov/",
         countapi: 'maayanlab.github.io/pharclick',
         clickurl: if_search(async ({ search }) => `https://pharos.nih.gov/targets/${await uniprot_kb(search)}`),
+        example: 'https://pharos.nih.gov/targets/${swiss-prot}',
     },
     {
         name: 'Harmonziome',
@@ -370,6 +375,7 @@ const manifest = [
         url: "https://maayanlab.cloud/Harmonizome/",
         countapi: 'maayanlab.github.io/harmclick',
         clickurl: if_search(async ({ search }) => `https://maayanlab.cloud/Harmonizome/gene/${search}`),
+        example: 'https://maayanlab.cloud/Harmonizome/gene/${gene-symbol}',
     },
     {
         name: 'SigCom LINCS',
@@ -397,6 +403,7 @@ const manifest = [
         countapi: 'maayanlab.github.io/SigComLINCSGeneclick',
         // https://maayanlab.cloud/sigcom-lincs/metadata-api/entities?filter={%22skip%22:0,%22limit%22:10,%22where%22:{%22meta.symbol%22:%20%22STAT3%22},%22fields%22:[%22id%22]}
         clickurl: if_search(async ({ search }) => `https://maayanlab.cloud/sigcom-lincs/#/MetadataSearch/Genes?query={%22skip%22:0,%22limit%22:10,%22search%22:[%22${search}%22]}`),
+        example: 'https://maayanlab.cloud/sigcom-lincs/#/MetadataSearch/Genes?query={%22skip%22:0,%22limit%22:10,%22search%22:[%22${gene-symbol}%22]}',
     },
     {
         name: 'SigCom LINCS',
@@ -423,6 +430,7 @@ const manifest = [
         url: "https://maayanlab.cloud/sigcom-lincs",
         countapi: 'maayanlab.github.io/SigComLINCSDrugclick',
         clickurl: if_search(async ({ search }) => `https://maayanlab.cloud/sigcom-lincs/#/MetadataSearch/Signatures?query={%22skip%22:0,%22limit%22:10,%22search%22:[%22${search}%22]}`),
+        example: 'https://maayanlab.cloud/sigcom-lincs/#/MetadataSearch/Signatures?query={%22skip%22:0,%22limit%22:10,%22search%22:[%22${gene-symbol}%22]}',
     },
     {
         name: 'IDG Reactome Portal',
@@ -448,6 +456,7 @@ const manifest = [
         url: "https://idg.reactome.org/",
         countapi: 'maayanlab.github.io/IDGReactomeGeneclick',
         clickurl: if_search(async ({ search }) => `https://idg.reactome.org/search/${search}`),
+        example: 'https://idg.reactome.org/search/${gene-symbol}',
     },
     {
         name: 'PrismEXP',
@@ -494,6 +503,7 @@ const manifest = [
         description: 'The Metabolomics Workbench serves as a repository for metabolomics data and metadata and provides analysis tools.',
         url: 'https://www.metabolomicsworkbench.org/',
         clickurl: if_search(async ({ search }) => `https://www.metabolomicsworkbench.org/databases/proteome/MGP_detail.php?MGP_ID=${await metabolomicswb(search)}`),
+        example: 'https://www.metabolomicsworkbench.org/databases/proteome/MGP_detail.php?MGP_ID=${mgp_id}',
         countapi: 'maayanlab.github.io/metabclick',
     },
     {
@@ -515,6 +525,7 @@ const manifest = [
         description: 'Wikipedia is a free content, multilingual online encyclopedia written and maintained by a community of volunteers through a model of open collaboration, using a wiki-based editing system',
         url: 'https://en.wikipedia.org/',
         clickurl: if_search(async ({ search }) => `https://en.wikipedia.org/wiki/${search}`),
+        example: 'https://en.wikipedia.org/wiki/${gene-symbol}',
         countapi: 'maayanlab.github.io/wikipediaclick',
     },
     {
@@ -536,6 +547,7 @@ const manifest = [
         description: 'PubMed comprises more than 33 million citations for biomedical literature from MEDLINE, life science journals, and online books.',
         url: 'https://pubmed.ncbi.nlm.nih.gov/',
         clickurl: if_search(async ({ search }) => `https://pubmed.ncbi.nlm.nih.gov/?term=${search}`),
+        example: 'https://pubmed.ncbi.nlm.nih.gov/?term=${gene-symbol}',
         countapi: 'maayanlab.github.io/pubmedclick',
     },
     {
@@ -558,6 +570,7 @@ const manifest = [
         url: "https://www.glygen.org/protein-search/",
         countapi: 'maayanlab.github.io/glygclick',
         clickurl: if_search(async ({ search }) => `https://www.glygen.org/protein/${await uniprot_kb(search)}`),
+        example: 'https://www.glygen.org/protein/${swiss-prot}',
     },
     {
         name: 'komp',
@@ -579,6 +592,7 @@ const manifest = [
         url: "https://www.mousephenotype.org",
         countapi: 'maayanlab.github.io/kompclick',
         clickurl: if_search(async ({ search }) => `https://www.mousephenotype.org/data/genes/MGI:${await MGI(search)}`),
+        example: 'https://www.mousephenotype.org/data/genes/MGI:${MGI_id}',
     },
     {
         name: 'UDN',
@@ -600,6 +614,7 @@ const manifest = [
         url: "https://undiagnosed.hms.harvard.edu/genes/",
         countapi: 'maayanlab.github.io/udnclick',
         clickurl: if_search(async ({ search }) => `https://undiagnosed.hms.harvard.edu/genes/${search}/`),
+        example: 'https://undiagnosed.hms.harvard.edu/genes/${gene-symbol}/',
     },
     {
         name: 'ARCHS4',
@@ -626,6 +641,7 @@ const manifest = [
         url: "https://maayanlab.cloud/archs4/",
         countapi: 'maayanlab.github.io/ARCHS4click',
         clickurl: if_search(async ({ search }) => `https://maayanlab.cloud/archs4/gene/${search}`),
+        example: 'https://maayanlab.cloud/archs4/gene/${gene-symbol}',
         similar_coexpression: try_or_else(async ({ search }) => await  expand(search, 'coexpression', 10), null),
         similar_literature: try_or_else(async ({ search }) => await expand(search, 'generif', 10), null),
     },
@@ -648,6 +664,7 @@ const manifest = [
         url: "https://www.ncbi.nlm.nih.gov/gene/",
         countapi: 'maayanlab.github.io/NCBIclick',
         clickurl: if_search(async ({ search }) => `https://www.ncbi.nlm.nih.gov/gene/${await gene_id(search)}`),
+        example: 'https://www.ncbi.nlm.nih.gov/gene/${ncbi_gene_id}',
     },
     {
         name: 'WikiPathways',
@@ -668,6 +685,7 @@ const manifest = [
         url: "https://www.wikipathways.org/",
         countapi: 'maayanlab.github.io/WikiPathwaysclick',
         clickurl: if_search(async ({ search }) => `https://www.wikipathways.org//index.php?query=${search}&title=Special%3ASearchPathways&doSearch=1&sa=Search`),
+        example: 'https://www.wikipathways.org//index.php?query=${gene-symbol}&title=Special%3ASearchPathways&doSearch=1&sa=Search',
     },
     {
         name: 'Protein Capture Reagents Program',
@@ -685,10 +703,11 @@ const manifest = [
             alt: 'Protein Capture Reagents Program site image',
         },
         title: 'Protein Capture Reagents Program',
-        description: 'The goal of the Common Fund’s Protein Capture Reagents Program is to develop a community resource of renewable, high-quality protein capture reagents, such as antibodies, with a focus on the creation of transcription factor reagents and testing next generation capture technologies.',
+        description: 'The goal of the Common Fund\'s Protein Capture Reagents Program is to develop a community resource of renewable, high-quality protein capture reagents, such as antibodies, with a focus on the creation of transcription factor reagents and testing next generation capture technologies.',
         url: 'https://proteincapture.org/',
         countapi: 'maayanlab.github.io/ProteinCaptureReagentsProgramclick',
         clickurl: if_search(async ({ search }) => `https://proteincapture.org/reagent_portal/?hgnc_name_value=${search}#proteins`),
+        example: 'https://proteincapture.org/reagent_portal/?hgnc_name_value=${gene-symbol}#proteins',
     },
     {
         name: 'GeneCards',
@@ -709,6 +728,7 @@ const manifest = [
         url: 'https://www.genecards.org/',
         countapi: 'maayanlab.github.io/genecardclick',
         clickurl: if_search(async ({ search }) => `https://www.genecards.org/cgi-bin/carddisp.pl?gene=${search}`),
+        example: 'https://www.genecards.org/cgi-bin/carddisp.pl?gene=${gene-symbol}',
     },
     {
         name: 'Enrichr',
@@ -735,6 +755,7 @@ const manifest = [
         url: "https://maayanlab.cloud/Enrichr/#find",
         countapi: 'maayanlab.github.io/enrichrclick',
         clickurl: if_search(async ({ search }) => `https://maayanlab.cloud/Enrichr/#find!gene=${search}`),
+        example: 'https://maayanlab.cloud/Enrichr/#find!gene=${gene-symbol}',
     },
     {
         name: 'ENCODE',
@@ -755,6 +776,7 @@ const manifest = [
         url: "https://www.encodeproject.org/",
         countapi: 'maayanlab.github.io/ENCODEclick',
         clickurl: if_search(async ({ search }) => `https://www.encodeproject.org/genes/${await gene_id(search)}`),
+        example: 'https://www.encodeproject.org/genes/{ncbi_gene_id}',
     },
     {
         name: 'uniprot',
@@ -775,6 +797,7 @@ const manifest = [
         url: "https://www.uniprot.org/",
         countapi: 'maayanlab.github.io/uniprotclick',
         clickurl: if_search(async ({ search }) => `https://www.uniprot.org/uniprot/${await uniprot_kb(search)}`),
+        example: 'https://www.uniprot.org/uniprot/${swiss-prot}',
     },
     {
         name: 'alphafold',
@@ -795,6 +818,7 @@ const manifest = [
         url: "https://alphafold.ebi.ac.uk/",
         countapi: 'maayanlab.github.io/alphafoldclick',
         clickurl: if_search(async ({ search }) => `https://alphafold.ebi.ac.uk/entry/${await uniprot_kb(search)}`),
+        example: 'https://alphafold.ebi.ac.uk/entry/{swiss-prot}',
     },
     {
         name: 'MARRVEL',
@@ -815,6 +839,7 @@ const manifest = [
         url: "http://marrvel.org/",
         countapi: 'maayanlab.github.io/MARRVELclick',
         clickurl: if_search(async ({ search }) => `http://marrvel.org/human/gene/${await gene_id(search)}`),
+        example: 'http://marrvel.org/human/gene/${ncbi_gene_id}',
     },
     {
         name: 'biogps',
@@ -835,6 +860,7 @@ const manifest = [
         url: "http://biogps.org",
         countapi: 'maayanlab.github.io/BIOGPSclick',
         clickurl: if_search(async ({ search }) => `http://biogps.org/#goto=genereport&id=${await gene_id(search)}`),
+        example: 'http://biogps.org/#goto=genereport&id={ncbi_gene_id}',
     },
     {
         name: 'hgnc',
@@ -855,6 +881,7 @@ const manifest = [
         url: "https://www.genenames.org/",
         countapi: 'maayanlab.github.io/HGNCclick',
         clickurl: if_search(async ({ search }) => `https://www.genenames.org/data/gene-symbol-report/#!/symbol/${search}`),
+        example: 'https://www.genenames.org/data/gene-symbol-report/#!/symbol/${gene-symbol}',
     },
     {
         name: 'exRNAAtlas',
@@ -875,7 +902,8 @@ const manifest = [
         description: 'The exRNA Atlas is the data repository of the Extracellular RNA Communication Consortium (ERCC). The repository includes small RNA sequencing and qPCR-derived exRNA profiles from human and mouse biofluids.',
         url: 'https://exrna-atlas.org/',
         countapi: 'maayanlab.github.io/exRNAAtlasclick',
-        clickurl: if_search(async ({ search }) => exrna(search))
+        clickurl: if_search(async ({ search }) => exrna(search)),
+        example: 'https://exrna-atlas.org/exat/censusResults?identifiers=${gene-symbol}&library=${exrna_library}',
     },
     {
         name: 'ensembl',
@@ -896,6 +924,7 @@ const manifest = [
         url: "https://useast.ensembl.org/index.html",
         countapi: 'maayanlab.github.io/ENSEMBLclick',
         clickurl: if_search(async ({ search }) => `https://useast.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g=${await ensembl_id(search)}`),
+        example: 'https://useast.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g=${ensembl}',
     },
     {
         name: 'bgee',
@@ -916,6 +945,7 @@ const manifest = [
         url: "https://bgee.org/",
         countapi: 'maayanlab.github.io/bgeeclick',
         clickurl: if_search(async ({ search }) => `https://bgee.org/?page=gene&gene_id=${await ensembl_id(search)}`),
+        example: 'https://bgee.org/?page=gene&gene_id=${gene-symbol}',
     },
     {
         name: 'cosmic',
@@ -936,6 +966,7 @@ const manifest = [
         url: "https://cancer.sanger.ac.uk/cosmic",
         countapi: 'maayanlab.github.io/COSMICclick',
         clickurl: if_search(async ({ search }) => `https://cancer.sanger.ac.uk/cosmic/gene/analysis?ln=${search}`),
+        example: 'https://cancer.sanger.ac.uk/cosmic/gene/analysis?ln=${gene-symbol}',
     },
     {
         name: 'ClinGen',
@@ -956,6 +987,7 @@ const manifest = [
         url: "https://www.clinicalgenome.org/",
         countapi: 'maayanlab.github.io/CLINGENclick',
         clickurl: if_search(async ({ search }) => `https://search.clinicalgenome.org/kb/genes/HGNC:${await HGNC(search)}`),
+        example: 'https://search.clinicalgenome.org/kb/genes/HGNC:${HGNC}',
     },
     {
         name: 'gwas',
@@ -976,6 +1008,7 @@ const manifest = [
         url: "https://www.ebi.ac.uk/gwas/home",
         countapi: 'maayanlab.github.io/GWASclick',
         clickurl: if_search(async ({ search }) => `https://www.ebi.ac.uk/gwas/genes/${search}`),
+        example: 'https://www.ebi.ac.uk/gwas/genes/${gene-symbol}',
     },
     {
         name: 'PDBe',
@@ -996,6 +1029,7 @@ const manifest = [
         url: "https://www.ebi.ac.uk/pdbe/pdbe-kb",
         countapi: 'maayanlab.github.io/PDBeclick',
         clickurl: if_search(async ({ search }) => `https://www.ebi.ac.uk/pdbe/pdbe-kb/proteins/${await uniprot_kb(search)}`),
+        example: 'https://www.ebi.ac.uk/pdbe/pdbe-kb/proteins/${swiss-prot}',
     },
     {
         name: 'pdb',
@@ -1016,6 +1050,7 @@ const manifest = [
         url: "https://www.rcsb.org/",
         countapi: 'maayanlab.github.io/PDBclick',
         clickurl: if_search(async ({ search }) => `https://www.rcsb.org/search?request=%7B%22query%22%3A%7B%22parameters%22%3A%7B%22attribute%22%3A%22rcsb_entity_source_organism.rcsb_gene_name.value%22%2C%22operator%22%3A%22in%22%2C%22value%22%3A%5B%22${search}%22%5D%7D%2C%22service%22%3A%22text%22%2C%22type%22%3A%22terminal%22%2C%22node_id%22%3A0%7D%2C%22return_type%22%3A%22entry%22%2C%22request_options%22%3A%7B%22pager%22%3A%7B%22start%22%3A0%2C%22rows%22%3A25%7D%2C%22scoring_strategy%22%3A%22combined%22%2C%22sort%22%3A%5B%7B%22sort_by%22%3A%22score%22%2C%22direction%22%3A%22desc%22%7D%5D%7D%2C%22request_info%22%3A%7B%22src%22%3A%22ui%22%2C%22query_id%22%3A%220b67dad6ca2a8ccaca6d67d2399f1ac3%22%7D%7D`),
+        example: 'https://www.rcsb.org/search?request=%7B%22query%22%3A%7B%22parameters%22%3A%7B%22attribute%22%3A%22rcsb_entity_source_organism.rcsb_gene_name.value%22%2C%22operator%22%3A%22in%22%2C%22value%22%3A%5B%22${gene-symbol}%22%5D%7D%2C%22service%22%3A%22text%22%2C%22type%22%3A%22terminal%22%2C%22node_id%22%3A0%7D%2C%22return_type%22%3A%22entry%22%2C%22request_options%22%3A%7B%22pager%22%3A%7B%22start%22%3A0%2C%22rows%22%3A25%7D%2C%22scoring_strategy%22%3A%22combined%22%2C%22sort%22%3A%5B%7B%22sort_by%22%3A%22score%22%2C%22direction%22%3A%22desc%22%7D%5D%7D%2C%22request_info%22%3A%7B%22src%22%3A%22ui%22%2C%22query_id%22%3A%220b67dad6ca2a8ccaca6d67d2399f1ac3%22%7D%7D',
     },
     {
         name: 'geneva',
@@ -1041,6 +1076,7 @@ const manifest = [
         url: "https://genevatool.org/",
         countapi: 'maayanlab.github.io/GENEVAclick',
         clickurl: if_search(async ({ search }) => `https://genevatool.org/gene_table?gene_name=${search}`),
+        example: 'https://genevatool.org/gene_table?gene_name=${gene-symbol}',
     },
     {
         name: 'mgi',
@@ -1061,6 +1097,7 @@ const manifest = [
         url: "http://www.informatics.jax.org/",
         countapi: 'maayanlab.github.io/MGIclick',
         clickurl: if_search(async ({ search }) => `http://www.informatics.jax.org/marker/MGI:${await MGI(search)}`),
+        example: 'http://www.informatics.jax.org/marker/MGI:${MGI_id}',
     },
     {
         name: 'omim',
@@ -1081,6 +1118,7 @@ const manifest = [
         url: "https://omim.org/",
         countapi: 'maayanlab.github.io/OMIMclick',
         clickurl: if_search(async ({ search }) => `https://www.omim.org/search?index=entry&start=1&limit=10&sort=score+desc%2C+prefix_sort+desc&search=approved_gene_symbol%3A${search}`),
+        example: 'https://www.omim.org/search?index=entry&start=1&limit=10&sort=score+desc%2C+prefix_sort+desc&search=approved_gene_symbol%3A${gene-symbol}',
     },
     {
         name: 'GEO_search',
@@ -1126,6 +1164,7 @@ const manifest = [
         url: "http://geneontology.org/",
         countapi: 'maayanlab.github.io/GOclick',
         clickurl: if_search(async ({ search }) => `http://amigo.geneontology.org/amigo/gene_product/UniProtKB:${await uniprot_kb(search)}`),
+        example: 'http://amigo.geneontology.org/amigo/gene_product/UniProtKB:${swiss-prot}',
     },
     {
         name: 'reactome',
@@ -1147,6 +1186,7 @@ const manifest = [
         url: "https://reactome.org/",
         countapi: 'maayanlab.github.io/Reactomeclick',
         clickurl: if_search(async ({ search }) => `https://reactome.org/content/query?q=${search}&species=Homo+sapiens&species=Entries+without+species&cluster=true`),
+        example: 'https://reactome.org/content/query?q=${gene-symbol}&species=Homo+sapiens&species=Entries+without+species&cluster=true',
     },
     {
         name: 'kegg',
@@ -1167,6 +1207,7 @@ const manifest = [
         url: "https://www.genome.jp/kegg/",
         countapi: 'maayanlab.github.io/KEGGclick',
         clickurl: if_search(async ({ search }) => `https://www.genome.jp/entry/hsa:${await entrezgene(search)}`),
+        example: 'https://www.genome.jp/entry/hsa:${entrez}',
     },
     {
         name: 'monarch',
@@ -1187,6 +1228,7 @@ const manifest = [
         url: "https://monarchinitiative.org/",
         countapi: 'maayanlab.github.io/monarchclick',
         clickurl: if_search(async ({ search }) => `https://monarchinitiative.org/gene/HGNC:${await HGNC(search)}`),
+        example: 'https://monarchinitiative.org/gene/HGNC:${HGNC}',
     },
     {
         name: 'hgb',
@@ -1207,6 +1249,7 @@ const manifest = [
         url: "https://genome.ucsc.edu/cgi-bin/hgGateway",
         countapi: 'maayanlab.github.io/HGBclick',
         clickurl: if_search(async ({ search }) => `https://genome.ucsc.edu/cgi-bin/hgGene?hgg_gene=${await transcript(search)}&hgg_type=knownGene`),
+        example: 'https://genome.ucsc.edu/cgi-bin/hgGene?hgg_gene=${hgGene}&hgg_type=knownGene',
     },
     {
         name: 'OpenTargets',
@@ -1227,6 +1270,7 @@ const manifest = [
         url: "https://platform.opentargets.org/",
         countapi: 'maayanlab.github.io/OpenTargetsclick',
         clickurl: if_search(async ({ search }) => `https://platform.opentargets.org/target/${await ensembl_id(search)}`),
+        example: 'https://platform.opentargets.org/target/${ensembl}',
     },
     {
         name: 'OpenTargetsGenetics',
@@ -1247,6 +1291,7 @@ const manifest = [
         url: "https://genetics.opentargets.org/",
         countapi: 'maayanlab.github.io/OpenTargetsGeneticsclick',
         clickurl: if_search(async ({ search }) => `https://genetics.opentargets.org/gene/${await ensembl_id(search)}`),
+        example: 'https://genetics.opentargets.org/gene/${ensembl}',
     },
     {
         name: 'genemania',
@@ -1267,6 +1312,7 @@ const manifest = [
         url: "http://genemania.org",
         countapi: 'maayanlab.github.io/GeneMANIAclick',
         clickurl: if_search(async ({ search }) => `https://genemania.org/search/homo-sapiens/${search}`),
+        example: 'https://genemania.org/search/homo-sapiens/${gene-symbol}',
     },
     {
         name: 'humanproteinatlas',
@@ -1287,6 +1333,7 @@ const manifest = [
         url: "https://www.proteinatlas.org",
         countapi: 'maayanlab.github.io/HumanProteinAtlasclick',
         clickurl: if_search(async ({ search }) => `https://www.proteinatlas.org/${await ensembl_id(search)}-${search}`),
+        example: 'https://www.proteinatlas.org/{search}-${gene-symbol}',
     },
     {
         name: 'OpenTargets',
@@ -1309,6 +1356,7 @@ const manifest = [
         url: "https://platform.opentargets.org/",
         countapi: 'maayanlab.github.io/OpenTargetsclick',
         clickurl: if_search(async ({ search }) => `https://platform.opentargets.org/drug/${await CHEMBL(search)}`),
+        example: 'https://platform.opentargets.org/drug/${chembl}',
     },
     {
         name: 'MedChemExpress',
@@ -1329,6 +1377,7 @@ const manifest = [
         url: "https://www.medchemexpress.com/",
         countapi: 'maayanlab.github.io/MedChemExpressclick',
         clickurl: if_search(async ({ search }) => `https://www.medchemexpress.com/${await medchemexpress(search)}.html`),
+        example: 'https://www.medchemexpress.com/${gene-symbol}.html',
     },
     {
         name: 'pubchem',
@@ -1351,6 +1400,7 @@ const manifest = [
         url: "https://pubchem.ncbi.nlm.nih.gov/",
         countapi: 'maayanlab.github.io/PubChemclick',
         clickurl: if_search(async ({ search }) => `https://pubchem.ncbi.nlm.nih.gov/compound/${await CID(search)}`),
+        example: 'https://pubchem.ncbi.nlm.nih.gov/compound/${PubChemCID}',
     },
     {
         name: 'chembl',
@@ -1373,6 +1423,7 @@ const manifest = [
         url: "https://www.ebi.ac.uk/chembl/",
         countapi: 'maayanlab.github.io/ChEMBLclick',
         clickurl: if_search(async ({ search }) => `https://www.ebi.ac.uk/chembl/compound_report_card/${await CHEMBL(search)}/`),
+        example: 'https://www.ebi.ac.uk/chembl/compound_report_card/${CHEMBL}/',
     },
     {
         name: 'guide',
@@ -1395,6 +1446,7 @@ const manifest = [
         url: "https://www.guidetopharmacology.org/",
         countapi: 'maayanlab.github.io/guideclick',
         clickurl: if_search(async ({ search }) => `https://www.guidetopharmacology.org/GRAC/LigandDisplayForward?ligandId=${await GTPL(search)}`),
+        example: 'https://www.guidetopharmacology.org/GRAC/LigandDisplayForward?ligandId=${GTPL}',
     },
     {
         name: 'drugbank',
@@ -1417,6 +1469,7 @@ const manifest = [
         url: "https://go.drugbank.com/",
         countapi: 'maayanlab.github.io/drugbankclick',
         clickurl: if_search(async ({ search }) => `https://go.drugbank.com/drugs/${await DrugBankNum(search)}`),
+        example: 'https://go.drugbank.com/drugs/${DrugBankID}',
     },
     {
         name: 'drugmonizome',
@@ -1444,6 +1497,7 @@ const manifest = [
         url: "https://maayanlab.cloud/drugmonizome/#/TermSearch/Drug%20sets",
         countapi: 'maayanlab.github.io/drugmonizomeclick',
         clickurl: if_search(async ({ search }) => `https://maayanlab.cloud/drugmonizome/#/TermSearch/Small%20molecules?query=%7B%22limit%22:10,%22search%22:[%22${search}%22]%7D`),
+        example: 'https://maayanlab.cloud/drugmonizome/#/TermSearch/Small%20molecules?query=%7B%22limit%22:10,%22search%22:[%22${drug-name}%22]%7D',
     },
     {
         name: 'drugenrichr',
@@ -1471,6 +1525,7 @@ const manifest = [
         url: "https://maayanlab.cloud/DrugEnrichr/",
         countapi: 'maayanlab.github.io/drugenrichrclick',
         clickurl: if_search(async ({ search }) => `https://maayanlab.cloud/DrugEnrichr/#find!drug=${search}`),
+        example: 'https://maayanlab.cloud/DrugEnrichr/#find!drug=${drug-name}',
     },
     {
         name: 'drugscom',
@@ -1489,10 +1544,11 @@ const manifest = [
             alt: 'Drugs.com site image',
         },
         title: 'Drugs.com',
-        description: `Drugs.com is the largest, most widely visited, independent medicine information website available on the Internet. Drug.com's aim is to be the Internet’s most trusted resource for drug and related health information.`,
+        description: 'Drugs.com is the largest, most widely visited, independent medicine information website available on the Internet. Drug.com\'s aim is to be the Internet\'s most trusted resource for drug and related health information.',
         url: "https://www.drugs.com/",
         countapi: 'maayanlab.github.io/drugscomclick',
         clickurl: if_search(async ({ search }) => `https://www.drugs.com/${await DrugName(search)}.html`),
+        example: 'https://www.drugs.com/${drug-name}.html',
     },
     {
         name: 'drugcentral',
@@ -1520,6 +1576,7 @@ const manifest = [
         url: "https://drugcentral.org/",
         countapi: 'maayanlab.github.io/drugcentral',
         clickurl: if_search(async ({ search }) => `https://drugcentral.org/drugcard/74?q=${await DrugName(search)}`),
+        example: 'https://drugcentral.org/drugcard/74?q=${drug-name}',
     },
     {
         name: 'zinc15',
@@ -1546,6 +1603,7 @@ const manifest = [
         url: "https://zinc15.docking.org/",
         countapi: 'maayanlab.github.io/ZINC15click',
         clickurl: if_search(async ({ search }) => `https://zinc15.docking.org/substances/search/?q=${await DrugName(search)}`),
+        example: 'https://zinc15.docking.org/substances/search/?q=${drug-name}',
     },
     {
         name: 'ldp2',
@@ -1571,7 +1629,8 @@ const manifest = [
         description: 'LDP 2.0 includes data about over 20,000 small molecules, including approved drugs, compounds in clinical trials, and tool-compounds. Chemical structures are searchable by substructure.',
         url: "http://lincsportal.ccs.miami.edu/signatures/home",
         countapi: 'maayanlab.github.io/LINCS2click',
-        clickurl: if_search(async ({ search }) => `http://lincsportal.ccs.miami.edu/signatures/perturbations/${await ldp2_id(search)}`)
+        clickurl: if_search(async ({ search }) => `http://lincsportal.ccs.miami.edu/signatures/perturbations/${await ldp2_id(search)}`),
+        example: 'http://lincsportal.ccs.miami.edu/signatures/perturbations/${ldp2-id}',
     },
     {
         name: 'pharmgkb',
