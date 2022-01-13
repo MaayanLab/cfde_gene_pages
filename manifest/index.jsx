@@ -16,9 +16,9 @@ function if_search(func) {
     }
 }
 
-export const gene_query_url = 'https://mygene.info/v3'
+const gene_query_url = 'https://mygene.info/v3'
 
-export const species_map = {
+const species_map = {
     '9606': 'Homo sapiens',
     '6239': 'Caenorhabditis elegans',
     '7955': 'Danio rerio',
@@ -38,7 +38,7 @@ export const gene_id = defined(memo(async (gene_search) => {
     }
 }))
 
-export const expand = defined(memo(async (gene_search, exp_type = "coexpression", top = 5) => {
+const expand = defined(memo(async (gene_search, exp_type = "coexpression", top = 5) => {
     const gene_exp = await fetchEx(`https://maayanlab.cloud/enrichrsearch/gene/expand?search=${gene_search}&top=${top}&type=${exp_type}`)
     if (gene_exp.ok) {
         const { data, success } = await gene_exp.json()
@@ -50,7 +50,7 @@ export const expand = defined(memo(async (gene_search, exp_type = "coexpression"
     }
 }))
 
-export const expand_drug = defined(memo(async (drug_search, exp_type = "L1000_coexpression", top = 5) => {
+const expand_drug = defined(memo(async (drug_search, exp_type = "L1000_coexpression", top = 5) => {
     const gene_exp = await fetchEx(`https://maayanlab.cloud/enrichrsearch/drug/expand?search=${drug_search}&top=${top}&type=${exp_type}`)
     if (gene_exp.ok) {
         const { data, success } = await gene_exp.json()
@@ -62,7 +62,7 @@ export const expand_drug = defined(memo(async (drug_search, exp_type = "L1000_co
     }
 }))
 
-export const predict_regulators = defined(memo(async (genes, type_url, top = 5) => {
+const predict_regulators = defined(memo(async (genes, type_url, top = 5) => {
     const results = await fetchEx(`https://maayanlab.cloud/${type_url}/api/enrich/`, {
         method: 'POST',
         headers: {
@@ -79,20 +79,20 @@ export const predict_regulators = defined(memo(async (genes, type_url, top = 5) 
     }
 }))
 
-export const gene_info = defined(memo(try_or_else(async (gene_search) => {
+const gene_info = defined(memo(try_or_else(async (gene_search) => {
     const gene_res = await fetchEx(`${gene_query_url}/gene/${await gene_id(gene_search)}`)
     if (!gene_res.ok) throw new Error('gene_info status is not OK')
     return await gene_res.json()
 })))
 
-export const medchemexpress = defined(memo(async (gene_search) => {
+const medchemexpress = defined(memo(async (gene_search) => {
     const mce = await fetchEx(`https://www.medchemexpress.com/search.html?q=${gene_search}&ft=&fa=&fp=`)
     if (mce.ok) {
         return gene_search
     }
 }))
 
-export const appyter = defined(memo(async (appyter_name, args) => {
+const appyter = defined(memo(async (appyter_name, args) => {
     const ret = await fetchEx(`https://appyters.maayanlab.cloud/${appyter_name}/`, {
         method: 'POST',
         headers: {
@@ -105,7 +105,7 @@ export const appyter = defined(memo(async (appyter_name, args) => {
     return `https://appyters.maayanlab.cloud/${appyter_name}/${session_id}`
 }))
 
-export const exrna = defined(memo(async (gene_search) => {
+const exrna = defined(memo(async (gene_search) => {
     let census_types = ['miRNAs', 'piRNAs', 'snRNAs', 'snoRNAs', 'tRNAs'];
     for(const census_type of census_types){
         const rq = await fetchEx(`https://exrna-atlas.org/exat/api/doc/census/${census_type}/${gene_search}`);
@@ -134,7 +134,7 @@ const transcript = defined(async (gene_search) => (await gene_info(gene_search))
 const entrezgene = defined(async (gene_search) => (await gene_info(gene_search)).entrezgene)
 const pdb = defined(async (gene_search) => ensure_array((await gene_info(gene_search)).pdb)[0])
 
-export const phosphosite = defined(memo(async (gene_search) => {
+const phosphosite = defined(memo(async (gene_search) => {
     const res = await fetchEx(`https://www.phosphosite.org/simpleSearchSubmitAction.action?searchStr=${gene_search}`)
     if (res.ok) {
         let results = await res.json()
@@ -143,7 +143,7 @@ export const phosphosite = defined(memo(async (gene_search) => {
     }
 }))
 
-export const metabolomicswb = defined(memo(async (gene_search) => {
+const metabolomicswb = defined(memo(async (gene_search) => {
     const mgp = await fetchEx(`https://www.metabolomicsworkbench.org/rest/protein/uniprot_id/${await uniprot_kb(gene_search)}/mgp_id/`)
     if (mgp.ok) {
         let mgp_resp = await mgp.json()
@@ -151,7 +151,7 @@ export const metabolomicswb = defined(memo(async (gene_search) => {
     }
 }))
 
-export const ldp2_id = defined(memo(async (drug_search) => {
+const ldp2_id = defined(memo(async (drug_search) => {
     const url = `http://lincsportal.ccs.miami.edu/sigc-api/small-molecule/fetch-by-name?name=${drug_search}&returnSignatureIDs=false`
     const pert_res = await fetchEx(url)
     if (pert_res.ok) {
