@@ -25,7 +25,7 @@ export default function Downloads() {
                                         <th scope="row">Gene Resource Manifest</th>
                                         <td>Gene resource links &amp; descriptions</td>
                                         <td><a href="https://maayanlab-public.s3.amazonaws.com/cfde-gene-pages/gene-manifest.tsv">gene-manifest.tsv</a></td>
-                                        <td>2021-10-18</td>
+                                        <td>2022-01-13</td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Gene Accessibility Matrix</th>
@@ -37,7 +37,7 @@ export default function Downloads() {
                                         <th scope="row">Drug Resource Manifest</th>
                                         <td>Drug resource links &amp; descriptions</td>
                                         <td><a href="https://maayanlab-public.s3.amazonaws.com/cfde-gene-pages/drug-manifest.tsv">drug-manifest.tsv</a></td>
-                                        <td>2021-10-18</td>
+                                        <td>2022-01-13</td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Drug Accessibility Matrix</th>
