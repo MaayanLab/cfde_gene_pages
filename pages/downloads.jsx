@@ -1,7 +1,20 @@
 import React from 'react'
 import Head from 'next/head'
 
-export default function Downloads() {
+const storage = 'https://maayanlab-public.s3.amazonaws.com/cfde-gene-pages'
+
+export async function getStaticProps() {
+    const req = await fetch(`${storage}/manifest.json`)
+    const manifest = await req.json()
+    return {
+        props: {
+            manifest
+        },
+        revalidate: false
+    }
+}
+
+export default function Downloads(props) {
     return (
         <>
             <Head>
@@ -21,30 +34,14 @@ export default function Downloads() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th scope="row">Gene Resource Manifest</th>
-                                        <td>Gene resource links &amp; descriptions</td>
-                                        <td><a href="https://maayanlab-public.s3.amazonaws.com/cfde-gene-pages/gene-manifest.tsv">gene-manifest.tsv</a></td>
-                                        <td>2022-01-13</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Gene Accessibility Matrix</th>
-                                        <td>Gene x Resource Matrix (1: available, 0: unavailable)</td>
-                                        <td><a href="https://maayanlab-public.s3.amazonaws.com/cfde-gene-pages/genes.tsv">genes.tsv</a></td>
-                                        <td>2021-10-18</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Drug Resource Manifest</th>
-                                        <td>Drug resource links &amp; descriptions</td>
-                                        <td><a href="https://maayanlab-public.s3.amazonaws.com/cfde-gene-pages/drug-manifest.tsv">drug-manifest.tsv</a></td>
-                                        <td>2022-01-13</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Drug Accessibility Matrix</th>
-                                        <td>Drug x Resource Matrix (1: available, 0: unavailable)</td>
-                                        <td><a href="https://maayanlab-public.s3.amazonaws.com/cfde-gene-pages/drugs.tsv">drugs.tsv</a></td>
-                                        <td>2021-10-18</td>
-                                    </tr>
+                                    {props.manifest.map(download => (
+                                        <tr key={download.filename}>
+                                            <th scope="row">{download.name}</th>
+                                            <td>{download.description}</td>
+                                            <td><a href={`${storage}/${download.versions[download.latest]}`} download={download.filename}>{download.filename}</a></td>
+                                            <td>{download.latest}</td>
+                                        </tr>
+                                    ))}
                                 </tbody>
                             </table>
                         </div>
