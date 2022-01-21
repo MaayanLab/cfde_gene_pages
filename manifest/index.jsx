@@ -85,13 +85,6 @@ const gene_info = defined(memo(try_or_else(async (gene_search) => {
     return await gene_res.json()
 })))
 
-const medchemexpress = defined(memo(async (gene_search) => {
-    const mce = await fetchEx(`https://www.medchemexpress.com/search.html?q=${gene_search}&ft=&fa=&fp=`)
-    if (mce.ok) {
-        return gene_search
-    }
-}))
-
 const appyter = defined(memo(async (appyter_name, args) => {
     const ret = await fetchEx(`https://appyters.maayanlab.cloud/${appyter_name}/`, {
         method: 'POST',
@@ -1383,7 +1376,7 @@ const manifest = [
         description: 'MedChemExpress (MCE) offers a wide range of high-quality research chemicals and biochemicals (novel life-science reagents, reference compounds and natural compounds) for scientific use.',
         url: "https://www.medchemexpress.com/",
         countapi: 'maayanlab.github.io/MedChemExpressclick',
-        clickurl: if_search(async ({ search }) => `https://www.medchemexpress.com/${await medchemexpress(search)}.html`),
+        clickurl: if_search(async ({ search }) => `https://www.medchemexpress.com/search.html?q=${search}&ft=&fa=&fp=`),
         example: 'https://www.medchemexpress.com/${gene-symbol}.html',
     },
     {
