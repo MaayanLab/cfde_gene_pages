@@ -18,11 +18,11 @@ const components = {
 }
 
 export async function getStaticPaths() {
-    const {gene_examples, drug_examples} = await import('@/manifest/examples')
+    // const {gene_examples, drug_examples} = await import('@/manifest/examples')
     return {
         paths: [
-            ...gene_examples.map((search) => ({params: {entity: 'gene', search}})),
-            ...drug_examples.map((search) => ({params: {entity: 'drug', search}})),
+            // ...gene_examples.map((search) => ({params: {entity: 'gene', search}})),
+            // ...drug_examples.map((search) => ({params: {entity: 'drug', search}})),
         ],
         fallback: 'blocking',
     }
