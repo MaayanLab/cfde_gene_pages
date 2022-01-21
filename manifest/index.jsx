@@ -5,6 +5,7 @@ import isitup from "@/utils/isitup"
 import try_or_else from "@/utils/try_or_else"
 import ensure_array from "@/utils/ensure_array"
 import fetchEx from '@/utils/fetchEx'
+import FormData from 'form-data'
 
 function if_search(func) {
     return async (props) => {
@@ -151,6 +152,26 @@ const STRING = defined(memo(async (gene_search) => {
     if (res.ok) {
         const [link] = await res.json()
         return link
+    }
+}))
+
+const STITCH = defined(memo(async (gene_search) => {
+    const formData = new FormData()
+    formData.append('identifier', gene_search)
+    formData.append('targetmode', 'proteins')
+    formData.append('species_text_single_identifier', 'Homo sapiens')
+    formData.append('required_score', 400)
+    formData.append('have_user_input', 2)
+    const res = await fetchEx(`http://stitch.embl.de/cgi/network.pl`, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+        method: 'POST',
+        body: formData,
+        redirect: 'manual',
+    })
+    if (res.status === 302) {
+        return res.headers.get('Location')
     }
 }))
 
@@ -1702,6 +1723,28 @@ const manifest = [
         clickurl: if_search(async ({ search }) => await STRING(search)),
         url: "https://string-db.org/",
         countapi: 'maayanlab.github.io/STRINGclick',
+    },
+    {
+        name: 'STITCH',
+        tags: {
+            gene: true,
+            CF: false,
+            PS: false,
+            Ag: true,
+        },
+        img1: {
+            src: '/logos/STITCH_logo.png',
+            alt: 'STITCH image',
+        },
+        img2: {
+            src: '/logos/STITCH_site.png',
+            alt: 'STITCH site image',
+        },
+        title: 'STITCH',
+        description: 'STRING is a database of known and predicted interactions between chemicals and proteins and a functional enrichment tool.',
+        clickurl: if_search(async ({ search }) => await STITCH(search)),
+        url: "http://stitch.embl.de/",
+        countapi: 'maayanlab.github.io/STITCHclick',
     },
 ]
 
