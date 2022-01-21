@@ -39,7 +39,7 @@ export async function getStaticProps({params: {entity}}) {
                         }
                         return self
                     } catch (e) {
-                        console.warn(`${item.name} was not resolved\n${e.stack}`)
+                        console.warn(`${item.name} was not resolved for ${entity}\n${e.stack}`)
                         return
                     }
                 })
