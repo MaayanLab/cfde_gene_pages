@@ -1748,7 +1748,7 @@ const manifest = [
             alt: 'STITCH site image',
         },
         title: 'STITCH',
-        description: 'STRING is a database of known and predicted interactions between chemicals and proteins and a functional enrichment tool.',
+        description: 'STITCH is a database of known and predicted interactions between chemicals and proteins and a functional enrichment tool.',
         clickurl: if_search(async ({ search }) => await STITCH(search)),
         url: "http://stitch.embl.de/",
         countapi: 'maayanlab.github.io/STITCHclick',
