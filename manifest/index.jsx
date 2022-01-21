@@ -3,7 +3,7 @@ import defined from '@/utils/defined'
 import countable from "@/utils/countable"
 import isitup from "@/utils/isitup"
 import try_or_else from "@/utils/try_or_else"
-// import ensure_array from "@/utils/ensure_array"
+import ensure_array from "@/utils/ensure_array"
 import fetchEx from '@/utils/fetchEx'
 
 function if_search(func) {
@@ -159,7 +159,11 @@ const ldp2_id = defined(memo(async (drug_search) => {
     const pert_res = await fetchEx(url)
     if (pert_res.ok) {
         const data = await pert_res.json()
-        return data['data']['perturbagen_id'][0]
+        for (const datum of ensure_array(data['data'])) {
+            for (const perturbagen_id of ensure_array(datum['perturbagen_id'])) {
+                return perturbagen_id
+            }
+        }
     }
 }))
 
