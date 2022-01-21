@@ -159,7 +159,7 @@ const STITCH = defined(memo(async (gene_search) => {
     const formData = new FormData()
     formData.append('identifier', gene_search)
     formData.append('targetmode', 'proteins')
-    formData.append('species_text_single_identifier', 'Homo sapiens')
+    formData.append('input_query_species', 'auto_detect')
     formData.append('required_score', 400)
     formData.append('have_user_input', 2)
     const res = await fetchEx(`http://stitch.embl.de/cgi/network.pl`, {
@@ -171,7 +171,31 @@ const STITCH = defined(memo(async (gene_search) => {
         redirect: 'manual',
     })
     if (res.status === 302) {
+        // redirect is success
         return res.headers.get('Location')
+    } else {
+        // if we get content, we may have identifier options to select, we'll take the first
+        const content = await res.text()
+        const m = /<input name="identifier" id="identifier_([^\"]+)"/g.exec(content)
+        const identifier = m.groups[1]
+        const formData = new FormData()
+        formData.append('identifier', identifier)
+        formData.append('targetmode', 'proteins')
+        formData.append('input_query_species', 'auto_detect')
+        formData.append('required_score', 400)
+        formData.append('have_user_input', 1)
+        const res = await fetchEx(`http://stitch.embl.de/cgi/network.pl`, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+            method: 'POST',
+            body: formData,
+            redirect: 'manual',
+        })
+        if (res.status === 302) {
+            // yay
+            return res.headers.get('Location')
+        }
     }
 }))
 
