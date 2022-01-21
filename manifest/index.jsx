@@ -146,19 +146,6 @@ const metabolomicswb = defined(memo(async (gene_search) => {
     }
 }))
 
-const ldp2_id = defined(memo(async (drug_search) => {
-    const url = `http://lincsportal.ccs.miami.edu/sigc-api/small-molecule/fetch-by-name?name=${drug_search}&returnSignatureIDs=false`
-    const pert_res = await fetchEx(url)
-    if (pert_res.ok) {
-        const data = await pert_res.json()
-        for (const datum of ensure_array(data['data'])) {
-            for (const perturbagen_id of ensure_array(datum['perturbagen_id'])) {
-                return perturbagen_id
-            }
-        }
-    }
-}))
-
 export const drug_info = defined(memo(try_or_else(async (drug_search) => {
     const drug_query_url = 'https://pubchem.ncbi.nlm.nih.gov/rest'
     const drug_res = await fetchEx(`${drug_query_url}/pug/compound/name/${drug_search}/synonyms/JSON`)
@@ -179,6 +166,19 @@ const DrugName = defined(async (drug_search) => {
     }
 })
 const GTPL = defined(async (drug_search) => (await drug_info(drug_search)).Synonym.find(item => item.trim().match(/^GTPL/)).substring(4))
+
+const ldp2_id = defined(memo(async (drug_search) => {
+    const url = `http://lincsportal.ccs.miami.edu/sigc-api/small-molecule/fetch-by-name?name=${drug_search}&returnSignatureIDs=false`
+    const pert_res = await fetchEx(url)
+    if (pert_res.ok) {
+        const data = await pert_res.json()
+        for (const datum of ensure_array(data['data'])) {
+            for (const perturbagen_id of ensure_array(datum['perturbagen_id'])) {
+                return perturbagen_id
+            }
+        }
+    }
+}))
 
 /**
  * Each object attribute can be a literal value or an async callable that accepts the parameters:
