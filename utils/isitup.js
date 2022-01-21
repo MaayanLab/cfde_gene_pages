@@ -6,12 +6,13 @@ const isitup = memo(async (url) => {
         if (process.env.NODE_ENV === 'production') {
             const isitup_res = await fetchEx(url)
             if (isitup_res.status >= 400) {
-                throw new Error(isitup_res.statusText)
+                throw new Error(`isitup returned ${isitup_res.statusText}`)
             }
         }
-        return 'yes'
+        return true
     } catch (e) {
-        return e.toString()
+        console.warn(e.toString())
+        return false
     }
 })
 export default isitup

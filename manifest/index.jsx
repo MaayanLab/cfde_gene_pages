@@ -102,7 +102,7 @@ const appyter = defined(memo(async (appyter_name, args) => {
 const exrna_library = defined(memo(async (gene_search) => {
     let census_types = ['miRNA', 'piRNA', 'snRNA', 'snoRNA', 'tRNA']
     for (const census_type of census_types) {
-        if (await isitup(`https://exrna-atlas.org/exat/api/doc/census/${census_type}s/${gene_search}`) === 'yes') {
+        if (await isitup(`https://exrna-atlas.org/exat/api/doc/census/${census_type}s/${gene_search}`)) {
             return census_type
         }
     }
@@ -1763,12 +1763,7 @@ for (const item of manifest) {
     if ('countapi' in item) {
         item.clicks = async ({ self }) => await countable(self.countapi).get()
     }
-    if ('clickurl' in item) {
-        item.status = if_search(async ({ self }) => {
-            const status = await isitup(self.clickurl)
-            if (status !== 'yes') throw new Error(`${item.name}: isitup returned ${status}`)
-            return status
-        })
+        item.status = if_search(async ({ self }) => await isitup(self.clickurl))
     }
 }
 

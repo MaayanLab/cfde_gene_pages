@@ -43,9 +43,9 @@ export default async function availability(entity_type, entities) {
             _rc.clickurl = await callable(_rc.clickurl)({ self: _rc, search: _entity })
             _rc.status = await callable(_rc.status)({ self: _rc, search: _entity })
           } catch (e) {
-            _rc.status = 'no'
+            _rc.status = false
           }
-          yield _rc.status === 'yes' ? '1' : '0'
+          yield _rc.status ? '1' : '0'
           await (new Promise((resolve, _reject) => setTimeout(resolve, (0.5 + Math.random()) * 1000)))
         }
       })
