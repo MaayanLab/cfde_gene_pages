@@ -1734,6 +1734,7 @@ const manifest = [
         name: 'STITCH',
         tags: {
             gene: true,
+            drug: true,
             CF: false,
             PS: false,
             Ag: true,
