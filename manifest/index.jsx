@@ -905,7 +905,7 @@ const manifest = [
         description: 'The exRNA Atlas is the data repository of the Extracellular RNA Communication Consortium (ERCC). The repository includes small RNA sequencing and qPCR-derived exRNA profiles from human and mouse biofluids.',
         url: 'https://exrna-atlas.org/',
         countapi: 'maayanlab.github.io/exRNAAtlasclick',
-        clickurl: if_search(async ({ search }) => exrna(search)),
+        clickurl: if_search(async ({ search }) => await exrna(search)),
         example: 'https://exrna-atlas.org/exat/censusResults?identifiers=${gene-symbol}&library=${exrna_library}',
     },
     {
@@ -1146,7 +1146,7 @@ const manifest = [
         description: 'Gene Centric GEO Reverse Search Appyter enables users to query for a gene in a species of interest; it returns an interactive volcano plot of signatures in which the gene is up- or down-regulated.',
         url: "https://appyters.maayanlab.cloud/#/Gene_Centric_GEO_Reverse_Search",
         countapi: 'maayanlab.github.io/GEOsearchclick',
-        clickurl: if_search(async ({ search }) => appyter('Gene_Centric_GEO_Reverse_Search', { species_input: "Human", human_gene: search,  mouse_gene: search})),
+        clickurl: if_search(async ({ search }) => await appyter('Gene_Centric_GEO_Reverse_Search', { species_input: "Human", human_gene: search,  mouse_gene: search})),
     },
     {
         name: 'go',
