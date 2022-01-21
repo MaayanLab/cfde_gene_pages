@@ -60,6 +60,7 @@ export async function getStaticProps({params: {entity, search}}) {
                                 search,
                             })
                         }
+                        if (!self.status) throw new Error('Bad status')
                         return self
                     } catch (e) {
                         console.warn(`${item.name} was not resolved for ${entity}: ${search}\n${e.stack}`)
