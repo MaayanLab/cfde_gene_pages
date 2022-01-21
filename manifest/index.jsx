@@ -98,12 +98,11 @@ const appyter = defined(memo(async (appyter_name, args) => {
     return `https://appyters.maayanlab.cloud/${appyter_name}/${session_id}`
 }))
 
-const exrna = defined(memo(async (gene_search) => {
-    let census_types = ['miRNAs', 'piRNAs', 'snRNAs', 'snoRNAs', 'tRNAs'];
-    for(const census_type of census_types){
-        const rq = await fetchEx(`https://exrna-atlas.org/exat/api/doc/census/${census_type}/${gene_search}`);
-        if (rq.ok) {
-            return `https://exrna-atlas.org/exat/censusResults?identifiers=${gene_search}&library=${census_type.slice(0, -1)}`
+const exrna_library = defined(memo(async (gene_search) => {
+    let census_types = ['miRNA', 'piRNA', 'snRNA', 'snoRNA', 'tRNA']
+    for (const census_type of census_types) {
+        if (await isitup(`https://exrna-atlas.org/exat/api/doc/census/${census_type}s/${gene_search}`) === 'yes') {
+            return census_type
         }
     }
 }))
@@ -902,7 +901,7 @@ const manifest = [
         description: 'The exRNA Atlas is the data repository of the Extracellular RNA Communication Consortium (ERCC). The repository includes small RNA sequencing and qPCR-derived exRNA profiles from human and mouse biofluids.',
         url: 'https://exrna-atlas.org/',
         countapi: 'maayanlab.github.io/exRNAAtlasclick',
-        clickurl: if_search(async ({ search }) => await exrna(search)),
+        clickurl: if_search(async ({ search }) => `https://exrna-atlas.org/exat/censusResults?identifiers=${search}&library=${await exrna_library(search)}`),
         example: 'https://exrna-atlas.org/exat/censusResults?identifiers=${gene-symbol}&library=${exrna_library}',
     },
     {
