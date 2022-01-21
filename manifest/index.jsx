@@ -146,6 +146,14 @@ const metabolomicswb = defined(memo(async (gene_search) => {
     }
 }))
 
+const STRING = defined(memo(async (gene_search) => {
+    const res = await fetchEx(`https://string-db.org/api/json/get_link?identifier=${gene_search}`)
+    if (res.ok) {
+        const [link] = await res.json()
+        return link
+    }
+}))
+
 export const drug_info = defined(memo(try_or_else(async (drug_search) => {
     const drug_query_url = 'https://pubchem.ncbi.nlm.nih.gov/rest'
     const drug_res = await fetchEx(`${drug_query_url}/pug/compound/name/${drug_search}/synonyms/JSON`)
@@ -1672,6 +1680,28 @@ const manifest = [
         description: 'Drugs@FDA drug cards provide the most recent information from approved drug labels, including regulatory, safety and effectiveness information.',
         url: "https://www.accessdata.fda.gov/scripts/cder/daf/",
         countapi: 'maayanlab.github.io/DrugsFDAclick',
+    },
+    {
+        name: 'STRING',
+        tags: {
+            gene: true,
+            CF: false,
+            PS: false,
+            Ag: true,
+        },
+        img1: {
+            src: '/logos/STRING_logo.png',
+            alt: 'STRING image',
+        },
+        img2: {
+            src: '/logos/STRING_site.png',
+            alt: 'STRING site image',
+        },
+        title: 'STRING',
+        description: 'STRING is a database of known and predicted protein-protein interactions and a functional enrichment tool covering more than 5000 genomes.',
+        clickurl: if_search(async ({ search }) => await STRING(search)),
+        url: "https://string-db.org/",
+        countapi: 'maayanlab.github.io/STRINGclick',
     },
 ]
 
