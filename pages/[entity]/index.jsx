@@ -59,8 +59,9 @@ export default function Entity(props) {
                 <div className="container">
                     <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                         {props.manifest
-                            .map(({ component, ...item }) => {
-                                const Component = components[component]
+                            .map(({ component, ...item }) => ({ Component: components[component], ...item }))
+                            .filter(({ Component }) => Component !== undefined)
+                            .map(({ Component, ...item }) => {
                                 return (
                                     <Component
                                         key={item.name}
