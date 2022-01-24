@@ -719,6 +719,7 @@ const manifest = [
         url: "https://undiagnosed.hms.harvard.edu/genes/",
         countapi: 'maayanlab.github.io/udnclick',
         clickurl: if_search(async ({ search }) => `https://undiagnosed.hms.harvard.edu/genes/${search}/`),
+        status: if_search(async ({ self }) => await isitup(self.clickurl, '404 Error Page')),
         example: 'https://undiagnosed.hms.harvard.edu/genes/${gene-symbol}/',
     },
     {
@@ -1075,6 +1076,7 @@ const manifest = [
         url: 'https://exrna-atlas.org/',
         countapi: 'maayanlab.github.io/exRNAAtlasclick',
         clickurl: if_search(async ({ search }) => `https://exrna-atlas.org/exat/censusResults?identifiers=${search}&library=${await exrna_library(search)}`),
+        status: if_search(async ({ self }) => await isitup(self.clickurl, '<b>Problematic</b> identifiers can be found below')),
         example: 'https://exrna-atlas.org/exat/censusResults?identifiers=${gene-symbol}&library=${exrna_library}',
     },
     {
@@ -1171,6 +1173,7 @@ const manifest = [
         url: "https://www.clinicalgenome.org/",
         countapi: 'maayanlab.github.io/CLINGENclick',
         clickurl: if_search(async ({ search }) => `https://search.clinicalgenome.org/kb/genes/HGNC:${await HGNC(search)}`),
+        status: if_search(async ({ self }) => await isitup(self.clickurl, 'ClinGen has not yet published curations for')),
         example: 'https://search.clinicalgenome.org/kb/genes/HGNC:${HGNC}',
     },
     {
@@ -1196,6 +1199,7 @@ const manifest = [
         url: "https://www.ebi.ac.uk/gwas/home",
         countapi: 'maayanlab.github.io/GWASclick',
         clickurl: if_search(async ({ search }) => `https://www.ebi.ac.uk/gwas/genes/${search}`),
+        status: if_search(async ({ self }) => await isitup(self.clickurl, 'cannot be found in the GWAS Catalog database')),
         example: 'https://www.ebi.ac.uk/gwas/genes/${gene-symbol}',
     },
     {
@@ -1849,6 +1853,7 @@ const manifest = [
         url: "https://www.drugs.com/",
         countapi: 'maayanlab.github.io/drugscomclick',
         clickurl: if_search(async ({ search }) => `https://www.drugs.com/${await DrugName(search)}.html`),
+        status: if_search(async ({ self }) => await isitup(self.clickurl, 'Page Not Found')),
         example: 'https://www.drugs.com/${drug-name}.html',
     },
     {
