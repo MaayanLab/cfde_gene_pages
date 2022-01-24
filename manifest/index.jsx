@@ -199,12 +199,6 @@ const STITCH = defined(memo(async (gene_search) => {
     }
 }))
 
-const TTD_status = if_search(async ({ self }) => {
-    const res = await fetch(self.clickurl)
-    const content = await res.text()
-    return !content.includes('Sorry! Nothing is found.')
-})
-
 export const drug_info = defined(memo(try_or_else(async (drug_search) => {
     const drug_query_url = 'https://pubchem.ncbi.nlm.nih.gov/rest'
     const drug_res = await fetchEx(`${drug_query_url}/pug/compound/name/${drug_search}/synonyms/JSON`)
@@ -2065,7 +2059,7 @@ const manifest = [
         title: 'Therapeutic Target Database',
         description: 'Therapeutic Target Database (TTD) is a database to provide information about the known and explored therapeutic protein and nucleic acid targets, the targeted disease, pathway information and the corresponding drugs directed at each of these targets.',
         clickurl: if_search(async ({ search }) => `http://idrblab.net/ttd/search/ttd/target?search_api_fulltext=${search}`),
-        status: TTD_status,
+        status: if_search(async ({ self }) => await isitup(self.clickurl, 'Sorry! Nothing is found.')),
         example: "http://idrblab.net/ttd/search/ttd/target?search_api_fulltext=${gene}",
         url: "http://db.idrblab.net/ttd/",
         countapi: 'maayanlab.github.io/TTDclick',
@@ -2093,7 +2087,7 @@ const manifest = [
         title: 'Therapeutic Target Database',
         description: 'Therapeutic Target Database (TTD) is a database to provide information about the known and explored therapeutic protein and nucleic acid targets, the targeted disease, pathway information and the corresponding drugs directed at each of these targets.',
         clickurl: if_search(async ({ search }) => `http://idrblab.net/ttd/search/ttd/drug?search_api_fulltext=${search}`),
-        status: TTD_status,
+        status: if_search(async ({ self }) => await isitup(self.clickurl, 'Sorry! Nothing is found.')),
         example: "http://idrblab.net/ttd/search/ttd/drug?search_api_fulltext=${drug}",
         url: "http://db.idrblab.net/ttd/",
         countapi: 'maayanlab.github.io/TTDclick',
