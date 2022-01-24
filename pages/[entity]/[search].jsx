@@ -10,10 +10,12 @@ import capitalize from '@/utils/capitalize'
 const EntityCard = dynamic(() => import('@/components/EntityCard'))
 const SearchPage = dynamic(() => import('@/components/SearchPage'))
 const GeneInfoCard = dynamic(() => import('@/components/GeneInfoCard'))
+const SimilarityInfo = dynamic(() => import('@/components/SimilarityInfo'))
 
 const components = {
     GeneInfoCard,
     EntityCard,
+    SimilarityInfo,
     [undefined]: EntityCard,
 }
 
@@ -89,9 +91,9 @@ export default function Search(props) {
             </Head>
             <SearchPage router={router} {...props}>{({router, CF, PS, Ag}) => (
                 props.manifest && !router.loading ? (
-                    <div className="album pb-5">
+                    <div className="album pb-3">
                         <div className="container">
-                            <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 justify-content-center">
+                            <div className="row">
                                 {props.manifest
                                     .filter(item => {
                                         if ('pinned' in item.tags) return true
@@ -114,59 +116,6 @@ export default function Search(props) {
                                         )
                                     })}
                             </div>
-
-                            {props.manifest
-                                .filter(item => {
-                                    if (item.name === 'ARCHS4') return true
-                                }).map(({component, ...item}) => {
-                                    return (
-                                        <div key={item.name} className="row justify-content-center mt-5">
-                                            <div className="col-12">
-                                                <p>
-                                                    {(item.similar_coexpression === undefined) || (item.similar_coexpression === null)
-                                                        ? ''
-                                                        :<span style={{fontWeight: 500}}>Similar genes based on mRNA co-expression: </span>}
-                                                    {(item.similar_coexpression === undefined) || (item.similar_coexpression === null)
-                                                    ? ''
-                                                    : item.similar_coexpression.map(gene =>
-                                                        <a
-                                                            key={gene}
-                                                            className="mx-1"
-                                                            href="#"
-                                                            onClick={evt => {
-                                                                router.push({
-                                                                    pathname: '/[entity]/[search]',
-                                                                    query: {entity: 'gene', search: gene},
-                                                                })
-                                                            }}
-                                                        >{gene}</a>
-                                                    )}
-                                                </p>
-                                                <p>
-                                                    {(item.similar_literature === undefined) || (item.similar_literature === null)
-                                                        ? ''
-                                                        : <span style={{fontWeight: 500}}>Similar genes based on literature: </span>}
-                                                    {(item.similar_literature === undefined) || (item.similar_literature === null)
-                                                    ? ''
-                                                    : item.similar_literature.map(gene =>
-                                                        <a
-                                                            key={gene}
-                                                            className="mx-1"
-                                                            href="#"
-                                                            onClick={evt => {
-                                                                router.push({
-                                                                    pathname: '/[entity]/[search]',
-                                                                    query: {entity: 'gene', search: gene},
-                                                                })
-                                                            }}
-                                                        >{gene}</a>
-                                                    )}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    )
-                                })
-                            }
                         </div>
                     </div>
                 ) : null

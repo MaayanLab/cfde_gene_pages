@@ -700,8 +700,18 @@ const manifest = [
         countapi: 'maayanlab.github.io/ARCHS4click',
         clickurl: if_search(async ({ search }) => `https://maayanlab.cloud/archs4/gene/${search}`),
         example: 'https://maayanlab.cloud/archs4/gene/${gene-symbol}',
+    },
+    {
+        name: 'ARCHS4-simiarity',
+        component: 'SimilarityInfo',
+        tags: {
+            gene: true,
+            pinned: true,
+        },
+        title: 'ARCHS4 Similarity',
         similar_coexpression: try_or_else(async ({ search }) => await  expand(search, 'coexpression', 10), null),
         similar_literature: try_or_else(async ({ search }) => await expand(search, 'generif', 10), null),
+        status: true,
     },
     {
         name: 'NCBI',
