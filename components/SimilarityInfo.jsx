@@ -1,5 +1,5 @@
 
-export default function SimilarityInfo(item) {
+export default function SimilarityInfo({ router, ...item }) {
   return (
     <div className="col-12 justify-content-center">
       {(item.similar_coexpression === undefined) || (item.similar_coexpression === null) ? null : (
