@@ -89,13 +89,15 @@ export default function Search(props) {
             <Head>
                 <title>Gene and Drug Landing Page Aggregator: {props.search} ({capitalize(props.entity)})</title>
             </Head>
-            <SearchPage router={router} {...props}>{({router, CF, PS, Ag}) => (
+            <SearchPage router={router} {...props}>{({router, CF, PS, Ag, gene, drug}) => (
                 props.manifest && !router.loading ? (
                     <div className="album pb-3">
                         <div className="container">
                             <div className="row">
                                 {props.manifest
                                     .filter(item => {
+                                        if (gene === true && !('gene' in item.output)) return false
+                                        if (drug === true && !('drug' in item.output)) return false
                                         if ('pinned' in item.tags) return true
                                         if (CF === true && !('CF' in item.tags)) return false
                                         return (

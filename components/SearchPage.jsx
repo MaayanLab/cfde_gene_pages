@@ -8,6 +8,8 @@ export default function SearchPage({ router, ...props }) {
   const [CF, setCF] = useQsState('CF', false)
   const [PS, setPS] = useQsState('PS', true)
   const [Ag, setAg] = useQsState('Ag', true)
+  const [gene, setGene] = useQsState('gene', false)
+  const [drug, setDrug] = useQsState('drug', false)
   return (
     <div>
       <SearchControl
@@ -16,6 +18,8 @@ export default function SearchPage({ router, ...props }) {
         CF={CF} setCF={setCF}
         PS={PS} setPS={setPS}
         Ag={Ag} setAg={setAg}
+        gene={gene} setGene={setGene}
+        drug={drug} setDrug={setDrug}
         onSubmit={query => {
           router.push({
             pathname: '/[entity]/[search]',
@@ -24,7 +28,7 @@ export default function SearchPage({ router, ...props }) {
         }}
       />
       {router.loading ? <Loader /> : null}
-      {props.children ? props.children({ router, CF, PS, Ag }) : null}
+      {props.children ? props.children({ router, CF, PS, Ag, gene, drug }) : null}
     </div>
   )
 }

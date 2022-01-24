@@ -8,6 +8,7 @@ const Autocomplete = dynamic(() => import('@/components/Autocomplete'))
 export default function SearchControl({
                                           entity: initEntity, search: initSearch,
                                           CF, setCF, PS, setPS, Ag, setAg,
+                                          gene, setGene, drug, setDrug,
                                           onSubmit,
                                       }) {
     const [entity, setEntity] = React.useState('gene')
@@ -26,6 +27,8 @@ export default function SearchControl({
     if (CF === undefined) CF = false
     if (PS === undefined) PS = true
     if (Ag === undefined) Ag = true
+    if (gene === undefined) gene = false
+    if (drug === undefined) drug = true
     return (
         <section className="pt-5 pb-3 container">
             <div className="row py-lg-5">
@@ -40,7 +43,7 @@ export default function SearchControl({
                         autoComplete="off"
                         onSubmit={(evt) => {
                             evt.preventDefault()
-                            onSubmit({entity, search, CF, PS, Ag})
+                            onSubmit({entity, search, CF, PS, Ag, gene, drug})
                         }}
                     >
                         <div className="input-group">
@@ -69,7 +72,7 @@ export default function SearchControl({
                                     Gene Examples:
                                     {gene_examples.map((gene, ind) => (
                                         <span key={gene}>
-                      {ind > 0 ? ',' : null}
+                                            {ind > 0 ? ',' : null}
                                             &nbsp;
                                             <a
                                                 href="#"
@@ -77,16 +80,16 @@ export default function SearchControl({
                                                     evt.preventDefault();
                                                     onSubmit({entity: 'gene', search: gene, CF, PS, Ag})
                                                 }}>
-                        {gene}
-                      </a>
-                    </span>
+                                            {gene}
+                                        </a>
+                                        </span>
                                     ))}
                                 </div>
                                 <div className="my-2 mx-3 text-muted">
                                     Drug Examples:
                                     {drug_examples.map((drug, ind) => (
                                         <span key={drug}>
-                      {ind > 0 ? ',' : null}
+                                            {ind > 0 ? ',' : null}
                                             &nbsp;
                                             <a
                                                 href="#"
@@ -94,14 +97,14 @@ export default function SearchControl({
                                                     evt.preventDefault();
                                                     onSubmit({entity: 'drug', search: drug, CF, PS, Ag})
                                                 }}>
-                        {drug}
-                      </a>
-                    </span>
+                                            {drug}
+                                        </a>
+                                        </span>
                                     ))}
                                 </div>
                             </div>
                         </div>
-                        {setCF && setPS && setAg ? (
+                        {setCF && setPS && setAg && setGene && setDrug ? (
                             <div className="form-group">
                                 <div className="form-check form-check-inline">
                                     <input id="inlineCheckbox1" className="form-check-input" type="checkbox" value="option1" checked={CF}
@@ -118,6 +121,17 @@ export default function SearchControl({
                                     <input id="inlineRadio2" className="form-check-input" type="checkbox" value="option3" checked={Ag}
                                            onChange={(evt) => setAg(evt.target.checked)}/>
                                     <label className="form-check-label" htmlFor="inlineRadio2">Aggregator</label>
+                                </div>
+                                <br />
+                                <div className="form-check form-check-inline">
+                                    <input id="inlineRadio3" className="form-check-input" type="checkbox" value="option3" checked={gene}
+                                           onChange={(evt) => setGene(evt.target.checked)}/>
+                                    <label className="form-check-label" htmlFor="inlineRadio3">Informs Related Genes</label>
+                                </div>
+                                <div className="form-check form-check-inline">
+                                    <input id="inlineRadio4" className="form-check-input" type="checkbox" value="option4" checked={drug}
+                                           onChange={(evt) => setDrug(evt.target.checked)}/>
+                                    <label className="form-check-label" htmlFor="inlineRadio4">Informs Related Drugs</label>
                                 </div>
                             </div>
                         ) : null}
