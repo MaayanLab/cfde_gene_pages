@@ -367,6 +367,9 @@ const manifest = [
             PS: true,
             gene: true,
         },
+        output: {
+            tissue: true,
+        },
         img1: {
             src: '/logos/gtex_logo.png',
             alt: 'GTEx logo',
@@ -388,6 +391,14 @@ const manifest = [
             CF: true,
             Ag: true,
             gene: true,
+        },
+        output: {
+            tissue: true,
+            drug: true,
+            disease: true,
+            gene: true,
+            function: true,
+            publication: true,
         },
         img1: {
             src: '/logos/pharos_logo.png',
@@ -416,6 +427,14 @@ const manifest = [
             gene: true,
             MaayanLab: true,
         },
+        output: {
+            tissue: true,
+            drug: true,
+            disease: true,
+            gene: true,
+            function: true,
+            publication: true,
+        },
         img1: {
             src: '/logos/harmonizome_logo.png',
             alt: 'Harmonizome',
@@ -442,6 +461,11 @@ const manifest = [
             Ag: true,
             gene: true,
             MaayanLab: true,
+        },
+        output: {
+            tissue: true,
+            disease: true,
+            drug: true,
         },
         img1: {
             src: '/logos/sigcom_logo.png',
@@ -497,6 +521,10 @@ const manifest = [
             PS: true,
             gene: true,
         },
+        output: {
+            gene: true,
+            function: true,
+        },
         img1: {
             src: '/logos/Reactome_IDG_logo.png',
             alt: 'LDP 3.0',
@@ -524,6 +552,9 @@ const manifest = [
             gene: true,
             MaayanLab: true
         },
+        output: {
+            function: true,
+        },
         img1: {
             src: '/logos/prismexp_logo.png',
             alt: 'PrismEXP logo',
@@ -549,6 +580,8 @@ const manifest = [
             PS: true,
             gene: true,
         },
+        output: {
+        },
         img1: {
             src: '/logos/Metabolomics_logo.jpeg',
             alt: 'Metabolomics image',
@@ -570,6 +603,9 @@ const manifest = [
             Ag: true,
             gene: true,
             drug: true,
+        },
+        output: {
+            publication: true,
         },
         img1: {
             src: '/logos/wiki_logo.png',
@@ -593,6 +629,9 @@ const manifest = [
             gene: true,
             drug: true,
         },
+        output: {
+            publication: true,
+        },
         img1: {
             src: '/logos/pubmed_logo.png',
             alt: 'PubMed image',
@@ -614,6 +653,12 @@ const manifest = [
             CF: true,
             PS: true,
             gene: true,
+        },
+        output: {
+            tissue: true,
+            disease: true,
+            function: true,
+            publication: true,
         },
         img1: {
             src: "/logos/Glygen_logo.png",
@@ -637,6 +682,11 @@ const manifest = [
             PS: true,
             gene: true,
         },
+        output: {
+            disease: true,
+            function: true,
+            publication: true,
+        },
         img1: {
             src: '/logos/komp_logo.png',
             alt: 'KOMP image',
@@ -658,6 +708,9 @@ const manifest = [
             CF: true,
             PS: true,
             gene: true,
+        },
+        output: {
+            function: true,
         },
         img1: {
             src: '/logos/UDN_logo.png',
@@ -681,6 +734,11 @@ const manifest = [
             PS: true,
             gene: true,
             MaayanLab: true,
+        },
+        output: {
+            tissue: true,
+            gene: true,
+            function: true,
         },
         img1: {
             src: '/logos/archs_logo.png',
@@ -708,6 +766,9 @@ const manifest = [
             gene: true,
             pinned: true,
         },
+        output: {
+            gene: true,
+        },
         title: 'ARCHS4 Similarity',
         similar_coexpression: try_or_else(async ({ search }) => await  expand(search, 'coexpression', 10), null),
         similar_literature: try_or_else(async ({ search }) => await expand(search, 'generif', 10), null),
@@ -718,6 +779,12 @@ const manifest = [
         tags: {
             gene: true,
             Ag: true,
+        },
+        output: {
+            tissue: true,
+            gene: true,
+            function: true,
+            publication: true,
         },
         img1: {
             src: '/logos/NCBI_logo.png',
@@ -739,6 +806,10 @@ const manifest = [
         tags: {
             gene: true,
             Ag: true,
+        },
+        output: {
+            gene: true,
+            function: true,
         },
         img1: {
             src: '/logos/wikipathways_logo.png',
@@ -762,6 +833,9 @@ const manifest = [
             Ag: true,
             CF: true,
         },
+        output: {
+            gene: true,
+        },
         img1: {
             src: '/logos/pcrp_logo.png',
             alt: 'Protein Capture Reagents Program logo',
@@ -782,6 +856,14 @@ const manifest = [
         tags: {
             gene: true,
             Ag: true,
+        },
+        output: {
+            drug: true,
+            disease: true,
+            tissue: true,
+            function: true,
+            gene: true,
+            publication: true,
         },
         img1: {
             src: '/logos/gc_logo.png',
@@ -805,6 +887,13 @@ const manifest = [
             CF: false,
             Ag: true,
             MaayanLab: true,
+        },
+        output: {
+            drug: true,
+            disease: true,
+            tissue: true,
+            function: true,
+            gene: true,
         },
         img1: {
             src: '/logos/enrichr_logo.png',
@@ -831,6 +920,8 @@ const manifest = [
             gene: true,
             PS: true,
         },
+        output: {
+        },
         img1: {
             src: '/logos/ENCODE_logo.png',
             alt: 'ENCODE image',
@@ -851,6 +942,10 @@ const manifest = [
         tags: {
             gene: true,
             Ag: true,
+        },
+        output: {
+            function: true,
+            gene: true,
         },
         img1: {
             src: '/logos/uniprot_logo.png',
@@ -894,6 +989,12 @@ const manifest = [
             gene: true,
             Ag: true,
         },
+        output: {
+            drug: true,
+            disease: true,
+            tissue: true,
+            function: true,
+        },
         img1: {
             src: '/logos/marrvel_logo.png',
             alt: 'MARRVEL image',
@@ -915,6 +1016,10 @@ const manifest = [
             gene: true,
             PS: true,
         },
+        output: {
+            tissue: true,
+            function: true,
+        },
         img1: {
             src: '/logos/biogps_logo.png',
             alt: 'BioGPS image',
@@ -935,6 +1040,9 @@ const manifest = [
         tags: {
             gene: true,
             Ag: true,
+        },
+        output: {
+            publication: true,
         },
         img1: {
             src: '/logos/hgnc_logo.png',
@@ -958,6 +1066,8 @@ const manifest = [
             PS: true,
             CF: true
         },
+        output: {
+        },
         img1: {
             src: '/logos/exrna_logo.png',
             alt: 'exRNA Atlas logo'
@@ -978,6 +1088,10 @@ const manifest = [
         tags: {
             gene: true,
             PS: true,
+        },
+        output: {
+            tissue: true,
+            function: true,
         },
         img1: {
             src: '/logos/Ensembl_logo.png',
@@ -1021,6 +1135,11 @@ const manifest = [
             gene: true,
             PS: true,
         },
+        output: {
+            drug: true,
+            tissue: true,
+            publication: true,
+        },
         img1: {
             src: '/logos/COSMIC_logo.png',
             alt: 'COSMIC image',
@@ -1041,6 +1160,9 @@ const manifest = [
         tags: {
             gene: true,
             PS: true,
+        },
+        output: {
+            disease: true,
         },
         img1: {
             src: '/logos/ClinGen_logo.png',
@@ -1063,6 +1185,10 @@ const manifest = [
             gene: true,
             PS: true,
         },
+        output: {
+            disease: true,
+            publication: true,
+        },
         img1: {
             src: '/logos/GWAS_logo.png',
             alt: 'GWAS image',
@@ -1083,6 +1209,11 @@ const manifest = [
         tags: {
             gene: true,
             PS: true,
+        },
+        output: {
+            drug: true,
+            gene: true,
+            publication: true,
         },
         img1: {
             src: '/logos/PDBe_logo.png',
@@ -1113,6 +1244,9 @@ const manifest = [
             src: '/logos/PDB_site.png',
             alt: 'PDB site image',
         },
+        output: {
+            publication: true,
+        },
         title: 'PDB',
         description: 'PDB has information about the 3D shapes of proteins, nucleic acids, and complex assemblies that contribute to understanding everything from protein synthesis to health and disease.',
         url: "https://www.rcsb.org/",
@@ -1126,6 +1260,9 @@ const manifest = [
             CF: true,
             gene: true,
             Ag: true,
+        },
+        output: {
+            publication: true,
         },
         img1: {
             src: '/logos/GENEVA_logo.png',
@@ -1152,6 +1289,13 @@ const manifest = [
             gene: true,
             PS: true,
         },
+        output: {
+            disease: true,
+            function: true,
+            tissue: true,
+            gene: true,
+            publication: true,
+        },
         img1: {
             src: '/logos/MGI_logo.png',
             alt: 'MGI image',
@@ -1172,6 +1316,10 @@ const manifest = [
         tags: {
             gene: true,
             PS: true,
+        },
+        output: {
+            function: true,
+            publication: true,
         },
         img1: {
             src: '/logos/OMIM_logo.png',
@@ -1194,6 +1342,10 @@ const manifest = [
             gene: true,
             PS: true,
             MaayanLab: true,
+        },
+        output: {
+            function: true,
+            publication: true,
         },
         img1: {
             src: '/logos/appyters_logo.png',
@@ -1219,6 +1371,9 @@ const manifest = [
             gene: true,
             PS: true,
         },
+        output: {
+            function: true,
+        },
         img1: {
             src: '/logos/GO_logo.png',
             alt: 'Gene Ontology image',
@@ -1241,6 +1396,10 @@ const manifest = [
             CF: true,
             PS: true,
         },
+        output: {
+            function: true,
+            gene: true,
+        },
         img1: {
             src: '/logos/Reactome_logo.png',
             alt: 'Reactome image',
@@ -1261,6 +1420,9 @@ const manifest = [
         tags: {
             gene: true,
             PS: true,
+        },
+        output: {
+            function: true,
         },
         img1: {
             src: '/logos/KEGG_logo.png',
@@ -1283,6 +1445,12 @@ const manifest = [
             gene: true,
             PS: true,
         },
+        output: {
+            gene: true,
+            tissue: true,
+            function: true,
+            publication: true,
+        },
         img1: {
             src: '/logos/Monarch_logo.png',
             alt: 'Monarch Initiative image',
@@ -1303,6 +1471,11 @@ const manifest = [
         tags: {
             gene: true,
             PS: true,
+        },
+        output: {
+            tissue: true,
+            drug: true,
+            function: true,
         },
         img1: {
             src: '/logos/HGB_logo.png',
@@ -1325,6 +1498,12 @@ const manifest = [
             gene: true,
             Ag: true,
         },
+        output: {
+            tissue: true,
+            function: true,
+            drug: true,
+            publication: true,
+        },
         img1: {
             src: '/logos/OpenTargets_logo.png',
             alt: 'Open Targets image',
@@ -1345,6 +1524,12 @@ const manifest = [
         tags: {
             gene: true,
             Ag: true,
+        },
+        output: {
+            tissue: true,
+            function: true,
+            drug: true,
+            publication: true,
         },
         img1: {
             src: '/logos/OpenTargets_logo.png',
@@ -1367,6 +1552,11 @@ const manifest = [
             gene: true,
             Ag: true,
         },
+        output: {
+            gene: true,
+            function: true,
+            publication: true,
+        },
         img1: {
             src: '/logos/GeneMANIA_logo.png',
             alt: 'GeneMANIA site logo',
@@ -1387,6 +1577,10 @@ const manifest = [
         tags: {
             gene: true,
             PS: true,
+        },
+        output: {
+            tissue: true,
+            function: true,
         },
         img1: {
             src: '/logos/HPA_logo.png',
@@ -1411,6 +1605,10 @@ const manifest = [
             CF: false,
             PS: false,
         },
+        output: {
+            MOA: true,
+            publication: true,
+        },
         img1: {
             src: '/logos/OpenTargets_logo.png',
             alt: 'Open Targets image',
@@ -1431,6 +1629,9 @@ const manifest = [
         tags: {
             drug: true,
             Ag: true,
+        },
+        output: {
+            publication: true,
         },
         img1: {
             src: '/logos/medchemexpress_logo.png',
@@ -1455,6 +1656,12 @@ const manifest = [
             PS: false,
             Ag: true,
         },
+        output: {
+            drug: true,
+            gene: true,
+            disease: true,
+            publication: true,
+        },
         img1: {
             src: '/logos/PubChem_logo.png',
             alt: 'PubChem image',
@@ -1477,6 +1684,13 @@ const manifest = [
             CF: false,
             PS: false,
             Ag: true,
+        },
+        output: {
+            MOA: true,
+            drug: true,
+            gene: true,
+            disease: true,
+            publication: true,
         },
         img1: {
             src: '/logos/chEMBL_logo.png',
@@ -1501,6 +1715,12 @@ const manifest = [
             PS: false,
             Ag: true,
         },
+        output: {
+            MOA: true,
+            drug: true,
+            gene: true,
+            disease: true,
+        },
         img1: {
             src: '/logos/Guide_logo.png',
             alt: 'Guide to Pharmacology image',
@@ -1523,6 +1743,12 @@ const manifest = [
             CF: false,
             PS: false,
             Ag: true,
+        },
+        output: {
+            MOA: true,
+            drug: true,
+            gene: true,
+            disease: true,
         },
         img1: {
             src: '/logos/DrugBank_logo.png',
@@ -1547,6 +1773,12 @@ const manifest = [
             PS: false,
             Ag: true,
             MaayanLab: true,
+        },
+        output: {
+            MOA: true,
+            drug: true,
+            gene: true,
+            disease: true,
         },
         img1: {
             src: '/logos/drugmonizome_logo.png',
@@ -1576,6 +1808,12 @@ const manifest = [
             Ag: true,
             MaayanLab: true,
         },
+        output: {
+            MOA: true,
+            drug: true,
+            gene: true,
+            disease: true,
+        },
         img1: {
             src: '/logos/DrugEnrichr_logo.png',
             alt: 'DrugEnrichr',
@@ -1603,6 +1841,7 @@ const manifest = [
             PS: false,
             Ag: true,
         },
+        output: {},
         img1: {
             src: '/logos/Drugscom_logo.png',
             alt: 'Drugs.com image',
@@ -1626,6 +1865,10 @@ const manifest = [
             hidden: true,
             PS: false,
             Ag: true,
+        },
+        output: {
+            MOA: true,
+            disease: true,
         },
         img1: {
             src: '/logos/drugcentral_logo.png',
@@ -1654,6 +1897,7 @@ const manifest = [
             PS: true,
             Ag: false,
         },
+        output: {},
         img1: {
             src: '/logos/zinc15_logo.png',
             alt: 'ZINC15 image',
@@ -1680,6 +1924,10 @@ const manifest = [
             drug: true,
             PS: true,
             Ag: false
+        },
+        output: {
+            gene: true,
+            disease: true,
         },
         img1: {
             src: '/logos/ldp2_logo.png',
@@ -1750,6 +1998,9 @@ const manifest = [
             PS: false,
             Ag: true,
         },
+        output: {
+            gene: true,
+        },
         img1: {
             src: '/logos/STRING_logo.png',
             alt: 'STRING image',
@@ -1773,6 +2024,10 @@ const manifest = [
             PS: false,
             Ag: true,
         },
+        output: {
+            gene: true,
+            drug: true,
+        },
         img1: {
             src: '/logos/STITCH_logo.png',
             alt: 'STITCH image',
@@ -1794,6 +2049,10 @@ const manifest = [
             CF: false,
             PS: false,
             Ag: true,
+        },
+        output: {
+            drug: true,
+            disease: true,
         },
         img1: {
             src: '/logos/TTD_logo.png',
@@ -1819,6 +2078,10 @@ const manifest = [
             PS: false,
             Ag: true,
         },
+        output: {
+            gene: true,
+            disease: true,
+        },
         img1: {
             src: '/logos/TTD_logo.png',
             alt: 'TTD image',
@@ -1842,12 +2105,20 @@ const manifest = [
 // Also insert common attributes by tag
 export const manifest_tag_counts = {}
 for (const item of manifest) {
+    if (!('tags' in item)) {
+        item.tags = {}
+    }
     for (const tag in item.tags) {
         if (item.tags[tag] === false) delete item.tags[tag]
         else {
-            if (!(tag in manifest_tag_counts)) manifest_tag_counts[tag] = 0
             manifest_tag_counts[tag] += 1
         }
+    }
+    if (!('output' in item)) {
+        item.output = {}
+    }
+    for (const tag in item.output) {
+        if (item.output[tag] === false) delete item.output[tag]
     }
     if ('countapi' in item) {
         item.clicks = async ({ self }) => await countable(self.countapi).get()
