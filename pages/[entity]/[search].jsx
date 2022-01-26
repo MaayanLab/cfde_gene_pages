@@ -59,6 +59,7 @@ export async function getStaticProps({params: {entity, search}}) {
                         for (const k in item) {
                             self[k] = await callable(item[k])({
                                 self,
+                                entity,
                                 search,
                             })
                         }

@@ -39,7 +39,7 @@ export const gene_id = defined(memo(async (gene_search) => {
     }
 }))
 
-const expand = defined(memo(async (gene_search, exp_type = "coexpression", top = 5) => {
+const expand_gene = defined(memo(async (gene_search, exp_type = "coexpression", top = 5) => {
     const gene_exp = await fetchEx(`https://maayanlab.cloud/enrichrsearch/gene/expand?search=${gene_search}&top=${top}&type=${exp_type}`)
     if (gene_exp.ok) {
         const { data, success } = await gene_exp.json()
@@ -755,7 +755,7 @@ const manifest = [
         example: 'https://maayanlab.cloud/archs4/gene/${gene-symbol}',
     },
     {
-        name: 'ARCHS4-simiarity',
+        name: 'simiarity-info',
         component: 'SimilarityInfo',
         tags: {
             gene: true,
@@ -764,9 +764,26 @@ const manifest = [
         output: {
             gene: true,
         },
-        title: 'ARCHS4 Similarity',
-        similar_coexpression: try_or_else(async ({ search }) => await  expand(search, 'coexpression', 10), null),
-        similar_literature: try_or_else(async ({ search }) => await expand(search, 'generif', 10), null),
+        title: 'Search Similarity Expansion',
+        similarities: try_or_else(async (props) => {
+            const { entity } = props
+            if (entity === 'gene') {
+                return [
+                    {
+                        title: 'Similar genes based on mRNA co-expression',
+                        entity: 'gene',
+                        items: await try_or_else(async ({ search }) => await expand_gene(search, 'coexpression', 10), null)(props),
+                    },
+                    {
+                        title: 'Similar genes based on literature',
+                        entity: 'gene',
+                        items: await try_or_else(async ({ search }) => await expand_gene(search, 'generif', 10), null)(props),
+                    },
+                ]
+            } else {
+                throw new Error('Unsupported entity')
+            }
+        }, null),
         status: true,
     },
     {
