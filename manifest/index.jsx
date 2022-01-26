@@ -1426,7 +1426,6 @@ const manifest = [
             MaayanLab: true,
         },
         output: {
-            drug: true,
             function: true,
             publication: true,
         },
