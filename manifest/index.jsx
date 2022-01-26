@@ -63,6 +63,15 @@ const expand_drug = defined(memo(async (drug_search, exp_type = "L1000_coexpress
     }
 }))
 
+const gene_drug_rif = defined(memo(async (gene) => {
+    const lookup = await import('@/public/gene_drug_rif/gene_drug.json')
+    return lookup[gene]
+}))
+const drug_gene_rif = defined(memo(async (drug) => {
+    const lookup = await import('@/public/gene_drug_rif/drug_gene.json')
+    return lookup[drug.toLowerCase()]
+}))
+
 // const predict_regulators = defined(memo(async (genes, type_url, top = 5) => {
 //     const results = await fetchEx(`https://maayanlab.cloud/${type_url}/api/enrich/`, {
 //         method: 'POST',
@@ -781,6 +790,11 @@ const manifest = [
                         entity: 'gene',
                         items: await try_or_else(async ({ search }) => await expand_gene(search, 'generif', 10), null)(props),
                     },
+                    {
+                        title: 'Similar genes based on literature',
+                        entity: 'drug',
+                        items: await try_or_else(async ({ search }) => await gene_drug_rif(search), null)(props),
+                    },
                 ]
             } else if (entity === 'drug') {
                 return [
@@ -793,6 +807,11 @@ const manifest = [
                         title: 'Similar drugs based on literature',
                         entity: 'drug',
                         items: await try_or_else(async ({ search }) => await expand_drug(search, 'drugrif_cooccur', 10), null)(props),
+                    },
+                    {
+                        title: 'Similar genes based on literature',
+                        entity: 'gene',
+                        items: await try_or_else(async ({ search }) => await drug_gene_rif(search), null)(props),
                     },
                 ]
             } else {
