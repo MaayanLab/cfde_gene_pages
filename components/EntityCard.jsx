@@ -96,33 +96,39 @@ export default function EntityCard(props) {
                      style={{
                          height: "80px"
                      }}>
-                    <div className="d-flex justify-content-between align-items-center">
+                    <div className="row mt-2">
                         {props.clickurl !== undefined && props.search !== undefined ? (
-                            <p className="mt-3">
+                            <div className="col-9">
+                            <p>
                                 <a
                                     href={props.clickurl}
                                     target="_blank"
                                     onClick={() => countable(props.countapi).hit()}
-                                >Explore {props.search} with {props.title}</a></p>
+                                >Explore {props.search} with {props.title}</a></p></div>
                             ) : [(props.search === undefined) && (props.tags.gene) ? (
-                                <p className="mt-2">
+                            <div className="col-9">
+                                <p>
                                     <a
                                         href={props.url}
                                         target="_blank"
                                         onClick={() => countable(props.countapi).hit()}
-                                    >Explore genes and proteins with {props.title}</a></p>
+                                    >Explore genes and proteins with {props.title}</a></p></div>
                                 ) : [(props.search === undefined) && (props.tags.drug) ? (
-                                    <p className="mt-2">
+                            <div className="col-9">
+                                    <p>
                                         <a
                                             href={props.url}
                                             target="_blank"
                                             onClick={() => countable(props.countapi).hit()}
-                                        >Explore drugs and small molecules with {props.title}</a></p>
+                                        >Explore drugs and small molecules with {props.title}</a></p></div>
                                 ) : null]
                             ]
                         }
-                        {clicks !== undefined ? <small
-                            className="card-text text-muted mb-2" style={{ width: "100px"}}>Clicks: <span>{clicks}</span></small> : null}
+                        {clicks !== undefined ?
+                        <div className="col-3">
+                            <small
+                            className="card-text text-muted" style={{ width: "100px"}}>Clicks: <span>{clicks}</span></small>
+                        </div> : null}
                     </div>
                 </div>
             </div>
