@@ -764,60 +764,93 @@ const manifest = [
         example: 'https://maayanlab.cloud/archs4/gene/${gene-symbol}',
     },
     {
-        name: 'simiarity-info',
+        name: 'gene-mrna-coexpr-similarity',
         component: 'SimilarityInfo',
         tags: {
-            drug: true,
             gene: true,
             pinned: true,
         },
         output: {
             gene: true,
+        },
+        title: 'Similar genes based on mRNA co-expression',
+        entity: 'gene',
+        items: if_search(async ({ search }) => await expand_gene(search, 'coexpression', 10)),
+        status: true,
+    },
+    {
+        name: 'gene-gene-literature-similarity',
+        component: 'SimilarityInfo',
+        tags: {
+            gene: true,
+            pinned: true,
+        },
+        output: {
+            gene: true,
+        },
+        title: 'Similar genes based on literature',
+        entity: 'gene',
+        items: if_search(async ({ search }) => await expand_gene(search, 'generif', 10)),
+        status: true,
+    },
+    {
+        name: 'gene-drug-literature-similarity',
+        component: 'SimilarityInfo',
+        tags: {
+            gene: true,
+            pinned: true,
+        },
+        output: {
             drug: true,
         },
-        title: 'Search Similarity Expansion',
-        similarities: try_or_else(async (props) => {
-            const { entity } = props
-            if (entity === 'gene') {
-                return [
-                    {
-                        title: 'Similar genes based on mRNA co-expression',
-                        entity: 'gene',
-                        items: await try_or_else(async ({ search }) => await expand_gene(search, 'coexpression', 10), null)(props),
-                    },
-                    {
-                        title: 'Similar genes based on literature',
-                        entity: 'gene',
-                        items: await try_or_else(async ({ search }) => await expand_gene(search, 'generif', 10), null)(props),
-                    },
-                    {
-                        title: 'Similar genes based on literature',
-                        entity: 'drug',
-                        items: await try_or_else(async ({ search }) => await gene_drug_rif(search), null)(props),
-                    },
-                ]
-            } else if (entity === 'drug') {
-                return [
-                    {
-                        title: 'Similar drugs based on Drug L1000 Signature Similarity',
-                        entity: 'drug',
-                        items: await try_or_else(async ({ search }) => await expand_drug(search, 'L1000_coexpression', 10), null)(props),
-                    },
-                    {
-                        title: 'Similar drugs based on literature',
-                        entity: 'drug',
-                        items: await try_or_else(async ({ search }) => await expand_drug(search, 'drugrif_cooccur', 10), null)(props),
-                    },
-                    {
-                        title: 'Similar genes based on literature',
-                        entity: 'gene',
-                        items: await try_or_else(async ({ search }) => await drug_gene_rif(search), null)(props),
-                    },
-                ]
-            } else {
-                throw new Error('Unsupported entity')
-            }
-        }, null),
+        title: 'Similar drugs based on literature',
+        entity: 'gene',
+        items: if_search(async ({ search }) => await gene_drug_rif(search)),
+        status: true,
+    },
+    {
+        name: 'drug-l1000-coexpr-similarity',
+        component: 'SimilarityInfo',
+        tags: {
+            drug: true,
+            pinned: true,
+        },
+        output: {
+            drug: true,
+        },
+        title: 'Similar drugs based on Drug L1000 Signature Similarity',
+        entity: 'drug',
+        items: if_search(async ({ search }) => await expand_drug(search, 'L1000_coexpression', 10)),
+        status: true,
+    },
+    {
+        name: 'drug-drug-literature-similarity',
+        component: 'SimilarityInfo',
+        tags: {
+            drug: true,
+            pinned: true,
+        },
+        output: {
+            drug: true,
+        },
+        title: 'Similar drugs based on literature',
+        entity: 'gene',
+        items: if_search(async ({ search }) => await expand_drug(search, 'drugrif_cooccur', 10)),
+        status: true,
+    },
+    {
+        name: 'drug-gene-literature-similarity',
+        component: 'SimilarityInfo',
+        tags: {
+            drug: true,
+            pinned: true,
+        },
+        output: {
+            gene: true,
+        },
+        title: 'Similar genes based on literature',
+        entity: 'gene',
+        items: if_search(async ({ search }) => await drug_gene_rif(search)),
         status: true,
     },
     {
