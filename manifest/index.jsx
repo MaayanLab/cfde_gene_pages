@@ -51,17 +51,17 @@ const expand_gene = defined(memo(async (gene_search, exp_type = "coexpression", 
     }
 }))
 
-// const expand_drug = defined(memo(async (drug_search, exp_type = "L1000_coexpression", top = 5) => {
-//     const gene_exp = await fetchEx(`https://maayanlab.cloud/enrichrsearch/drug/expand?search=${drug_search}&top=${top}&type=${exp_type}`)
-//     if (gene_exp.ok) {
-//         const { data, success } = await gene_exp.json()
-//         if ((Array.isArray(data)) && success) {
-//             if (data.length > 0) {
-//                 return data
-//             }
-//         }
-//     }
-// }))
+const expand_drug = defined(memo(async (drug_search, exp_type = "L1000_coexpression", top = 5) => {
+    const gene_exp = await fetchEx(`https://maayanlab.cloud/enrichrsearch/drug/expand?search=${drug_search}&top=${top}&type=${exp_type}`)
+    if (gene_exp.ok) {
+        const { data, success } = await gene_exp.json()
+        if ((Array.isArray(data)) && success) {
+            if (data.length > 0) {
+                return data
+            }
+        }
+    }
+}))
 
 // const predict_regulators = defined(memo(async (genes, type_url, top = 5) => {
 //     const results = await fetchEx(`https://maayanlab.cloud/${type_url}/api/enrich/`, {
@@ -758,11 +758,13 @@ const manifest = [
         name: 'simiarity-info',
         component: 'SimilarityInfo',
         tags: {
+            drug: true,
             gene: true,
             pinned: true,
         },
         output: {
             gene: true,
+            drug: true,
         },
         title: 'Search Similarity Expansion',
         similarities: try_or_else(async (props) => {
@@ -778,6 +780,19 @@ const manifest = [
                         title: 'Similar genes based on literature',
                         entity: 'gene',
                         items: await try_or_else(async ({ search }) => await expand_gene(search, 'generif', 10), null)(props),
+                    },
+                ]
+            } else if (entity === 'drug') {
+                return [
+                    {
+                        title: 'Similar drugs based on Drug L1000 Signature Similarity',
+                        entity: 'drug',
+                        items: await try_or_else(async ({ search }) => await expand_drug(search, 'L1000_coexpression', 10), null)(props),
+                    },
+                    {
+                        title: 'Similar drugs based on literature',
+                        entity: 'drug',
+                        items: await try_or_else(async ({ search }) => await expand_drug(search, 'drugrif_cooccur', 10), null)(props),
                     },
                 ]
             } else {
