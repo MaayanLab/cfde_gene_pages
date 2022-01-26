@@ -788,7 +788,7 @@ const manifest = [
         output: {
             gene: true,
         },
-        title: 'Similar genes based on literature',
+        title: 'Co-mentioned genes in literature',
         entity: 'gene',
         items: if_search(async ({ search }) => await expand_gene(search, 'generif', 10)),
         status: true,
@@ -803,7 +803,7 @@ const manifest = [
         output: {
             drug: true,
         },
-        title: 'Similar drugs based on literature',
+        title: 'Co-mentioned drugs in literature',
         entity: 'drug',
         items: if_search(async ({ search }) => await gene_drug_rif(search)),
         status: true,
@@ -833,7 +833,7 @@ const manifest = [
         output: {
             drug: true,
         },
-        title: 'Similar drugs based on literature',
+        title: 'Co-mentioned drugs in literature',
         entity: 'drug',
         items: if_search(async ({ search }) => await expand_drug(search, 'drugrif_cooccur', 10)),
         status: true,
@@ -848,7 +848,7 @@ const manifest = [
         output: {
             gene: true,
         },
-        title: 'Similar genes based on literature',
+        title: 'Co-mentioned genes in literature',
         entity: 'gene',
         items: if_search(async ({ search }) => await drug_gene_rif(search)),
         status: true,
