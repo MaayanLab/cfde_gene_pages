@@ -127,7 +127,7 @@ export default function EntityCard(props) {
                         {clicks !== undefined ?
                         <div className="col-3">
                             <small
-                            className="card-text text-muted" style={{ width: "100px"}}>Clicks: <span>{clicks}</span></small>
+                            className="card-text text-muted text-end d-block"><span>{clicks}</span><img src="/images/click.png" className="mx-1 mb-2" width={18} height={18}/></small>
                         </div> : null}
                     </div>
                 </div>

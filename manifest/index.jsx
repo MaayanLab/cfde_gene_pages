@@ -382,7 +382,7 @@ const manifest = [
             alt: 'GTEx site screenshot',
         },
         title: 'GTEx',
-        description: 'The Genotype-Tissue Expression (GTEx) Portal provides open access to data including gene expression, QTLs, and histology images.',
+        description: 'The Genotype-Tissue Expression (GTEx) Portal provides open access to data including gene expression, QTLs, and histology static.',
         url: "https://www.gtexportal.org/home/",
         countapi: 'maayanlab.github.io/gteclick',
         clickurl: if_search(async ({ search }) => `https://www.gtexportal.org/home/gene/${await ensembl_id(search)}`),
