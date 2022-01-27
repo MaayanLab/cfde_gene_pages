@@ -2192,11 +2192,17 @@ for (const item of manifest) {
         item.tags = {}
     }
     for (const tag in item.tags) {
+
         if (item.tags[tag] === false) delete item.tags[tag]
         else {
-            manifest_tag_counts[tag] += 1
+            if (manifest_tag_counts[tag]) {
+                manifest_tag_counts[tag] += 1
+            } else {
+                manifest_tag_counts[tag] = 1
+            }
         }
     }
+    console.log(manifest_tag_counts)
     if (!('output' in item)) {
         item.output = {}
     }
