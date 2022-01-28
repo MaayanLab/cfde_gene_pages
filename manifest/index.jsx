@@ -577,6 +577,35 @@ const manifest = [
         clickurl: if_search(async ({ search }) => `${await appyter('PrismEXP', {'gene_symbol': search, 'gmt_select': 'GO_Biological_Process_2018'})}`)
     },
     {
+        name: 'RGCSRS',
+        tags: {
+            CF: false,
+            PS: true,
+            gene: true,
+            MaayanLab: true
+        },
+        output: {
+            drug: true,
+        },
+        img1: {
+            src: '/logos/appyters_logo.png',
+            alt: 'RGCSRS Appyter',
+        },
+        img2: {
+            src: '/logos/RGCSRS_site.png',
+            alt: 'RGCSRS Appyter site image',
+        },
+        img3: {
+            src: '/logos/MaayanLab_logo.png',
+            alt: 'MaayanLab',
+        },
+        title: 'RGCSRS',
+        description: 'This Appyter provides visualizations of the RNA-seq signatures induced by CRISPR knockouts and chemical perturbagens. Signatures are computed from transformed data profiles from the LINCS L1000 data.',
+        url: 'https://appyters.maayanlab.cloud/#/L1000_RNAseq_Gene_Search',
+        countapi: 'maayanlab.github.io/RGCSRSclick',
+        clickurl: if_search(async ({ search }) => `${await appyter('L1000_RNAseq_Gene_Search', { 'gene': search })}`),
+    },
+    {
         name: 'metabolomics',
         tags: {
             CF: true,
