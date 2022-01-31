@@ -208,8 +208,9 @@ const STITCH = defined(memo(async (gene_search) => {
     }
 }))
 
+const drug_query_url = 'https://pubchem.ncbi.nlm.nih.gov/rest'
+
 export const drug_info = defined(memo(try_or_else(async (drug_search) => {
-    const drug_query_url = 'https://pubchem.ncbi.nlm.nih.gov/rest'
     const drug_res = await fetchEx(`${drug_query_url}/pug/compound/name/${drug_search}/synonyms/JSON`)
     if (!drug_res.ok) throw new Error('drug_info status is not OK')
     const data = await drug_res.json()
@@ -219,14 +220,13 @@ export const drug_info = defined(memo(try_or_else(async (drug_search) => {
 const CID = defined(async (drug_search) => (await drug_info(drug_search)).CID)
 const CHEMBL = defined(async (drug_search) => (await drug_info(drug_search)).Synonym.find(item => item.trim().match(/^CHEMBL/)))
 const DrugBankNum = defined(async (drug_search) => (await drug_info(drug_search)).Synonym.find(item => item.trim().match(/^DB/)))
-const DrugName = defined(async (drug_search) => {
-    const info = (await drug_info(drug_search.toLowerCase()))
-    if (drug_search.toLowerCase() === info.Synonym[0]) {
-        return info.Synonym[1]
-    } else {
-        return info.Synonym[0]
-    }
-})
+const DrugName = defined(memo(async (drug_search) => {
+    const info = await drug_info(drug_search.toLowerCase())
+    const res = await fetchEx(`${drug_query_url}/pug/compound/cid/${info.CID}/property/Title/JSON`)
+    if (!res.ok) throw new Error('DrugName status is not OK')
+    const properties = await res.json()
+    return properties.PropertyTable.Properties[0].Title.toLowerCase()
+}))
 const GTPL = defined(async (drug_search) => (await drug_info(drug_search)).Synonym.find(item => item.trim().match(/^GTPL/)).substring(4))
 
 const ldp2_id = defined(memo(async (drug_search) => {
