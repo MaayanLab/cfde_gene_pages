@@ -2237,7 +2237,7 @@ for (const item of manifest) {
             }
         }
     }
-    console.log(manifest_tag_counts)
+    // console.debug(manifest_tag_counts)
     if (!('output' in item)) {
         item.output = {}
     }
