@@ -1,5 +1,5 @@
 
-export default function SimilarityInfo({ router, title, entity, items }) {
+export default function SimilarityInfo({ router, title, entity, items, description }) {
   return (
     <div className="col-12 justify-content-center">
       <p>

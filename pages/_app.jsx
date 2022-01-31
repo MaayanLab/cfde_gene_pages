@@ -87,7 +87,7 @@ export default function App({ Component, pageProps }) {
                 role="button"
             ><FontAwesomeIcon width={16} height={16} icon={faEnvelope} /></a>
           </p>
-          <p className="mb-0">Prototype project developed by the CFDE Gene WG</p>
+          <p className="mb-0">This project was developed for the <a href="https://commonfund.nih.gov/dataecosystem" target="_blank">Common Fund Data Ecosystem (CFDE) NIH Common Fund program.</a></p>
           <p className="mb-0"><a href="https://github.com/MaayanLab/cfde_gene_pages">Project's GitHub Repo</a></p>
           <p className="mb-0"><a href="https://docs.google.com/forms/d/1ifK44AvAay6JyUVXkKTzkHdX2QoWLRfZZ4T3sEFFR1U/">Suggest a new resource</a></p>
           <p><a href="#">Back to top</a></p>  </div>

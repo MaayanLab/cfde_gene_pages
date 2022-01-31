@@ -766,6 +766,7 @@ const manifest = [
     {
         name: 'gene-mrna-coexpr-similarity',
         component: 'SimilarityInfo',
+        description: 'GGIs are computed from thousands of randomly selected RNA-seq samples processed uniformly with the ARCHS4 pipeline. The top 10 genes are those with the highest Pearson Correlation Coefficient with the queried gene.',
         tags: {
             gene: true,
             pinned: true,
@@ -773,7 +774,7 @@ const manifest = [
         output: {
             gene: true,
         },
-        title: 'Similar genes based on mRNA co-expression',
+        title: 'Gene-gene interactions (GGIs) from mRNA co-expression',
         entity: 'gene',
         items: if_search(async ({ search }) => await expand_gene(search, 'coexpression', 10)),
         status: true,
@@ -781,6 +782,7 @@ const manifest = [
     {
         name: 'gene-gene-literature-similarity',
         component: 'SimilarityInfo',
+        description: 'GGIs are computed from based on the most co-mentions genes with the queried gene in published abstracts based on a PubMed search.',
         tags: {
             gene: true,
             pinned: true,
@@ -788,7 +790,7 @@ const manifest = [
         output: {
             gene: true,
         },
-        title: 'Co-mentioned genes in literature',
+        title: 'Gene-gene interactions (GGIs) from literature',
         entity: 'gene',
         items: if_search(async ({ search }) => await expand_gene(search, 'generif', 10)),
         status: true,
@@ -796,6 +798,7 @@ const manifest = [
     {
         name: 'gene-drug-literature-similarity',
         component: 'SimilarityInfo',
+        description: 'GDIs are computed from based on the most co-mentions genes with the queried drug in published abstracts based on a PubMed search.',
         tags: {
             gene: true,
             pinned: true,
@@ -803,7 +806,7 @@ const manifest = [
         output: {
             drug: true,
         },
-        title: 'Co-mentioned drugs in literature',
+        title: 'Gene-drug interactions (GDIs) from literature',
         entity: 'drug',
         items: if_search(async ({ search }) => await gene_drug_rif(search)),
         status: true,
@@ -811,6 +814,7 @@ const manifest = [
     {
         name: 'drug-l1000-coexpr-similarity',
         component: 'SimilarityInfo',
+        description: 'DDIs are computed from the LINCS L1000 signatures. For each drug, the strongest signature is selected and then signatures are compared with the cosine distance. Signatures are computed using the Characteristic Direction method as described in Bioinformatics, 32, 15, 2338-2345 (2016).',
         tags: {
             drug: true,
             pinned: true,
@@ -818,7 +822,7 @@ const manifest = [
         output: {
             drug: true,
         },
-        title: 'Similar drugs based on Drug L1000 Signature Similarity',
+        title: 'Drug-drug interactions (DDIs) based on the LINCS L1000 signatures',
         entity: 'drug',
         items: if_search(async ({ search }) => await expand_drug(search, 'L1000_coexpression', 10)),
         status: true,
@@ -826,6 +830,7 @@ const manifest = [
     {
         name: 'drug-drug-literature-similarity',
         component: 'SimilarityInfo',
+        description: 'DDIs are computed from based on the most co-mentions drugs with the queried drug in published abstracts based on a PubMed search.',
         tags: {
             drug: true,
             pinned: true,
@@ -833,7 +838,7 @@ const manifest = [
         output: {
             drug: true,
         },
-        title: 'Co-mentioned drugs in literature',
+        title: 'Drug-drug interactions (DDIs) from literature',
         entity: 'drug',
         items: if_search(async ({ search }) => await expand_drug(search, 'drugrif_cooccur', 10)),
         status: true,
@@ -841,6 +846,7 @@ const manifest = [
     {
         name: 'drug-gene-literature-similarity',
         component: 'SimilarityInfo',
+        description: 'DGIs are computed from based on the most co-mentions drugs with the queried gene in published abstracts based on a PubMed search.',
         tags: {
             drug: true,
             pinned: true,
@@ -848,7 +854,7 @@ const manifest = [
         output: {
             gene: true,
         },
-        title: 'Co-mentioned genes in literature',
+        title: 'Drug-gene interactions (DGIs) from literature',
         entity: 'gene',
         items: if_search(async ({ search }) => await drug_gene_rif(search)),
         status: true,

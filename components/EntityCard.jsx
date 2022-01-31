@@ -94,7 +94,7 @@ export default function EntityCard(props) {
                 </div>
                 <div className="card-footer"
                      style={{
-                         height: "80px"
+                         height: "100px"
                      }}>
                     <div className="row mt-2">
                         {props.clickurl !== undefined && props.search !== undefined ? (
