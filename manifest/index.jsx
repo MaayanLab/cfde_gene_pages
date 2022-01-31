@@ -2004,8 +2004,9 @@ const manifest = [
         description: 'DrugCentral provides information on active ingredients chemical entities, pharmaceutical products, drug mode of action, indications, pharmacologic action.',
         url: "https://drugcentral.org/",
         countapi: 'maayanlab.github.io/drugcentral',
-        clickurl: if_search(async ({ search }) => `https://drugcentral.org/drugcard/74?q=${await DrugName(search)}`),
-        example: 'https://drugcentral.org/drugcard/74?q=${drug-name}',
+        clickurl: if_search(async ({ search }) => `https://drugcentral.org/?q=${await DrugName(search)}`),
+        status: if_search(async ({ self }) => await isitup(self.clickurl, 'Results: 0')),
+        example: 'https://drugcentral.org/?q=${drug-name}',
     },
     {
         name: 'zinc15',
