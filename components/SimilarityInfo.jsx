@@ -12,19 +12,21 @@ export default function SimilarityInfo({ router, title, entity, items, descripti
           <BootstrapTooltip title={description} />
           :&nbsp;
         </span>
-        {items.map(item => (
-          <a
-            key={item}
-            className="mx-1"
-            href="#"
-            onClick={evt => {
-              router.push({
-                pathname: '/[entity]/[search]',
-                query: { entity: entity, search: item },
-              })
-            }}
-          >{item}</a>
-        ))}
+        <div className="d-flex flex-wrap">
+          {items.map(item => (
+            <a
+              key={item}
+              className="mx-1"
+              href="#"
+              onClick={evt => {
+                router.push({
+                  pathname: '/[entity]/[search]',
+                  query: { entity: entity, search: item },
+                })
+              }}
+            >{item}</a>
+          ))}
+        </div>
       </p>
     </div>
   )

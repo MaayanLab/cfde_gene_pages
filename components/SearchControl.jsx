@@ -30,7 +30,7 @@ export default function SearchControl({
     if (gene === undefined) gene = false
     if (drug === undefined) drug = true
     return (
-        <section className="pt-5 pb-3 container">
+        <section className="pt-5 container">
             <div className="row py-lg-5">
                 <div className="col-8 col-sm-10 mx-auto">
                     <h1 className="fw-light">Gene and Drug Landing Page Aggregator</h1>

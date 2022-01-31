@@ -17,7 +17,11 @@ export default function BootstrapTooltip({ title }) {
       data-bs-toggle="popover"
       data-bs-trigger="hover focus"
       title={title}>
-      <FontAwesomeIcon width={16} height={16} icon={faQuestionCircle} />
+      <FontAwesomeIcon
+        width={24} height={24}
+        icon={faQuestionCircle}
+        transform="up-1 left-1 shrink-4"
+      />
     </span>
   )
 }
