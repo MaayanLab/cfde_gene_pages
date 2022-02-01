@@ -2,7 +2,7 @@ import React from 'react'
 import Head from 'next/head'
 import dynamic from 'next/dynamic'
 import callable from '@/utils/callable'
-import full_manifest, {gene_id, drug_info} from '@/manifest'
+import full_manifest, {gene_id, drug_info, variant_to_gene} from '@/manifest'
 import useRouterEx from '@/utils/routerEx'
 import cmp from '@/manifest/cmp'
 import capitalize from '@/utils/capitalize'
@@ -39,9 +39,20 @@ export async function getStaticProps({params: {entity, search}}) {
     }
     try {
         if (entity === 'gene') {
+            console.log(42)
             if ((await gene_id(search)) === undefined) throw new Error('NotFound')
         } else if (entity === 'drug') {
+            console.log(44)
             if ((await drug_info(search)) === undefined) throw new Error('NotFound')
+        } else if (entity === 'variant') {
+            console.log(48)
+            if ((await variant_to_gene(search)) === undefined) {
+                throw new Error('NotFound')
+            }
+            else {
+                entity = 'gene';
+                console.log(entity)
+            }
         } else {
             throw new Error('NotFound')
         }
@@ -90,7 +101,7 @@ export default function Search(props) {
             <Head>
                 <title>Gene and Drug Landing Page Aggregator: {props.search} ({capitalize(props.entity)})</title>
             </Head>
-            <SearchPage router={router} {...props}>{({router, CF, PS, Ag, gene, drug}) => (
+            <SearchPage router={router} {...props}>{({router, CF, PS, Ag, gene, drug, variant}) => (
                 props.manifest && !router.loading ? (
                     <div className="album pb-3">
                         <div className="container">
@@ -98,6 +109,7 @@ export default function Search(props) {
                                 {props.manifest
                                     .filter(item => {
                                         if (gene === true && !('gene' in item.output)) return false
+                                        if (variant === true && !('gene' in item.output)) return false
                                         if (drug === true && !('drug' in item.output)) return false
                                         if ('pinned' in item.tags) return true
                                         if (CF === true && !('CF' in item.tags)) return false

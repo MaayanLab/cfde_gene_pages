@@ -8,7 +8,8 @@ const Autocomplete = dynamic(() => import('@/components/Autocomplete'))
 export default function SearchControl({
                                           entity: initEntity, search: initSearch,
                                           CF, setCF, PS, setPS, Ag, setAg,
-                                          gene, setGene, drug, setDrug,
+                                          gene, setGene, variant, setVariant,
+                                          drug, setDrug,
                                           onSubmit,
                                       }) {
     const [entity, setEntity] = React.useState('gene')
@@ -28,6 +29,7 @@ export default function SearchControl({
     if (PS === undefined) PS = true
     if (Ag === undefined) Ag = true
     if (gene === undefined) gene = false
+    if (variant === undefined) variant = false
     if (drug === undefined) drug = true
     return (
         <section className="pt-5 container">
@@ -43,7 +45,7 @@ export default function SearchControl({
                         autoComplete="off"
                         onSubmit={(evt) => {
                             evt.preventDefault()
-                            onSubmit({entity, search, CF, PS, Ag, gene, drug})
+                            onSubmit({entity, search, CF, PS, Ag, gene, variant, drug})
                         }}
                     >
                         <div className="input-group">
