@@ -107,7 +107,6 @@ const variant_to_gene = defined(memo(async (variant) => {
             console.log(gene)
         }
     }
-
 }))
 
 const appyter = defined(memo(async (appyter_name, args) => {

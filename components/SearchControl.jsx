@@ -1,6 +1,6 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
-import {gene_examples, drug_examples} from '@/manifest/examples'
+import {gene_examples, drug_examples, variant_examples} from '@/manifest/examples'
 import {manifest_tag_counts} from '@/manifest'
 
 const Autocomplete = dynamic(() => import('@/components/Autocomplete'))
@@ -54,12 +54,13 @@ export default function SearchControl({
                                 onChange={evt => setEntity(evt.target.value)}
                             >
                                 <option value="gene">Gene</option>
+                                <option value="variant">Variant</option>
                                 <option value="drug">Drug</option>
                             </select>
                             <Autocomplete
                                 type="text"
                                 className="form-control"
-                                placeholder="Gene or Drug"
+                                placeholder="Gene, Variant or Drug"
                                 autocomplete={entity}
                                 value={search}
                                 onChange={evt => setSearch(evt.target.value)}
@@ -67,8 +68,8 @@ export default function SearchControl({
                             <input type="submit" className="btn btn-primary" value="Search"/>
                         </div>
                         <div className="input-group">
-                            <div className="d-flex flex-wrap align-content-around justify-content-center">
-                                <div className="my-2 text-muted">
+                            <div className="d-flex flex-wrap align-content-around justify-content-start">
+                                <div className="mt-2 text-muted">
                                     Gene Examples:
                                     {gene_examples.map((gene, ind) => (
                                         <span key={gene}>
@@ -85,7 +86,7 @@ export default function SearchControl({
                                         </span>
                                     ))}
                                 </div>
-                                <div className="my-2 mx-3 text-muted">
+                                <div className="mt-2 text-muted mx-3">
                                     Drug Examples:
                                     {drug_examples.map((drug, ind) => (
                                         <span key={drug}>
@@ -98,6 +99,23 @@ export default function SearchControl({
                                                     onSubmit({entity: 'drug', search: drug, CF, PS, Ag})
                                                 }}>
                                             {drug}
+                                        </a>
+                                        </span>
+                                    ))}
+                                </div>
+                                <div className="mt-1 mb-3 text-muted">
+                                    Variant Examples:
+                                    {variant_examples.map((variant, ind) => (
+                                        <span key={variant}>
+                                            {ind > 0 ? ',' : null}
+                                            &nbsp;
+                                            <a
+                                                href="#"
+                                                onClick={(evt) => {
+                                                    evt.preventDefault();
+                                                    onSubmit({entity: 'variant', search: variant, CF, PS, Ag})
+                                                }}>
+                                            {variant}
                                         </a>
                                         </span>
                                     ))}
