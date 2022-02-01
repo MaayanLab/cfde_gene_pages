@@ -18,6 +18,7 @@ function if_search(func) {
 }
 
 const gene_query_url = 'https://mygene.info/v3'
+const variant_query_url = 'https://mygene.info/v1'
 
 const species_map = {
     '9606': 'Homo sapiens',
@@ -72,6 +73,7 @@ const drug_gene_rif = defined(memo(async (drug) => {
     return lookup[drug.toLowerCase()]
 }))
 
+
 // const predict_regulators = defined(memo(async (genes, type_url, top = 5) => {
 //     const results = await fetchEx(`https://maayanlab.cloud/${type_url}/api/enrich/`, {
 //         method: 'POST',
@@ -94,6 +96,19 @@ const gene_info = defined(memo(try_or_else(async (gene_search) => {
     if (!gene_res.ok) throw new Error('gene_info status is not OK')
     return await gene_res.json()
 })))
+
+
+const variant_to_gene = defined(memo(async (variant) => {
+    const myvariant = await fetchEx(`${variant_query_url}/variant/${variant}`);
+    if (myvariant.ok) {
+        const myvariant_json = await myvariant.json()
+        if ('dbsnp' in myvariant_json) {
+            const gene = myvariant_json.dbsnp.gene.name
+            console.log(gene)
+        }
+    }
+
+}))
 
 const appyter = defined(memo(async (appyter_name, args) => {
     const ret = await fetchEx(`https://appyters.maayanlab.cloud/${appyter_name}/`, {
@@ -128,6 +143,7 @@ const clean_cut = defined((desc, max_len = 400) => {
 // const organism = defined(async (gene_search) => species_map[(await gene_info(gene_search)).taxid])
 // const chromosome_location = defined(async (gene_search) => (await gene_info(gene_search)).map_location)
 // const biological_function = defined(async (gene_search) => clean_cut((await gene_info(gene_search)).summary))
+
 const ensembl_id = defined(async (gene_search) => (await gene_info(gene_search)).ensembl.gene)
 const HGNC = defined(async (gene_search) => (await gene_info(gene_search)).HGNC)
 const uniprot_kb = defined(async (gene_search) => (await gene_info(gene_search)).uniprot['Swiss-Prot'])
