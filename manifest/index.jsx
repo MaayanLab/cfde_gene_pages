@@ -100,11 +100,18 @@ const gene_info = defined(memo(try_or_else(async (gene_search) => {
 
 export const variant_to_gene = defined(memo(async (variant) => {
     const myvariant = await fetchEx(`${variant_query_url}/variant/${variant}`);
-    console.log(`${variant_query_url}/variant/${variant}`)
     if (myvariant.ok) {
-        const myvariant_json = await myvariant.json()
+        let myvariant_json = await myvariant.json()
+        // We don't care about the exact nucleotide-nucleotide variation, so we choose the first one for rsIDs
+        if (Array.isArray(myvariant_json)) myvariant_json = myvariant_json[0];
         if ('dbsnp' in myvariant_json) {
-            return myvariant_json.dbsnp.gene.name
+            if ('gene' in myvariant_json.dbsnp) {
+                let gene = myvariant_json.dbsnp.gene;
+                // First gene is usually the one that makes sense both literally and figuratively
+                // i.e. we're not interested in antisense RNAs etc
+                if (Array.isArray(gene)) gene = gene[0]
+                return gene.symbol
+            }
         }
     }
 }))

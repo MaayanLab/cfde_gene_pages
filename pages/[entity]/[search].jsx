@@ -39,19 +39,17 @@ export async function getStaticProps({params: {entity, search}}) {
     }
     try {
         if (entity === 'gene') {
-            console.log(42)
             if ((await gene_id(search)) === undefined) throw new Error('NotFound')
         } else if (entity === 'drug') {
-            console.log(44)
             if ((await drug_info(search)) === undefined) throw new Error('NotFound')
         } else if (entity === 'variant') {
-            console.log(48)
-            if ((await variant_to_gene(search)) === undefined) {
+            let variant_gene = await variant_to_gene(search)
+            if ((variant_gene) === undefined) {
                 throw new Error('NotFound')
             }
             else {
                 entity = 'gene';
-                console.log(entity)
+                search = variant_gene;
             }
         } else {
             throw new Error('NotFound')
