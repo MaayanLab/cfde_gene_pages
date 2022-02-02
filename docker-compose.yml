@@ -2,6 +2,6 @@ version: '3'
 services:
   app:
     build: .
-    image: maayanlab/cfde_gene_pages:0.7.10
+    image: maayanlab/cfde_gene_pages:0.7.11
     ports:
       - 3000:3000
