@@ -2238,9 +2238,6 @@ for (const item of manifest) {
             }
         }
     }
-    // Surtract number of "-similarity" items in the manifest. Not awfully sustainable but gets the job done
-    manifest_tag_counts.gene = manifest_tag_counts.gene - 3;
-    manifest_tag_counts.drug = manifest_tag_counts.drug - 3;
     // console.debug(manifest_tag_counts)
     if (!('output' in item)) {
         item.output = {}
@@ -2255,5 +2252,8 @@ for (const item of manifest) {
         item.status = if_search(async ({ self }) => await isitup(self.clickurl))
     }
 }
+// Surtract number of "-similarity" items in the manifest. Not awfully sustainable but gets the job done
+manifest_tag_counts.gene = manifest_tag_counts.gene - 3;
+manifest_tag_counts.drug = manifest_tag_counts.drug - 3;
 
 export default manifest
