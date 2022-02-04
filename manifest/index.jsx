@@ -817,6 +817,20 @@ const manifest = [
         example: 'https://maayanlab.cloud/archs4/gene/${gene-symbol}',
     },
     {
+        name: 'variant-to-gene-conversion',
+        component: 'VariantInfo',
+        title: '',
+        description: 'dbSNP contains human single nucleotide variations, microsatellites, and small-scale insertions and deletions along with publication, population frequency, molecular consequence, and genomic and RefSeq mapping information for both common variations and clinical mutations.',
+        tags: {
+            gene: true,
+            variant: true,
+            pinned: true,
+        },
+        gene: if_search(async ({search}) => `${search}`),
+        entity: 'gene',
+        status: true,
+    },
+    {
         name: 'gene-mrna-coexpr-similarity',
         component: 'SimilarityInfo',
         description: 'GGIs are computed from thousands of randomly selected RNA-seq samples processed uniformly with the ARCHS4 pipeline. The top 10 genes are those with the highest Pearson Correlation Coefficient with the queried gene.',
@@ -2278,5 +2292,8 @@ for (const item of manifest) {
         item.status = if_search(async ({self}) => await isitup(self.clickurl))
     }
 }
+// Surtract number of "-similarity" items in the manifest. Not awfully sustainable but gets the job done
+manifest_tag_counts.gene = manifest_tag_counts.gene - 3;
+manifest_tag_counts.drug = manifest_tag_counts.drug - 3;
 
 export default manifest

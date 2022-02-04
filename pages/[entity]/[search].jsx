@@ -11,11 +11,13 @@ const EntityCard = dynamic(() => import('@/components/EntityCard'))
 const SearchPage = dynamic(() => import('@/components/SearchPage'))
 const GeneInfoCard = dynamic(() => import('@/components/GeneInfoCard'))
 const SimilarityInfo = dynamic(() => import('@/components/SimilarityInfo'))
+const VariantInfo = dynamic(() => import('@/components/VariantInfo'))
 
 const components = {
     GeneInfoCard,
     EntityCard,
     SimilarityInfo,
+    VariantInfo,
     [undefined]: EntityCard,
 }
 
