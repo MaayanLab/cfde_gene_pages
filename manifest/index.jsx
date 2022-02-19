@@ -389,6 +389,31 @@ const manifest = [
         example: 'https://www.gtexportal.org/home/gene/${ensembl_id}',
     },
     {
+        name: 'MetGENE',
+        tags: {
+            CF: true,
+            PS: true,
+            gene: true,
+        },
+        output: {
+            tissue: true,
+        },
+        img1: {
+            src: '/logos/MetGENE_logo.png',
+            alt: 'MetGENE logo',
+        },
+        img2: {
+            src: '/logos/MetGENE_site.png',
+            alt: 'MetGENE site screenshot',
+        },
+        title: 'MetGENE',
+        description: 'The objective of MetGENE is to identify the reactions catalyzed by the given gene(s) RPE and the related metabolites.',
+        url: "https://sc-cfdewebdev.sdsc.edu/MetGENE/metGene.php",
+        countapi: 'maayanlab.github.io/metgeneclick',
+        clickurl: if_search(async ({search}) => `https://sc-cfdewebdev.sdsc.edu/MetGENE/metGene.php?species=hsa&anatomy=Blood&disease=Diabetes&phenotype=BMI&GeneInfoStr=${await entrezgene(search)}`),
+        example: 'https://sc-cfdewebdev.sdsc.edu/MetGENE/metGene.php?species=hsa&anatomy=Blood&disease=Diabetes&phenotype=BMI&GeneInfoStr=${entrez}',
+    },
+    {
         name: 'Pharos',
         tags: {
             CF: true,
