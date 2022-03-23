@@ -42,7 +42,7 @@ export const gene_id = defined(memo(async (gene_search) => {
 const expand_gene = defined(memo(async (gene_search, exp_type = "coexpression", top = 5) => {
     const gene_exp = await fetchEx(`https://maayanlab.cloud/enrichrsearch/gene/expand?search=${gene_search}&top=${top}&type=${exp_type}`)
     if (gene_exp.ok) {
-        const { data, success } = await gene_exp.json()
+        const {data, success} = await gene_exp.json()
         if ((Array.isArray(data)) && success) {
             if (data.length > 0) {
                 return data
@@ -54,7 +54,7 @@ const expand_gene = defined(memo(async (gene_search, exp_type = "coexpression", 
 const expand_drug = defined(memo(async (drug_search, exp_type = "L1000_coexpression", top = 5) => {
     const gene_exp = await fetchEx(`https://maayanlab.cloud/enrichrsearch/drug/expand?search=${drug_search}&top=${top}&type=${exp_type}`)
     if (gene_exp.ok) {
-        const { data, success } = await gene_exp.json()
+        const {data, success} = await gene_exp.json()
         if ((Array.isArray(data)) && success) {
             if (data.length > 0) {
                 return data
@@ -385,7 +385,7 @@ const manifest = [
         description: 'The Genotype-Tissue Expression (GTEx) Portal provides open access to data including gene expression, QTLs, and histology static.',
         url: "https://www.gtexportal.org/home/",
         countapi: 'maayanlab.github.io/gteclick',
-        clickurl: if_search(async ({ search }) => `https://www.gtexportal.org/home/gene/${await ensembl_id(search)}`),
+        clickurl: if_search(async ({search}) => `https://www.gtexportal.org/home/gene/${await ensembl_id(search)}`),
         example: 'https://www.gtexportal.org/home/gene/${ensembl_id}',
     },
     {
@@ -410,8 +410,8 @@ const manifest = [
         description: 'The objective of MetGENE is to identify the reactions catalyzed by the given gene(s) RPE and the related metabolites.',
         url: "https://sc-cfdewebdev.sdsc.edu/MetGENE/metGene.php",
         countapi: 'maayanlab.github.io/metgeneclick',
-        clickurl: if_search(async ({search}) => `https://sc-cfdewebdev.sdsc.edu/MetGENE/metGene.php?species=hsa&anatomy=Blood&disease=Diabetes&phenotype=BMI&GeneInfoStr=${await entrezgene(search)}`),
-        example: 'https://sc-cfdewebdev.sdsc.edu/MetGENE/metGene.php?species=hsa&anatomy=Blood&disease=Diabetes&phenotype=BMI&GeneInfoStr=${entrez}',
+        clickurl: if_search(async ({search}) => `'https://sc-cfdewebdev.sdsc.edu/MetGENE/metGene.php?GeneInfoStr=${search}&GeneIDType=SYMBOL&species=hsa&anatomy=NA&disease=NA&phenotype=NA'`),
+        example: '\'https://sc-cfdewebdev.sdsc.edu/MetGENE/metGene.php?GeneInfoStr=${gene-symbol}&GeneIDType=SYMBOL&species=hsa&anatomy=NA&disease=NA&phenotype=NA\'',
     },
     {
         name: 'Pharos',
@@ -444,7 +444,7 @@ const manifest = [
         description: 'The Pharos interface provides facile access to most data types collected by the Knowledge Management Center for the IDG program.',
         url: "https://pharos.nih.gov/",
         countapi: 'maayanlab.github.io/pharclick',
-        clickurl: if_search(async ({ search }) => `https://pharos.nih.gov/targets/${await uniprot_kb(search)}`),
+        clickurl: if_search(async ({search}) => `https://pharos.nih.gov/search?q=${search}`),
         example: 'https://pharos.nih.gov/targets/${swiss-prot}',
     },
     {
@@ -479,7 +479,7 @@ const manifest = [
         description: 'The Harmonizome is a collection of knowledge about genes and proteins from 114 datasets created by processing 66 online resources to facilitate discovery via data integration.',
         url: "https://maayanlab.cloud/Harmonizome/",
         countapi: 'maayanlab.github.io/harmclick',
-        clickurl: if_search(async ({ search }) => `https://maayanlab.cloud/Harmonizome/gene/${search}`),
+        clickurl: if_search(async ({search}) => `https://maayanlab.cloud/Harmonizome/gene/${search}`),
         example: 'https://maayanlab.cloud/Harmonizome/gene/${gene-symbol}',
     },
     {
@@ -512,7 +512,7 @@ const manifest = [
         url: "https://maayanlab.cloud/sigcom-lincs",
         countapi: 'maayanlab.github.io/SigComLINCSGeneclick',
         // https://maayanlab.cloud/sigcom-lincs/metadata-api/entities?filter={%22skip%22:0,%22limit%22:10,%22where%22:{%22meta.symbol%22:%20%22STAT3%22},%22fields%22:[%22id%22]}
-        clickurl: if_search(async ({ search }) => `https://maayanlab.cloud/sigcom-lincs/#/MetadataSearch/Genes?query={%22skip%22:0,%22limit%22:10,%22search%22:[%22${search}%22]}`),
+        clickurl: if_search(async ({search}) => `https://maayanlab.cloud/sigcom-lincs/#/MetadataSearch/Genes?query={%22skip%22:0,%22limit%22:10,%22search%22:[%22${search}%22]}`),
         example: 'https://maayanlab.cloud/sigcom-lincs/#/MetadataSearch/Genes?query={%22skip%22:0,%22limit%22:10,%22search%22:[%22${gene-symbol}%22]}',
     },
     {
@@ -539,7 +539,7 @@ const manifest = [
         description: 'SigCom LINCS data portal serves LINCS datasets and signatures. It provides a signature similarity search to query for mimicker or reverser signatures.',
         url: "https://maayanlab.cloud/sigcom-lincs",
         countapi: 'maayanlab.github.io/SigComLINCSDrugclick',
-        clickurl: if_search(async ({ search }) => `https://maayanlab.cloud/sigcom-lincs/#/MetadataSearch/Signatures?query={%22skip%22:0,%22limit%22:10,%22search%22:[%22${search}%22]}`),
+        clickurl: if_search(async ({search}) => `https://maayanlab.cloud/sigcom-lincs/#/MetadataSearch/Signatures?query={%22skip%22:0,%22limit%22:10,%22search%22:[%22${search}%22]}`),
         example: 'https://maayanlab.cloud/sigcom-lincs/#/MetadataSearch/Signatures?query={%22skip%22:0,%22limit%22:10,%22search%22:[%22${gene-symbol}%22]}',
     },
     {
@@ -569,7 +569,7 @@ const manifest = [
         description: 'IDG Reactome Portal provides biologist-friendly way to visualize proteins, complexes, and reactions in high-quality Reactome pathways.',
         url: "https://idg.reactome.org/",
         countapi: 'maayanlab.github.io/IDGReactomeGeneclick',
-        clickurl: if_search(async ({ search }) => `https://idg.reactome.org/search/${search}`),
+        clickurl: if_search(async ({search}) => `https://idg.reactome.org/search/${search}`),
         example: 'https://idg.reactome.org/search/${gene-symbol}',
     },
     {
@@ -599,7 +599,10 @@ const manifest = [
         description: 'Automated Vector Quantization of Massive Co-expression RNA-seq Data Improves Gene Function Prediction (PrismEXP) is a new statistical approach for accurate gene function prediction.',
         url: 'https://appyters.maayanlab.cloud/#/PrismEXP',
         countapi: 'maayanlab.github.io/PrismEXPclick',
-        clickurl: if_search(async ({ search }) => `${await appyter('PrismEXP', {'gene_symbol': search, 'gmt_select': 'GO_Biological_Process_2018'})}`)
+        clickurl: if_search(async ({search}) => `${await appyter('PrismEXP', {
+            'gene_symbol': search,
+            'gmt_select': 'GO_Biological_Process_2018'
+        })}`)
     },
     {
         name: 'RGCSRS',
@@ -628,7 +631,7 @@ const manifest = [
         description: 'This Appyter provides visualizations of the RNA-seq signatures induced by CRISPR knockouts and chemical perturbagens. Signatures are computed from transformed data profiles from the LINCS L1000 data.',
         url: 'https://appyters.maayanlab.cloud/#/L1000_RNAseq_Gene_Search',
         countapi: 'maayanlab.github.io/RGCSRSclick',
-        clickurl: if_search(async ({ search }) => `${await appyter('L1000_RNAseq_Gene_Search', { 'gene': search })}`),
+        clickurl: if_search(async ({search}) => `${await appyter('L1000_RNAseq_Gene_Search', {'gene': search})}`),
     },
     {
         name: 'metabolomics',
@@ -637,8 +640,7 @@ const manifest = [
             PS: true,
             gene: true,
         },
-        output: {
-        },
+        output: {},
         img1: {
             src: '/logos/Metabolomics_logo.jpeg',
             alt: 'Metabolomics image',
@@ -650,7 +652,7 @@ const manifest = [
         title: 'Metabolomics Workbench',
         description: 'The Metabolomics Workbench serves as a repository for metabolomics data and metadata and provides analysis tools.',
         url: 'https://www.metabolomicsworkbench.org/',
-        clickurl: if_search(async ({ search }) => `https://www.metabolomicsworkbench.org/databases/proteome/MGP_detail.php?MGP_ID=${await metabolomicswb(search)}`),
+        clickurl: if_search(async ({search}) => `https://www.metabolomicsworkbench.org/databases/proteome/MGP_detail.php?MGP_ID=${await metabolomicswb(search)}`),
         example: 'https://www.metabolomicsworkbench.org/databases/proteome/MGP_detail.php?MGP_ID=${mgp_id}',
         countapi: 'maayanlab.github.io/metabclick',
     },
@@ -675,7 +677,7 @@ const manifest = [
         title: 'Wikipedia',
         description: 'Wikipedia is a free content, multilingual online encyclopedia written and maintained by a community of volunteers through a model of open collaboration, using a wiki-based editing system',
         url: 'https://en.wikipedia.org/',
-        clickurl: if_search(async ({ search }) => `https://en.wikipedia.org/wiki/${search}`),
+        clickurl: if_search(async ({search}) => `https://en.wikipedia.org/wiki/${search}`),
         example: 'https://en.wikipedia.org/wiki/${gene-symbol}',
         countapi: 'maayanlab.github.io/wikipediaclick',
     },
@@ -700,7 +702,7 @@ const manifest = [
         title: 'PubMed',
         description: 'PubMed comprises more than 33 million citations for biomedical literature from MEDLINE, life science journals, and online books.',
         url: 'https://pubmed.ncbi.nlm.nih.gov/',
-        clickurl: if_search(async ({ search }) => `https://pubmed.ncbi.nlm.nih.gov/?term=${search}`),
+        clickurl: if_search(async ({search}) => `https://pubmed.ncbi.nlm.nih.gov/?term=${search}`),
         example: 'https://pubmed.ncbi.nlm.nih.gov/?term=${gene-symbol}',
         countapi: 'maayanlab.github.io/pubmedclick',
     },
@@ -729,7 +731,7 @@ const manifest = [
         description: 'GlyGen provides computational and informatics resources and tools for glycosciences research using information from many data sources.',
         url: "https://www.glygen.org/protein-search/",
         countapi: 'maayanlab.github.io/glygclick',
-        clickurl: if_search(async ({ search }) => `https://www.glygen.org/protein/${await uniprot_kb(search)}`),
+        clickurl: if_search(async ({search}) => `https://www.glygen.org/protein/${await uniprot_kb(search)}`),
         example: 'https://www.glygen.org/protein/${swiss-prot}',
     },
     {
@@ -756,7 +758,14 @@ const manifest = [
         description: 'The Knockout Mouse Programme - International Mouse Phenotyping Consortium (KOMP-IMPC) has information about the functions of protein-coding genes in the mouse genome.',
         url: "https://www.mousephenotype.org",
         countapi: 'maayanlab.github.io/kompclick',
-        clickurl: if_search(async ({ search }) => `https://www.mousephenotype.org/data/genes/MGI:${await MGI(search)}`),
+        clickurl: if_search(async ({search}) => {
+            try {
+                return `https://www.mousephenotype.org/data/genes/MGI:${await MGI(search)}`
+            } catch (e) {
+                return `https://www.mousephenotype.org/data/search?term=${search}&type=gene`
+            }
+        }),
+        status: if_search(async ({self}) => await isitup(self.clickurl, 'No results found for gene')),
         example: 'https://www.mousephenotype.org/data/genes/MGI:${MGI_id}',
     },
     {
@@ -781,8 +790,8 @@ const manifest = [
         description: 'This page contains information about genetic changes that were identified in a UDN participant.',
         url: "https://undiagnosed.hms.harvard.edu/genes/",
         countapi: 'maayanlab.github.io/udnclick',
-        clickurl: if_search(async ({ search }) => `https://undiagnosed.hms.harvard.edu/genes/${search}/`),
-        status: if_search(async ({ self }) => await isitup(self.clickurl, '404 Error Page')),
+        clickurl: if_search(async ({search}) => `https://undiagnosed.hms.harvard.edu/genes/${search}/`),
+        status: if_search(async ({self}) => await isitup(self.clickurl, '404 Error Page')),
         example: 'https://undiagnosed.hms.harvard.edu/genes/${gene-symbol}/',
     },
     {
@@ -814,7 +823,7 @@ const manifest = [
         description: 'ARCHS4 provides access to gene counts from HiSeq 2000, HiSeq 2500 and NextSeq 500 platforms for human and mouse experiments from GEO and SRA.',
         url: "https://maayanlab.cloud/archs4/",
         countapi: 'maayanlab.github.io/ARCHS4click',
-        clickurl: if_search(async ({ search }) => `https://maayanlab.cloud/archs4/gene/${search}`),
+        clickurl: if_search(async ({search}) => `https://maayanlab.cloud/archs4/gene/${search}`),
         example: 'https://maayanlab.cloud/archs4/gene/${gene-symbol}',
     },
     {
@@ -831,7 +840,7 @@ const manifest = [
         title: 'Gene-gene interactions (GGIs) from mRNA co-expression',
         description: 'GGIs are computed from thousands of randomly selected RNA-seq samples processed uniformly with the ARCHS4 pipeline. The top 10 genes are those with the highest Pearson Correlation Coefficient with the queried gene.',
         entity: 'gene',
-        items: if_search(async ({ search }) => await expand_gene(search, 'coexpression', 10)),
+        items: if_search(async ({search}) => await expand_gene(search, 'coexpression', 10)),
         status: true,
     },
     {
@@ -848,7 +857,7 @@ const manifest = [
         title: 'Gene-gene interactions (GGIs) from literature',
         description: 'GGIs are computed from based on the most co-mentions genes with the queried gene in published abstracts based on a PubMed search.',
         entity: 'gene',
-        items: if_search(async ({ search }) => await expand_gene(search, 'generif', 10)),
+        items: if_search(async ({search}) => await expand_gene(search, 'generif', 10)),
         status: true,
     },
     {
@@ -865,7 +874,7 @@ const manifest = [
         title: 'Gene-drug interactions (GDIs) from literature',
         description: 'GDIs are computed from based on the most co-mentions genes with the queried drug in published abstracts based on a PubMed search.',
         entity: 'drug',
-        items: if_search(async ({ search }) => await gene_drug_rif(search)),
+        items: if_search(async ({search}) => await gene_drug_rif(search)),
         status: true,
     },
     {
@@ -882,7 +891,7 @@ const manifest = [
         title: 'Drug-drug interactions (DDIs) based on the LINCS L1000 signatures',
         description: 'DDIs are computed from the LINCS L1000 signatures. For each drug, the strongest signature is selected and then signatures are compared with the cosine distance. Signatures are computed using the Characteristic Direction method as described in Bioinformatics, 32, 15, 2338-2345 (2016).',
         entity: 'drug',
-        items: if_search(async ({ search }) => await expand_drug(search, 'L1000_coexpression', 10)),
+        items: if_search(async ({search}) => await expand_drug(search, 'L1000_coexpression', 10)),
         status: true,
     },
     {
@@ -899,7 +908,7 @@ const manifest = [
         title: 'Drug-drug interactions (DDIs) from literature',
         description: 'DDIs are computed from based on the most co-mentions drugs with the queried drug in published abstracts based on a PubMed search.',
         entity: 'drug',
-        items: if_search(async ({ search }) => await expand_drug(search, 'drugrif_cooccur', 10)),
+        items: if_search(async ({search}) => await expand_drug(search, 'drugrif_cooccur', 10)),
         status: true,
     },
     {
@@ -916,7 +925,7 @@ const manifest = [
         title: 'Drug-gene interactions (DGIs) from literature',
         description: 'DGIs are computed from based on the most co-mentions drugs with the queried gene in published abstracts based on a PubMed search.',
         entity: 'gene',
-        items: if_search(async ({ search }) => await drug_gene_rif(search)),
+        items: if_search(async ({search}) => await drug_gene_rif(search)),
         status: true,
     },
     {
@@ -943,7 +952,7 @@ const manifest = [
         description: 'The NCBI Gene Database page provides information about nomenclature, RefSeqs, maps, pathways, variations, phenotypes, and links to genome-, phenotype-, and locus-specific resources.',
         url: "https://www.ncbi.nlm.nih.gov/gene/",
         countapi: 'maayanlab.github.io/NCBIclick',
-        clickurl: if_search(async ({ search }) => `https://www.ncbi.nlm.nih.gov/gene/${await gene_id(search)}`),
+        clickurl: if_search(async ({search}) => `https://www.ncbi.nlm.nih.gov/gene/${await gene_id(search)}`),
         example: 'https://www.ncbi.nlm.nih.gov/gene/${ncbi_gene_id}',
     },
     {
@@ -968,7 +977,7 @@ const manifest = [
         description: 'WikiPathways was established to facilitate the contribution and maintenance of pathway information by the biology community.',
         url: "https://www.wikipathways.org/",
         countapi: 'maayanlab.github.io/WikiPathwaysclick',
-        clickurl: if_search(async ({ search }) => `https://www.wikipathways.org//index.php?query=${search}&title=Special%3ASearchPathways&doSearch=1&sa=Search`),
+        clickurl: if_search(async ({search}) => `https://www.wikipathways.org//index.php?query=${search}&title=Special%3ASearchPathways&doSearch=1&sa=Search`),
         example: 'https://www.wikipathways.org//index.php?query=${gene-symbol}&title=Special%3ASearchPathways&doSearch=1&sa=Search',
     },
     {
@@ -993,7 +1002,7 @@ const manifest = [
         description: 'The goal of the Common Fund\'s Protein Capture Reagents Program is to develop a community resource of renewable, high-quality protein capture reagents, such as antibodies, with a focus on the creation of transcription factor reagents and testing next generation capture technologies.',
         url: 'https://proteincapture.org/',
         countapi: 'maayanlab.github.io/ProteinCaptureReagentsProgramclick',
-        clickurl: if_search(async ({ search }) => `https://proteincapture.org/reagent_portal/?hgnc_name_value=${search}#proteins`),
+        clickurl: if_search(async ({search}) => `https://proteincapture.org/reagent_portal/?hgnc_name_value=${search}#proteins`),
         example: 'https://proteincapture.org/reagent_portal/?hgnc_name_value=${gene-symbol}#proteins',
     },
     {
@@ -1022,7 +1031,7 @@ const manifest = [
         description: 'GeneCards is a searchable, integrative database that provides comprehensive, user-friendly information on all annotated and predicted human genes.',
         url: 'https://www.genecards.org/',
         countapi: 'maayanlab.github.io/genecardclick',
-        clickurl: if_search(async ({ search }) => `https://www.genecards.org/cgi-bin/carddisp.pl?gene=${search}`),
+        clickurl: if_search(async ({search}) => `https://www.genecards.org/cgi-bin/carddisp.pl?gene=${search}`),
         example: 'https://www.genecards.org/cgi-bin/carddisp.pl?gene=${gene-symbol}',
     },
     {
@@ -1056,7 +1065,7 @@ const manifest = [
         description: 'Enrichr is an enrichment analysis tool that provides various types of visualization summaries of collective functions of gene sets.',
         url: "https://maayanlab.cloud/Enrichr/#find",
         countapi: 'maayanlab.github.io/enrichrclick',
-        clickurl: if_search(async ({ search }) => `https://maayanlab.cloud/Enrichr/#find!gene=${search}`),
+        clickurl: if_search(async ({search}) => `https://maayanlab.cloud/Enrichr/#find!gene=${search}`),
         example: 'https://maayanlab.cloud/Enrichr/#find!gene=${gene-symbol}',
     },
     {
@@ -1065,8 +1074,7 @@ const manifest = [
             gene: true,
             PS: true,
         },
-        output: {
-        },
+        output: {},
         img1: {
             src: '/logos/ENCODE_logo.png',
             alt: 'ENCODE image',
@@ -1079,7 +1087,7 @@ const manifest = [
         description: 'The ENCODE Consortium not only produces high-quality data, but also analyzes the data in an integrative fashion.',
         url: "https://www.encodeproject.org/",
         countapi: 'maayanlab.github.io/ENCODEclick',
-        clickurl: if_search(async ({ search }) => `https://www.encodeproject.org/genes/${await gene_id(search)}`),
+        clickurl: if_search(async ({search}) => `https://www.encodeproject.org/genes/${await gene_id(search)}`),
         example: 'https://www.encodeproject.org/genes/{ncbi_gene_id}',
     },
     {
@@ -1104,7 +1112,7 @@ const manifest = [
         description: 'The mission of UniProt is to provide the scientific community with a comprehensive, high-quality and freely accessible resource of protein sequence and functional information.',
         url: "https://www.uniprot.org/",
         countapi: 'maayanlab.github.io/uniprotclick',
-        clickurl: if_search(async ({ search }) => `https://www.uniprot.org/uniprot/${await uniprot_kb(search)}`),
+        clickurl: if_search(async ({search}) => `https://www.uniprot.org/uniprot/${await uniprot_kb(search)}`),
         example: 'https://www.uniprot.org/uniprot/${swiss-prot}',
     },
     {
@@ -1125,7 +1133,7 @@ const manifest = [
         description: 'AlphaFold DB provides open access to protein structure predictions for the human proteome and 20 other key organisms to accelerate scientific research.',
         url: "https://alphafold.ebi.ac.uk/",
         countapi: 'maayanlab.github.io/alphafoldclick',
-        clickurl: if_search(async ({ search }) => `https://alphafold.ebi.ac.uk/entry/${await uniprot_kb(search)}`),
+        clickurl: if_search(async ({search}) => `https://alphafold.ebi.ac.uk/entry/${await uniprot_kb(search)}`),
         example: 'https://alphafold.ebi.ac.uk/entry/{swiss-prot}',
     },
     {
@@ -1152,7 +1160,7 @@ const manifest = [
         description: 'MARRVEL enables users to search multiple public variant databases simultaneously and provides a unified interface to facilitate the search process.',
         url: "http://marrvel.org/",
         countapi: 'maayanlab.github.io/MARRVELclick',
-        clickurl: if_search(async ({ search }) => `http://marrvel.org/human/gene/${await gene_id(search)}`),
+        clickurl: if_search(async ({search}) => `http://marrvel.org/human/gene/${await gene_id(search)}`),
         example: 'http://marrvel.org/human/gene/${ncbi_gene_id}',
     },
     {
@@ -1177,7 +1185,7 @@ const manifest = [
         description: 'BioGPS is a free extensible and customizable gene annotation portal, a complete resource for learning about gene and protein function.',
         url: "http://biogps.org",
         countapi: 'maayanlab.github.io/BIOGPSclick',
-        clickurl: if_search(async ({ search }) => `http://biogps.org/#goto=genereport&id=${await gene_id(search)}`),
+        clickurl: if_search(async ({search}) => `http://biogps.org/#goto=genereport&id=${await gene_id(search)}`),
         example: 'http://biogps.org/#goto=genereport&id={ncbi_gene_id}',
     },
     {
@@ -1201,7 +1209,7 @@ const manifest = [
         description: 'The HGNC database is a curated online repository of approved gene nomenclature, gene groups and associated resources including links to genomic, proteomic and phenotypic information.',
         url: "https://www.genenames.org/",
         countapi: 'maayanlab.github.io/HGNCclick',
-        clickurl: if_search(async ({ search }) => `https://www.genenames.org/data/gene-symbol-report/#!/symbol/${search}`),
+        clickurl: if_search(async ({search}) => `https://www.genenames.org/data/gene-symbol-report/#!/symbol/${search}`),
         example: 'https://www.genenames.org/data/gene-symbol-report/#!/symbol/${gene-symbol}',
     },
     {
@@ -1211,8 +1219,7 @@ const manifest = [
             PS: true,
             CF: true
         },
-        output: {
-        },
+        output: {},
         img1: {
             src: '/logos/exrna_logo.png',
             alt: 'exRNA Atlas logo'
@@ -1225,8 +1232,8 @@ const manifest = [
         description: 'The exRNA Atlas is the data repository of the Extracellular RNA Communication Consortium (ERCC). The repository includes small RNA sequencing and qPCR-derived exRNA profiles from human and mouse biofluids.',
         url: 'https://exrna-atlas.org/',
         countapi: 'maayanlab.github.io/exRNAAtlasclick',
-        clickurl: if_search(async ({ search }) => `https://exrna-atlas.org/exat/censusResults?identifiers=${search}&library=${await exrna_library(search)}`),
-        status: if_search(async ({ self }) => await isitup(self.clickurl, '<b>Problematic</b> identifiers can be found below')),
+        clickurl: if_search(async ({search}) => `https://exrna-atlas.org/exat/censusResults?identifiers=${search}&library=${await exrna_library(search)}`),
+        status: if_search(async ({self}) => await isitup(self.clickurl, '<b>Problematic</b> identifiers can be found below')),
         example: 'https://exrna-atlas.org/exat/censusResults?identifiers=${gene-symbol}&library=${exrna_library}',
     },
     {
@@ -1251,7 +1258,7 @@ const manifest = [
         description: 'Ensembl is a genome browser for vertebrate genomes that supports research in comparative genomics, evolution, sequence variation and transcriptional regulation.',
         url: "https://useast.ensembl.org/index.html",
         countapi: 'maayanlab.github.io/ENSEMBLclick',
-        clickurl: if_search(async ({ search }) => `https://useast.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g=${await ensembl_id(search)}`),
+        clickurl: if_search(async ({search}) => `https://useast.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g=${await ensembl_id(search)}`),
         example: 'https://useast.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g=${ensembl}',
     },
     {
@@ -1272,7 +1279,7 @@ const manifest = [
         description: 'Bgee is a database for retrieval and comparison of gene expression patterns across multiple animal species.',
         url: "https://bgee.org/",
         countapi: 'maayanlab.github.io/bgeeclick',
-        clickurl: if_search(async ({ search }) => `https://bgee.org/?page=gene&gene_id=${await ensembl_id(search)}`),
+        clickurl: if_search(async ({search}) => `https://bgee.org/?page=gene&gene_id=${await ensembl_id(search)}`),
         example: 'https://bgee.org/?page=gene&gene_id=${gene-symbol}',
     },
     {
@@ -1298,7 +1305,7 @@ const manifest = [
         description: "COSMIC, the Catalogue Of Somatic Mutations In Cancer, is the world's largest and most comprehensive resource for exploring the impact of somatic mutations in human cancer.",
         url: "https://cancer.sanger.ac.uk/cosmic",
         countapi: 'maayanlab.github.io/COSMICclick',
-        clickurl: if_search(async ({ search }) => `https://cancer.sanger.ac.uk/cosmic/gene/analysis?ln=${search}`),
+        clickurl: if_search(async ({search}) => `https://cancer.sanger.ac.uk/cosmic/gene/analysis?ln=${search}`),
         example: 'https://cancer.sanger.ac.uk/cosmic/gene/analysis?ln=${gene-symbol}',
     },
     {
@@ -1322,8 +1329,8 @@ const manifest = [
         description: 'ClinGen is a NIH funded resource dedicated to building a central resource that defines the clinical relevance of genes and variants for use in precision medicine and research.',
         url: "https://www.clinicalgenome.org/",
         countapi: 'maayanlab.github.io/CLINGENclick',
-        clickurl: if_search(async ({ search }) => `https://search.clinicalgenome.org/kb/genes/HGNC:${await HGNC(search)}`),
-        status: if_search(async ({ self }) => await isitup(self.clickurl, 'ClinGen has not yet published curations for')),
+        clickurl: if_search(async ({search}) => `https://search.clinicalgenome.org/kb/genes/HGNC:${await HGNC(search)}`),
+        status: if_search(async ({self}) => await isitup(self.clickurl, 'ClinGen has not yet published curations for')),
         example: 'https://search.clinicalgenome.org/kb/genes/HGNC:${HGNC}',
     },
     {
@@ -1348,8 +1355,8 @@ const manifest = [
         description: 'The GWAS Catalog provides a consistent, searchable, visualisable and freely available database of SNP-trait associations, which can be easily integrated with other resources.',
         url: "https://www.ebi.ac.uk/gwas/home",
         countapi: 'maayanlab.github.io/GWASclick',
-        clickurl: if_search(async ({ search }) => `https://www.ebi.ac.uk/gwas/genes/${search}`),
-        status: if_search(async ({ self }) => await isitup(self.clickurl, 'cannot be found in the GWAS Catalog database')),
+        clickurl: if_search(async ({search}) => `https://www.ebi.ac.uk/gwas/genes/${search}`),
+        status: if_search(async ({self}) => await isitup(self.clickurl, 'cannot be found in the GWAS Catalog database')),
         example: 'https://www.ebi.ac.uk/gwas/genes/${gene-symbol}',
     },
     {
@@ -1375,7 +1382,7 @@ const manifest = [
         description: 'PDBe Knowledge Base is a community-driven resource managed by the PDBe team, collating functional annotations and predictions for structure data in the PDB archive.',
         url: "https://www.ebi.ac.uk/pdbe/pdbe-kb",
         countapi: 'maayanlab.github.io/PDBeclick',
-        clickurl: if_search(async ({ search }) => `https://www.ebi.ac.uk/pdbe/pdbe-kb/proteins/${await uniprot_kb(search)}`),
+        clickurl: if_search(async ({search}) => `https://www.ebi.ac.uk/pdbe/pdbe-kb/proteins/${await uniprot_kb(search)}`),
         example: 'https://www.ebi.ac.uk/pdbe/pdbe-kb/proteins/${swiss-prot}',
     },
     {
@@ -1399,7 +1406,7 @@ const manifest = [
         description: 'PDB has information about the 3D shapes of proteins, nucleic acids, and complex assemblies that contribute to understanding everything from protein synthesis to health and disease.',
         url: "https://www.rcsb.org/",
         countapi: 'maayanlab.github.io/PDBclick',
-        clickurl: if_search(async ({ search }) => `https://www.rcsb.org/search?request=%7B%22query%22%3A%7B%22parameters%22%3A%7B%22attribute%22%3A%22rcsb_entity_source_organism.rcsb_gene_name.value%22%2C%22operator%22%3A%22in%22%2C%22value%22%3A%5B%22${search}%22%5D%7D%2C%22service%22%3A%22text%22%2C%22type%22%3A%22terminal%22%2C%22node_id%22%3A0%7D%2C%22return_type%22%3A%22entry%22%2C%22request_options%22%3A%7B%22pager%22%3A%7B%22start%22%3A0%2C%22rows%22%3A25%7D%2C%22scoring_strategy%22%3A%22combined%22%2C%22sort%22%3A%5B%7B%22sort_by%22%3A%22score%22%2C%22direction%22%3A%22desc%22%7D%5D%7D%2C%22request_info%22%3A%7B%22src%22%3A%22ui%22%2C%22query_id%22%3A%220b67dad6ca2a8ccaca6d67d2399f1ac3%22%7D%7D`),
+        clickurl: if_search(async ({search}) => `https://www.rcsb.org/search?request=%7B%22query%22%3A%7B%22parameters%22%3A%7B%22attribute%22%3A%22rcsb_entity_source_organism.rcsb_gene_name.value%22%2C%22operator%22%3A%22in%22%2C%22value%22%3A%5B%22${search}%22%5D%7D%2C%22service%22%3A%22text%22%2C%22type%22%3A%22terminal%22%2C%22node_id%22%3A0%7D%2C%22return_type%22%3A%22entry%22%2C%22request_options%22%3A%7B%22pager%22%3A%7B%22start%22%3A0%2C%22rows%22%3A25%7D%2C%22scoring_strategy%22%3A%22combined%22%2C%22sort%22%3A%5B%7B%22sort_by%22%3A%22score%22%2C%22direction%22%3A%22desc%22%7D%5D%7D%2C%22request_info%22%3A%7B%22src%22%3A%22ui%22%2C%22query_id%22%3A%220b67dad6ca2a8ccaca6d67d2399f1ac3%22%7D%7D`),
         example: 'https://www.rcsb.org/search?request=%7B%22query%22%3A%7B%22parameters%22%3A%7B%22attribute%22%3A%22rcsb_entity_source_organism.rcsb_gene_name.value%22%2C%22operator%22%3A%22in%22%2C%22value%22%3A%5B%22${gene-symbol}%22%5D%7D%2C%22service%22%3A%22text%22%2C%22type%22%3A%22terminal%22%2C%22node_id%22%3A0%7D%2C%22return_type%22%3A%22entry%22%2C%22request_options%22%3A%7B%22pager%22%3A%7B%22start%22%3A0%2C%22rows%22%3A25%7D%2C%22scoring_strategy%22%3A%22combined%22%2C%22sort%22%3A%5B%7B%22sort_by%22%3A%22score%22%2C%22direction%22%3A%22desc%22%7D%5D%7D%2C%22request_info%22%3A%7B%22src%22%3A%22ui%22%2C%22query_id%22%3A%220b67dad6ca2a8ccaca6d67d2399f1ac3%22%7D%7D',
     },
     {
@@ -1428,7 +1435,7 @@ const manifest = [
         description: 'GENEVA allows you to identify RNA-sequencing datasets from the Gene Expression Omnibus (GEO) that contains conditions modulating a gene or a gene signature.',
         url: "https://genevatool.org/",
         countapi: 'maayanlab.github.io/GENEVAclick',
-        clickurl: if_search(async ({ search }) => `https://genevatool.org/gene_table?gene_name=${search}`),
+        clickurl: if_search(async ({search}) => `https://genevatool.org/gene_table?gene_name=${search}`),
         example: 'https://genevatool.org/gene_table?gene_name=${gene-symbol}',
     },
     {
@@ -1456,7 +1463,7 @@ const manifest = [
         description: 'MGI is the international database resource for the laboratory mouse, providing integrated genetic, genomic, and biological data to facilitate the study of human health and disease.',
         url: "http://www.informatics.jax.org/",
         countapi: 'maayanlab.github.io/MGIclick',
-        clickurl: if_search(async ({ search }) => `http://www.informatics.jax.org/marker/MGI:${await MGI(search)}`),
+        clickurl: if_search(async ({search}) => `http://www.informatics.jax.org/marker/MGI:${await MGI(search)}`),
         example: 'http://www.informatics.jax.org/marker/MGI:${MGI_id}',
     },
     {
@@ -1481,7 +1488,7 @@ const manifest = [
         description: 'OMIM is a comprehensive, authoritative compendium of human genes and genetic phenotypes that is freely available and updated daily.',
         url: "https://omim.org/",
         countapi: 'maayanlab.github.io/OMIMclick',
-        clickurl: if_search(async ({ search }) => `https://www.omim.org/search?index=entry&start=1&limit=10&sort=score+desc%2C+prefix_sort+desc&search=approved_gene_symbol%3A${search}`),
+        clickurl: if_search(async ({search}) => `https://www.omim.org/search?index=entry&start=1&limit=10&sort=score+desc%2C+prefix_sort+desc&search=approved_gene_symbol%3A${search}`),
         example: 'https://www.omim.org/search?index=entry&start=1&limit=10&sort=score+desc%2C+prefix_sort+desc&search=approved_gene_symbol%3A${gene-symbol}',
     },
     {
@@ -1511,7 +1518,11 @@ const manifest = [
         description: 'Gene Centric GEO Reverse Search Appyter enables users to query for a gene in a species of interest; it returns an interactive volcano plot of signatures in which the gene is up- or down-regulated.',
         url: "https://appyters.maayanlab.cloud/#/Gene_Centric_GEO_Reverse_Search",
         countapi: 'maayanlab.github.io/GEOsearchclick',
-        clickurl: if_search(async ({ search }) => await appyter('Gene_Centric_GEO_Reverse_Search', { species_input: "Human", human_gene: search,  mouse_gene: search})),
+        clickurl: if_search(async ({search}) => await appyter('Gene_Centric_GEO_Reverse_Search', {
+            species_input: "Human",
+            human_gene: search,
+            mouse_gene: search
+        })),
     },
     {
         name: 'go',
@@ -1534,7 +1545,7 @@ const manifest = [
         description: 'The Gene Ontology (GO) knowledgebase is the world’s largest source of information on the functions of genes.',
         url: "http://geneontology.org/",
         countapi: 'maayanlab.github.io/GOclick',
-        clickurl: if_search(async ({ search }) => `http://amigo.geneontology.org/amigo/gene_product/UniProtKB:${await uniprot_kb(search)}`),
+        clickurl: if_search(async ({search}) => `http://amigo.geneontology.org/amigo/gene_product/UniProtKB:${await uniprot_kb(search)}`),
         example: 'http://amigo.geneontology.org/amigo/gene_product/UniProtKB:${swiss-prot}',
     },
     {
@@ -1560,7 +1571,7 @@ const manifest = [
         description: 'Reactome is a free, open-source, curated and peer-reviewed pathway database that provides intuitive bioinformatics tools for the visualization, interpretation and analysis of pathway knowledge.',
         url: "https://reactome.org/",
         countapi: 'maayanlab.github.io/Reactomeclick',
-        clickurl: if_search(async ({ search }) => `https://reactome.org/content/query?q=${search}&species=Homo+sapiens&species=Entries+without+species&cluster=true`),
+        clickurl: if_search(async ({search}) => `https://reactome.org/content/query?q=${search}&species=Homo+sapiens&species=Entries+without+species&cluster=true`),
         example: 'https://reactome.org/content/query?q=${gene-symbol}&species=Homo+sapiens&species=Entries+without+species&cluster=true',
     },
     {
@@ -1584,7 +1595,7 @@ const manifest = [
         description: 'KEGG is a database resource for understanding high-level functions and utilities of the biological system from molecular-level information.',
         url: "https://www.genome.jp/kegg/",
         countapi: 'maayanlab.github.io/KEGGclick',
-        clickurl: if_search(async ({ search }) => `https://www.genome.jp/entry/hsa:${await entrezgene(search)}`),
+        clickurl: if_search(async ({search}) => `https://www.genome.jp/entry/hsa:${await entrezgene(search)}`),
         example: 'https://www.genome.jp/entry/hsa:${entrez}',
     },
     {
@@ -1611,7 +1622,7 @@ const manifest = [
         description: 'The Monarch Initiative is an integrative data and analytic platform connecting phenotypes to genotypes across species, bridging basic and applied research with semantics-based analysis.',
         url: "https://monarchinitiative.org/",
         countapi: 'maayanlab.github.io/monarchclick',
-        clickurl: if_search(async ({ search }) => `https://monarchinitiative.org/gene/HGNC:${await HGNC(search)}`),
+        clickurl: if_search(async ({search}) => `https://monarchinitiative.org/gene/HGNC:${await HGNC(search)}`),
         example: 'https://monarchinitiative.org/gene/HGNC:${HGNC}',
     },
     {
@@ -1637,7 +1648,7 @@ const manifest = [
         description: 'The Human Genome Browser includes a broad collection of vertebrate and model organism assemblies and annotations, along with a large suite of tools for viewing, analyzing and downloading data.',
         url: "https://genome.ucsc.edu/cgi-bin/hgGateway",
         countapi: 'maayanlab.github.io/HGBclick',
-        clickurl: if_search(async ({ search }) => `https://genome.ucsc.edu/cgi-bin/hgGene?hgg_gene=${await transcript(search)}&hgg_type=knownGene`),
+        clickurl: if_search(async ({search}) => `https://genome.ucsc.edu/cgi-bin/hgGene?hgg_gene=${await transcript(search)}&hgg_type=knownGene`),
         example: 'https://genome.ucsc.edu/cgi-bin/hgGene?hgg_gene=${hgGene}&hgg_type=knownGene',
     },
     {
@@ -1664,7 +1675,7 @@ const manifest = [
         description: 'The Open Targets Platform is a comprehensive tool that supports systematic identification and prioritisation of potential therapeutic drug targets by integrating publicly available datasets including data generated by the Open Targets consortium.',
         url: "https://platform.opentargets.org/",
         countapi: 'maayanlab.github.io/OpenTargetsclick',
-        clickurl: if_search(async ({ search }) => `https://platform.opentargets.org/target/${await ensembl_id(search)}`),
+        clickurl: if_search(async ({search}) => `https://platform.opentargets.org/target/${await ensembl_id(search)}`),
         example: 'https://platform.opentargets.org/target/${ensembl}',
     },
     {
@@ -1691,7 +1702,7 @@ const manifest = [
         description: 'The Open Targets Genetics Portal is a tool highlighting variant-centric statistical evidence to allow both prioritisation of candidate causal variants at trait-associated loci and identification of potential drug targets.',
         url: "https://genetics.opentargets.org/",
         countapi: 'maayanlab.github.io/OpenTargetsGeneticsclick',
-        clickurl: if_search(async ({ search }) => `https://genetics.opentargets.org/gene/${await ensembl_id(search)}`),
+        clickurl: if_search(async ({search}) => `https://genetics.opentargets.org/gene/${await ensembl_id(search)}`),
         example: 'https://genetics.opentargets.org/gene/${ensembl}',
     },
     {
@@ -1717,7 +1728,7 @@ const manifest = [
         description: 'GeneMANIA builds subnetworks around an input gene using functional association data.',
         url: "http://genemania.org",
         countapi: 'maayanlab.github.io/GeneMANIAclick',
-        clickurl: if_search(async ({ search }) => `https://genemania.org/search/homo-sapiens/${search}`),
+        clickurl: if_search(async ({search}) => `https://genemania.org/search/homo-sapiens/${search}`),
         example: 'https://genemania.org/search/homo-sapiens/${gene-symbol}',
     },
     {
@@ -1742,7 +1753,7 @@ const manifest = [
         description: 'The Human Protein Atlas aims to map all human proteins in cells, tissues and organs using the integration of various omics technologies.',
         url: "https://www.proteinatlas.org",
         countapi: 'maayanlab.github.io/HumanProteinAtlasclick',
-        clickurl: if_search(async ({ search }) => `https://www.proteinatlas.org/${await ensembl_id(search)}-${search}`),
+        clickurl: if_search(async ({search}) => `https://www.proteinatlas.org/${await ensembl_id(search)}-${search}`),
         example: 'https://www.proteinatlas.org/{search}-${gene-symbol}',
     },
     {
@@ -1769,7 +1780,7 @@ const manifest = [
         description: 'The Open Targets Platform is a comprehensive tool that supports systematic identification and prioritisation of potential therapeutic drug targets by integrating publicly available datasets including data generated by the Open Targets consortium.',
         url: "https://platform.opentargets.org/",
         countapi: 'maayanlab.github.io/OpenTargetsclick',
-        clickurl: if_search(async ({ search }) => `https://platform.opentargets.org/drug/${await CHEMBL(search)}`),
+        clickurl: if_search(async ({search}) => `https://platform.opentargets.org/drug/${await CHEMBL(search)}`),
         example: 'https://platform.opentargets.org/drug/${chembl}',
     },
     {
@@ -1793,7 +1804,7 @@ const manifest = [
         description: 'MedChemExpress (MCE) offers a wide range of high-quality research chemicals and biochemicals (novel life-science reagents, reference compounds and natural compounds) for scientific use.',
         url: "https://www.medchemexpress.com/",
         countapi: 'maayanlab.github.io/MedChemExpressclick',
-        clickurl: if_search(async ({ search }) => `https://www.medchemexpress.com/search.html?q=${search}&ft=&fa=&fp=`),
+        clickurl: if_search(async ({search}) => `https://www.medchemexpress.com/search.html?q=${search}&ft=&fa=&fp=`),
         example: 'https://www.medchemexpress.com/${gene-symbol}.html',
     },
     {
@@ -1822,7 +1833,7 @@ const manifest = [
         description: 'PubChem, an open chemistry database at the NIH, mostly contains small molecules, but also larger molecules such as nucleotides, carbohydrates, lipids, peptides, and chemically-modified macromolecules.',
         url: "https://pubchem.ncbi.nlm.nih.gov/",
         countapi: 'maayanlab.github.io/PubChemclick',
-        clickurl: if_search(async ({ search }) => `https://pubchem.ncbi.nlm.nih.gov/compound/${await CID(search)}`),
+        clickurl: if_search(async ({search}) => `https://pubchem.ncbi.nlm.nih.gov/compound/${await CID(search)}`),
         example: 'https://pubchem.ncbi.nlm.nih.gov/compound/${PubChemCID}',
     },
     {
@@ -1852,7 +1863,7 @@ const manifest = [
         description: 'ChEMBL is a manually curated database of bioactive molecules with drug-like properties. It brings together chemical, bioactivity and genomic data to aid the translation of genomic information into effective new drugs.',
         url: "https://www.ebi.ac.uk/chembl/",
         countapi: 'maayanlab.github.io/ChEMBLclick',
-        clickurl: if_search(async ({ search }) => `https://www.ebi.ac.uk/chembl/compound_report_card/${await CHEMBL(search)}/`),
+        clickurl: if_search(async ({search}) => `https://www.ebi.ac.uk/chembl/compound_report_card/${await CHEMBL(search)}/`),
         example: 'https://www.ebi.ac.uk/chembl/compound_report_card/${CHEMBL}/',
     },
     {
@@ -1881,7 +1892,7 @@ const manifest = [
         description: 'The Guide to Pharmacology is a searchable database of drug targets and the prescription medicines and experimental drugs that act on them.',
         url: "https://www.guidetopharmacology.org/",
         countapi: 'maayanlab.github.io/guideclick',
-        clickurl: if_search(async ({ search }) => `https://www.guidetopharmacology.org/GRAC/LigandDisplayForward?ligandId=${await GTPL(search)}`),
+        clickurl: if_search(async ({search}) => `https://www.guidetopharmacology.org/GRAC/LigandDisplayForward?ligandId=${await GTPL(search)}`),
         example: 'https://www.guidetopharmacology.org/GRAC/LigandDisplayForward?ligandId=${GTPL}',
     },
     {
@@ -1910,7 +1921,7 @@ const manifest = [
         description: 'DrugBank Online is a comprehensive, free-to-access, online database containing information on drugs and drug targets.',
         url: "https://go.drugbank.com/",
         countapi: 'maayanlab.github.io/drugbankclick',
-        clickurl: if_search(async ({ search }) => `https://go.drugbank.com/drugs/${await DrugBankNum(search)}`),
+        clickurl: if_search(async ({search}) => `https://go.drugbank.com/drugs/${await DrugBankNum(search)}`),
         example: 'https://go.drugbank.com/drugs/${DrugBankID}',
     },
     {
@@ -1944,7 +1955,7 @@ const manifest = [
         description: 'Drugmonizome is a web portal for querying sets of known drugs and computing significant biomedical terms that drugs in the set share.',
         url: "https://maayanlab.cloud/drugmonizome/#/TermSearch/Drug%20sets",
         countapi: 'maayanlab.github.io/drugmonizomeclick',
-        clickurl: if_search(async ({ search }) => `https://maayanlab.cloud/drugmonizome/#/TermSearch/Small%20molecules?query=%7B%22limit%22:10,%22search%22:[%22${search}%22]%7D`),
+        clickurl: if_search(async ({search}) => `https://maayanlab.cloud/drugmonizome/#/TermSearch/Small%20molecules?query=%7B%22limit%22:10,%22search%22:[%22${search}%22]%7D`),
         example: 'https://maayanlab.cloud/drugmonizome/#/TermSearch/Small%20molecules?query=%7B%22limit%22:10,%22search%22:[%22${drug-name}%22]%7D',
     },
     {
@@ -1978,7 +1989,7 @@ const manifest = [
         description: 'DrugEnrichr is a new drug set enrichment analysis tool. DrugEnrichr has the familiar Enrichr interface but instead of serving gene sets for search it is serving drug sets.',
         url: "https://maayanlab.cloud/DrugEnrichr/",
         countapi: 'maayanlab.github.io/drugenrichrclick',
-        clickurl: if_search(async ({ search }) => `https://maayanlab.cloud/DrugEnrichr/#find!drug=${search}`),
+        clickurl: if_search(async ({search}) => `https://maayanlab.cloud/DrugEnrichr/#find!drug=${search}`),
         example: 'https://maayanlab.cloud/DrugEnrichr/#find!drug=${drug-name}',
     },
     {
@@ -2002,8 +2013,8 @@ const manifest = [
         description: 'Drugs.com is the largest, most widely visited, independent medicine information website available on the Internet. Drug.com\'s aim is to be the Internet\'s most trusted resource for drug and related health information.',
         url: "https://www.drugs.com/",
         countapi: 'maayanlab.github.io/drugscomclick',
-        clickurl: if_search(async ({ search }) => `https://www.drugs.com/${await DrugName(search)}.html`),
-        status: if_search(async ({ self }) => await isitup(self.clickurl, 'Page Not Found')),
+        clickurl: if_search(async ({search}) => `https://www.drugs.com/${await DrugName(search)}.html`),
+        status: if_search(async ({self}) => await isitup(self.clickurl, 'Page Not Found')),
         example: 'https://www.drugs.com/${drug-name}.html',
     },
     {
@@ -2035,8 +2046,8 @@ const manifest = [
         description: 'DrugCentral provides information on active ingredients chemical entities, pharmaceutical products, drug mode of action, indications, pharmacologic action.',
         url: "https://drugcentral.org/",
         countapi: 'maayanlab.github.io/drugcentral',
-        clickurl: if_search(async ({ search }) => `https://drugcentral.org/?q=${await DrugName(search)}`),
-        status: if_search(async ({ self }) => await isitup(self.clickurl, 'Results: 0')),
+        clickurl: if_search(async ({search}) => `https://drugcentral.org/?q=${await DrugName(search)}`),
+        status: if_search(async ({self}) => await isitup(self.clickurl, 'Results: 0')),
         example: 'https://drugcentral.org/?q=${drug-name}',
     },
     {
@@ -2064,7 +2075,7 @@ const manifest = [
         description: 'ZINC15 is a free database of commercially-available compounds for virtual screening. ZINC contains over 230 million purchasable compounds in ready-to-dock, 3D formats. ZINC also contains over 750 million purchasable compounds you can search for analogs.',
         url: "https://zinc15.docking.org/",
         countapi: 'maayanlab.github.io/ZINC15click',
-        clickurl: if_search(async ({ search }) => `https://zinc15.docking.org/substances/search/?q=${await DrugName(search)}`),
+        clickurl: if_search(async ({search}) => `https://zinc15.docking.org/substances/search/?q=${await DrugName(search)}`),
         example: 'https://zinc15.docking.org/substances/search/?q=${drug-name}',
     },
     {
@@ -2095,7 +2106,7 @@ const manifest = [
         description: 'LDP 2.0 includes data about over 20,000 small molecules, including approved drugs, compounds in clinical trials, and tool-compounds. Chemical structures are searchable by substructure.',
         url: "http://lincsportal.ccs.miami.edu/signatures/home",
         countapi: 'maayanlab.github.io/LINCS2click',
-        clickurl: if_search(async ({ search }) => `http://lincsportal.ccs.miami.edu/signatures/perturbations/${await ldp2_id(search)}`),
+        clickurl: if_search(async ({search}) => `http://lincsportal.ccs.miami.edu/signatures/perturbations/${await ldp2_id(search)}`),
         example: 'http://lincsportal.ccs.miami.edu/signatures/perturbations/${ldp2-id}',
     },
     {
@@ -2161,7 +2172,7 @@ const manifest = [
         },
         title: 'STRING',
         description: 'STRING is a database of known and predicted protein-protein interactions and a functional enrichment tool covering more than 5000 genomes.',
-        clickurl: if_search(async ({ search }) => await STRING(search)),
+        clickurl: if_search(async ({search}) => await STRING(search)),
         url: "https://string-db.org/",
         countapi: 'maayanlab.github.io/STRINGclick',
     },
@@ -2188,7 +2199,7 @@ const manifest = [
         },
         title: 'STITCH',
         description: 'STITCH is a database of known and predicted interactions between chemicals and proteins and a functional enrichment tool.',
-        clickurl: if_search(async ({ search }) => await STITCH(search)),
+        clickurl: if_search(async ({search}) => await STITCH(search)),
         url: "http://stitch.embl.de/",
         countapi: 'maayanlab.github.io/STITCHclick',
     },
@@ -2214,8 +2225,8 @@ const manifest = [
         },
         title: 'Therapeutic Target Database',
         description: 'Therapeutic Target Database (TTD) is a database to provide information about the known and explored therapeutic protein and nucleic acid targets, the targeted disease, pathway information and the corresponding drugs directed at each of these targets.',
-        clickurl: if_search(async ({ search }) => `http://idrblab.net/ttd/search/ttd/target?search_api_fulltext=${search}`),
-        status: if_search(async ({ self }) => await isitup(self.clickurl, 'Sorry! Nothing is found.')),
+        clickurl: if_search(async ({search}) => `http://idrblab.net/ttd/search/ttd/target?search_api_fulltext=${search}`),
+        status: if_search(async ({self}) => await isitup(self.clickurl, 'Sorry! Nothing is found.')),
         example: "http://idrblab.net/ttd/search/ttd/target?search_api_fulltext=${gene}",
         url: "http://db.idrblab.net/ttd/",
         countapi: 'maayanlab.github.io/TTDclick',
@@ -2242,8 +2253,8 @@ const manifest = [
         },
         title: 'Therapeutic Target Database',
         description: 'Therapeutic Target Database (TTD) is a database to provide information about the known and explored therapeutic protein and nucleic acid targets, the targeted disease, pathway information and the corresponding drugs directed at each of these targets.',
-        clickurl: if_search(async ({ search }) => `http://idrblab.net/ttd/search/ttd/drug?search_api_fulltext=${search}`),
-        status: if_search(async ({ self }) => await isitup(self.clickurl, 'Sorry! Nothing is found.')),
+        clickurl: if_search(async ({search}) => `http://idrblab.net/ttd/search/ttd/drug?search_api_fulltext=${search}`),
+        status: if_search(async ({self}) => await isitup(self.clickurl, 'Sorry! Nothing is found.')),
         example: "http://idrblab.net/ttd/search/ttd/drug?search_api_fulltext=${drug}",
         url: "http://db.idrblab.net/ttd/",
         countapi: 'maayanlab.github.io/TTDclick',
@@ -2277,10 +2288,10 @@ for (const item of manifest) {
         if (item.output[tag] === false) delete item.output[tag]
     }
     if ('countapi' in item) {
-        item.clicks = async ({ self }) => await countable(self.countapi).get()
+        item.clicks = async ({self}) => await countable(self.countapi).get()
     }
     if ('clickurl' in item && !('status' in item)) {
-        item.status = if_search(async ({ self }) => await isitup(self.clickurl))
+        item.status = if_search(async ({self}) => await isitup(self.clickurl))
     }
 }
 
