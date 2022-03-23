@@ -37,16 +37,8 @@ export async function getStaticProps({params: {entity, search}}) {
             revalidate: false,
         }
     }
-    try {
-        if (entity === 'gene') {
-            if ((await gene_id(search)) === undefined) throw new Error('NotFound')
-        } else if (entity === 'drug') {
-            if ((await drug_info(search)) === undefined) throw new Error('NotFound')
-        } else {
-            throw new Error('NotFound')
-        }
-    } catch (e) {
-        return {notFound: true, props: {}}
+    if (entity !== 'gene' && entity !== 'drug') {
+        return { notFound: true }
     }
 
     const manifest = (
@@ -72,6 +64,12 @@ export async function getStaticProps({params: {entity, search}}) {
                 })
         )
     ).filter(v => v !== undefined)
+
+    if (manifest.length === 0) {
+        console.warn(`No items found for ${JSON.stringify({ entity, search })}`)
+        return { notFound: true, props: {} }
+    }
+
     manifest.sort(cmp)
     return {
         props: {
