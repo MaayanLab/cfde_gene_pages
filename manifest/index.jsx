@@ -410,8 +410,8 @@ const manifest = [
         description: 'The objective of MetGENE is to identify the reactions catalyzed by the given gene(s) RPE and the related metabolites.',
         url: "https://sc-cfdewebdev.sdsc.edu/MetGENE/metGene.php",
         countapi: 'maayanlab.github.io/metgeneclick',
-        clickurl: if_search(async ({search}) => `'https://sc-cfdewebdev.sdsc.edu/MetGENE/metGene.php?GeneInfoStr=${search}&GeneIDType=SYMBOL&species=hsa&anatomy=NA&disease=NA&phenotype=NA'`),
-        example: '\'https://sc-cfdewebdev.sdsc.edu/MetGENE/metGene.php?GeneInfoStr=${gene-symbol}&GeneIDType=SYMBOL&species=hsa&anatomy=NA&disease=NA&phenotype=NA\'',
+        clickurl: if_search(async ({search}) => `https://sc-cfdewebdev.sdsc.edu/MetGENE/metGene.php?GeneInfoStr=${search}&GeneIDType=SYMBOL&species=hsa&anatomy=NA&disease=NA&phenotype=NA`),
+        example: 'https://sc-cfdewebdev.sdsc.edu/MetGENE/metGene.php?GeneInfoStr=${gene-symbol}&GeneIDType=SYMBOL&species=hsa&anatomy=NA&disease=NA&phenotype=NA',
     },
     {
         name: 'Pharos',
