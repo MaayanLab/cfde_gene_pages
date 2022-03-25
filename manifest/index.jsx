@@ -432,8 +432,8 @@ const manifest = [
         description: 'The objective of MetGENE is to identify the reactions catalyzed by the given gene(s) RPE and the related metabolites.',
         url: "https://sc-cfdewebdev.sdsc.edu/MetGENE/metGene.php",
         countapi: 'maayanlab.github.io/metgeneclick',
-        clickurl: if_search(async ({search}) => `https://sc-cfdewebdev.sdsc.edu/MetGENE/metGene.php?species=hsa&anatomy=Blood&disease=Diabetes&phenotype=BMI&GeneInfoStr=${await entrezgene(search)}`),
-        example: 'https://sc-cfdewebdev.sdsc.edu/MetGENE/metGene.php?species=hsa&anatomy=Blood&disease=Diabetes&phenotype=BMI&GeneInfoStr=${entrez}',
+        clickurl: if_search(async ({search}) => `https://sc-cfdewebdev.sdsc.edu/MetGENE/metGene.php?GeneInfoStr=${search}&GeneIDType=SYMBOL&species=hsa&anatomy=NA&disease=NA&phenotype=NA`),
+        example: 'https://sc-cfdewebdev.sdsc.edu/MetGENE/metGene.php?GeneInfoStr=${gene-symbol}&GeneIDType=SYMBOL&species=hsa&anatomy=NA&disease=NA&phenotype=NA',
     },
     {
         name: 'Pharos',
@@ -466,7 +466,7 @@ const manifest = [
         description: 'The Pharos interface provides facile access to most data types collected by the Knowledge Management Center for the IDG program.',
         url: "https://pharos.nih.gov/",
         countapi: 'maayanlab.github.io/pharclick',
-        clickurl: if_search(async ({search}) => `https://pharos.nih.gov/targets/${await uniprot_kb(search)}`),
+        clickurl: if_search(async ({search}) => `https://pharos.nih.gov/search?q=${search}`),
         example: 'https://pharos.nih.gov/targets/${swiss-prot}',
     },
     {
@@ -780,7 +780,14 @@ const manifest = [
         description: 'The Knockout Mouse Programme - International Mouse Phenotyping Consortium (KOMP-IMPC) has information about the functions of protein-coding genes in the mouse genome.',
         url: "https://www.mousephenotype.org",
         countapi: 'maayanlab.github.io/kompclick',
-        clickurl: if_search(async ({search}) => `https://www.mousephenotype.org/data/genes/MGI:${await MGI(search)}`),
+        clickurl: if_search(async ({search}) => {
+            try {
+                return `https://www.mousephenotype.org/data/genes/MGI:${await MGI(search)}`
+            } catch (e) {
+                return `https://www.mousephenotype.org/data/search?term=${search}&type=gene`
+            }
+        }),
+        status: if_search(async ({self}) => await isitup(self.clickurl, 'No results found for gene')),
         example: 'https://www.mousephenotype.org/data/genes/MGI:${MGI_id}',
     },
     {

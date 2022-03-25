@@ -83,6 +83,12 @@ export async function getStaticProps({params: {entity, search}}) {
                 })
         )
     ).filter(v => v !== undefined)
+
+    if (manifest.length === 0) {
+        console.warn(`No items found for ${JSON.stringify({ entity, search })}`)
+        return { notFound: true, props: {} }
+    }
+
     manifest.sort(cmp)
     return {
         props: {
