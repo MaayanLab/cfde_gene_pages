@@ -1561,6 +1561,38 @@ const manifest = [
         })),
     },
     {
+        name: 'CFDE_GP',
+        tags: {
+            gene: true,
+            PS: false,
+            Ag: true,
+            MaayanLab: true,
+        },
+        output: {
+            function: true,
+            tissue: true,
+            disease: true,
+            drug: true,
+        },
+        img1: {
+            src: '/logos/appyters_logo.png',
+            alt: 'CFDE Gene Partnership Appyter',
+        },
+        img2: {
+            src: '/logos/CFDE_Gene_Partnership_search_site.png',
+            alt: 'Appyter screenshot',
+        },
+        img3: {
+            src: '/logos/MaayanLab_logo.png',
+            alt: 'MaayanLab',
+        },
+        title: 'CFDE Gene Partnership',
+        description: 'CFDE Gene Partnership uses FAIR APIs from different DCCs to find and present gene-centric knowledge.',
+        url: "https://appyters.maayanlab.cloud/#/CFDE-Gene-Partnership",
+        countapi: 'maayanlab.github.io/CFDE_GP_click',
+        clickurl: if_search(async ({search}) => await appyter('CFDE-Gene-Partnership', {gene: search})),
+    },
+    {
         name: 'go',
         tags: {
             gene: true,

@@ -90,7 +90,12 @@ export default function App({ Component, pageProps }) {
           <p className="mb-0">This project was developed for the <a href="https://commonfund.nih.gov/dataecosystem" target="_blank">Common Fund Data Ecosystem (CFDE) NIH Common Fund</a> program.</p>
           <p className="mb-0"><a href="https://github.com/MaayanLab/cfde_gene_pages">Project's GitHub Repo</a></p>
           <p className="mb-0"><a href="https://docs.google.com/forms/d/1ifK44AvAay6JyUVXkKTzkHdX2QoWLRfZZ4T3sEFFR1U/">Suggest a new resource</a></p>
-          <p><a href="#">Back to top</a></p>  </div>
+          <p><a href="#">Back to top</a></p>
+          <p className="small">Please acknowledge GDLPA in your publications by citing the following references:<br/>
+            <a href="https://academic.oup.com/bioinformaticsadvances/article/2/1/vbac013/6539777">Daniel J B Clarke, Maxim V Kuleshov, Zhuorui Xie, John E Evangelista, Marilyn R Meyers,<br/>
+              Eryk Kropiwnicki, Sherry L Jenkins, Avi Ma’ayan, Gene and drug landing page aggregator,<br/>
+              Bioinformatics Advances, Volume 2, Issue 1, 2022, vbac013, https://doi.org/10.1093/bioadv/vbac013</a></p>
+        </div>
       </footer>
     </>
   )
