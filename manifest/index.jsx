@@ -1566,6 +1566,7 @@ const manifest = [
             gene: true,
             PS: false,
             Ag: true,
+            CF: true,
             MaayanLab: true,
         },
         output: {
