@@ -889,7 +889,6 @@ const manifest = [
         title: '',
         description: 'dbSNP contains human single nucleotide variations, microsatellites, and small-scale insertions and deletions along with publication, population frequency, molecular consequence, and genomic and RefSeq mapping information for both common variations and clinical mutations.',
         tags: {
-            gene: true,
             variant: true,
             pinned: true,
         },
