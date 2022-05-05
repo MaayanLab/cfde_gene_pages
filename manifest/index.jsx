@@ -167,6 +167,11 @@ const entrezgene = defined(async (gene_search) => (await gene_info(gene_search))
 //     }
 // }))
 
+const cfde_nid = defined(memo(async (gene_search) => {
+    let mapping = await import('@/public/cfde_nid_map.json')
+    return `https://app.nih-cfde.org/chaise/record/#1/CFDE:gene/nid=${mapping[gene_search][0]}`
+}))
+
 const metabolomicswb = defined(memo(async (gene_search) => {
     const mgp = await fetchEx(`https://www.metabolomicsworkbench.org/rest/protein/uniprot_id/${await uniprot_kb(gene_search)}/mgp_id/`)
     if (mgp.ok) {
@@ -536,6 +541,34 @@ const manifest = [
         // https://maayanlab.cloud/sigcom-lincs/metadata-api/entities?filter={%22skip%22:0,%22limit%22:10,%22where%22:{%22meta.symbol%22:%20%22STAT3%22},%22fields%22:[%22id%22]}
         clickurl: if_search(async ({search}) => `https://maayanlab.cloud/sigcom-lincs/#/MetadataSearch/Genes?query={%22skip%22:0,%22limit%22:10,%22search%22:[%22${search}%22]}`),
         example: 'https://maayanlab.cloud/sigcom-lincs/#/MetadataSearch/Genes?query={%22skip%22:0,%22limit%22:10,%22search%22:[%22${gene-symbol}%22]}',
+    },
+    {
+        name: 'CFDE Search Portal',
+        tags: {
+            CF: true,
+            Ag: true,
+            gene: true,
+        },
+        output: {
+            gene: true,
+            tissue: true,
+            disease: true,
+            function: true,
+        },
+        img1: {
+            src: '/logos/CFDE_logo.png',
+            alt: 'CFDE Search Portal',
+        },
+        img2: {
+            src: '/logos/cfdesp_site.png',
+            alt: 'CFDE Search Portal site image',
+        },
+        title: 'CFDE Search Portal',
+        description: 'The CFDE Search Portal is a hub for searching the CFDE data across all programs. The main page of the portal (shown below) is meant for high-level decision-making, whereas the repository (or “data browser”) allows users such as clinical researchers, bioinformatics power users, and NIH program officers to search for CFDE data.',
+        url: "https://app.nih-cfde.org/",
+        countapi: 'maayanlab.github.io/CFDESearchPortal',
+        clickurl: if_search(async ({search}) => await cfde_nid(search)),
+        example: 'https://app.nih-cfde.org/chaise/record/#1/CFDE:gene/nid=1',
     },
     {
         name: 'SigCom LINCS',
