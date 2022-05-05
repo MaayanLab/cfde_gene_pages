@@ -412,6 +412,8 @@ const manifest = [
         countapi: 'maayanlab.github.io/metgeneclick',
         clickurl: if_search(async ({search}) => `https://sc-cfdewebdev.sdsc.edu/MetGENE/metGene.php?GeneInfoStr=${search}&GeneIDType=SYMBOL&species=hsa&anatomy=NA&disease=NA&phenotype=NA`),
         example: 'https://sc-cfdewebdev.sdsc.edu/MetGENE/metGene.php?GeneInfoStr=${gene-symbol}&GeneIDType=SYMBOL&species=hsa&anatomy=NA&disease=NA&phenotype=NA',
+        // status: if_search(async ({ self }) => await isitup(self.clickurl, 'is not a valid gene ID for the Gene ID type SYMBOL')),
+        status: if_search(async ({ self }) => true),
     },
     {
         name: 'Pharos',
