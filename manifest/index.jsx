@@ -167,6 +167,11 @@ const entrezgene = defined(async (gene_search) => (await gene_info(gene_search))
 //     }
 // }))
 
+const cfde_nid = defined(memo(async (gene) => {
+    let mapping = await import('@/public/cfde_nid_map.json')
+    return `https://app.nih-cfde.org/chaise/record/#1/CFDE:gene/nid=${mapping[gene][0]}`
+}))
+
 const metabolomicswb = defined(memo(async (gene_search) => {
     const mgp = await fetchEx(`https://www.metabolomicsworkbench.org/rest/protein/uniprot_id/${await uniprot_kb(gene_search)}/mgp_id/`)
     if (mgp.ok) {
@@ -536,6 +541,33 @@ const manifest = [
         // https://maayanlab.cloud/sigcom-lincs/metadata-api/entities?filter={%22skip%22:0,%22limit%22:10,%22where%22:{%22meta.symbol%22:%20%22STAT3%22},%22fields%22:[%22id%22]}
         clickurl: if_search(async ({search}) => `https://maayanlab.cloud/sigcom-lincs/#/MetadataSearch/Genes?query={%22skip%22:0,%22limit%22:10,%22search%22:[%22${search}%22]}`),
         example: 'https://maayanlab.cloud/sigcom-lincs/#/MetadataSearch/Genes?query={%22skip%22:0,%22limit%22:10,%22search%22:[%22${gene-symbol}%22]}',
+    },
+    {
+        name: 'CFDE Search Portal',
+        tags: {
+            CF: true,
+            Ag: true,
+            gene: true,
+        },
+        output: {
+            gene: true,
+            tissue: true,
+            disease: true,
+            function: true,
+        },
+        img1: {
+            src: '/logos/CFDE_logo.png',
+            alt: 'CFDE Search Portal',
+        },
+        img2: {
+            src: '/logos/cfdesp_site.png',
+            alt: 'CFDE Search Portal site image',
+        },
+        title: 'CFDE Search Portal',
+        description: 'The CFDE Search Portal is a hub for searching the CFDE data across all programs. The main page of the portal is meant for high-level decision-making, whereas the repository allows users such as clinical researchers, bioinformatics power users, and NIH program officers to search for CFDE data.',
+        url: "https://app.nih-cfde.org/",
+        countapi: 'maayanlab.github.io/CFDESearchPortal',
+        clickurl: if_search(async ({search}) => await cfde_nid(search))
     },
     {
         name: 'SigCom LINCS',
@@ -2327,6 +2359,482 @@ const manifest = [
         example: "http://idrblab.net/ttd/search/ttd/drug?search_api_fulltext=${drug}",
         url: "http://db.idrblab.net/ttd/",
         countapi: 'maayanlab.github.io/TTDclick',
+    },
+
+    {
+        name: 'CADD',
+        tags: {
+            PS: true,
+            Ag: false,
+            variant: true,
+        },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/CADD_logo.png',
+            alt: 'CADD logo',
+        },
+        img2: {
+            src: '/logos/CADD_site.png',
+            alt: 'CADD site screenshot',
+        },
+        title: 'CADD',
+        description: '',
+        url: '',
+        countapi: 'maayanlab.github.io/CADDclick',
+        clickurl: if_search(async ({search}) => ``),
+        example: '',
+    },
+    {
+        name: 'gnomAD',
+        tags: {
+            PS: true,
+            Ag: false,
+            variant: true,
+        },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/gnomAD_logo.png',
+            alt: 'gnomAD logo',
+        },
+        img2: {
+            src: '/logos/gnomAD_site.png',
+            alt: 'gnomAD site screenshot',
+        },
+        title: 'gnomAD',
+        description: 'The Genome Aggregation Database (gnomAD) is a resource developed by an international coalition of investigators, with the goal of aggregating and harmonizing both exome and genome sequencing data from a wide variety of large-scale sequencing projects, and making summary data available for the wider scientific community.',
+        url: 'https://gnomad.broadinstitute.org/',
+        countapi: 'maayanlab.github.io/gnomADclick',
+        clickurl: if_search(async ({search}) => `https://gnomad.broadinstitute.org/variant/${search}?dataset=gnomad_r2_1`),
+        example: '',
+    },
+    {
+        name: 'dbSNP',
+        tags: {
+            PS: true,
+            Ag: false,
+            variant: true,
+        },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/dbSNP_logo.png',
+            alt: 'dbSNP logo',
+        },
+        img2: {
+            src: '/logos/dbSNP_site.png',
+            alt: 'dbSNP site screenshot',
+        },
+        title: 'dbSNP',
+        description: 'dbSNP contains human single nucleotide variations, microsatellites, and small-scale insertions and deletions along with publication, population frequency, molecular consequence, and genomic and RefSeq mapping information for both common variations and clinical mutations.',
+        url: 'https://www.ncbi.nlm.nih.gov/snp/',
+        countapi: 'maayanlab.github.io/dbSNPclick',
+        clickurl: if_search(async ({search}) => `https://www.ncbi.nlm.nih.gov/snp/${search}/`),
+        example: '',
+    },
+    {
+        name: 'snpEff',
+        tags: {
+            PS: true,
+            Ag: false,
+            variant: true,
+        },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/snpEff_logo.png',
+            alt: 'snpEff logo',
+        },
+        img2: {
+            src: '/logos/snpEff_site.png',
+            alt: 'snpEff site screenshot',
+        },
+        title: 'snpEff',
+        description: '',
+        url: '',
+        countapi: 'maayanlab.github.io/snpEffclick',
+        clickurl: if_search(async ({search}) => ``),
+        example: '',
+    },
+    {
+        name: 'ClinVar',
+        tags: {
+            PS: true,
+            Ag: false,
+            variant: true,
+        },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/ClinVar_logo.png',
+            alt: 'ClinVar logo',
+        },
+        img2: {
+            src: '/logos/ClinVar_site.png',
+            alt: 'ClinVar site screenshot',
+        },
+        title: 'ClinVar',
+        description: 'ClinVar aggregates information about genomic variation and its relationship to human health.',
+        url: 'https://www.ncbi.nlm.nih.gov/clinvar/',
+        countapi: 'maayanlab.github.io/ClinVarclick',
+        clickurl: if_search(async ({search}) => `https://www.ncbi.nlm.nih.gov/clinvar/?term=${search}`),
+        example: '',
+    },
+    {
+        name: 'SNPedia',
+        tags: {
+            PS: true,
+            Ag: false,
+            variant: true,
+        },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/SNPedia_logo.png',
+            alt: 'SNPedia logo',
+        },
+        img2: {
+            src: '/logos/SNPedia_site.png',
+            alt: 'SNPedia site screenshot',
+        },
+        title: 'SNPedia',
+        description: 'SNPedia is a wiki investigating human genetics. It shares information about the effects of variations in DNA, citing peer-reviewed scientific publications.',
+        url: 'https://www.snpedia.com/',
+        countapi: 'maayanlab.github.io/SNPediaclick',
+        clickurl: if_search(async ({search}) => `https://www.snpedia.com/index.php/${search}`),
+        example: '',
+    },
+    {
+        name: 'GRASP',
+        tags: {
+            PS: true,
+            Ag: false,
+            variant: true,
+        },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/GRASP_logo.png',
+            alt: 'GRASP logo',
+        },
+        img2: {
+            src: '/logos/GRASP_site.png',
+            alt: 'GRASP site screenshot',
+        },
+        title: 'GRASP',
+        description: 'Genome-Wide Repository of Associations Between SNPs and Phenotypes (GRASP) includes all available genetic association results from papers, their supplements and web-based content.',
+        url: 'https://grasp.nhlbi.nih.gov/',
+        countapi: 'maayanlab.github.io/GRASPclick',
+        clickurl: if_search(async ({search}) => ``),
+        example: '',
+    },
+    {
+        name: 'dbNSFP',
+        tags: {
+            PS: true,
+            Ag: false,
+            variant: true,
+        },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/dbNSFP_logo.png',
+            alt: 'dbNSFP logo',
+        },
+        img2: {
+            src: '/logos/dbNSFP_site.png',
+            alt: 'dbNSFP site screenshot',
+        },
+        title: 'dbNSFP',
+        description: '',
+        url: 'https://database.liulab.science/dbNSFP',
+        countapi: 'maayanlab.github.io/dbNSFPclick',
+        clickurl: if_search(async ({search}) => ``),
+        example: '',
+    },
+    {
+        name: 'PharmGKB',
+        tags: {
+            PS: true,
+            Ag: false,
+            variant: true,
+        },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/PharmGKB_logo.png',
+            alt: 'PharmGKB logo',
+        },
+        img2: {
+            src: '/logos/PharmGKB_site.png',
+            alt: 'PharmGKB site screenshot',
+        },
+        title: 'PharmGKB',
+        description: '',
+        url: '',
+        countapi: 'maayanlab.github.io/PharmGKBclick',
+        clickurl: if_search(async ({search}) => ``),
+        example: '',
+    },
+    {
+        name: 'UCSC_Genome_Browser',
+        tags: {
+            PS: true,
+            Ag: false,
+            variant: true,
+        },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/UCSC_Genome_Browser_logo.png',
+            alt: 'UCSC_Genome_Browser logo',
+        },
+        img2: {
+            src: '/logos/UCSC_Genome_Browser_site.png',
+            alt: 'UCSC_Genome_Browser site screenshot',
+        },
+        title: 'UCSC_Genome_Browser',
+        description: '',
+        url: '',
+        countapi: 'maayanlab.github.io/UCSC_Genome_Browserclick',
+        clickurl: if_search(async ({search}) => ``),
+        example: '',
+    },
+    {
+        name: 'GWAS_Central',
+        tags: {
+            PS: true,
+            Ag: false,
+            variant: true,
+        },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/GWAS_Central_logo.png',
+            alt: 'GWAS_Central logo',
+        },
+        img2: {
+            src: '/logos/GWAS_Central_site.png',
+            alt: 'GWAS_Central site screenshot',
+        },
+        title: 'GWAS_Central',
+        description: '',
+        url: '',
+        countapi: 'maayanlab.github.io/GWAS_Centralclick',
+        clickurl: if_search(async ({search}) => ``),
+        example: '',
+    },
+    {
+        name: 'GWAS_Catalog',
+        tags: {
+            PS: true,
+            Ag: false,
+            variant: true,
+        },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/GWAS_Catalog_logo.png',
+            alt: 'GWAS_Catalog logo',
+        },
+        img2: {
+            src: '/logos/GWAS_Catalog_site.png',
+            alt: 'GWAS_Catalog site screenshot',
+        },
+        title: 'GWAS_Catalog',
+        description: '',
+        url: '',
+        countapi: 'maayanlab.github.io/GWAS_Catalogclick',
+        clickurl: if_search(async ({search}) => ``),
+        example: '',
+    },
+    {
+        name: 'Ensembl',
+        tags: {
+            PS: true,
+            Ag: false,
+            variant: true,
+        },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/Ensembl_logo.png',
+            alt: 'Ensembl logo',
+        },
+        img2: {
+            src: '/logos/Ensembl_site.png',
+            alt: 'Ensembl site screenshot',
+        },
+        title: 'Ensembl',
+        description: '',
+        url: '',
+        countapi: 'maayanlab.github.io/Ensemblclick',
+        clickurl: if_search(async ({search}) => ``),
+        example: '',
+    },
+    {
+        name: 'HaploReg',
+        tags: {
+            PS: true,
+            Ag: false,
+            variant: true,
+        },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/HaploReg_logo.png',
+            alt: 'HaploReg logo',
+        },
+        img2: {
+            src: '/logos/HaploReg_site.png',
+            alt: 'HaploReg site screenshot',
+        },
+        title: 'HaploReg',
+        description: '',
+        url: '',
+        countapi: 'maayanlab.github.io/HaploRegclick',
+        clickurl: if_search(async ({search}) => ``),
+        example: '',
+    },
+    {
+        name: 'Open Targets',
+        tags: {
+            PS: true,
+            Ag: false,
+            variant: true,
+        },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/Open Targets_logo.png',
+            alt: 'Open Targets logo',
+        },
+        img2: {
+            src: '/logos/Open Targets_site.png',
+            alt: 'Open Targets site screenshot',
+        },
+        title: 'Open Targets',
+        description: '',
+        url: '',
+        countapi: 'maayanlab.github.io/Open Targetsclick',
+        clickurl: if_search(async ({search}) => ``),
+        example: '',
+    },
+    {
+        name: 'DisGenNET',
+        tags: {
+            PS: true,
+            Ag: false,
+            variant: true,
+        },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/DisGenNET_logo.png',
+            alt: 'DisGenNET logo',
+        },
+        img2: {
+            src: '/logos/DisGenNET_site.png',
+            alt: 'DisGenNET site screenshot',
+        },
+        title: 'DisGenNET',
+        description: '',
+        url: '',
+        countapi: 'maayanlab.github.io/DisGenNETclick',
+        clickurl: if_search(async ({search}) => ``),
+        example: '',
+    },
+    {
+        name: 'PheWeb',
+        tags: {
+            PS: true,
+            Ag: false,
+            variant: true,
+        },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/PheWeb_logo.png',
+            alt: 'PheWeb logo',
+        },
+        img2: {
+            src: '/logos/PheWeb_site.png',
+            alt: 'PheWeb site screenshot',
+        },
+        title: 'PheWeb',
+        description: '',
+        url: '',
+        countapi: 'maayanlab.github.io/PheWebclick',
+        clickurl: if_search(async ({search}) => ``),
+        example: '',
+    },
+    {
+        name: 'GTEx',
+        tags: {
+            PS: true,
+            Ag: false,
+            variant: true,
+        },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/GTEx_logo.png',
+            alt: 'GTEx logo',
+        },
+        img2: {
+            src: '/logos/GTEx_site.png',
+            alt: 'GTEx site screenshot',
+        },
+        title: 'GTEx',
+        description: '',
+        url: '',
+        countapi: 'maayanlab.github.io/GTExclick',
+        clickurl: if_search(async ({search}) => ``),
+        example: '',
+    },
+    {
+        name: 'GeneShot',
+        tags: {
+            PS: true,
+            Ag: false,
+            variant: true,
+        },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/GeneShot_logo.png',
+            alt: 'GeneShot logo',
+        },
+        img2: {
+            src: '/logos/GeneShot_site.png',
+            alt: 'GeneShot site screenshot',
+        },
+        title: 'GeneShot',
+        description: '',
+        url: '',
+        countapi: 'maayanlab.github.io/GeneShotclick',
+        clickurl: if_search(async ({search}) => ``),
+        example: '',
     },
 ]
 
