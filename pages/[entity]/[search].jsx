@@ -33,6 +33,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({params: {entity, search}}) {
+    const entities = [entity]
     if (search === 'error') {
         return {
             props: {error: true},
@@ -50,7 +51,7 @@ export async function getStaticProps({params: {entity, search}}) {
                 throw new Error('NotFound')
             }
             else {
-                entity = 'gene';
+                entities.push('gene');
                 search = variant_gene;
             }
         } else {
@@ -64,7 +65,9 @@ export async function getStaticProps({params: {entity, search}}) {
         await Promise.all(
             full_manifest
                 .map(async (item) => {
-                    if (!(entity in item.tags)) return
+                    const entities_filtered = entities.filter(entity => entity in item.tags)
+                    if (entities_filtered.length === 0) return
+                    const entity = entities_filtered[0]
                     try {
                         const self = {}
                         for (const k in item) {

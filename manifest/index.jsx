@@ -167,9 +167,9 @@ const entrezgene = defined(async (gene_search) => (await gene_info(gene_search))
 //     }
 // }))
 
-const cfde_nid = defined(memo(async (gene) => {
+const cfde_nid = defined(memo(async (gene_search) => {
     let mapping = await import('@/public/cfde_nid_map.json')
-    return `https://app.nih-cfde.org/chaise/record/#1/CFDE:gene/nid=${mapping[gene][0]}`
+    return `https://app.nih-cfde.org/chaise/record/#1/CFDE:gene/nid=${mapping[gene_search][0]}`
 }))
 
 const metabolomicswb = defined(memo(async (gene_search) => {
@@ -439,6 +439,8 @@ const manifest = [
         countapi: 'maayanlab.github.io/metgeneclick',
         clickurl: if_search(async ({search}) => `https://sc-cfdewebdev.sdsc.edu/MetGENE/metGene.php?GeneInfoStr=${search}&GeneIDType=SYMBOL&species=hsa&anatomy=NA&disease=NA&phenotype=NA`),
         example: 'https://sc-cfdewebdev.sdsc.edu/MetGENE/metGene.php?GeneInfoStr=${gene-symbol}&GeneIDType=SYMBOL&species=hsa&anatomy=NA&disease=NA&phenotype=NA',
+        // status: if_search(async ({ self }) => await isitup(self.clickurl, 'is not a valid gene ID for the Gene ID type SYMBOL')),
+        status: if_search(async ({ self }) => true),
     },
     {
         name: 'Pharos',
@@ -564,10 +566,11 @@ const manifest = [
             alt: 'CFDE Search Portal site image',
         },
         title: 'CFDE Search Portal',
-        description: 'The CFDE Search Portal is a hub for searching the CFDE data across all programs. The main page of the portal is meant for high-level decision-making, whereas the repository allows users such as clinical researchers, bioinformatics power users, and NIH program officers to search for CFDE data.',
+        description: 'The CFDE Search Portal is a hub for searching the CFDE data across all programs. The main page of the portal (shown below) is meant for high-level decision-making, whereas the repository (or “data browser”) allows users such as clinical researchers, bioinformatics power users, and NIH program officers to search for CFDE data.',
         url: "https://app.nih-cfde.org/",
         countapi: 'maayanlab.github.io/CFDESearchPortal',
-        clickurl: if_search(async ({search}) => await cfde_nid(search))
+        clickurl: if_search(async ({search}) => await cfde_nid(search)),
+        example: 'https://app.nih-cfde.org/chaise/record/#1/CFDE:gene/nid=1',
     },
     {
         name: 'SigCom LINCS',
@@ -886,7 +889,6 @@ const manifest = [
         title: '',
         description: 'dbSNP contains human single nucleotide variations, microsatellites, and small-scale insertions and deletions along with publication, population frequency, molecular consequence, and genomic and RefSeq mapping information for both common variations and clinical mutations.',
         tags: {
-            gene: true,
             variant: true,
             pinned: true,
         },
@@ -2833,6 +2835,306 @@ const manifest = [
         description: '',
         url: '',
         countapi: 'maayanlab.github.io/GeneShotclick',
+        clickurl: if_search(async ({search}) => ``),
+        example: '',
+    },
+    {
+        name: 'PharmGKB',
+            tags: {
+        PS: true,
+            Ag: false,
+            variant: true,
+    },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/PharmGKB_logo.png',
+                alt: 'PharmGKB logo',
+        },
+        img2: {
+            src: '/logos/PharmGKB_site.png',
+                alt: 'PharmGKB site screenshot',
+        },
+        title: 'PharmGKB',
+            description: 'PharmGKB is a comprehensive resource that curates knowledge about the impact of genetic variation on drug response for clinicians and researchers.',
+        url: 'https://www.pharmgkb.org',
+        countapi: 'maayanlab.github.io/PharmGKBclick',
+        clickurl: if_search(async ({search}) => ``),
+        example: '',
+    },
+    {
+        name: 'UCSC_Genome_Browser',
+            tags: {
+        PS: true,
+            Ag: false,
+            variant: true,
+    },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/UCSC_Genome_Browser_logo.png',
+                alt: 'UCSC_Genome_Browser logo',
+        },
+        img2: {
+            src: '/logos/UCSC_Genome_Browser_site.png',
+                alt: 'UCSC_Genome_Browser site screenshot',
+        },
+        title: 'UCSC_Genome_Browser',
+            description: 'The Human Genome Browser includes a broad collection of vertebrate and model organism assemblies and annotations, along with a large suite of tools for viewing, analyzing and downloading data.',
+        url: 'https://genome.ucsc.edu',
+        countapi: 'maayanlab.github.io/UCSC_Genome_Browserclick',
+        clickurl: if_search(async ({search}) => ``),
+        example: '',
+    },
+    {
+        name: 'GWAS_Central',
+            tags: {
+        PS: true,
+            Ag: false,
+            variant: true,
+    },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/GWAS_Central_logo.png',
+                alt: 'GWAS_Central logo',
+        },
+        img2: {
+            src: '/logos/GWAS_Central_site.png',
+                alt: 'GWAS_Central site screenshot',
+        },
+        title: 'GWAS_Central',
+            description: 'GWAS Central provides a centralized compilation of summary level findings from genetic association studies, both large and small.',
+        url: 'https://www.gwascentral.org',
+        countapi: 'maayanlab.github.io/GWAS_Centralclick',
+        clickurl: if_search(async ({search}) => ``),
+        example: '',
+    },
+    {
+        name: 'GWAS_Catalog',
+            tags: {
+        PS: true,
+            Ag: false,
+            variant: true,
+    },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/GWAS_Catalog_logo.png',
+                alt: 'GWAS_Catalog logo',
+        },
+        img2: {
+            src: '/logos/GWAS_Catalog_site.png',
+                alt: 'GWAS_Catalog site screenshot',
+        },
+        title: 'GWAS_Catalog',
+            description: 'The NHGRI-EBI GWAS Catalog is a curated collection of all human genome-wide association studies, produced by a collaboration between EMBL-EBI and NHGRI.',
+        url: 'https://www.ebi.ac.uk/gwas/',
+        countapi: 'maayanlab.github.io/GWAS_Catalogclick',
+        clickurl: if_search(async ({search}) => ``),
+        example: '',
+    },
+    {
+        name: 'Ensembl',
+            tags: {
+        PS: true,
+            Ag: false,
+            variant: true,
+    },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/Ensembl_logo.png',
+                alt: 'Ensembl logo',
+        },
+        img2: {
+            src: '/logos/Ensembl_site.png',
+                alt: 'Ensembl site screenshot',
+        },
+        title: 'Ensembl',
+            description: 'Ensembl is a genome browser for vertebrate genomes that supports research in comparative genomics, evolution, sequence variation and transcriptional regulation.',
+        url: 'https://ensembl.org/',
+        countapi: 'maayanlab.github.io/Ensemblclick',
+        clickurl: if_search(async ({search}) => ``),
+        example: '',
+    },
+    {
+        name: 'HaploReg',
+            tags: {
+        PS: true,
+            Ag: false,
+            variant: true,
+    },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/HaploReg_logo.png',
+                alt: 'HaploReg logo',
+        },
+        img2: {
+            src: '/logos/HaploReg_site.png',
+                alt: 'HaploReg site screenshot',
+        },
+        title: 'HaploReg',
+            description: 'HaploReg is a tool for exploring annotations of the noncoding genome at variants on haplotype blocks, such as candidate regulatory SNPs at disease-associated loci.',
+        url: 'https://pubs.broadinstitute.org/mammals/haploreg/haploreg.php',
+        countapi: 'maayanlab.github.io/HaploRegclick',
+        clickurl: if_search(async ({search}) => ``),
+        example: '',
+    },
+    {
+        name: 'Open_Targets',
+            tags: {
+        PS: true,
+            Ag: false,
+            variant: true,
+    },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/Open_Targets_logo.png',
+                alt: 'Open_Targets logo',
+        },
+        img2: {
+            src: '/logos/Open_Targets_site.png',
+                alt: 'Open_Targets site screenshot',
+        },
+        title: 'Open_Targets',
+            description: 'The Open Targets Genetics Portal is a tool highlighting variant-centric statistical evidence to allow both prioritisation of candidate causal variants at trait-associated loci and identification of potential drug targets.',
+        url: 'https://www.opentargets.org/',
+        countapi: 'maayanlab.github.io/Open_Targetsclick',
+        clickurl: if_search(async ({search}) => ``),
+        example: '',
+    },
+    {
+        name: 'DisGenNET',
+            tags: {
+        PS: true,
+            Ag: false,
+            variant: true,
+    },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/DisGenNET_logo.png',
+                alt: 'DisGenNET logo',
+        },
+        img2: {
+            src: '/logos/DisGenNET_site.png',
+                alt: 'DisGenNET site screenshot',
+        },
+        title: 'DisGenNET',
+            description: 'DisGeNET is a discovery platform containing one of the largest publicly available collections of genes and variants associated to human diseases.',
+        url: 'https://www.disgenet.org/',
+        countapi: 'maayanlab.github.io/DisGenNETclick',
+        clickurl: if_search(async ({search}) => ``),
+        example: '',
+    },
+    {
+        name: 'PheWeb',
+            tags: {
+        PS: true,
+            Ag: false,
+            variant: true,
+    },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/PheWeb_logo.png',
+                alt: 'PheWeb logo',
+        },
+        img2: {
+            src: '/logos/PheWeb_site.png',
+                alt: 'PheWeb site screenshot',
+        },
+        title: 'PheWeb',
+            description: '',
+        url: 'https://pheweb.sph.umich.edu/',
+        countapi: 'maayanlab.github.io/PheWebclick',
+        clickurl: if_search(async ({search}) => ``),
+        example: '',
+    },
+    {
+        name: 'GTEx',
+            tags: {
+        PS: true,
+            Ag: false,
+            variant: true,
+    },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/GTEx_logo.png',
+                alt: 'GTEx logo',
+        },
+        img2: {
+            src: '/logos/GTEx_site.png',
+                alt: 'GTEx site screenshot',
+        },
+        title: 'GTEx',
+            description: 'The Genotype-Tissue Expression (GTEx) Portal provides open access to data including gene expression, QTLs, and histology static.',
+        url: 'https://gtexportal.org/',
+        countapi: 'maayanlab.github.io/GTExclick',
+        clickurl: if_search(async ({search}) => ``),
+        example: '',
+    },
+    {
+        name: 'GeneShot',
+            tags: {
+        PS: true,
+            Ag: false,
+            variant: true,
+    },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/GeneShot_logo.png',
+                alt: 'GeneShot logo',
+        },
+        img2: {
+            src: '/logos/GeneShot_site.png',
+                alt: 'GeneShot site screenshot',
+        },
+        title: 'GeneShot',
+            description: 'Geneshot is a search engine that accepts any search term to return a list of genes that are mostly associated with the search terms.',
+        url: 'https://maayanlab.cloud/geneshot/',
+        countapi: 'maayanlab.github.io/GeneShotclick',
+        clickurl: if_search(async ({search}) => ``),
+        example: '',
+    },
+    {
+        name: 'ClinGen',
+            tags: {
+        PS: true,
+            Ag: false,
+            variant: true,
+    },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/ClinGen_logo.png',
+                alt: 'ClinGen logo',
+        },
+        img2: {
+            src: '/logos/ClinGen_site.png',
+                alt: 'ClinGen site screenshot',
+        },
+        title: 'ClinGen',
+            description: 'ClinGen is a National Institutes of Health (NIH)-funded resource dedicated to building a central resource that defines the clinical relevance of genes and variants for use in precision medicine and research.',
+        url: 'https://clinicalgenome.org/',
+        countapi: 'maayanlab.github.io/ClinGenclick',
         clickurl: if_search(async ({search}) => ``),
         example: '',
     },

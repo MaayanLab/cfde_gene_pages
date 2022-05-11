@@ -7,6 +7,7 @@ import getConfig from 'next/config'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebookF, faLinkedinIn, faTwitter } from '@fortawesome/free-brands-svg-icons'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import manifest from '@/manifest'
 
 const Analytics = dynamic(() => import('@/components/Analytics'))
 const PDBeMolstarPluginContext = dynamic(() => import('@/components/PDBeMolstarWidget').then(({ PDBeMolstarPluginContext }) => PDBeMolstarPluginContext))
@@ -27,6 +28,34 @@ export default function App({ Component, pageProps }) {
         <meta property="og:image" content={`${publicRuntimeConfig.origin}/logos/thumbnail.png`} />
         <meta property="og:url" content={publicRuntimeConfig.origin} />
         <meta name="author" content="Ma'ayan Lab" />
+        <meta name="keywords" content={[
+          `gdlpa, lincs, bd2k, dcic, bd2k-lincs dcic`,
+          `data coordination and integration center`,
+          `biomedical, systems biology, drug discovery, gene signature`,
+          `genomics, transcriptomics, proteomics, metabolomics`,
+          `genes, proteins, drugs, perturbations`,
+          `maayan lab, avi ma'ayan, avi maayan`,
+          `nih, common fund, cfde`,
+          ...manifest.map(({ name }) => name),
+        ].join(', ')} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "http://schema.org",
+              "@type": "WebSite",
+              "url": "https://cfde-gene-pages.cloud/",
+              "potentialAction": [
+                {
+                  "@type": "SearchAction",
+                  "target": "https://cfde-gene-pages.cloud/gene/{query}",
+                  "query-input": "required name=query"
+                }
+              ]
+            })
+          }}
+        />
+
         <link rel="shortcut icon" href="/logos/logo.png" type="image/x-icon" />
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="theme-color" content="#ffffff" />
