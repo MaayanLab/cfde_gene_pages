@@ -116,6 +116,31 @@ export const variant_to_gene = defined(memo(async (variant) => {
     }
 }))
 
+export const rsid = defined(memo(async (variant) => {
+    const myvariant = await fetchEx(`${variant_query_url}/variant/${variant}`);
+    if (myvariant.ok) {
+        let myvariant_json = await myvariant.json()
+        if (Array.isArray(myvariant_json)) myvariant_json = myvariant_json[0];
+        return myvariant_json['dbsnp']['rsid']
+    }
+}))
+
+const fill_template = function(template_string, template_vars){
+    return new Function("return `"+template_string +"`;").call(template_vars);
+}
+
+export const chr_coord = defined(memo(async (variant, template_string) => {
+    const myvariant = await fetchEx(`${variant_query_url}/variant/${variant}`);
+    if (myvariant.ok) {
+        let myvariant_json = await myvariant.json()
+        if (Array.isArray(myvariant_json)) myvariant_json = myvariant_json[0];
+        let chr_c = myvariant_json['_id'];
+        let template_vars = {chr: chr_c['chrom'], pos: chr_c['vcf']['position'], alt: chr_c['vcf']['alt'], ref: chr_c['vcf']['ref']}
+        return fill_template(template_string, template_vars)
+    }
+}))
+
+
 const appyter = defined(memo(async (appyter_name, args) => {
     const ret = await fetchEx(`https://appyters.maayanlab.cloud/${appyter_name}/`, {
         method: 'POST',
@@ -1397,7 +1422,7 @@ const manifest = [
         },
         title: 'ClinGen',
         description: 'ClinGen is a NIH funded resource dedicated to building a central resource that defines the clinical relevance of genes and variants for use in precision medicine and research.',
-        url: "https://www.clinicalgenome.org/",
+        url: 'https://www.clinicalgenome.org/',
         countapi: 'maayanlab.github.io/CLINGENclick',
         clickurl: if_search(async ({search}) => `https://search.clinicalgenome.org/kb/genes/HGNC:${await HGNC(search)}`),
         status: if_search(async ({self}) => await isitup(self.clickurl, 'ClinGen has not yet published curations for')),
@@ -2362,7 +2387,6 @@ const manifest = [
         url: "http://db.idrblab.net/ttd/",
         countapi: 'maayanlab.github.io/TTDclick',
     },
-
     {
         name: 'CADD',
         tags: {
@@ -2385,7 +2409,7 @@ const manifest = [
         description: 'CADD is a tool for scoring the deleteriousness of single nucleotide variants as well as insertion/deletions variants in the human genome.',
         url: 'https://cadd.gs.washington.edu/',
         countapi: 'maayanlab.github.io/CADDclick',
-        clickurl: if_search(async ({search}) => ``),
+        clickurl: if_search(async ({search}) => `https://cadd.gs.washington.edu/snv/GRCh37-v1.6/${await chr_coord(search, '${chr}:${pos}_${ref}_${alt}')}`),
         example: '',
     },
     {
@@ -2410,7 +2434,7 @@ const manifest = [
         description: 'The Genome Aggregation Database (gnomAD) is a resource developed by an international coalition of investigators, with the goal of aggregating and harmonizing both exome and genome sequencing data from a wide variety of large-scale sequencing projects, and making summary data available for the wider scientific community.',
         url: 'https://gnomad.broadinstitute.org/',
         countapi: 'maayanlab.github.io/gnomADclick',
-        clickurl: if_search(async ({search}) => `https://gnomad.broadinstitute.org/variant/${search}?dataset=gnomad_r2_1`),
+        clickurl: if_search(async ({search}) => `https://gnomad.broadinstitute.org/variant/${await chr_coord(search, '${chr}-${pos}-${ref}-${alt}')}?dataset=gnomad_r2_1`),
         example: '',
     },
     {
@@ -2435,7 +2459,7 @@ const manifest = [
         description: 'dbSNP contains human single nucleotide variations, microsatellites, and small-scale insertions and deletions along with publication, population frequency, molecular consequence, and genomic and RefSeq mapping information for both common variations and clinical mutations.',
         url: 'https://www.ncbi.nlm.nih.gov/snp/',
         countapi: 'maayanlab.github.io/dbSNPclick',
-        clickurl: if_search(async ({search}) => `https://www.ncbi.nlm.nih.gov/snp/${search}/`),
+        clickurl: if_search(async ({search}) => `https://www.ncbi.nlm.nih.gov/snp/?term=${rsid(search)}`),
         example: '',
     },
     {
@@ -2460,7 +2484,7 @@ const manifest = [
         description: 'ClinVar aggregates information about genomic variation and its relationship to human health.',
         url: 'https://www.ncbi.nlm.nih.gov/clinvar/',
         countapi: 'maayanlab.github.io/ClinVarclick',
-        clickurl: if_search(async ({search}) => `https://www.ncbi.nlm.nih.gov/clinvar/?term=${search}`),
+        clickurl: if_search(async ({search}) => `https://www.ncbi.nlm.nih.gov/clinvar/?term=${rsid(search)}`),
         example: '',
     },
     {
@@ -2485,59 +2509,59 @@ const manifest = [
         description: 'SNPedia is a wiki investigating human genetics. It shares information about the effects of variations in DNA, citing peer-reviewed scientific publications.',
         url: 'https://www.snpedia.com/',
         countapi: 'maayanlab.github.io/SNPediaclick',
-        clickurl: if_search(async ({search}) => `https://www.snpedia.com/index.php/${search}`),
+        clickurl: if_search(async ({search}) => `https://www.snpedia.com/index.php/${rsid(search)}`),
         example: '',
     },
-    {
-        name: 'GRASP',
-        tags: {
-            PS: true,
-            Ag: false,
-            variant: true,
-        },
-        output: {
-            gene: true,
-        },
-        img1: {
-            src: '/logos/GRASP_logo.png',
-            alt: 'GRASP logo',
-        },
-        img2: {
-            src: '/logos/GRASP_site.png',
-            alt: 'GRASP site screenshot',
-        },
-        title: 'GRASP',
-        description: 'Genome-Wide Repository of Associations Between SNPs and Phenotypes (GRASP) includes all available genetic association results from papers, their supplements and web-based content.',
-        url: 'https://grasp.nhlbi.nih.gov/',
-        countapi: 'maayanlab.github.io/GRASPclick',
-        clickurl: if_search(async ({search}) => ``),
-        example: '',
-    },
-    {
-        name: 'dbNSFP',
-        tags: {
-            PS: true,
-            Ag: false,
-            variant: true,
-        },
-        output: {
-            gene: true,
-        },
-        img1: {
-            src: '/logos/dbNSFP_logo.png',
-            alt: 'dbNSFP logo',
-        },
-        img2: {
-            src: '/logos/dbNSFP_site.png',
-            alt: 'dbNSFP site screenshot',
-        },
-        title: 'dbNSFP',
-        description: 'dbNSFP is a database developed for functional prediction and annotation of all potential non-synonymous single-nucleotide variants (nsSNVs) in the human genome.',
-        url: 'https://database.liulab.science/dbNSFP',
-        countapi: 'maayanlab.github.io/dbNSFPclick',
-        clickurl: if_search(async ({search}) => ``),
-        example: '',
-    },
+    // {
+    //     name: 'GRASP',
+    //     tags: {
+    //         PS: true,
+    //         Ag: false,
+    //         variant: true,
+    //     },
+    //     output: {
+    //         gene: true,
+    //     },
+    //     img1: {
+    //         src: '/logos/GRASP_logo.png',
+    //         alt: 'GRASP logo',
+    //     },
+    //     img2: {
+    //         src: '/logos/GRASP_site.png',
+    //         alt: 'GRASP site screenshot',
+    //     },
+    //     title: 'GRASP',
+    //     description: 'Genome-Wide Repository of Associations Between SNPs and Phenotypes (GRASP) includes all available genetic association results from papers, their supplements and web-based content.',
+    //     url: 'https://grasp.nhlbi.nih.gov/',
+    //     countapi: 'maayanlab.github.io/GRASPclick',
+    //     clickurl: if_search(async ({search}) => ``),
+    //     example: '',
+    // },
+    // {
+    //     name: 'dbNSFP',
+    //     tags: {
+    //         PS: true,
+    //         Ag: false,
+    //         variant: true,
+    //     },
+    //     output: {
+    //         gene: true,
+    //     },
+    //     img1: {
+    //         src: '/logos/dbNSFP_logo.png',
+    //         alt: 'dbNSFP logo',
+    //     },
+    //     img2: {
+    //         src: '/logos/dbNSFP_site.png',
+    //         alt: 'dbNSFP site screenshot',
+    //     },
+    //     title: 'dbNSFP',
+    //     description: 'dbNSFP is a database developed for functional prediction and annotation of all potential non-synonymous single-nucleotide variants (nsSNVs) in the human genome.',
+    //     url: 'https://database.liulab.science/dbNSFP',
+    //     countapi: 'maayanlab.github.io/dbNSFPclick',
+    //     clickurl: if_search(async ({search}) => ``),
+    //     example: '',
+    // },
     {
         name: 'gwas',
         tags: {
@@ -2556,11 +2580,11 @@ const manifest = [
             src: '/logos/GWAS_site.png',
             alt: 'GWAS Catalog site screenshot',
         },
-        title: 'GWAS_Catalog',
+        title: 'GWAS Catalog',
         description: 'The GWAS Catalog provides a consistent, searchable, visualisable and freely available database of SNP-trait associations, which can be easily integrated with other resources.',
         url: "https://www.ebi.ac.uk/gwas/home",
         countapi: 'maayanlab.github.io/GWASclick',
-        clickurl: if_search(async ({search}) => ``),
+        clickurl: if_search(async ({search}) => `https://www.ebi.ac.uk/gwas/search?query=${rsid(search)}`),
         example: '',
     },
     {
@@ -2582,37 +2606,37 @@ const manifest = [
             alt: 'OpenTargets site screenshot',
         },
         title: 'OpenTargets',
-        description: 'The Open Targets Genetics Portal is a tool highlighting variant-centric statistical evidence to allow both prioritisation of candidate causal variants at trait-associated loci and identification of potential drug targets.',
-        url: "https://platform.opentargets.org/",
+        description: 'The OpenTargets Genetics Portal is a tool highlighting variant-centric statistical evidence to allow both prioritisation of candidate causal variants at trait-associated loci and identification of potential drug targets.',
+        url: "https://genetics.opentargets.org/",
         countapi: 'maayanlab.github.io/OpenTargetsclick',
-        clickurl: if_search(async ({search}) => ``),
+        clickurl: if_search(async ({search}) => `https://genetics.opentargets.org/variant/${await chr_coord(search, '${chr}_${pos}_${ref}_${alt}')}`),
         example: '',
     },
-    {
-        name: 'GeneShot',
-        tags: {
-            PS: true,
-            Ag: false,
-            variant: true,
-        },
-        output: {
-            gene: true,
-        },
-        img1: {
-            src: '/logos/GeneShot_logo.png',
-            alt: 'GeneShot logo',
-        },
-        img2: {
-            src: '/logos/GeneShot_site.png',
-            alt: 'GeneShot site screenshot',
-        },
-        title: 'GeneShot',
-        description: 'Geneshot is a search engine that accepts any search term to return a list of genes that are mostly associated with the search terms. ',
-        url: 'https://maayanlab.cloud/geneshot/',
-        countapi: 'maayanlab.github.io/GeneShotclick',
-        clickurl: if_search(async ({search}) => ``),
-        example: '',
-    },
+    // {
+    //     name: 'GeneShot',
+    //     tags: {
+    //         PS: true,
+    //         Ag: false,
+    //         variant: true,
+    //     },
+    //     output: {
+    //         gene: true,
+    //     },
+    //     img1: {
+    //         src: '/logos/GeneShot_logo.png',
+    //         alt: 'GeneShot logo',
+    //     },
+    //     img2: {
+    //         src: '/logos/GeneShot_site.png',
+    //         alt: 'GeneShot site screenshot',
+    //     },
+    //     title: 'GeneShot',
+    //     description: 'Geneshot is a search engine that accepts any search term to return a list of genes that are mostly associated with the search terms. ',
+    //     url: 'https://maayanlab.cloud/geneshot/',
+    //     countapi: 'maayanlab.github.io/GeneShotclick',
+    //     clickurl: if_search(async ({search}) => ``),
+    //     example: '',
+    // },
     {
         name: 'PharmGKB',
             tags: {
@@ -2635,7 +2659,7 @@ const manifest = [
         description: 'PharmGKB is a comprehensive resource that curates knowledge about the impact of genetic variation on drug response for clinicians and researchers.',
         url: 'https://www.pharmgkb.org',
         countapi: 'maayanlab.github.io/PharmGKBclick',
-        clickurl: if_search(async ({search}) => ``),
+        clickurl: if_search(async ({search}) => `https://www.pharmgkb.org/search?query=${rsid(search)}`),
         example: '',
     },
     {
@@ -2660,7 +2684,8 @@ const manifest = [
         description: 'The Human Genome Browser includes a broad collection of vertebrate and model organism assemblies and annotations, along with a large suite of tools for viewing, analyzing and downloading data.',
         url: "https://genome.ucsc.edu/cgi-bin/hgGateway",
         countapi: 'maayanlab.github.io/HGBclick',
-        clickurl: if_search(async ({search}) => ``),
+        clickurl: if_search(async ({search}) => `https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg38&position=${await chr_coord(search, '${chr}:${pos}-${pos}')}`),
+        // What if it's not a single nucleotide variation?
         example: '',
     },
     {
@@ -2685,32 +2710,7 @@ const manifest = [
         description: 'GWAS Central provides a centralized compilation of summary level findings from genetic association studies, both large and small.',
         url: 'https://www.gwascentral.org',
         countapi: 'maayanlab.github.io/GWAS_Centralclick',
-        clickurl: if_search(async ({search}) => ``),
-        example: '',
-    },
-    {
-        name: 'GWAS_Catalog',
-            tags: {
-        PS: true,
-            Ag: false,
-            variant: true,
-    },
-        output: {
-            gene: true,
-        },
-        img1: {
-            src: '/logos/GWAS_Catalog_logo.png',
-            alt: 'GWAS_Catalog logo',
-        },
-        img2: {
-            src: '/logos/GWAS_Catalog_site.png',
-            alt: 'GWAS_Catalog site screenshot',
-        },
-        title: 'GWAS_Catalog',
-        description: 'The NHGRI-EBI GWAS Catalog is a curated collection of all human genome-wide association studies, produced by a collaboration between EMBL-EBI and NHGRI.',
-        url: 'https://www.ebi.ac.uk/gwas/',
-        countapi: 'maayanlab.github.io/GWAS_Catalogclick',
-        clickurl: if_search(async ({search}) => ``),
+        clickurl: if_search(async ({search}) => `https://www.gwascentral.org/search?q=${rsid(search)}`),
         example: '',
     },
     {
@@ -2735,59 +2735,34 @@ const manifest = [
         description: 'Ensembl is a genome browser for vertebrate genomes that supports research in comparative genomics, evolution, sequence variation and transcriptional regulation.',
         url: "https://useast.ensembl.org/index.html",
         countapi: 'maayanlab.github.io/ENSEMBLclick',
-        clickurl: if_search(async ({search}) => ``),
+        clickurl: if_search(async ({search}) => `https://useast.ensembl.org/homo_sapiens/Variation/Summary?v=${rsid(search)}`),
         example: '',
     },
-    {
-        name: 'HaploReg',
-            tags: {
-        PS: true,
-            Ag: false,
-            variant: true,
-    },
-        output: {
-            gene: true,
-        },
-        img1: {
-            src: '/logos/HaploReg_logo.png',
-            alt: 'HaploReg logo',
-        },
-        img2: {
-            src: '/logos/HaploReg_site.png',
-            alt: 'HaploReg site screenshot',
-        },
-        title: 'HaploReg',
-        description: 'HaploReg is a tool for exploring annotations of the noncoding genome at variants on haplotype blocks, such as candidate regulatory SNPs at disease-associated loci.',
-        url: 'https://pubs.broadinstitute.org/mammals/haploreg/haploreg.php',
-        countapi: 'maayanlab.github.io/HaploRegclick',
-        clickurl: if_search(async ({search}) => ``),
-        example: '',
-    },
-    {
-        name: 'OpenTargets',
-            tags: {
-        PS: true,
-            Ag: false,
-            variant: true,
-    },
-        output: {
-            gene: true,
-        },
-        img1: {
-            src: '/logos/Open_Targets_logo.png',
-            alt: 'Open_Targets logo',
-        },
-        img2: {
-            src: '/logos/Open_Targets_site.png',
-            alt: 'Open_Targets site screenshot',
-        },
-        title: 'OpenTargets',
-        description: 'The Open Targets Platform is a comprehensive tool that supports systematic identification and prioritisation of potential therapeutic drug targets by integrating publicly available datasets including data generated by the Open Targets consortium.',
-        url: 'https://www.opentargets.org/',
-        countapi: 'maayanlab.github.io/Open_Targetsclick',
-        clickurl: if_search(async ({search}) => ``),
-        example: '',
-    },
+    // {
+    //     name: 'HaploReg',
+    //         tags: {
+    //     PS: true,
+    //         Ag: false,
+    //         variant: true,
+    // },
+    //     output: {
+    //         gene: true,
+    //     },
+    //     img1: {
+    //         src: '/logos/HaploReg_logo.png',
+    //         alt: 'HaploReg logo',
+    //     },
+    //     img2: {
+    //         src: '/logos/HaploReg_site.png',
+    //         alt: 'HaploReg site screenshot',
+    //     },
+    //     title: 'HaploReg',
+    //     description: 'HaploReg is a tool for exploring annotations of the noncoding genome at variants on haplotype blocks, such as candidate regulatory SNPs at disease-associated loci.',
+    //     url: 'https://pubs.broadinstitute.org/mammals/haploreg/haploreg_v4.php',
+    //     countapi: 'maayanlab.github.io/HaploRegclick',
+    //     clickurl: if_search(async ({search}) => ``),
+    //     example: '',
+    // },
     {
         name: 'DisGenNET',
             tags: {
@@ -2810,7 +2785,7 @@ const manifest = [
         description: 'DisGeNET is a discovery platform containing one of the largest publicly available collections of genes and variants associated to human diseases.',
         url: 'https://www.disgenet.org/',
         countapi: 'maayanlab.github.io/DisGenNETclick',
-        clickurl: if_search(async ({search}) => ``),
+        clickurl: if_search(async ({search}) => `https://www.disgenet.org/search/2/${rsid(search)}/`),
         example: '',
     },
     {
@@ -2835,7 +2810,7 @@ const manifest = [
         description: 'PheWeb is an easy-to-use open-source web-based tool for visualizing, navigating, and sharing GWAS and PheWAS results.',
         url: 'https://pheweb.sph.umich.edu/',
         countapi: 'maayanlab.github.io/PheWebclick',
-        clickurl: if_search(async ({search}) => ``),
+        clickurl: if_search(async ({search}) => `https://pheweb.org/UKB-TOPMed/variant/${await chr_coord(search, '${chr}:${pos}-${ref}-${alt}')}`),
         example: '',
     },
     {
@@ -2860,59 +2835,34 @@ const manifest = [
         description: 'The Genotype-Tissue Expression (GTEx) Portal provides open access to data including gene expression, QTLs, and histology static.',
         url: 'https://gtexportal.org/',
         countapi: 'maayanlab.github.io/gteclick',
-        clickurl: if_search(async ({search}) => ``),
+        clickurl: if_search(async ({search}) => `https://gtexportal.org/home/snp/${rsid(search)}`),
         example: '',
     },
-    {
-        name: 'GeneShot',
-            tags: {
-        PS: true,
-            Ag: false,
-            variant: true,
-    },
-        output: {
-            gene: true,
-        },
-        img1: {
-            src: '/logos/GeneShot_logo.png',
-            alt: 'GeneShot logo',
-        },
-        img2: {
-            src: '/logos/GeneShot_site.png',
-            alt: 'GeneShot site screenshot',
-        },
-        title: 'GeneShot',
-        description: 'Geneshot is a search engine that accepts any search term to return a list of genes that are mostly associated with the search terms.',
-        url: 'https://maayanlab.cloud/geneshot/',
-        countapi: 'maayanlab.github.io/GeneShotclick',
-        clickurl: if_search(async ({search}) => ``),
-        example: '',
-    },
-    {
-        name: 'ClinGen',
-            tags: {
-        PS: true,
-            Ag: false,
-            variant: true,
-    },
-        output: {
-            gene: true,
-        },
-        img1: {
-            src: '/logos/ClinGen_logo.png',
-            alt: 'ClinGen logo',
-        },
-        img2: {
-            src: '/logos/ClinGen_site.png',
-            alt: 'ClinGen site screenshot',
-        },
-        title: 'ClinGen',
-        description: 'ClinGen is a NIH funded resource dedicated to building a central resource that defines the clinical relevance of genes and variants for use in precision medicine and research.',
-        url: "https://www.clinicalgenome.org/",
-        countapi: 'maayanlab.github.io/CLINGENclick',
-        clickurl: if_search(async ({search}) => ``),
-        example: '',
-    },
+    // {
+    //     name: 'ClinGen',
+    //         tags: {
+    //     PS: true,
+    //         Ag: false,
+    //         variant: true,
+    // },
+    //     output: {
+    //         gene: true,
+    //     },
+    //     img1: {
+    //         src: '/logos/ClinGen_logo.png',
+    //         alt: 'ClinGen logo',
+    //     },
+    //     img2: {
+    //         src: '/logos/ClinGen_site.png',
+    //         alt: 'ClinGen site screenshot',
+    //     },
+    //     title: 'ClinGen',
+    //     description: 'ClinGen is a NIH funded resource dedicated to building a central resource that defines the clinical relevance of genes and variants for use in precision medicine and research.',
+    //     url: 'https://www.clinicalgenome.org/',
+    //     countapi: 'maayanlab.github.io/CLINGENclick',
+    //     clickurl: if_search(async ({search}) => ``),
+    //     example: '',
+    // },
     {
         name: 'SpliceAI',
         tags: {
@@ -2935,9 +2885,12 @@ const manifest = [
         description: 'SpliceAI is a deep neural network that accurately predicts splice junctions from an arbitrary pre-mRNA transcript sequence, enabling precise prediction of noncoding genetic variants that cause cryptic splicing.',
         url: 'https://spliceailookup.broadinstitute.org/',
         countapi: 'maayanlab.github.io/SpliceAIclick',
-        clickurl: if_search(async ({search}) => ``),
+        clickurl: if_search(async ({search}) => `https://spliceailookup.broadinstitute.org/#variant=${await chr_coord(search, 'chr${chr}-${pos}-${ref}-${alt}')}&hg=38`),
         example: '',
     },
+// Add
+// https://bravo.sph.umich.edu/
+// https://www.ncbi.nlm.nih.gov/CBBresearch/Lu/Demo/LitVar/#!?query=rs28897756
 ]
 
 // Remove `false` entries so the key does not appear with `in` operator
