@@ -18,13 +18,14 @@ export async function getStaticPaths() {
         paths: [
             {params: {entity: 'gene'}},
             {params: {entity: 'drug'}},
+            {params: {entity: 'variant'}},
         ],
         fallback: false,
     }
 }
 
 export async function getStaticProps({params: {entity}}) {
-    if (entity !== 'gene' && entity !== 'drug') return {notFound: true}
+    if (entity !== 'gene' && entity !== 'drug' && entity !== 'variant') return {notFound: true}
     const manifest = (
         await Promise.all(
             full_manifest
