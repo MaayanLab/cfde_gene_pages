@@ -2409,7 +2409,7 @@ const manifest = [
         description: 'CADD is a tool for scoring the deleteriousness of single nucleotide variants as well as insertion/deletions variants in the human genome.',
         url: 'https://cadd.gs.washington.edu/',
         countapi: 'maayanlab.github.io/CADDclick',
-        clickurl: if_search(async ({search}) => `https://cadd.gs.washington.edu/snv/GRCh37-v1.6/${await chr_coord(search, '${chr}:${pos}_${ref}_${alt}')}`),
+        clickurl: if_search(async ({search}) => `https://cadd.gs.washington.edu/snv/GRCh37-v1.6/${await chr_coord(search, '${this.chr}:${this.pos}_${this.ref}_${this.alt}')}`),
         example: '',
     },
     {
@@ -2434,7 +2434,7 @@ const manifest = [
         description: 'The Genome Aggregation Database (gnomAD) is a resource developed by an international coalition of investigators, with the goal of aggregating and harmonizing both exome and genome sequencing data from a wide variety of large-scale sequencing projects, and making summary data available for the wider scientific community.',
         url: 'https://gnomad.broadinstitute.org/',
         countapi: 'maayanlab.github.io/gnomADclick',
-        clickurl: if_search(async ({search}) => `https://gnomad.broadinstitute.org/variant/${await chr_coord(search, '${chr}-${pos}-${ref}-${alt}')}?dataset=gnomad_r2_1`),
+        clickurl: if_search(async ({search}) => `https://gnomad.broadinstitute.org/variant/${await chr_coord(search, '${this.chr}-${this.pos}-${this.ref}-${this.alt}')}?dataset=gnomad_r2_1`),
         example: '',
     },
     {
@@ -2609,7 +2609,7 @@ const manifest = [
         description: 'The OpenTargets Genetics Portal is a tool highlighting variant-centric statistical evidence to allow both prioritisation of candidate causal variants at trait-associated loci and identification of potential drug targets.',
         url: "https://genetics.opentargets.org/",
         countapi: 'maayanlab.github.io/OpenTargetsclick',
-        clickurl: if_search(async ({search}) => `https://genetics.opentargets.org/variant/${await chr_coord(search, '${chr}_${pos}_${ref}_${alt}')}`),
+        clickurl: if_search(async ({search}) => `https://genetics.opentargets.org/variant/${await chr_coord(search, '${this.chr}_${this.pos}_${this.ref}_${this.alt}')}`),
         example: '',
     },
     // {
@@ -2684,7 +2684,7 @@ const manifest = [
         description: 'The Human Genome Browser includes a broad collection of vertebrate and model organism assemblies and annotations, along with a large suite of tools for viewing, analyzing and downloading data.',
         url: "https://genome.ucsc.edu/cgi-bin/hgGateway",
         countapi: 'maayanlab.github.io/HGBclick',
-        clickurl: if_search(async ({search}) => `https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg38&position=${await chr_coord(search, '${chr}:${pos}-${pos}')}`),
+        clickurl: if_search(async ({search}) => `https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg38&position=${await chr_coord(search, '${this.chr}:${this.pos}-${this.pos}')}`),
         // What if it's not a single nucleotide variation?
         example: '',
     },
@@ -2810,7 +2810,7 @@ const manifest = [
         description: 'PheWeb is an easy-to-use open-source web-based tool for visualizing, navigating, and sharing GWAS and PheWAS results.',
         url: 'https://pheweb.sph.umich.edu/',
         countapi: 'maayanlab.github.io/PheWebclick',
-        clickurl: if_search(async ({search}) => `https://pheweb.org/UKB-TOPMed/variant/${await chr_coord(search, '${chr}:${pos}-${ref}-${alt}')}`),
+        clickurl: if_search(async ({search}) => `https://pheweb.org/UKB-TOPMed/variant/${await chr_coord(search, '${this.chr}:${this.pos}-${this.ref}-${this.alt}')}`),
         example: '',
     },
     {
@@ -2885,12 +2885,13 @@ const manifest = [
         description: 'SpliceAI is a deep neural network that accurately predicts splice junctions from an arbitrary pre-mRNA transcript sequence, enabling precise prediction of noncoding genetic variants that cause cryptic splicing.',
         url: 'https://spliceailookup.broadinstitute.org/',
         countapi: 'maayanlab.github.io/SpliceAIclick',
-        clickurl: if_search(async ({search}) => `https://spliceailookup.broadinstitute.org/#variant=${await chr_coord(search, 'chr${chr}-${pos}-${ref}-${alt}')}&hg=38`),
+        clickurl: if_search(async ({search}) => `https://spliceailookup.broadinstitute.org/#variant=${await chr_coord(search, 'chr${this.chr}-${this.pos}-${this.ref}-${this.alt}')}&hg=38`),
         example: '',
     },
 // Add
 // https://bravo.sph.umich.edu/
 // https://www.ncbi.nlm.nih.gov/CBBresearch/Lu/Demo/LitVar/#!?query=rs28897756
+// https://www.ebi.ac.uk/dgva/
 ]
 
 // Remove `false` entries so the key does not appear with `in` operator
