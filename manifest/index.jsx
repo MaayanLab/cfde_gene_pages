@@ -125,18 +125,13 @@ export const rsid = defined(memo(async (variant) => {
     }
 }))
 
-const fill_template = function(template_string, template_vars){
-    return new Function("return `"+template_string +"`;").call(template_vars);
-}
-
-export const chr_coord = defined(memo(async (variant, template_string) => {
+export const chr_coord = defined(memo(async (variant, fill_template) => {
     const myvariant = await fetchEx(`${variant_query_url}/variant/${variant}`);
     if (myvariant.ok) {
         let myvariant_json = await myvariant.json()
         if (Array.isArray(myvariant_json)) myvariant_json = myvariant_json[0];
         let chr_c = myvariant_json['_id'];
-        let template_vars = {chr: chr_c['chrom'], pos: chr_c['vcf']['position'], alt: chr_c['vcf']['alt'], ref: chr_c['vcf']['ref']}
-        return fill_template(template_string, template_vars)
+        return fill_template({ chr: chr_c['chrom'], pos: chr_c['vcf']['position'], alt: chr_c['vcf']['alt'], ref: chr_c['vcf']['ref'] })
     }
 }))
 
@@ -2410,7 +2405,7 @@ const manifest = [
         description: 'CADD is a tool for scoring the deleteriousness of single nucleotide variants as well as insertion/deletions variants in the human genome.',
         url: 'https://cadd.gs.washington.edu/',
         countapi: 'maayanlab.github.io/CADDclick',
-        clickurl: if_search(async ({search}) => `https://cadd.gs.washington.edu/snv/GRCh37-v1.6/${await chr_coord(search, '${this.chr}:${this.pos}_${this.ref}_${this.alt}')}`),
+        clickurl: if_search(async ({search}) => `https://cadd.gs.washington.edu/snv/GRCh37-v1.6/${await chr_coord(search, (vars) => `${vars.chr}:${vars.pos}_${vars.ref}_${vars.alt}`)}`),
         example: '',
     },
     {
@@ -2435,7 +2430,7 @@ const manifest = [
         description: 'The Genome Aggregation Database (gnomAD) is a resource developed by an international coalition of investigators, with the goal of aggregating and harmonizing both exome and genome sequencing data from a wide variety of large-scale sequencing projects, and making summary data available for the wider scientific community.',
         url: 'https://gnomad.broadinstitute.org/',
         countapi: 'maayanlab.github.io/gnomADclick',
-        clickurl: if_search(async ({search}) => `https://gnomad.broadinstitute.org/variant/${await chr_coord(search, '${this.chr}-${this.pos}-${this.ref}-${this.alt}')}?dataset=gnomad_r2_1`),
+        clickurl: if_search(async ({search}) => `https://gnomad.broadinstitute.org/variant/${await chr_coord(search, (vars) => `${vars.chr}-${vars.pos}-${vars.ref}-${vars.alt}`)}?dataset=gnomad_r2_1`),
         example: '',
     },
     {
@@ -2610,7 +2605,7 @@ const manifest = [
         description: 'The OpenTargets Genetics Portal is a tool highlighting variant-centric statistical evidence to allow both prioritisation of candidate causal variants at trait-associated loci and identification of potential drug targets.',
         url: "https://genetics.opentargets.org/",
         countapi: 'maayanlab.github.io/OpenTargetsclick',
-        clickurl: if_search(async ({search}) => `https://genetics.opentargets.org/variant/${await chr_coord(search, '${this.chr}_${this.pos}_${this.ref}_${this.alt}')}`),
+        clickurl: if_search(async ({search}) => `https://genetics.opentargets.org/variant/${await chr_coord(search, (vars) => `${vars.chr}_${vars.pos}_${vars.ref}_${vars.alt}`)}`),
         example: '',
     },
     // {
@@ -2685,7 +2680,7 @@ const manifest = [
         description: 'The Human Genome Browser includes a broad collection of vertebrate and model organism assemblies and annotations, along with a large suite of tools for viewing, analyzing and downloading data.',
         url: "https://genome.ucsc.edu/cgi-bin/hgGateway",
         countapi: 'maayanlab.github.io/HGBclick',
-        clickurl: if_search(async ({search}) => `https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg38&position=${await chr_coord(search, '${this.chr}:${this.pos}-${this.pos}')}`),
+        clickurl: if_search(async ({search}) => `https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg38&position=${await chr_coord(search, (vars) => `${vars.chr}:${vars.pos}-${vars.pos}`)}`),
         // What if it's not a single nucleotide variation?
         example: '',
     },
@@ -2811,7 +2806,7 @@ const manifest = [
         description: 'PheWeb is an easy-to-use open-source web-based tool for visualizing, navigating, and sharing GWAS and PheWAS results.',
         url: 'https://pheweb.sph.umich.edu/',
         countapi: 'maayanlab.github.io/PheWebclick',
-        clickurl: if_search(async ({search}) => `https://pheweb.org/UKB-TOPMed/variant/${await chr_coord(search, '${this.chr}:${this.pos}-${this.ref}-${this.alt}')}`),
+        clickurl: if_search(async ({search}) => `https://pheweb.org/UKB-TOPMed/variant/${await chr_coord(search, (vars) => `${vars.chr}:${vars.pos}-${vars.ref}-${vars.alt}`)}`),
         example: '',
     },
     {
@@ -2886,7 +2881,7 @@ const manifest = [
         description: 'SpliceAI is a deep neural network that accurately predicts splice junctions from an arbitrary pre-mRNA transcript sequence, enabling precise prediction of noncoding genetic variants that cause cryptic splicing.',
         url: 'https://spliceailookup.broadinstitute.org/',
         countapi: 'maayanlab.github.io/SpliceAIclick',
-        clickurl: if_search(async ({search}) => `https://spliceailookup.broadinstitute.org/#variant=${await chr_coord(search, 'chr${this.chr}-${this.pos}-${this.ref}-${this.alt}')}&hg=38`),
+        clickurl: if_search(async ({search}) => `https://spliceailookup.broadinstitute.org/#variant=${await chr_coord(search, (vars) => `chr${vars.chr}-${vars.pos}-${vars.ref}-${vars.alt}`)}&hg=38`),
         example: '',
     },
 // Add
