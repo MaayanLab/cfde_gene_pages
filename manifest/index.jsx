@@ -914,12 +914,13 @@ const manifest = [
         title: '',
         description: 'dbSNP contains human single nucleotide variations, microsatellites, and small-scale insertions and deletions along with publication, population frequency, molecular consequence, and genomic and RefSeq mapping information for both common variations and clinical mutations.',
         tags: {
-            variant: true,
+            gene: true,
             pinned: true,
         },
-        gene: if_search(async ({search}) => `${search}`),
+        gene: if_search(async ({ entities }) => entities.gene),
+        variant: if_search(async ({ entities }) => entities.variant),
         entity: 'gene',
-        status: true,
+        status: ({ entities }) => entities.variant !== undefined && entities.gene !== undefined,
     },
     {
         name: 'gene-mrna-coexpr-similarity',

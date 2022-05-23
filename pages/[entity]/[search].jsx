@@ -6,6 +6,7 @@ import full_manifest, {gene_id, drug_info, variant_to_gene} from '@/manifest'
 import useRouterEx from '@/utils/routerEx'
 import cmp from '@/manifest/cmp'
 import capitalize from '@/utils/capitalize'
+import is_variant from '@/utils/is_variant'
 
 const EntityCard = dynamic(() => import('@/components/EntityCard'))
 const SearchPage = dynamic(() => import('@/components/SearchPage'))
@@ -33,7 +34,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({params: {entity, search}}) {
-    const entities = [entity]
+    const entities = { [entity]: search }
     if (search === 'error') {
         return {
             props: {error: true},
@@ -42,18 +43,20 @@ export async function getStaticProps({params: {entity, search}}) {
     }
     try {
         if (entity === 'gene') {
-            if ((await gene_id(search)) === undefined) throw new Error('NotFound')
+            if (is_variant(search)) {
+                let variant_gene = await variant_to_gene(search)
+                if (variant_gene === undefined) {
+                    throw new Error('NotFound')
+                }
+                entities.variant = search
+                entities.gene = variant_gene
+                search = variant_gene
+            } else if ((await gene_id(search)) === undefined) {
+                throw new Error('NotFound')
+            }
         } else if (entity === 'drug') {
             if ((await drug_info(search)) === undefined) throw new Error('NotFound')
         } else if (entity === 'variant') {
-            let variant_gene = await variant_to_gene(search)
-            if ((variant_gene) === undefined) {
-                throw new Error('NotFound')
-            }
-            else {
-                entities.push('gene');
-                search = variant_gene;
-            }
         } else {
             throw new Error('NotFound')
         }
@@ -65,7 +68,7 @@ export async function getStaticProps({params: {entity, search}}) {
         await Promise.all(
             full_manifest
                 .map(async (item) => {
-                    const entities_filtered = entities.filter(entity => entity in item.tags)
+                    const entities_filtered = Object.keys(entities).filter(entity => entity in item.tags)
                     if (entities_filtered.length === 0) return
                     const entity = entities_filtered[0]
                     try {
@@ -74,6 +77,7 @@ export async function getStaticProps({params: {entity, search}}) {
                             self[k] = await callable(item[k])({
                                 self,
                                 entity,
+                                entities,
                                 search,
                             })
                         }
