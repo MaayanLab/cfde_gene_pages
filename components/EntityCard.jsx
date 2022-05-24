@@ -121,7 +121,15 @@ export default function EntityCard(props) {
                                             target="_blank"
                                             onClick={() => countable(props.countapi).hit()}
                                         >Explore drugs and small molecules with {props.title}</a></p></div>
-                                ) : null]
+                                ) : [(props.search === undefined) && (props.tags.variant) ? (
+                            <div className="col-9">
+                                <p>
+                                    <a
+                                        href={props.url}
+                                        target="_blank"
+                                        onClick={() => countable(props.countapi).hit()}
+                                    >Explore variants with {props.title}</a></p></div>
+                        ) : null]]
                             ]
                         }
                         {clicks !== undefined ?
