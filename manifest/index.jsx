@@ -131,7 +131,7 @@ export const chr_coord = defined(memo(async (variant, fill_template) => {
         let myvariant_json = await myvariant.json()
         if (Array.isArray(myvariant_json)) myvariant_json = myvariant_json[0];
         let chr_c = myvariant_json['_id'];
-        return fill_template({ chr: chr_c['chrom'], pos: chr_c['vcf']['position'], alt: chr_c['vcf']['alt'], ref: chr_c['vcf']['ref'] })
+        return fill_template({ chr: myvariant_json['chrom'], pos: myvariant_json['vcf']['position'], alt: myvariant_json['vcf']['alt'], ref: myvariant_json['vcf']['ref'] })
     }
 }))
 
