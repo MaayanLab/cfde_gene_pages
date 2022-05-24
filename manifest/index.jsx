@@ -121,7 +121,7 @@ export const rsid = defined(memo(async (variant) => {
     if (myvariant.ok) {
         let myvariant_json = await myvariant.json()
         if (Array.isArray(myvariant_json)) myvariant_json = myvariant_json[0];
-        return myvariant_json['dbsnp']['rsid']
+        return myvariant_json['dbsnp']['await rsid']
     }
 }))
 
@@ -2455,7 +2455,7 @@ const manifest = [
         description: 'dbSNP contains human single nucleotide variations, microsatellites, and small-scale insertions and deletions along with publication, population frequency, molecular consequence, and genomic and RefSeq mapping information for both common variations and clinical mutations.',
         url: 'https://www.ncbi.nlm.nih.gov/snp/',
         countapi: 'maayanlab.github.io/dbSNPclick',
-        clickurl: if_search(async ({search}) => `https://www.ncbi.nlm.nih.gov/snp/?term=${rsid(search)}`),
+        clickurl: if_search(async ({search}) => `https://www.ncbi.nlm.nih.gov/snp/?term=${await rsid(search)}`),
         example: '',
     },
     {
@@ -2480,7 +2480,7 @@ const manifest = [
         description: 'ClinVar aggregates information about genomic variation and its relationship to human health.',
         url: 'https://www.ncbi.nlm.nih.gov/clinvar/',
         countapi: 'maayanlab.github.io/ClinVarclick',
-        clickurl: if_search(async ({search}) => `https://www.ncbi.nlm.nih.gov/clinvar/?term=${rsid(search)}`),
+        clickurl: if_search(async ({search}) => `https://www.ncbi.nlm.nih.gov/clinvar/?term=${await rsid(search)}`),
         example: '',
     },
     {
@@ -2505,7 +2505,7 @@ const manifest = [
         description: 'SNPedia is a wiki investigating human genetics. It shares information about the effects of variations in DNA, citing peer-reviewed scientific publications.',
         url: 'https://www.snpedia.com/',
         countapi: 'maayanlab.github.io/SNPediaclick',
-        clickurl: if_search(async ({search}) => `https://www.snpedia.com/index.php/${rsid(search)}`),
+        clickurl: if_search(async ({search}) => `https://www.snpedia.com/index.php/${await rsid(search)}`),
         example: '',
     },
     // {
@@ -2580,7 +2580,7 @@ const manifest = [
         description: 'The GWAS Catalog provides a consistent, searchable, visualisable and freely available database of SNP-trait associations, which can be easily integrated with other resources.',
         url: "https://www.ebi.ac.uk/gwas/home",
         countapi: 'maayanlab.github.io/GWASclick',
-        clickurl: if_search(async ({search}) => `https://www.ebi.ac.uk/gwas/search?query=${rsid(search)}`),
+        clickurl: if_search(async ({search}) => `https://www.ebi.ac.uk/gwas/search?query=${await rsid(search)}`),
         example: '',
     },
     {
@@ -2655,7 +2655,7 @@ const manifest = [
         description: 'PharmGKB is a comprehensive resource that curates knowledge about the impact of genetic variation on drug response for clinicians and researchers.',
         url: 'https://www.pharmgkb.org',
         countapi: 'maayanlab.github.io/PharmGKBclick',
-        clickurl: if_search(async ({search}) => `https://www.pharmgkb.org/search?query=${rsid(search)}`),
+        clickurl: if_search(async ({search}) => `https://www.pharmgkb.org/search?query=${await rsid(search)}`),
         example: '',
     },
     {
@@ -2702,11 +2702,11 @@ const manifest = [
             src: '/logos/GWAS_Central_site.png',
             alt: 'GWAS_Central site screenshot',
         },
-        title: 'GWAS_Central',
+        title: 'GWAS Central',
         description: 'GWAS Central provides a centralized compilation of summary level findings from genetic association studies, both large and small.',
         url: 'https://www.gwascentral.org',
         countapi: 'maayanlab.github.io/GWAS_Centralclick',
-        clickurl: if_search(async ({search}) => `https://www.gwascentral.org/search?q=${rsid(search)}`),
+        clickurl: if_search(async ({search}) => `https://www.gwascentral.org/search?q=${await rsid(search)}`),
         example: '',
     },
     {
@@ -2731,7 +2731,7 @@ const manifest = [
         description: 'Ensembl is a genome browser for vertebrate genomes that supports research in comparative genomics, evolution, sequence variation and transcriptional regulation.',
         url: "https://useast.ensembl.org/index.html",
         countapi: 'maayanlab.github.io/ENSEMBLclick',
-        clickurl: if_search(async ({search}) => `https://useast.ensembl.org/homo_sapiens/Variation/Summary?v=${rsid(search)}`),
+        clickurl: if_search(async ({search}) => `https://useast.ensembl.org/homo_sapiens/Variation/Summary?v=${await rsid(search)}`),
         example: '',
     },
     // {
@@ -2760,7 +2760,7 @@ const manifest = [
     //     example: '',
     // },
     {
-        name: 'DisGenNET',
+        name: 'DisGeNET',
             tags: {
         PS: true,
             Ag: false,
@@ -2770,18 +2770,18 @@ const manifest = [
             gene: true,
         },
         img1: {
-            src: '/logos/DisGenNET_logo.png',
-            alt: 'DisGenNET logo',
+            src: '/logos/DisGeNET_logo.png',
+            alt: 'DisGeNET logo',
         },
         img2: {
-            src: '/logos/DisGenNET_site.png',
-            alt: 'DisGenNET site screenshot',
+            src: '/logos/DisGeNET_site.png',
+            alt: 'DisGeNET site screenshot',
         },
-        title: 'DisGenNET',
+        title: 'DisGeNET',
         description: 'DisGeNET is a discovery platform containing one of the largest publicly available collections of genes and variants associated to human diseases.',
         url: 'https://www.disgenet.org/',
-        countapi: 'maayanlab.github.io/DisGenNETclick',
-        clickurl: if_search(async ({search}) => `https://www.disgenet.org/search/2/${rsid(search)}/`),
+        countapi: 'maayanlab.github.io/DisGeNETclick',
+        clickurl: if_search(async ({search}) => `https://www.disgenet.org/search/2/${await rsid(search)}/`),
         example: '',
     },
     {
@@ -2831,7 +2831,7 @@ const manifest = [
         description: 'The Genotype-Tissue Expression (GTEx) Portal provides open access to data including gene expression, QTLs, and histology static.',
         url: 'https://gtexportal.org/',
         countapi: 'maayanlab.github.io/gteclick',
-        clickurl: if_search(async ({search}) => `https://gtexportal.org/home/snp/${rsid(search)}`),
+        clickurl: if_search(async ({search}) => `https://gtexportal.org/home/snp/${await rsid(search)}`),
         example: '',
     },
     // {
@@ -2884,10 +2884,81 @@ const manifest = [
         clickurl: if_search(async ({search}) => `https://spliceailookup.broadinstitute.org/#variant=${await chr_coord(search, (vars) => `chr${vars.chr}-${vars.pos}-${vars.ref}-${vars.alt}`)}&hg=38`),
         example: '',
     },
-// Add
-// https://bravo.sph.umich.edu/
-// https://www.ncbi.nlm.nih.gov/CBBresearch/Lu/Demo/LitVar/#!?query=rs28897756
-// https://www.ebi.ac.uk/dgva/
+    {
+        name: 'Bravo',
+        tags: {
+            PS: true,
+            Ag: false,
+            variant: true,
+        },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/Bravo_logo.png',
+            alt: 'Bravo logo',
+        },
+        img2: {
+            src: '/logos/Bravo_site.png',
+            alt: 'Bravo site screenshot',
+        },
+        title: 'BRAVO',
+        description: 'BRAVO variant browser shows chromosome locations (on GRCh38 human genome assembly), alleles, functional annotations, and allele frequencies for 705 million variants observed in 132,345 deeply sequenced (>38X) genomes from the TOPMed (Trans-Omics for Precision Medicine) data freeze 8.',
+        url: 'https://bravo.sph.umich.edu/freeze8/hg38/',
+        countapi: 'maayanlab.github.io/Bravoclick',
+        clickurl: if_search(async ({search}) => `https://bravo.sph.umich.edu/freeze8/hg38/variant/snv/${await rsid(search)}`),
+        example: '',
+    },
+    {
+        name: 'LitVar',
+        tags: {
+            PS: true,
+            Ag: false,
+            variant: true,
+        },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/LitVar_logo.png',
+            alt: 'LitVar logo',
+        },
+        img2: {
+            src: '/logos/LitVar_site.png',
+            alt: 'LitVar site screenshot',
+        },
+        title: 'LitVar',
+        description: 'LitVar allows the search and retrieval of variant relevant information from the biomedical literature and shows key biological relations between a variant and its close related entities (e.g. genes, diseases, and drugs).',
+        url: 'https://www.ncbi.nlm.nih.gov/CBBresearch/Lu/Demo/LitVar/',
+        countapi: 'maayanlab.github.io/LitVarclick',
+        clickurl: if_search(async ({search}) => `https://www.ncbi.nlm.nih.gov/CBBresearch/Lu/Demo/LitVar/#!?query=${await rsid(search)}`),
+        example: '',
+    },
+    {
+        name: 'EVA',
+        tags: {
+            PS: true,
+            Ag: false,
+            variant: true,
+        },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/EVA_logo.png',
+            alt: 'EVA logo',
+        },
+        img2: {
+            src: '/logos/EVA_site.png',
+            alt: 'EVA site screenshot',
+        },
+        title: 'European Variation Archive',
+        description: 'The European Variation Archive is an open-access database of all types of genetic variation data from all species.',
+        url: 'https://www.ebi.ac.uk/eva/',
+        countapi: 'maayanlab.github.io/EVAclick',
+        clickurl: if_search(async ({search}) => `https://www.ebi.ac.uk/eva/?Variant-Browser&species=hsapiens_grch37&selectFilter=snp&snp=${await rsid(search)}&studies=PRJEB4019%2CPRJEB6930%2CPRJEB45238%2CPRJEB46983%2CPRJEB36033%2CPRJEB32845%2CPRJEB35772%2CPRJEB51904%2CPRJEB28604%2CPRJEB23749%2CPRJEB48632%2CPRJEB40010%2CPRJEB33136%2CPRJEB42554%2CPRJEB36082%2CPRJEB20820%2CPRJEB40448%2CPRJEB34654%2CPRJEB27824%2CPRJEB44301%2CPRJEB52611%2CPRJEB25965%2CPRJEB25656%2CPRJEB5439%2CPRJEB49380%2CPRJEB50475%2CPRJEB41629%2CPRJEB40684%2CPRJEB44390%2CPRJEB36886%2CPRJEB9822%2CPRJEB44918%2CPRJEB47695%2CPRJEB5829%2CPRJEB8652%2CPRJEB8650%2CPRJEB8639%2CPRJEB47801%2CPRJEB42472%2CPRJEB36238%2CPRJEB6042%2CPRJEB20817%2CPRJEB49193%2CPRJEB37584%2CPRJEB11750%2CPRJEB11749%2CPRJEB11746%2CPRJEB33969%2CPRJX00001%2CPRJEB44901%2CPRJEB35159%2CPRJEB48950%2CPRJEB33712%2CPRJEB15385%2CPRJEB33648%2CPRJEB10956%2CPRJEB45988%2CPRJEB47787%2CPRJEB46183%2CPRJEB47822%2CPRJEB47913%2CPRJEB49213%2CPRJEB48200%2CPRJEB36264%2CPRJEB29344%2CPRJEB46414%2CPRJEB23791%2CPRJEB37766%2CPRJEB8705%2CPRJEB39574%2CPRJEB28702%2CPRJEB51117%2CPRJEB47290%2CPRJEB41871%2CPRJEB52471%2CPRJEB42529%2CPRJEB44446%2CPRJEB17529%2CPRJEB34334%2CPRJEB52694%2CPRJEB50888%2CPRJEB51505%2CPRJEB39409%2CPRJEB45235%2CPRJEB20726%2CPRJEB19524%2CPRJEB19523%2CPRJEB45041%2CPRJEB51008%2CPRJEB43721%2CPRJEB36753%2CPRJEB11984%2CPRJEB32264%2CPRJNA289433%2CPRJEB49292%2CPRJEB39251%2CPRJEB19794%2CPRJEB8661%2CPRJEB32689%2CPRJEB7895%2CPRJEB51091%2CPRJEB25808%2CPRJEB25807%2CPRJEB7217%2CPRJEB7218%2CPRJEB6041%2CPRJEB52220%2CPRJEB14713&id=rs28897756&annot-vep-version=78&annot-vep-cache-version=78`),
+        example: '',
+    },
 ]
 
 // Remove `false` entries so the key does not appear with `in` operator
