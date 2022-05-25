@@ -68,6 +68,7 @@ const gene_drug_rif = defined(memo(async (gene) => {
     const lookup = await import('@/public/gene_drug_rif/gene_drug.json')
     return lookup[gene]
 }))
+
 const drug_gene_rif = defined(memo(async (drug) => {
     const lookup = await import('@/public/gene_drug_rif/drug_gene.json')
     return lookup[drug.toLowerCase()]
@@ -116,12 +117,21 @@ export const variant_to_gene = defined(memo(async (variant) => {
     }
 }))
 
+const liftover = defined(memo(try_or_else(async (chr_c, conv="hg19-to-hg38") => {
+    //     "output_chrom": "chr8",
+    //     "output_start": 139288372,
+    //     "output_end": 139288377,
+    const coord = await fetchEx(`https://spliceailookup-api.broadinstitute.org/liftover/?hg=${conv}&format=interval&chrom=${chr_c['chr']}&start=${chr_c['pos']}&end=${chr_c['pos']}`)
+    if (!coord.ok) throw new Error('gene_info status is not OK')
+    return await coord.json()
+})))
+
 export const rsid = defined(memo(async (variant) => {
     const myvariant = await fetchEx(`${variant_query_url}/variant/${variant}`);
     if (myvariant.ok) {
         let myvariant_json = await myvariant.json()
         if (Array.isArray(myvariant_json)) myvariant_json = myvariant_json[0];
-        return myvariant_json['dbsnp']['await rsid']
+        return myvariant_json['dbsnp']['rsid']
     }
 }))
 
@@ -129,8 +139,10 @@ export const chr_coord = defined(memo(async (variant, fill_template) => {
     const myvariant = await fetchEx(`${variant_query_url}/variant/${variant}`);
     if (myvariant.ok) {
         let myvariant_json = await myvariant.json()
+        // Choose the recent version
         if (Array.isArray(myvariant_json)) myvariant_json = myvariant_json[0];
         let chr_c = myvariant_json['_id'];
+
         return fill_template({ chr: myvariant_json['chrom'], pos: myvariant_json['vcf']['position'], alt: myvariant_json['vcf']['alt'], ref: myvariant_json['vcf']['ref'] })
     }
 }))
@@ -2881,7 +2893,7 @@ const manifest = [
         description: 'SpliceAI is a deep neural network that accurately predicts splice junctions from an arbitrary pre-mRNA transcript sequence, enabling precise prediction of noncoding genetic variants that cause cryptic splicing.',
         url: 'https://spliceailookup.broadinstitute.org/',
         countapi: 'maayanlab.github.io/SpliceAIclick',
-        clickurl: if_search(async ({search}) => `https://spliceailookup.broadinstitute.org/#variant=${await chr_coord(search, (vars) => `chr${vars.chr}-${vars.pos}-${vars.ref}-${vars.alt}`)}&hg=38`),
+        clickurl: if_search(async ({search}) => `https://spliceailookup.broadinstitute.org/#variant=${await chr_coord(search, (vars) => `chr${vars.chr}-${vars.pos}-${vars.ref}-${vars.alt}`)}&hg=37`),
         example: '',
     },
     {
@@ -2956,7 +2968,7 @@ const manifest = [
         description: 'The European Variation Archive is an open-access database of all types of genetic variation data from all species.',
         url: 'https://www.ebi.ac.uk/eva/',
         countapi: 'maayanlab.github.io/EVAclick',
-        clickurl: if_search(async ({search}) => `https://www.ebi.ac.uk/eva/?Variant-Browser&species=hsapiens_grch37&selectFilter=snp&snp=${await rsid(search)}&studies=PRJEB4019%2CPRJEB6930%2CPRJEB45238%2CPRJEB46983%2CPRJEB36033%2CPRJEB32845%2CPRJEB35772%2CPRJEB51904%2CPRJEB28604%2CPRJEB23749%2CPRJEB48632%2CPRJEB40010%2CPRJEB33136%2CPRJEB42554%2CPRJEB36082%2CPRJEB20820%2CPRJEB40448%2CPRJEB34654%2CPRJEB27824%2CPRJEB44301%2CPRJEB52611%2CPRJEB25965%2CPRJEB25656%2CPRJEB5439%2CPRJEB49380%2CPRJEB50475%2CPRJEB41629%2CPRJEB40684%2CPRJEB44390%2CPRJEB36886%2CPRJEB9822%2CPRJEB44918%2CPRJEB47695%2CPRJEB5829%2CPRJEB8652%2CPRJEB8650%2CPRJEB8639%2CPRJEB47801%2CPRJEB42472%2CPRJEB36238%2CPRJEB6042%2CPRJEB20817%2CPRJEB49193%2CPRJEB37584%2CPRJEB11750%2CPRJEB11749%2CPRJEB11746%2CPRJEB33969%2CPRJX00001%2CPRJEB44901%2CPRJEB35159%2CPRJEB48950%2CPRJEB33712%2CPRJEB15385%2CPRJEB33648%2CPRJEB10956%2CPRJEB45988%2CPRJEB47787%2CPRJEB46183%2CPRJEB47822%2CPRJEB47913%2CPRJEB49213%2CPRJEB48200%2CPRJEB36264%2CPRJEB29344%2CPRJEB46414%2CPRJEB23791%2CPRJEB37766%2CPRJEB8705%2CPRJEB39574%2CPRJEB28702%2CPRJEB51117%2CPRJEB47290%2CPRJEB41871%2CPRJEB52471%2CPRJEB42529%2CPRJEB44446%2CPRJEB17529%2CPRJEB34334%2CPRJEB52694%2CPRJEB50888%2CPRJEB51505%2CPRJEB39409%2CPRJEB45235%2CPRJEB20726%2CPRJEB19524%2CPRJEB19523%2CPRJEB45041%2CPRJEB51008%2CPRJEB43721%2CPRJEB36753%2CPRJEB11984%2CPRJEB32264%2CPRJNA289433%2CPRJEB49292%2CPRJEB39251%2CPRJEB19794%2CPRJEB8661%2CPRJEB32689%2CPRJEB7895%2CPRJEB51091%2CPRJEB25808%2CPRJEB25807%2CPRJEB7217%2CPRJEB7218%2CPRJEB6041%2CPRJEB52220%2CPRJEB14713&id=rs28897756&annot-vep-version=78&annot-vep-cache-version=78`),
+        clickurl: if_search(async ({search}) => `https://www.ebi.ac.uk/eva/?Variant-Browser&species=hsapiens_grch38&selectFilter=snp&snp=${await rsid(search)}&studies=PRJEB43233%2CPRJEB51718%2CPRJEB42044%2CPRJEB42835%2CPRJEB39630%2CPRJEB40782%2CPRJEB49407%2CPRJEB41091%2CPRJEB44734%2CPRJEB36187%2CPRJEB39939%2CPRJEB32182%2CPRJEB39694%2CPRJEB51000%2CPRJEB41688%2CPRJEB33276%2CPRJEB46486%2CPRJEB42411%2CPRJEB15384%2CPRJEB40694%2CPRJEB43053%2CPRJEB50808%2CPRJEB46209%2CPRJEB51003%2CPRJEB41367%2CPRJEB48128%2CPRJEB50889%2CPRJEB41290%2CPRJEB41691%2CPRJEB15197%2CPRJEB46068%2CPRJEB32114%2CPRJEB51961%2CPRJEB30460%2CPRJEB31735%2CPRJEB48356&id=${await rsid(search)}&annot-vep-version=86&annot-vep-cache-version=86`),
         example: '',
     },
 ]
