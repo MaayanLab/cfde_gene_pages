@@ -117,13 +117,10 @@ export const variant_to_gene = defined(memo(async (variant) => {
     }
 }))
 
-const liftover = defined(memo(try_or_else(async (chr_c, conv="hg19-to-hg38") => {
-    //     "output_chrom": "chr8",
-    //     "output_start": 139288372,
-    //     "output_end": 139288377,
-    const coord = await fetchEx(`https://spliceailookup-api.broadinstitute.org/liftover/?hg=${conv}&format=interval&chrom=${chr_c['chr']}&start=${chr_c['pos']}&end=${chr_c['pos']}`)
+const liftover = defined(memo(try_or_else(async (chr_c, conv="hg38-to-hg19") => {
+    const coord = await fetchEx(`https://spliceailookup-api.broadinstitute.org/liftover/?hg=${conv}&format=interval&chrom=${chr_c['chr']}&start=${chr_c['pos']}&end=${chr_c['pos']+1}`)
     if (!coord.ok) throw new Error('gene_info status is not OK')
-    return await coord.json()
+    else return await coord.json();
 })))
 
 export const rsid = defined(memo(async (variant) => {
@@ -136,15 +133,30 @@ export const rsid = defined(memo(async (variant) => {
 }))
 
 export const chr_coord = defined(memo(async (variant, fill_template) => {
-    const myvariant = await fetchEx(`${variant_query_url}/variant/${variant}`);
+    let chr = variant.split(':')[0];
+    let pos = parseInt(variant.split(':')[1].split('.')[1].slice(0,-3));
+    let ref_alt = variant.slice(-3);
+    let ref = ref_alt.split('>')[0];
+    let alt = ref_alt.split('>')[1];
+    let myvariant = await fetchEx(`${variant_query_url}/variant/${variant}`);
+    let myvariant_json;
     if (myvariant.ok) {
-        let myvariant_json = await myvariant.json()
-        // Choose the recent version
-        if (Array.isArray(myvariant_json)) myvariant_json = myvariant_json[0];
-        let chr_c = myvariant_json['_id'];
-
-        return fill_template({ chr: myvariant_json['chrom'], pos: myvariant_json['vcf']['position'], alt: myvariant_json['vcf']['alt'], ref: myvariant_json['vcf']['ref'] })
+        myvariant_json = await myvariant.json()
     }
+    else {
+    // Probably hg38. Convert to hg19 to use with MyVariant.info
+        let hg19 = await liftover({chr: chr, pos: pos});
+        let variant = `${hg19['output_chrom']}:g.${hg19['output_start']}${ref_alt}`
+        let myvariant = await fetchEx(`${variant_query_url}/variant/${variant}`);
+        if (myvariant.ok) {
+            myvariant_json = await myvariant.json()
+        }
+    }
+    // Choose the recent version
+    if (Array.isArray(myvariant_json)) myvariant_json = myvariant_json[0];
+    // Convert to hg38 for output
+    let hg38 = await liftover({chr: myvariant_json['chrom'], pos: parseInt(myvariant_json['vcf']['position'])})
+    return fill_template({ chr: hg38['output_chrom'], pos: hg38['output_start'], alt: alt, ref: ref })
 }))
 
 
