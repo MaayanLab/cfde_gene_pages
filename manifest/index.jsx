@@ -133,20 +133,30 @@ export const rsid = defined(memo(async (variant) => {
 }))
 
 export const chr_coord = defined(memo(async (variant, fill_template) => {
-    let chr = variant.split(':')[0];
-    let pos = parseInt(variant.split(':')[1].split('.')[1].slice(0,-3));
-    let ref_alt = variant.slice(-3);
-    let ref = ref_alt.split('>')[0];
-    let alt = ref_alt.split('>')[1];
+
+    let chr, pos, ref_alt, ref, alt;
     let myvariant = await fetchEx(`${variant_query_url}/variant/${variant}`);
     let myvariant_json;
+
     if (myvariant.ok) {
         myvariant_json = await myvariant.json()
+        // Switch from rsid to coordinates
+        variant = myvariant_json['_id'];
+        chr = variant.split(':')[0];
+        pos = parseInt(variant.split(':')[1].split('.')[1].slice(0,-3));
+        ref_alt = variant.slice(-3);
+        ref = ref_alt.split('>')[0];
+        alt = ref_alt.split('>')[1];
     }
     else {
-    // Probably hg38. Convert to hg19 to use with MyVariant.info
+        // Probably hg38. Convert to hg19 to use with MyVariant.info
+        chr = variant.split(':')[0];
+        pos = parseInt(variant.split(':')[1].split('.')[1].slice(0,-3));
+        ref_alt = variant.slice(-3);
+        ref = ref_alt.split('>')[0];
+        alt = ref_alt.split('>')[1];
         let hg19 = await liftover({chr: chr, pos: pos});
-        let variant = `${hg19['output_chrom']}:g.${hg19['output_start']}${ref_alt}`
+        variant = `${hg19['output_chrom']}:g.${hg19['output_start']}${ref_alt}`
         let myvariant = await fetchEx(`${variant_query_url}/variant/${variant}`);
         if (myvariant.ok) {
             myvariant_json = await myvariant.json()
@@ -2905,7 +2915,7 @@ const manifest = [
         description: 'SpliceAI is a deep neural network that accurately predicts splice junctions from an arbitrary pre-mRNA transcript sequence, enabling precise prediction of noncoding genetic variants that cause cryptic splicing.',
         url: 'https://spliceailookup.broadinstitute.org/',
         countapi: 'maayanlab.github.io/SpliceAIclick',
-        clickurl: if_search(async ({search}) => `https://spliceailookup.broadinstitute.org/#variant=${await chr_coord(search, (vars) => `chr${vars.chr}-${vars.pos}-${vars.ref}-${vars.alt}`)}&hg=37`),
+        clickurl: if_search(async ({search}) => `https://spliceailookup.broadinstitute.org/#variant=${await chr_coord(search, (vars) => `${vars.chr}-${vars.pos}-${vars.ref}-${vars.alt}`)}&hg=38`),
         example: '',
     },
     {
