@@ -109,7 +109,7 @@ export const variant_to_gene = defined(memo(async (variant) => {
             if ('gene' in myvariant_json.dbsnp) {
                 let gene = myvariant_json.dbsnp.gene;
                 // First gene is usually the one that makes sense both literally and figuratively
-                // i.e. we're not interested in antisense RNAs etc
+                // i.e. we're not intereswas converted to a geneted in antisense RNAs etc
                 if (Array.isArray(gene)) gene = gene[0]
                 return gene.symbol
             }
@@ -133,7 +133,6 @@ export const rsid = defined(memo(async (variant) => {
 }))
 
 export const chr_coord = defined(memo(async (variant, fill_template) => {
-
     let chr, pos, ref_alt, ref, alt;
     let myvariant = await fetchEx(`${variant_query_url}/variant/${variant}`);
     let myvariant_json;
@@ -951,6 +950,20 @@ const manifest = [
         entity: 'gene',
         status: ({ entities }) => entities.variant !== undefined && entities.gene !== undefined,
     },
+    // {
+    //     name: 'true-variant-to-gene-conversion',
+    //     component: 'TrueVariantInfo',
+    //     title: '',
+    //     description: 'dbSNP contains human single nucleotide variations, microsatellites, and small-scale insertions and deletions along with publication, population frequency, molecular consequence, and genomic and RefSeq mapping information for both common variations and clinical mutations.',
+    //     tags: {
+    //         variant: true,
+    //         pinned: true,
+    //     },
+    //     gene: if_search(async ({ entities }) => entities.gene),
+    //     variant: if_search(async ({ entities }) => entities.variant),
+    //     entity: 'variant',
+    //     status: ({ entities }) => entities.variant !== undefined && entities.gene !== undefined,
+    // },
     {
         name: 'gene-mrna-coexpr-similarity',
         component: 'SimilarityInfo',

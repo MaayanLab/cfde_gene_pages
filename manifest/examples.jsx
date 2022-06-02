@@ -7,7 +7,7 @@ export const gene_examples = [
 
 export const variant_examples = [
   'chr1:g.115879821G>C',
-  'rs34747326',
+  'rs28897756',
 ]
 
 export const drug_examples = [
