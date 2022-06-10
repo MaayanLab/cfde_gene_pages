@@ -36,7 +36,7 @@ export default function SearchControl({
             <div className="row py-lg-5">
                 <div className="col-8 col-sm-10 mx-auto">
                     <h1 className="fw-light">Gene and Drug Landing Page Aggregator</h1>
-                    <p className="text-muted mb-5">Gene and Drug Landing Page Aggregator (GDLPA) has links to {manifest_tag_counts.gene} gene
+                    <p className="text-muted mb-5">Gene and Drug Landing Page Aggregator (GDLPA) has links to {manifest_tag_counts.gene} gene, {manifest_tag_counts.variant} variant
                         and {manifest_tag_counts.drug} drug repositories that provide direct links to gene and drug
                         landing pages. You can search by gene or drug name and then choose the sites that contain
                         knowledge about your gene or drug of interest. Resources supported by the NIH Common Fund are listed first and have the CFDE logo at their top right corner.</p>
