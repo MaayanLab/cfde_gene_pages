@@ -444,7 +444,7 @@ const manifest = [
     // },
 
     {
-        name: 'GTEx',
+        name: 'GTEx gene',
         tags: {
             CF: true,
             PS: true,
@@ -565,7 +565,7 @@ const manifest = [
         example: 'https://maayanlab.cloud/Harmonizome/gene/${gene-symbol}',
     },
     {
-        name: 'SigCom LINCS',
+        name: 'SigCom LINCS Gene',
         tags: {
             CF: true,
             Ag: true,
@@ -626,7 +626,7 @@ const manifest = [
         example: 'https://app.nih-cfde.org/chaise/record/#1/CFDE:gene/nid=1',
     },
     {
-        name: 'SigCom LINCS',
+        name: 'SigCom LINCS Drug',
         tags: {
             CF: true,
             Ag: true,
@@ -1375,7 +1375,7 @@ const manifest = [
         example: 'https://exrna-atlas.org/exat/censusResults?identifiers=${gene-symbol}&library=${exrna_library}',
     },
     {
-        name: 'ensembl',
+        name: 'ensembl gene',
         tags: {
             gene: true,
             PS: true,
@@ -1472,7 +1472,7 @@ const manifest = [
         example: 'https://search.clinicalgenome.org/kb/genes/HGNC:${HGNC}',
     },
     {
-        name: 'gwas',
+        name: 'gwas gene',
         tags: {
             gene: true,
             PS: true,
@@ -1823,7 +1823,7 @@ const manifest = [
         example: 'https://genome.ucsc.edu/cgi-bin/hgGene?hgg_gene=${hgGene}&hgg_type=knownGene',
     },
     {
-        name: 'OpenTargets',
+        name: 'OpenTargets gene',
         tags: {
             gene: true,
             Ag: true,
@@ -1928,7 +1928,7 @@ const manifest = [
         example: 'https://www.proteinatlas.org/{search}-${gene-symbol}',
     },
     {
-        name: 'OpenTargets',
+        name: 'OpenTargets drug',
         tags: {
             drug: true,
             Ag: true,
@@ -2375,7 +2375,7 @@ const manifest = [
         countapi: 'maayanlab.github.io/STITCHclick',
     },
     {
-        name: 'TTD',
+        name: 'TTD gene',
         tags: {
             gene: true,
             CF: false,
@@ -2403,7 +2403,7 @@ const manifest = [
         countapi: 'maayanlab.github.io/TTDclick',
     },
     {
-        name: 'TTD',
+        name: 'TTD drug',
         tags: {
             drug: true,
             CF: false,
@@ -2606,7 +2606,7 @@ const manifest = [
     //     example: '',
     // },
     {
-        name: 'gwas',
+        name: 'gwas variant',
         tags: {
             PS: true,
             Ag: false,
@@ -2631,7 +2631,7 @@ const manifest = [
         example: '',
     },
     {
-        name: 'OpenTargets',
+        name: 'OpenTargets variant',
         tags: {
             PS: true,
             Ag: false,
@@ -2757,7 +2757,7 @@ const manifest = [
         example: '',
     },
     {
-        name: 'ensembl',
+        name: 'ensembl variant',
             tags: {
         PS: true,
             Ag: false,
@@ -2857,7 +2857,7 @@ const manifest = [
         example: '',
     },
     {
-        name: 'GTEx',
+        name: 'GTEx variant',
             tags: {
         PS: true,
             Ag: false,
@@ -3012,7 +3012,16 @@ const manifest = [
 // Also compute tag counts
 // Also insert common attributes by tag
 export const manifest_tag_counts = {}
+
+let duplicates = false
+const names = {}
 for (const item of manifest) {
+    if (item.name in names) {
+        names[item.name] += 1
+        duplicates = true
+    } else {
+        names[item.name] = 1
+    }
     if (!('tags' in item)) {
         item.tags = {}
     }
@@ -3040,6 +3049,9 @@ for (const item of manifest) {
     if ('clickurl' in item && !('status' in item)) {
         item.status = if_search(async ({self}) => await isitup(self.clickurl))
     }
+
+if (duplicates) {
+    throw new Error(`Duplicate names in manifest: ${Object.keys(names).filter(name => names[name] > 1).join(', ')}`)
 }
 
 export default manifest
