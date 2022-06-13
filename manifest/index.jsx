@@ -18,6 +18,7 @@ function if_search(func) {
 }
 
 const gene_query_url = 'https://mygene.info/v3'
+const variant_query_url = 'https://myvariant.info/v1'
 
 const species_map = {
     '9606': 'Homo sapiens',
@@ -67,10 +68,12 @@ const gene_drug_rif = defined(memo(async (gene) => {
     const lookup = await import('@/public/gene_drug_rif/gene_drug.json')
     return lookup[gene]
 }))
+
 const drug_gene_rif = defined(memo(async (drug) => {
     const lookup = await import('@/public/gene_drug_rif/drug_gene.json')
     return lookup[drug.toLowerCase()]
 }))
+
 
 // const predict_regulators = defined(memo(async (genes, type_url, top = 5) => {
 //     const results = await fetchEx(`https://maayanlab.cloud/${type_url}/api/enrich/`, {
@@ -94,6 +97,77 @@ const gene_info = defined(memo(try_or_else(async (gene_search) => {
     if (!gene_res.ok) throw new Error('gene_info status is not OK')
     return await gene_res.json()
 })))
+
+
+export const variant_to_gene = defined(memo(async (variant) => {
+    const myvariant = await fetchEx(`${variant_query_url}/variant/${variant}`);
+    if (myvariant.ok) {
+        let myvariant_json = await myvariant.json()
+        // We don't care about the exact nucleotide-nucleotide variation, so we choose the first one for rsIDs
+        if (Array.isArray(myvariant_json)) myvariant_json = myvariant_json[0];
+        if ('dbsnp' in myvariant_json) {
+            if ('gene' in myvariant_json.dbsnp) {
+                let gene = myvariant_json.dbsnp.gene;
+                // First gene is usually the one that makes sense both literally and figuratively
+                // i.e. we're not intereswas converted to a geneted in antisense RNAs etc
+                if (Array.isArray(gene)) gene = gene[0]
+                return gene.symbol
+            }
+        }
+    }
+}))
+
+const liftover = defined(memo(try_or_else(async (chr_c, conv="hg38-to-hg19") => {
+    const coord = await fetchEx(`https://spliceailookup-api.broadinstitute.org/liftover/?hg=${conv}&format=interval&chrom=${chr_c['chr']}&start=${chr_c['pos']}&end=${chr_c['pos']+1}`)
+    if (!coord.ok) throw new Error('gene_info status is not OK')
+    else return await coord.json();
+})))
+
+export const rsid = defined(memo(async (variant) => {
+    const myvariant = await fetchEx(`${variant_query_url}/variant/${variant}`);
+    if (myvariant.ok) {
+        let myvariant_json = await myvariant.json()
+        if (Array.isArray(myvariant_json)) myvariant_json = myvariant_json[0];
+        return myvariant_json['dbsnp']['rsid']
+    }
+}))
+
+export const chr_coord = defined(memo(async (variant, fill_template) => {
+    let chr, pos, ref_alt, ref, alt;
+    let myvariant = await fetchEx(`${variant_query_url}/variant/${variant}`);
+    let myvariant_json;
+
+    if (myvariant.ok) {
+        myvariant_json = await myvariant.json()
+        // Switch from rsid to coordinates
+        variant = myvariant_json['_id'];
+        chr = variant.split(':')[0];
+        pos = parseInt(variant.split(':')[1].split('.')[1].slice(0,-3));
+        ref_alt = variant.slice(-3);
+        ref = ref_alt.split('>')[0];
+        alt = ref_alt.split('>')[1];
+    }
+    else {
+        // Probably hg38. Convert to hg19 to use with MyVariant.info
+        chr = variant.split(':')[0];
+        pos = parseInt(variant.split(':')[1].split('.')[1].slice(0,-3));
+        ref_alt = variant.slice(-3);
+        ref = ref_alt.split('>')[0];
+        alt = ref_alt.split('>')[1];
+        let hg19 = await liftover({chr: chr, pos: pos});
+        variant = `${hg19['output_chrom']}:g.${hg19['output_start']}${ref_alt}`
+        let myvariant = await fetchEx(`${variant_query_url}/variant/${variant}`);
+        if (myvariant.ok) {
+            myvariant_json = await myvariant.json()
+        }
+    }
+    // Choose the recent version
+    if (Array.isArray(myvariant_json)) myvariant_json = myvariant_json[0];
+    // Convert to hg38 for output
+    let hg38 = await liftover({chr: myvariant_json['chrom'], pos: parseInt(myvariant_json['vcf']['position'])})
+    return fill_template({ chr: hg38['output_chrom'], pos: hg38['output_start'], alt: alt, ref: ref })
+}))
+
 
 const appyter = defined(memo(async (appyter_name, args) => {
     const ret = await fetchEx(`https://appyters.maayanlab.cloud/${appyter_name}/`, {
@@ -128,6 +202,7 @@ const clean_cut = defined((desc, max_len = 400) => {
 // const organism = defined(async (gene_search) => species_map[(await gene_info(gene_search)).taxid])
 // const chromosome_location = defined(async (gene_search) => (await gene_info(gene_search)).map_location)
 // const biological_function = defined(async (gene_search) => clean_cut((await gene_info(gene_search)).summary))
+
 const ensembl_id = defined(async (gene_search) => (await gene_info(gene_search)).ensembl.gene)
 const HGNC = defined(async (gene_search) => (await gene_info(gene_search)).HGNC)
 const uniprot_kb = defined(async (gene_search) => (await gene_info(gene_search)).uniprot['Swiss-Prot'])
@@ -144,6 +219,11 @@ const entrezgene = defined(async (gene_search) => (await gene_info(gene_search))
 //         return `https://www.phosphosite.org/proteinAction?id=${id}`
 //     }
 // }))
+
+const cfde_nid = defined(memo(async (gene_search) => {
+    let mapping = await import('@/public/cfde_nid_map.json')
+    return `https://app.nih-cfde.org/chaise/record/#1/CFDE:gene/nid=${mapping[gene_search][0]}`
+}))
 
 const metabolomicswb = defined(memo(async (gene_search) => {
     const mgp = await fetchEx(`https://www.metabolomicsworkbench.org/rest/protein/uniprot_id/${await uniprot_kb(gene_search)}/mgp_id/`)
@@ -518,6 +598,34 @@ const manifest = [
         example: 'https://maayanlab.cloud/sigcom-lincs/#/MetadataSearch/Genes?query={%22skip%22:0,%22limit%22:10,%22search%22:[%22${gene-symbol}%22]}',
     },
     {
+        name: 'CFDE Search Portal',
+        tags: {
+            CF: true,
+            Ag: true,
+            gene: true,
+        },
+        output: {
+            gene: true,
+            tissue: true,
+            disease: true,
+            function: true,
+        },
+        img1: {
+            src: '/logos/CFDE_logo.png',
+            alt: 'CFDE Search Portal',
+        },
+        img2: {
+            src: '/logos/cfdesp_site.png',
+            alt: 'CFDE Search Portal site image',
+        },
+        title: 'CFDE Search Portal',
+        description: 'The CFDE Search Portal is a hub for searching the CFDE data across all programs. The main page of the portal (shown below) is meant for high-level decision-making, whereas the repository (or “data browser”) allows users such as clinical researchers, bioinformatics power users, and NIH program officers to search for CFDE data.',
+        url: "https://app.nih-cfde.org/",
+        countapi: 'maayanlab.github.io/CFDESearchPortal',
+        clickurl: if_search(async ({search}) => await cfde_nid(search)),
+        example: 'https://app.nih-cfde.org/chaise/record/#1/CFDE:gene/nid=1',
+    },
+    {
         name: 'SigCom LINCS',
         tags: {
             CF: true,
@@ -828,6 +936,34 @@ const manifest = [
         clickurl: if_search(async ({search}) => `https://maayanlab.cloud/archs4/gene/${search}`),
         example: 'https://maayanlab.cloud/archs4/gene/${gene-symbol}',
     },
+    {
+        name: 'variant-to-gene-conversion',
+        component: 'VariantInfo',
+        title: '',
+        description: 'dbSNP contains human single nucleotide variations, microsatellites, and small-scale insertions and deletions along with publication, population frequency, molecular consequence, and genomic and RefSeq mapping information for both common variations and clinical mutations.',
+        tags: {
+            gene: true,
+            pinned: true,
+        },
+        gene: if_search(async ({ entities }) => entities.gene),
+        variant: if_search(async ({ entities }) => entities.variant),
+        entity: 'gene',
+        status: ({ entities }) => entities.variant !== undefined && entities.gene !== undefined,
+    },
+    // {
+    //     name: 'true-variant-to-gene-conversion',
+    //     component: 'TrueVariantInfo',
+    //     title: '',
+    //     description: 'dbSNP contains human single nucleotide variations, microsatellites, and small-scale insertions and deletions along with publication, population frequency, molecular consequence, and genomic and RefSeq mapping information for both common variations and clinical mutations.',
+    //     tags: {
+    //         variant: true,
+    //         pinned: true,
+    //     },
+    //     gene: if_search(async ({ entities }) => entities.gene),
+    //     variant: if_search(async ({ entities }) => entities.variant),
+    //     entity: 'variant',
+    //     status: ({ entities }) => entities.variant !== undefined && entities.gene !== undefined,
+    // },
     {
         name: 'gene-mrna-coexpr-similarity',
         component: 'SimilarityInfo',
@@ -1329,7 +1465,7 @@ const manifest = [
         },
         title: 'ClinGen',
         description: 'ClinGen is a NIH funded resource dedicated to building a central resource that defines the clinical relevance of genes and variants for use in precision medicine and research.',
-        url: "https://www.clinicalgenome.org/",
+        url: 'https://www.clinicalgenome.org/',
         countapi: 'maayanlab.github.io/CLINGENclick',
         clickurl: if_search(async ({search}) => `https://search.clinicalgenome.org/kb/genes/HGNC:${await HGNC(search)}`),
         status: if_search(async ({self}) => await isitup(self.clickurl, 'ClinGen has not yet published curations for')),
@@ -1525,6 +1661,39 @@ const manifest = [
             human_gene: search,
             mouse_gene: search
         })),
+    },
+    {
+        name: 'CFDE_GP',
+        tags: {
+            gene: true,
+            PS: false,
+            Ag: true,
+            CF: true,
+            MaayanLab: true,
+        },
+        output: {
+            function: true,
+            tissue: true,
+            disease: true,
+            drug: true,
+        },
+        img1: {
+            src: '/logos/appyters_logo.png',
+            alt: 'CFDE Gene Partnership Appyter',
+        },
+        img2: {
+            src: '/logos/CFDE_Gene_Partnership_search_site.png',
+            alt: 'Appyter screenshot',
+        },
+        img3: {
+            src: '/logos/MaayanLab_logo.png',
+            alt: 'MaayanLab',
+        },
+        title: 'CFDE Gene Partnership',
+        description: 'CFDE Gene Partnership uses FAIR APIs from different DCCs to find and present gene-centric knowledge.',
+        url: "https://appyters.maayanlab.cloud/#/CFDE-Gene-Partnership",
+        countapi: 'maayanlab.github.io/CFDE_GP_click',
+        clickurl: if_search(async ({search}) => await appyter('CFDE-Gene-Partnership', {gene: search})),
     },
     {
         name: 'go',
@@ -2260,6 +2429,582 @@ const manifest = [
         example: "http://idrblab.net/ttd/search/ttd/drug?search_api_fulltext=${drug}",
         url: "http://db.idrblab.net/ttd/",
         countapi: 'maayanlab.github.io/TTDclick',
+    },
+    {
+        name: 'CADD',
+        tags: {
+            PS: true,
+            Ag: false,
+            variant: true,
+        },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/CADD_logo.png',
+            alt: 'CADD logo',
+        },
+        img2: {
+            src: '/logos/CADD_site.png',
+            alt: 'CADD site screenshot',
+        },
+        title: 'CADD',
+        description: 'CADD is a tool for scoring the deleteriousness of single nucleotide variants as well as insertion/deletions variants in the human genome.',
+        url: 'https://cadd.gs.washington.edu/',
+        countapi: 'maayanlab.github.io/CADDclick',
+        clickurl: if_search(async ({search}) => `https://cadd.gs.washington.edu/snv/GRCh37-v1.6/${await chr_coord(search, (vars) => `${vars.chr}:${vars.pos}_${vars.ref}_${vars.alt}`)}`),
+        example: '',
+    },
+    {
+        name: 'gnomAD',
+        tags: {
+            PS: true,
+            Ag: false,
+            variant: true,
+        },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/gnomAD_logo.png',
+            alt: 'gnomAD logo',
+        },
+        img2: {
+            src: '/logos/gnomAD_site.png',
+            alt: 'gnomAD site screenshot',
+        },
+        title: 'gnomAD',
+        description: 'The Genome Aggregation Database (gnomAD) is a resource developed by an international coalition of investigators, with the goal of aggregating and harmonizing both exome and genome sequencing data from a wide variety of large-scale sequencing projects, and making summary data available for the wider scientific community.',
+        url: 'https://gnomad.broadinstitute.org/',
+        countapi: 'maayanlab.github.io/gnomADclick',
+        clickurl: if_search(async ({search}) => `https://gnomad.broadinstitute.org/variant/${await chr_coord(search, (vars) => `${vars.chr}-${vars.pos}-${vars.ref}-${vars.alt}`)}?dataset=gnomad_r2_1`),
+        example: '',
+    },
+    {
+        name: 'dbSNP',
+        tags: {
+            PS: true,
+            Ag: false,
+            variant: true,
+        },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/dbSNP_logo.png',
+            alt: 'dbSNP logo',
+        },
+        img2: {
+            src: '/logos/dbSNP_site.png',
+            alt: 'dbSNP site screenshot',
+        },
+        title: 'dbSNP',
+        description: 'dbSNP contains human single nucleotide variations, microsatellites, and small-scale insertions and deletions along with publication, population frequency, molecular consequence, and genomic and RefSeq mapping information for both common variations and clinical mutations.',
+        url: 'https://www.ncbi.nlm.nih.gov/snp/',
+        countapi: 'maayanlab.github.io/dbSNPclick',
+        clickurl: if_search(async ({search}) => `https://www.ncbi.nlm.nih.gov/snp/?term=${await rsid(search)}`),
+        example: '',
+    },
+    {
+        name: 'ClinVar',
+        tags: {
+            PS: true,
+            Ag: false,
+            variant: true,
+        },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/ClinVar_logo.png',
+            alt: 'ClinVar logo',
+        },
+        img2: {
+            src: '/logos/ClinVar_site.png',
+            alt: 'ClinVar site screenshot',
+        },
+        title: 'ClinVar',
+        description: 'ClinVar aggregates information about genomic variation and its relationship to human health.',
+        url: 'https://www.ncbi.nlm.nih.gov/clinvar/',
+        countapi: 'maayanlab.github.io/ClinVarclick',
+        clickurl: if_search(async ({search}) => `https://www.ncbi.nlm.nih.gov/clinvar/?term=${await rsid(search)}`),
+        example: '',
+    },
+    {
+        name: 'SNPedia',
+        tags: {
+            PS: true,
+            Ag: false,
+            variant: true,
+        },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/SNPedia_logo.png',
+            alt: 'SNPedia logo',
+        },
+        img2: {
+            src: '/logos/SNPedia_site.png',
+            alt: 'SNPedia site screenshot',
+        },
+        title: 'SNPedia',
+        description: 'SNPedia is a wiki investigating human genetics. It shares information about the effects of variations in DNA, citing peer-reviewed scientific publications.',
+        url: 'https://www.snpedia.com/',
+        countapi: 'maayanlab.github.io/SNPediaclick',
+        clickurl: if_search(async ({search}) => `https://www.snpedia.com/index.php/${await rsid(search)}`),
+        example: '',
+    },
+    // {
+    //     name: 'GRASP',
+    //     tags: {
+    //         PS: true,
+    //         Ag: false,
+    //         variant: true,
+    //     },
+    //     output: {
+    //         gene: true,
+    //     },
+    //     img1: {
+    //         src: '/logos/GRASP_logo.png',
+    //         alt: 'GRASP logo',
+    //     },
+    //     img2: {
+    //         src: '/logos/GRASP_site.png',
+    //         alt: 'GRASP site screenshot',
+    //     },
+    //     title: 'GRASP',
+    //     description: 'Genome-Wide Repository of Associations Between SNPs and Phenotypes (GRASP) includes all available genetic association results from papers, their supplements and web-based content.',
+    //     url: 'https://grasp.nhlbi.nih.gov/',
+    //     countapi: 'maayanlab.github.io/GRASPclick',
+    //     clickurl: if_search(async ({search}) => ``),
+    //     example: '',
+    // },
+    // {
+    //     name: 'dbNSFP',
+    //     tags: {
+    //         PS: true,
+    //         Ag: false,
+    //         variant: true,
+    //     },
+    //     output: {
+    //         gene: true,
+    //     },
+    //     img1: {
+    //         src: '/logos/dbNSFP_logo.png',
+    //         alt: 'dbNSFP logo',
+    //     },
+    //     img2: {
+    //         src: '/logos/dbNSFP_site.png',
+    //         alt: 'dbNSFP site screenshot',
+    //     },
+    //     title: 'dbNSFP',
+    //     description: 'dbNSFP is a database developed for functional prediction and annotation of all potential non-synonymous single-nucleotide variants (nsSNVs) in the human genome.',
+    //     url: 'https://database.liulab.science/dbNSFP',
+    //     countapi: 'maayanlab.github.io/dbNSFPclick',
+    //     clickurl: if_search(async ({search}) => ``),
+    //     example: '',
+    // },
+    {
+        name: 'gwas',
+        tags: {
+            PS: true,
+            Ag: false,
+            variant: true,
+        },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/GWAS_logo.png',
+            alt: 'GWAS Catalog logo',
+        },
+        img2: {
+            src: '/logos/GWAS_site.png',
+            alt: 'GWAS Catalog site screenshot',
+        },
+        title: 'GWAS Catalog',
+        description: 'The GWAS Catalog provides a consistent, searchable, visualisable and freely available database of SNP-trait associations, which can be easily integrated with other resources.',
+        url: "https://www.ebi.ac.uk/gwas/home",
+        countapi: 'maayanlab.github.io/GWASclick',
+        clickurl: if_search(async ({search}) => `https://www.ebi.ac.uk/gwas/search?query=${await rsid(search)}`),
+        example: '',
+    },
+    {
+        name: 'OpenTargets',
+        tags: {
+            PS: true,
+            Ag: false,
+            variant: true,
+        },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/OpenTargets_logo.png',
+            alt: 'OpenTargets logo',
+        },
+        img2: {
+            src: '/logos/OpenTargets_site.png',
+            alt: 'OpenTargets site screenshot',
+        },
+        title: 'OpenTargets',
+        description: 'The OpenTargets Genetics Portal is a tool highlighting variant-centric statistical evidence to allow both prioritisation of candidate causal variants at trait-associated loci and identification of potential drug targets.',
+        url: "https://genetics.opentargets.org/",
+        countapi: 'maayanlab.github.io/OpenTargetsclick',
+        clickurl: if_search(async ({search}) => `https://genetics.opentargets.org/variant/${await chr_coord(search, (vars) => `${vars.chr}_${vars.pos}_${vars.ref}_${vars.alt}`)}`),
+        example: '',
+    },
+    // {
+    //     name: 'GeneShot',
+    //     tags: {
+    //         PS: true,
+    //         Ag: false,
+    //         variant: true,
+    //     },
+    //     output: {
+    //         gene: true,
+    //     },
+    //     img1: {
+    //         src: '/logos/GeneShot_logo.png',
+    //         alt: 'GeneShot logo',
+    //     },
+    //     img2: {
+    //         src: '/logos/GeneShot_site.png',
+    //         alt: 'GeneShot site screenshot',
+    //     },
+    //     title: 'GeneShot',
+    //     description: 'Geneshot is a search engine that accepts any search term to return a list of genes that are mostly associated with the search terms. ',
+    //     url: 'https://maayanlab.cloud/geneshot/',
+    //     countapi: 'maayanlab.github.io/GeneShotclick',
+    //     clickurl: if_search(async ({search}) => ``),
+    //     example: '',
+    // },
+    {
+        name: 'PharmGKB',
+            tags: {
+        PS: true,
+            Ag: false,
+            variant: true,
+    },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/PharmGKB_logo.png',
+            alt: 'PharmGKB logo',
+        },
+        img2: {
+            src: '/logos/PharmGKB_site.png',
+            alt: 'PharmGKB site screenshot',
+        },
+        title: 'PharmGKB',
+        description: 'PharmGKB is a comprehensive resource that curates knowledge about the impact of genetic variation on drug response for clinicians and researchers.',
+        url: 'https://www.pharmgkb.org',
+        countapi: 'maayanlab.github.io/PharmGKBclick',
+        clickurl: if_search(async ({search}) => `https://www.pharmgkb.org/search?query=${await rsid(search)}`),
+        example: '',
+    },
+    {
+        name: 'Human Genome Browser',
+            tags: {
+        PS: true,
+            Ag: false,
+            variant: true,
+    },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/HGB_logo.png',
+            alt: 'UCSC_Genome_Browser logo',
+        },
+        img2: {
+            src: '/logos/HGB_site.png',
+            alt: 'UCSC_Genome_Browser site screenshot',
+        },
+        title: 'Human Genome Browser',
+        description: 'The Human Genome Browser includes a broad collection of vertebrate and model organism assemblies and annotations, along with a large suite of tools for viewing, analyzing and downloading data.',
+        url: "https://genome.ucsc.edu/cgi-bin/hgGateway",
+        countapi: 'maayanlab.github.io/HGBclick',
+        clickurl: if_search(async ({search}) => `https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg38&position=${await chr_coord(search, (vars) => `${vars.chr}:${vars.pos}-${vars.pos}`)}`),
+        // What if it's not a single nucleotide variation?
+        example: '',
+    },
+    {
+        name: 'GWAS_Central',
+            tags: {
+        PS: true,
+            Ag: false,
+            variant: true,
+    },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/GWAS_Central_logo.png',
+            alt: 'GWAS_Central logo',
+        },
+        img2: {
+            src: '/logos/GWAS_Central_site.png',
+            alt: 'GWAS_Central site screenshot',
+        },
+        title: 'GWAS Central',
+        description: 'GWAS Central provides a centralized compilation of summary level findings from genetic association studies, both large and small.',
+        url: 'https://www.gwascentral.org',
+        countapi: 'maayanlab.github.io/GWAS_Centralclick',
+        clickurl: if_search(async ({search}) => `https://www.gwascentral.org/search?q=${await rsid(search)}`),
+        example: '',
+    },
+    {
+        name: 'ensembl',
+            tags: {
+        PS: true,
+            Ag: false,
+            variant: true,
+    },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/Ensembl_logo.png',
+            alt: 'Ensembl image',
+        },
+        img2: {
+            src: '/logos/Ensembl_site.png',
+            alt: 'Ensembl site image',
+        },
+        title: 'Ensembl',
+        description: 'Ensembl is a genome browser for vertebrate genomes that supports research in comparative genomics, evolution, sequence variation and transcriptional regulation.',
+        url: "https://useast.ensembl.org/index.html",
+        countapi: 'maayanlab.github.io/ENSEMBLclick',
+        clickurl: if_search(async ({search}) => `https://useast.ensembl.org/homo_sapiens/Variation/Summary?v=${await rsid(search)}`),
+        example: '',
+    },
+    // {
+    //     name: 'HaploReg',
+    //         tags: {
+    //     PS: true,
+    //         Ag: false,
+    //         variant: true,
+    // },
+    //     output: {
+    //         gene: true,
+    //     },
+    //     img1: {
+    //         src: '/logos/HaploReg_logo.png',
+    //         alt: 'HaploReg logo',
+    //     },
+    //     img2: {
+    //         src: '/logos/HaploReg_site.png',
+    //         alt: 'HaploReg site screenshot',
+    //     },
+    //     title: 'HaploReg',
+    //     description: 'HaploReg is a tool for exploring annotations of the noncoding genome at variants on haplotype blocks, such as candidate regulatory SNPs at disease-associated loci.',
+    //     url: 'https://pubs.broadinstitute.org/mammals/haploreg/haploreg_v4.php',
+    //     countapi: 'maayanlab.github.io/HaploRegclick',
+    //     clickurl: if_search(async ({search}) => ``),
+    //     example: '',
+    // },
+    {
+        name: 'DisGeNET',
+            tags: {
+        PS: true,
+            Ag: false,
+            variant: true,
+    },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/DisGeNET_logo.png',
+            alt: 'DisGeNET logo',
+        },
+        img2: {
+            src: '/logos/DisGeNET_site.png',
+            alt: 'DisGeNET site screenshot',
+        },
+        title: 'DisGeNET',
+        description: 'DisGeNET is a discovery platform containing one of the largest publicly available collections of genes and variants associated to human diseases.',
+        url: 'https://www.disgenet.org/',
+        countapi: 'maayanlab.github.io/DisGeNETclick',
+        clickurl: if_search(async ({search}) => `https://www.disgenet.org/search/2/${await rsid(search)}/`),
+        example: '',
+    },
+    {
+        name: 'PheWeb',
+            tags: {
+        PS: true,
+            Ag: false,
+            variant: true,
+    },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/PheWeb_logo.png',
+            alt: 'PheWeb logo',
+        },
+        img2: {
+            src: '/logos/PheWeb_site.png',
+            alt: 'PheWeb site screenshot',
+        },
+        title: 'PheWeb',
+        description: 'PheWeb is an easy-to-use open-source web-based tool for visualizing, navigating, and sharing GWAS and PheWAS results.',
+        url: 'https://pheweb.sph.umich.edu/',
+        countapi: 'maayanlab.github.io/PheWebclick',
+        clickurl: if_search(async ({search}) => `https://pheweb.org/UKB-TOPMed/variant/${await chr_coord(search, (vars) => `${vars.chr}:${vars.pos}-${vars.ref}-${vars.alt}`)}`),
+        example: '',
+    },
+    {
+        name: 'GTEx',
+            tags: {
+        PS: true,
+            Ag: false,
+            variant: true,
+    },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/gtex_logo.png',
+            alt: 'GTEx logo',
+        },
+        img2: {
+            src: '/logos/Gtex_site.png',
+            alt: 'GTEx site screenshot',
+        },
+        title: 'GTEx',
+        description: 'The Genotype-Tissue Expression (GTEx) Portal provides open access to data including gene expression, QTLs, and histology static.',
+        url: 'https://gtexportal.org/',
+        countapi: 'maayanlab.github.io/gteclick',
+        clickurl: if_search(async ({search}) => `https://gtexportal.org/home/snp/${await rsid(search)}`),
+        example: '',
+    },
+    // {
+    //     name: 'ClinGen',
+    //         tags: {
+    //     PS: true,
+    //         Ag: false,
+    //         variant: true,
+    // },
+    //     output: {
+    //         gene: true,
+    //     },
+    //     img1: {
+    //         src: '/logos/ClinGen_logo.png',
+    //         alt: 'ClinGen logo',
+    //     },
+    //     img2: {
+    //         src: '/logos/ClinGen_site.png',
+    //         alt: 'ClinGen site screenshot',
+    //     },
+    //     title: 'ClinGen',
+    //     description: 'ClinGen is a NIH funded resource dedicated to building a central resource that defines the clinical relevance of genes and variants for use in precision medicine and research.',
+    //     url: 'https://www.clinicalgenome.org/',
+    //     countapi: 'maayanlab.github.io/CLINGENclick',
+    //     clickurl: if_search(async ({search}) => ``),
+    //     example: '',
+    // },
+    {
+        name: 'SpliceAI',
+        tags: {
+            PS: true,
+            Ag: false,
+            variant: true,
+        },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/SpliceAI_logo.png',
+            alt: 'SpliceAI logo',
+        },
+        img2: {
+            src: '/logos/SpliceAI_site.png',
+            alt: 'SpliceAI site screenshot',
+        },
+        title: 'SpliceAI',
+        description: 'SpliceAI is a deep neural network that accurately predicts splice junctions from an arbitrary pre-mRNA transcript sequence, enabling precise prediction of noncoding genetic variants that cause cryptic splicing.',
+        url: 'https://spliceailookup.broadinstitute.org/',
+        countapi: 'maayanlab.github.io/SpliceAIclick',
+        clickurl: if_search(async ({search}) => `https://spliceailookup.broadinstitute.org/#variant=${await chr_coord(search, (vars) => `${vars.chr}-${vars.pos}-${vars.ref}-${vars.alt}`)}&hg=38`),
+        example: '',
+    },
+    {
+        name: 'Bravo',
+        tags: {
+            PS: true,
+            Ag: false,
+            variant: true,
+        },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/Bravo_logo.png',
+            alt: 'Bravo logo',
+        },
+        img2: {
+            src: '/logos/Bravo_site.png',
+            alt: 'Bravo site screenshot',
+        },
+        title: 'BRAVO',
+        description: 'BRAVO variant browser shows chromosome locations (on GRCh38 human genome assembly), alleles, functional annotations, and allele frequencies for 705 million variants observed in 132,345 deeply sequenced (>38X) genomes from the TOPMed (Trans-Omics for Precision Medicine) data freeze 8.',
+        url: 'https://bravo.sph.umich.edu/freeze8/hg38/',
+        countapi: 'maayanlab.github.io/Bravoclick',
+        clickurl: if_search(async ({search}) => `https://bravo.sph.umich.edu/freeze8/hg38/variant/snv/${await rsid(search)}`),
+        example: '',
+    },
+    {
+        name: 'LitVar',
+        tags: {
+            PS: true,
+            Ag: false,
+            variant: true,
+        },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/LitVar_logo.png',
+            alt: 'LitVar logo',
+        },
+        img2: {
+            src: '/logos/LitVar_site.png',
+            alt: 'LitVar site screenshot',
+        },
+        title: 'LitVar',
+        description: 'LitVar allows the search and retrieval of variant relevant information from the biomedical literature and shows key biological relations between a variant and its close related entities (e.g. genes, diseases, and drugs).',
+        url: 'https://www.ncbi.nlm.nih.gov/CBBresearch/Lu/Demo/LitVar/',
+        countapi: 'maayanlab.github.io/LitVarclick',
+        clickurl: if_search(async ({search}) => `https://www.ncbi.nlm.nih.gov/CBBresearch/Lu/Demo/LitVar/#!?query=${await rsid(search)}`),
+        example: '',
+    },
+    {
+        name: 'EVA',
+        tags: {
+            PS: true,
+            Ag: false,
+            variant: true,
+        },
+        output: {
+            gene: true,
+        },
+        img1: {
+            src: '/logos/EVA_logo.png',
+            alt: 'EVA logo',
+        },
+        img2: {
+            src: '/logos/EVA_site.png',
+            alt: 'EVA site screenshot',
+        },
+        title: 'European Variation Archive',
+        description: 'The European Variation Archive is an open-access database of all types of genetic variation data from all species.',
+        url: 'https://www.ebi.ac.uk/eva/',
+        countapi: 'maayanlab.github.io/EVAclick',
+        clickurl: if_search(async ({search}) => `https://www.ebi.ac.uk/eva/?Variant-Browser&species=hsapiens_grch38&selectFilter=snp&snp=${await rsid(search)}&studies=PRJEB43233%2CPRJEB51718%2CPRJEB42044%2CPRJEB42835%2CPRJEB39630%2CPRJEB40782%2CPRJEB49407%2CPRJEB41091%2CPRJEB44734%2CPRJEB36187%2CPRJEB39939%2CPRJEB32182%2CPRJEB39694%2CPRJEB51000%2CPRJEB41688%2CPRJEB33276%2CPRJEB46486%2CPRJEB42411%2CPRJEB15384%2CPRJEB40694%2CPRJEB43053%2CPRJEB50808%2CPRJEB46209%2CPRJEB51003%2CPRJEB41367%2CPRJEB48128%2CPRJEB50889%2CPRJEB41290%2CPRJEB41691%2CPRJEB15197%2CPRJEB46068%2CPRJEB32114%2CPRJEB51961%2CPRJEB30460%2CPRJEB31735%2CPRJEB48356&id=${await rsid(search)}&annot-vep-version=86&annot-vep-cache-version=86`),
+        example: '',
     },
 ]
 

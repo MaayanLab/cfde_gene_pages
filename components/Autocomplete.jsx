@@ -10,6 +10,9 @@ const entity = {
       const res = await fetchEx('/drugbank_vocabulary_drugs.json')
       return await res.json()
   },
+    variant: async () => {
+        return []
+    }
 }
 
 export default function Autocomplete({ value, onChange, autocomplete }) {
@@ -26,7 +29,7 @@ export default function Autocomplete({ value, onChange, autocomplete }) {
       <input
         type="text"
         className="form-control"
-        placeholder="Gene or Drug"
+        placeholder="Gene, Variant or Drug"
         value={value}
         onChange={onChange}
         list="autocompleteDataList"

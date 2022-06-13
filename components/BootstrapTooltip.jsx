@@ -13,7 +13,7 @@ export default function BootstrapTooltip({title}) {
         <span
             ref={ref}
             className="d-inline-block"
-            tabindex="0"
+            tabIndex="0"
             data-bs-toggle="popover"
             data-bs-trigger="hover focus"
             title={title}>

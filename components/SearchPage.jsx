@@ -9,6 +9,7 @@ export default function SearchPage({ router, ...props }) {
   const [PS, setPS] = useQsState('PS', true)
   const [Ag, setAg] = useQsState('Ag', true)
   const [gene, setGene] = useQsState('gene', false)
+  const [variant, setVariant] = useQsState('variant', false)
   const [drug, setDrug] = useQsState('drug', false)
   return (
     <div>
@@ -19,6 +20,7 @@ export default function SearchPage({ router, ...props }) {
         PS={PS} setPS={setPS}
         Ag={Ag} setAg={setAg}
         gene={gene} setGene={setGene}
+        variant={variant} setVariant={setVariant}
         drug={drug} setDrug={setDrug}
         onSubmit={query => {
           router.push({
