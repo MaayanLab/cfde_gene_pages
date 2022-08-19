@@ -2357,6 +2357,11 @@ const manifest = [
         countapi: 'maayanlab.github.io/ZINC15click',
         clickurl: if_search(async ({ search }) => `https://zinc15.docking.org/substances/search/?q=${await DrugName(search)}`),
         example: 'https://zinc15.docking.org/substances/search/?q=${drug-name}',
+        status: if_search(async ({ search }) => {
+            const res = await fetch(`https://zinc15.docking.org/substances/search/?q=${encodeURIComponent(search)}`)
+            const html = await res.text()
+            return html.includes('More about ZINC') // this won't be here in 404s
+        }),
     },
     {
         name: 'ldp2',
