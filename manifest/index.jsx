@@ -629,6 +629,27 @@ const manifest = [
         // https://maayanlab.cloud/sigcom-lincs/metadata-api/entities?filter={%22skip%22:0,%22limit%22:10,%22where%22:{%22meta.symbol%22:%20%22STAT3%22},%22fields%22:[%22id%22]}
         clickurl: if_search(async ({ search }) => `https://maayanlab.cloud/sigcom-lincs/#/MetadataSearch/Genes?query={%22skip%22:0,%22limit%22:10,%22search%22:[%22${search}%22]}`),
         example: 'https://maayanlab.cloud/sigcom-lincs/#/MetadataSearch/Genes?query={%22skip%22:0,%22limit%22:10,%22search%22:[%22${gene-symbol}%22]}',
+        status: if_search(async ({ search }) => {
+            const res = await fetchEx(`https://maayanlab.cloud/sigcom-lincs/metadata-api/entities/find`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    filter: {
+                        limit: 1,
+                        where: {
+                            meta: {
+                                fullTextSearch: search,
+                            }
+                        }
+                    },
+                }),
+            })
+            if (!res.ok) return false
+            const data = await res.json()
+            return data.length > 0
+        }),
     },
     {
         name: 'CFDE Search Portal',
@@ -683,7 +704,28 @@ const manifest = [
         url: "https://maayanlab.cloud/sigcom-lincs",
         countapi: 'maayanlab.github.io/SigComLINCSDrugclick',
         clickurl: if_search(async ({ search }) => `https://maayanlab.cloud/sigcom-lincs/#/MetadataSearch/Signatures?query={%22skip%22:0,%22limit%22:10,%22search%22:[%22${search}%22]}`),
-        example: 'https://maayanlab.cloud/sigcom-lincs/#/MetadataSearch/Signatures?query={%22skip%22:0,%22limit%22:10,%22search%22:[%22${gene-symbol}%22]}',
+        example: 'https://maayanlab.cloud/sigcom-lincs/#/MetadataSearch/Signatures?query={%22skip%22:0,%22limit%22:10,%22search%22:[%22${drug}%22]}',
+        status: if_search(async ({ search }) => {
+            const res = await fetchEx(`https://maayanlab.cloud/sigcom-lincs/metadata-api/signatures/find`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    filter: {
+                        limit: 1,
+                        where: {
+                            meta: {
+                                fullTextSearch: search,
+                            }
+                        }
+                    },
+                }),
+            })
+            if (!res.ok) return false
+            const data = await res.json()
+            return data.length > 0
+        }),
     },
     {
         name: 'IDG Reactome Portal',
