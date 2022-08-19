@@ -4,6 +4,7 @@ import countable from "@/utils/countable"
 import isitup from "@/utils/isitup"
 import try_or_else from "@/utils/try_or_else"
 import ensure_array from "@/utils/ensure_array"
+import argmax from "@/utils/argmax"
 import fetchEx from '@/utils/fetchEx'
 import FormData from 'form-data'
 
@@ -292,10 +293,41 @@ const STITCH = defined(memo(async (gene_search) => {
 const drug_query_url = 'https://pubchem.ncbi.nlm.nih.gov/rest'
 
 export const drug_info = defined(memo(try_or_else(async (drug_search) => {
-    const drug_res = await fetchEx(`${drug_query_url}/pug/compound/name/${drug_search}/synonyms/JSON`)
-    if (!drug_res.ok) throw new Error('drug_info status is not OK')
-    const data = await drug_res.json()
-    return data.InformationList.Information[0]
+    // we first try resolving the compound name
+    const compound_res = await fetchEx(`${drug_query_url}/pug/compound/name/${encodeURIComponent(drug_search)}/synonyms/JSON`)
+    if (compound_res.ok) {
+        const compound_data = await compound_res.json()
+        return compound_data.InformationList.Information[0]
+    } else {
+        // if not found we resolve the substance
+        const substance_res = await fetchEx(`${drug_query_url}/pug/substance/name/${encodeURIComponent(drug_search)}/cids/JSON`)
+        if (substance_res.ok) {
+            const substance_data = await substance_res.json()
+            // we find the "most popular" cids among the substance results
+            const substance_cids = {}
+            for (const info of substance_data.InformationList.Information) {
+                for (const cid of ensure_array(info.CID)) {
+                    if (!(cid in substance_cids)) {
+                        substance_cids[cid] = 0
+                    }
+                    substance_cids[cid] += 1
+                }
+            }
+            const substance_cid = argmax(substance_cids)
+            if (substance_cid) {
+                // we then return the compound info
+                const substance_compound_res = await fetchEx(`${drug_query_url}/pug/compound/cid/${substance_cid}/synonyms/JSON`)
+                if (substance_compound_res.ok) {
+                    const substance_compound_data = await substance_compound_res.json()
+                    return substance_compound_data.InformationList.Information[0]
+                }
+            } else {
+                // just a substance, no compound info
+                const substance_synonyms_res = await fetchEx(`${drug_query_url}/pug/substance/sid/${substance_data.InformationList.Information[0].SID}/synonyms/JSON`)
+                return substance_synonyms_res.InformationList.Information[0]
+            }
+        }
+    }
 })))
 
 const CID = defined(async (drug_search) => (await drug_info(drug_search)).CID)
