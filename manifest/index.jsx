@@ -1867,6 +1867,27 @@ const manifest = [
         countapi: 'maayanlab.github.io/OpenTargetsclick',
         clickurl: if_search(async ({ search }) => `https://platform.opentargets.org/target/${await ensembl_id(search)}`),
         example: 'https://platform.opentargets.org/target/${ensembl}',
+        status: if_search(async ({ search }) => {
+            const res = await fetchEx(`https://api.platform.opentargets.org/api/v4/graphql`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    operationName:"TargetPageQuery",
+                    variables: {
+                        "ensgId": await ensembl_id(search),
+                    },
+                    query: `query TargetPageQuery($chemblId: String!) { target(ensemblId: $ensgId) { id } }`
+                }),
+            })
+            if (!res.ok) {
+                return false
+            }
+            const data = await res.json()
+            return data.data.target !== null
+        }),
     },
     {
         name: 'OpenTargetsGenetics',
@@ -1894,6 +1915,27 @@ const manifest = [
         countapi: 'maayanlab.github.io/OpenTargetsGeneticsclick',
         clickurl: if_search(async ({ search }) => `https://genetics.opentargets.org/gene/${await ensembl_id(search)}`),
         example: 'https://genetics.opentargets.org/gene/${ensembl}',
+        status: if_search(async ({ search }) => {
+            const res = await fetchEx(`https://api.genetics.opentargets.org/api/v4/graphql`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    operationName:"GenePageQuery",
+                    variables: {
+                        "geneId": await ensembl_id(search),
+                    },
+                    query: `query GenePageQuery($chemblId: String!) { geneInfo(geneId: $geneId) { id } }`
+                }),
+            })
+            if (!res.ok) {
+                return false
+            }
+            const data = await res.json()
+            return data.data.geneInfo !== null
+        }),
     },
     {
         name: 'genemania',
@@ -1972,6 +2014,27 @@ const manifest = [
         countapi: 'maayanlab.github.io/OpenTargetsclick',
         clickurl: if_search(async ({ search }) => `https://platform.opentargets.org/drug/${await CHEMBL(search)}`),
         example: 'https://platform.opentargets.org/drug/${chembl}',
+        status: if_search(async ({ search }) => {
+            const res = await fetchEx(`https://api.platform.opentargets.org/api/v4/graphql`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    operationName:"DrugPageQuery",
+                    variables: {
+                        "chemblId": await CHEMBL(search),
+                    },
+                    query: `query DrugPageQuery($chemblId: String!) { drug(chemblId: $chemblId) { id } }`
+                }),
+            })
+            if (!res.ok) {
+                return false
+            }
+            const data = await res.json()
+            return data.data.drug !== null
+        }),
     },
     {
         name: 'MedChemExpress',
@@ -2673,6 +2736,27 @@ const manifest = [
         countapi: 'maayanlab.github.io/OpenTargetsclick',
         clickurl: if_search(async ({ search }) => `https://genetics.opentargets.org/variant/${await chr_coord(search, (vars) => `${vars.chr}_${vars.pos}_${vars.ref}_${vars.alt}`)}`),
         example: '',
+        status: if_search(async ({ search }) => {
+            const res = await fetchEx(`https://api.genetics.opentargets.org/api/v4/graphql`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    operationName:"VariantPageQuery",
+                    variables: {
+                        "variantId": await chr_coord(search, (vars) => `${vars.chr}_${vars.pos}_${vars.ref}_${vars.alt}`),
+                    },
+                    query: `query VariantPageQuery($variantId: String!) { variantInfo(variantId: $variantId) { id } }`
+                }),
+            })
+            if (!res.ok) {
+                return false
+            }
+            const data = await res.json()
+            return data.data.variantInfo !== null
+        }),
     },
     // {
     //     name: 'GeneShot',
