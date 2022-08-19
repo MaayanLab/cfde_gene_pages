@@ -2244,6 +2244,12 @@ const manifest = [
         countapi: 'maayanlab.github.io/drugenrichrclick',
         clickurl: if_search(async ({ search }) => `https://maayanlab.cloud/DrugEnrichr/#find!drug=${search}`),
         example: 'https://maayanlab.cloud/DrugEnrichr/#find!drug=${drug-name}',
+        status: if_search(async ({ search }) => {
+            const res = await fetch(`https://maayanlab.cloud/DrugEnrichr/drugmap?drug=${encodeURIComponent(search)}&json=true`)
+            if (!res.ok) return false
+            const data = await res.json()
+            return Object.keys(data.drug).length !== 0
+        }),
     },
     {
         name: 'drugscom',
