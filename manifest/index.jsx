@@ -2253,7 +2253,7 @@ const manifest = [
         clickurl: if_search(async ({ search }) => `https://maayanlab.cloud/drugmonizome/#/TermSearch/Small%20molecules?query=%7B%22limit%22:10,%22search%22:[%22${search}%22]%7D`),
         example: 'https://maayanlab.cloud/drugmonizome/#/TermSearch/Small%20molecules?query=%7B%22limit%22:10,%22search%22:[%22${drug-name}%22]%7D',
         status: if_search(async ({ search }) => {
-            const res = await fetch(`https://maayanlab.cloud/drugmonizome/metadata-api/entities/find`, {
+            const res = await fetchEx(`https://maayanlab.cloud/drugmonizome/metadata-api/entities/find`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -2308,7 +2308,7 @@ const manifest = [
         clickurl: if_search(async ({ search }) => `https://maayanlab.cloud/DrugEnrichr/#find!drug=${search}`),
         example: 'https://maayanlab.cloud/DrugEnrichr/#find!drug=${drug-name}',
         status: if_search(async ({ search }) => {
-            const res = await fetch(`https://maayanlab.cloud/DrugEnrichr/drugmap?drug=${encodeURIComponent(search)}&json=true`)
+            const res = await fetchEx(`https://maayanlab.cloud/DrugEnrichr/drugmap?drug=${encodeURIComponent(search)}&json=true`)
             if (!res.ok) return false
             const data = await res.json()
             return Object.keys(data.drug).length !== 0
@@ -2400,7 +2400,7 @@ const manifest = [
         clickurl: if_search(async ({ search }) => `https://zinc15.docking.org/substances/search/?q=${await DrugName(search)}`),
         example: 'https://zinc15.docking.org/substances/search/?q=${drug-name}',
         status: if_search(async ({ search }) => {
-            const res = await fetch(`https://zinc15.docking.org/substances/search/?q=${encodeURIComponent(search)}`)
+            const res = await fetchEx(`https://zinc15.docking.org/substances/search/?q=${encodeURIComponent(search)}`)
             const html = await res.text()
             return html.includes('More about ZINC') // this won't be here in 404s
         }),
