@@ -2210,6 +2210,27 @@ const manifest = [
         countapi: 'maayanlab.github.io/drugmonizomeclick',
         clickurl: if_search(async ({ search }) => `https://maayanlab.cloud/drugmonizome/#/TermSearch/Small%20molecules?query=%7B%22limit%22:10,%22search%22:[%22${search}%22]%7D`),
         example: 'https://maayanlab.cloud/drugmonizome/#/TermSearch/Small%20molecules?query=%7B%22limit%22:10,%22search%22:[%22${drug-name}%22]%7D',
+        status: if_search(async ({ search }) => {
+            const res = await fetch(`https://maayanlab.cloud/drugmonizome/metadata-api/entities/find`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    filter:{
+                        limit:1,
+                        where:{
+                            meta: {
+                                fullTextSearch: search,
+                            }
+                        }
+                    },
+                }),
+            })
+            if (!res.ok) return false
+            const data = await res.json()
+            return data.length > 0
+        }),
     },
     {
         name: 'drugenrichr',
