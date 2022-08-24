@@ -7,7 +7,7 @@ node_modules/:
 	$(NPM) install
 
 .next/server/availability.js: | node_modules/
-	$(NPM) run build
+	$(NPM) run build:services
 
 $(DOWNLOADS)/:
 	mkdir -p $(DOWNLOADS)
