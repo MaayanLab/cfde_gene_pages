@@ -1559,6 +1559,32 @@ const manifest = [
         example: 'https://www.ebi.ac.uk/gwas/genes/${gene-symbol}',
     },
     {
+        name: 'tiga',
+        tags: {
+            gene: true,
+            CF: true,
+            Ag: true,
+        },
+        output: {
+            disease: true,
+        },
+        img1: {
+            src: '/logos/TIGA_logo.png',
+            alt: 'TIGA image',
+        },
+        img2: {
+            src: '/logos/TIGA_site.png',
+            alt: 'TIGA site image',
+        },
+        title: 'Target Illumination GWAS Analytics (TIGA)',
+        description: 'TIGA can score and rank traits with the same gene-trait association metrics.',
+        url: "https://unmtid-shinyapps.net/shiny/tiga/",
+        countapi: 'maayanlab.github.io/TIGAClick',
+        clickurl: if_search(async ({ search }) => `https://unmtid-shinyapps.net/shiny/tiga/?gene=${await ensembl_id(search)}`),
+        status: if_search(async ({ self }) => await isitup(self.clickurl, 'cannot be found in TIGA')),
+        example: 'https://unmtid-shinyapps.net/shiny/tiga/?gene=${ensembl_id}',
+    },
+    {
         name: 'PDBe',
         tags: {
             gene: true,
