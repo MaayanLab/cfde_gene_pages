@@ -39,7 +39,7 @@ export const gene_id = defined(memo(async (gene_search) => {
             }
         }
     }
-}))
+}), 'gene_id')
 
 const expand_gene = defined(memo(async (gene_search, exp_type = "coexpression", top = 5) => {
     const gene_exp = await fetchEx(`https://maayanlab.cloud/enrichrsearch/gene/expand?search=${gene_search}&top=${top}&type=${exp_type}`)
@@ -51,7 +51,7 @@ const expand_gene = defined(memo(async (gene_search, exp_type = "coexpression", 
             }
         }
     }
-}))
+}), 'expand_gene')
 
 const expand_drug = defined(memo(async (drug_search, exp_type = "L1000_coexpression", top = 5) => {
     const gene_exp = await fetchEx(`https://maayanlab.cloud/enrichrsearch/drug/expand?search=${drug_search}&top=${top}&type=${exp_type}`)
@@ -63,17 +63,17 @@ const expand_drug = defined(memo(async (drug_search, exp_type = "L1000_coexpress
             }
         }
     }
-}))
+}), 'expand_drug')
 
 const gene_drug_rif = defined(memo(async (gene) => {
     const lookup = await import('@/public/gene_drug_rif/gene_drug.json')
     return lookup[gene]
-}))
+}), 'gene_drug_rif')
 
 const drug_gene_rif = defined(memo(async (drug) => {
     const lookup = await import('@/public/gene_drug_rif/drug_gene.json')
     return lookup[drug.toLowerCase()]
-}))
+}), 'drug_gene_rif')
 
 
 // const predict_regulators = defined(memo(async (genes, type_url, top = 5) => {
@@ -97,7 +97,7 @@ const gene_info = defined(memo(try_or_else(async (gene_search) => {
     const gene_res = await fetchEx(`${gene_query_url}/gene/${await gene_id(gene_search)}`)
     if (!gene_res.ok) throw new Error('gene_info status is not OK')
     return await gene_res.json()
-})))
+})), 'gene_info')
 
 
 export const variant_to_gene = defined(memo(async (variant) => {
@@ -116,13 +116,13 @@ export const variant_to_gene = defined(memo(async (variant) => {
             }
         }
     }
-}))
+}), 'variant_to_gene')
 
 const liftover = defined(memo(try_or_else(async (chr_c, conv = "hg38-to-hg19") => {
     const coord = await fetchEx(`https://spliceailookup-api.broadinstitute.org/liftover/?hg=${conv}&format=interval&chrom=${chr_c['chr']}&start=${chr_c['pos']}&end=${chr_c['pos'] + 1}`)
     if (!coord.ok) throw new Error('gene_info status is not OK')
     else return await coord.json();
-})))
+})), 'liftover')
 
 export const rsid = defined(memo(async (variant) => {
     const myvariant = await fetchEx(`${variant_query_url}/variant/${variant}`);
@@ -131,7 +131,7 @@ export const rsid = defined(memo(async (variant) => {
         if (Array.isArray(myvariant_json)) myvariant_json = myvariant_json[0];
         return myvariant_json['dbsnp']['rsid']
     }
-}))
+}), 'rsid')
 
 export const chr_coord = defined(memo(async (variant, fill_template) => {
 
@@ -168,7 +168,7 @@ export const chr_coord = defined(memo(async (variant, fill_template) => {
     // Convert to hg38 for output
     let hg38 = await liftover({ chr: myvariant_json['chrom'], pos: parseInt(myvariant_json['vcf']['position']) })
     return fill_template({ chr: hg38['output_chrom'], pos: hg38['output_start'], alt: alt, ref: ref })
-}))
+}), 'chr_coord')
 
 
 const appyter = defined(memo(async (appyter_name, args) => {
@@ -182,7 +182,7 @@ const appyter = defined(memo(async (appyter_name, args) => {
     })
     const { session_id } = await ret.json()
     return `https://appyters.maayanlab.cloud/${appyter_name}/${session_id}`
-}))
+}), 'appyter')
 
 const exrna_library = defined(memo(async (gene_search) => {
     let census_types = ['miRNA', 'piRNA', 'snRNA', 'snoRNA', 'tRNA']
@@ -191,7 +191,7 @@ const exrna_library = defined(memo(async (gene_search) => {
             return census_type
         }
     }
-}))
+}), 'exrna_library')
 
 const clean_cut = defined((desc, max_len = 400) => {
     // Cut a description by a sentence end no longer than max_len
@@ -205,12 +205,12 @@ const clean_cut = defined((desc, max_len = 400) => {
 // const chromosome_location = defined(async (gene_search) => (await gene_info(gene_search)).map_location)
 // const biological_function = defined(async (gene_search) => clean_cut((await gene_info(gene_search)).summary))
 
-const ensembl_id = defined(async (gene_search) => (await gene_info(gene_search)).ensembl.gene)
-const HGNC = defined(async (gene_search) => (await gene_info(gene_search)).HGNC)
-const uniprot_kb = defined(async (gene_search) => (await gene_info(gene_search)).uniprot['Swiss-Prot'])
-const MGI = defined(async (gene_search) => (await gene_info(gene_search)).pantherdb.ortholog[0].MGI)
-const transcript = defined(async (gene_search) => (await gene_info(gene_search)).exac.transcript)
-const entrezgene = defined(async (gene_search) => (await gene_info(gene_search)).entrezgene)
+const ensembl_id = defined(async (gene_search) => (await gene_info(gene_search)).ensembl.gene, 'ensembl_id')
+const HGNC = defined(async (gene_search) => (await gene_info(gene_search)).HGNC, 'HGNC')
+const uniprot_kb = defined(async (gene_search) => (await gene_info(gene_search)).uniprot['Swiss-Prot'], 'uniprot_kb')
+const MGI = defined(async (gene_search) => (await gene_info(gene_search)).pantherdb.ortholog[0].MGI, 'MGI')
+const transcript = defined(async (gene_search) => (await gene_info(gene_search)).exac.transcript, 'transcript')
+const entrezgene = defined(async (gene_search) => (await gene_info(gene_search)).entrezgene, 'entrezgene')
 // const pdb = defined(async (gene_search) => ensure_array((await gene_info(gene_search)).pdb)[0])
 
 // const phosphosite = defined(memo(async (gene_search) => {
