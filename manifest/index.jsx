@@ -3221,7 +3221,7 @@ for (const item of manifest) {
         if (item.output[tag] === false) delete item.output[tag]
     }
     if ('countapi' in item) {
-        item.clicks = async ({ self }) => 0
+        item.clicks = async ({ self }) => await countable(self.countapi).get()
     }
     if ('clickurl' in item && !('status' in item)) {
         item.status = if_search(async ({ self }) => await isitup(self.clickurl))
