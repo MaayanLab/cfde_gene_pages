@@ -2,12 +2,6 @@ import React from "react"
 import countable from "@/utils/countable"
 
 export default function EntityCard(props) {
-    const [clicks, setClicks] = React.useState(props.clicks)
-    React.useEffect(async () => {
-        if (props.countapi !== undefined) {
-            setClicks(await countable(props.countapi).get())
-        }
-    }, [props.countapi])
     return (
         <div className="col-xl-4 col-lg-6 col-md-12">
             <div className="card shadow-sm m-3" title={props.tags.CF ? "Affiliated with the CFDE" : undefined}>
@@ -131,11 +125,6 @@ export default function EntityCard(props) {
                                     >Explore variants with {props.title}</a></p></div>
                         ) : null]]]
                         }
-                        {clicks !== undefined ?
-                            <div className="col-3">
-                                <small
-                                    className="card-text text-muted text-end d-block"><span>{clicks}</span><img src="/images/click.png" className="mx-1 mb-2" width={18} height={18} /></small>
-                            </div> : null}
                     </div>
                 </div>
             </div>
