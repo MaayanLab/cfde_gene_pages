@@ -813,7 +813,7 @@ const manifest = [
             alt: 'MaayanLab',
         },
         title: 'RGCSRS',
-        description: 'This Appyter provides visualizations of the RNA-seq signatures induced by CRISPR knockouts and chemical perturbagens. Signatures are computed from transformed data profiles from the LINCS L1000 data.',
+        description: 'The RGCSRS Appyter provides visualizations of the RNA-seq signatures induced by CRISPR knockouts and chemical perturbagens. Signatures are computed from transformed data profiles from the LINCS L1000 data.',
         url: 'https://appyters.maayanlab.cloud/#/L1000_RNAseq_Gene_Search',
         countapi: 'maayanlab.github.io/RGCSRSclick',
         clickurl: if_search(async ({ search }) => `${await appyter('L1000_RNAseq_Gene_Search', { 'gene': search })}`),
