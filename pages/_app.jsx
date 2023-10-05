@@ -113,7 +113,7 @@ export default function App({ Component, pageProps }) {
             <a
                 className="btn btn-primary px-2 py-1 m-1"
                 style={{ backgroundColor: '#333333', borderRadius: '20px' }}
-                href="mailto:info@example.com?&subject=&cc=&bcc=&body=https://cfde-gene-pages.maayanlab.cloud/"
+                href="mailto:avi.maayan@mssm.edu"
                 role="button"
             ><FontAwesomeIcon width={16} height={16} icon={faEnvelope} /></a>
           </p>
