@@ -222,11 +222,6 @@ const entrezgene = defined(async (gene_search) => (await gene_info(gene_search))
 //     }
 // }))
 
-const cfde_nid = defined(memo(async (gene_search) => {
-    let mapping = await import('@/public/cfde_nid_map.json')
-    return `https://app.nih-cfde.org/chaise/record/#1/CFDE:gene/nid=${mapping[gene_search][0]}`
-}))
-
 const metabolomicswb = defined(memo(async (gene_search) => {
     const mgp = await fetchEx(`https://www.metabolomicsworkbench.org/rest/protein/uniprot_id/${await uniprot_kb(gene_search)}/mgp_id/`)
     if (mgp.ok) {
@@ -652,7 +647,7 @@ const manifest = [
         }),
     },
     {
-        name: 'CFDE Search Portal',
+        name: 'CFDE Workbench',
         tags: {
             CF: true,
             Ag: true,
@@ -660,24 +655,25 @@ const manifest = [
         },
         output: {
             gene: true,
+            drug: true,
             tissue: true,
             disease: true,
             function: true,
         },
         img1: {
             src: '/logos/CFDE_logo.png',
-            alt: 'CFDE Search Portal',
+            alt: 'CFDE Workbench',
         },
         img2: {
-            src: '/logos/cfdesp_site.png',
-            alt: 'CFDE Search Portal site image',
+            src: '/logos/cfde_data_site.png',
+            alt: 'CFDE Workbench site image',
         },
-        title: 'CFDE Search Portal',
-        description: 'The CFDE Search Portal is a hub for searching the CFDE data across all programs. The main page of the portal (shown below) is meant for high-level decision-making, whereas the repository (or “data browser”) allows users such as clinical researchers, bioinformatics power users, and NIH program officers to search for CFDE data.',
-        url: "https://app.nih-cfde.org/",
-        countapi: 'maayanlab.github.io/CFDESearchPortal',
-        clickurl: if_search(async ({ search }) => await cfde_nid(search)),
-        example: 'https://app.nih-cfde.org/chaise/record/#1/CFDE:gene/nid=1',
+        title: 'CFDE Data Portal',
+        description: 'The CFDE Workbench is a hub for searching the CFDE data across all programs. The main page of the portal (shown below) is meant for high-level decision-making, whereas the Data Portal allows users such as clinical researchers, bioinformatics power users, and NIH program officers to search for CFDE data.',
+        url: "https://cfde.cloud/data",
+        countapi: 'maayanlab.github.io/CFDEDataPortal',
+        clickurl: if_search(async ({ search }) => `https://cfde.cloud/data/processed/search/${encodeURIComponent(search)}`),
+        example: 'https://cfde.cloud/data/processed/search/STAT3',
     },
     {
         name: 'SigCom LINCS Drug',
