@@ -669,7 +669,7 @@ const manifest = [
             alt: 'CFDE Workbench site image',
         },
         title: 'CFDE Data Portal',
-        description: 'The CFDE Workbench is a hub for searching the CFDE data across all programs. The main page of the portal (shown below) is meant for high-level decision-making, whereas the Data Portal allows users such as clinical researchers, bioinformatics power users, and NIH program officers to search for CFDE data.',
+        description: 'The CFDE Data Portal enables searching the CFDE data across all programs, allowing users such as clinical researchers, bioinformatics power users, and NIH program officers to search for CFDE data.',
         url: "https://cfde.cloud/data",
         countapi: 'maayanlab.github.io/CFDEDataPortal',
         clickurl: if_search(async ({ search }) => `https://cfde.cloud/data/processed/search/${encodeURIComponent(search)}`),
